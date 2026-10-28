@@ -1,0 +1,133 @@
+"""Chromium UI/audio tests using the same local sources in an offline CSP-hashed fixture."""
+from pathlib import Path
+import json, shutil, os, math
+from playwright.sync_api import sync_playwright
+from fixture import fixture
+ROOT=Path(__file__).resolve().parent.parent
+OUT=ROOT/'tests/screenshots';OUT.mkdir(exist_ok=True)
+checks=[];errors=[];console=[];requests=[];measurements={}
+def check(label,condition):
+ assert condition,label
+ checks.append(label)
+def pressed(page,selector):
+ el=page.locator(selector).first;el.scroll_into_view_if_needed();b=el.bounding_box()
+ page.mouse.move(b['x']+b['width']/2,b['y']+b['height']*.85);page.mouse.down();return el
+def release(page):
+ page.mouse.move(5,5);page.mouse.up();page.wait_for_timeout(320)
+def active(page):return page.evaluate('HL.audio.active.size')
+with sync_playwright() as p:
+ browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH') or shutil.which('chromium'),headless=True,args=['--no-sandbox'])
+ page=browser.new_page(viewport={'width':1440,'height':1050});page.set_default_timeout(10000)
+ page.on('pageerror',lambda e:errors.append(str(e)))
+ page.on('console',lambda e:console.append(e.text) if e.type=='error' else None)
+ page.on('request',lambda r:requests.append(r.url))
+ page.set_content(fixture(),wait_until='load')
+ check('Default master volume is 100%',page.locator('#volume').input_value()=='1' and page.evaluate('HL.audio.volume')==1)
+ check('Five top-level workspaces include Stairway to Tuning',page.locator('.main-nav [data-view]').count()==5 and page.locator('[data-view=stairway]').is_visible())
+ check('No import/export tab controls or pop-study content',page.locator('#import-dialog,#import-open,#export-tab,#export-library').count()==0 and page.evaluate("HL.library.every(x=>x.category!=='Pop & contemporary studies')"))
+ check('Piano exposes one octave and mixed pitch exponents',page.locator('#piano .piano-key').count()==13 and '−1 + 1/4' in page.locator('#piano-labels [data-pitch="-9"]').inner_text())
+ check('All guitar positions are labeled',page.locator('#neck .fret-note').count()==150)
+ check('Octave is an enclosed region, not nested note rings',page.locator('.octave-enclosure path').count()>0 and page.locator('.fret-note.octave').count()==0)
+ page.click('[data-chord=minor]');page.wait_for_timeout(1200)
+ check('Out-of-scale chord tone uses its chord spelling',page.locator('#piano [data-pitch="-6"]').inner_text()=='E♭4')
+ check('Chord and octave colors are magenta and yellow',page.locator('.fret-note.chord').first.evaluate("e=>getComputedStyle(e).borderTopColor")=='rgb(237, 131, 215)' and page.locator('.octave-region').first.evaluate("e=>getComputedStyle(e).stroke")=='rgb(244, 211, 107)')
+ # Hover correlates exact pitch, not pitch class.
+ page.locator('#neck .fret-note[data-pitch="-9"]').first.hover()
+ check('Hover connects every identical n',page.locator('.match[data-pitch="-9"]').count()==7 and page.locator('.match[data-pitch="3"]').count()==0)
+ # Pointer and keyboard holds keep the synthesizer level steady beyond the old decay duration.
+ el=pressed(page,'#piano [data-pitch="-9"]');page.wait_for_timeout(1700)
+ measurements['sustain_rms']=page.evaluate('()=>{let d=new Float32Array(8192);HL.audio.analyser.getFloatTimeDomainData(d);return Math.sqrt(d.reduce((s,x)=>s+x*x,0)/d.length)}')
+ check('Pointer hold sustains beyond 1.7 seconds',page.evaluate('[...HL.audio.active].some(v=>v.sustain&&!v.released)') and measurements['sustain_rms']>.1)
+ check('Held pitch lights matching fret positions',page.locator('.held-note[data-pitch="-9"]').count()==7)
+ release(page);check('Release outside the key stops the voice',active(page)==0)
+ el.focus();page.keyboard.down('Space');page.wait_for_timeout(1100)
+ check('Space holds a sustained note',page.evaluate('[...HL.audio.active].some(v=>v.sustain&&!v.released)'))
+ page.keyboard.up('Space');page.wait_for_timeout(350);check('Keyboard release has no duplicate click voice',active(page)==0)
+ page.locator('#piano [data-pitch="-8"]').click(force=True);page.wait_for_timeout(100)
+ check('Out-of-scale notes stay silent',active(page)==0)
+ pressed(page,'#neck .fret-note[data-pitch="-9"]');page.wait_for_timeout(500)
+ check('Fretboard supports sustained notes',page.evaluate('[...HL.audio.active].some(v=>v.sustain)'))
+ page.keyboard.press('Escape');page.mouse.up();page.wait_for_timeout(350)
+ check('Escape releases all sustained voices',active(page)==0 and page.locator('.held-note').count()==0)
+ pressed(page,'#piano [data-pitch="-9"]');page.wait_for_timeout(200);page.evaluate("HL.setView('spectrum')");page.mouse.up();page.wait_for_timeout(350)
+ check('Navigation releases held notes',active(page)==0)
+ # Harmonics remain a prominent global audio control.
+ page.click('#harmonics');check('Harmonics control changes global timbre',page.evaluate('HL.state.harmonics') and page.locator('#harmonics').get_attribute('aria-pressed')=='true')
+ check('Peak analysis is off by default',not page.locator('#peak-analysis-panel').is_visible())
+ page.click('#peak-analysis-toggle');pressed(page,'#tuner-reference');page.wait_for_timeout(3300)
+ check('Tuner target supports indefinite hold',page.evaluate('HL.spectrumState.referenceHeld') and page.evaluate('[...HL.audio.active].some(v=>v.group==="reference"&&v.sustain)'))
+ check('Held target is detected as E2', 'E2 in tune' in page.locator('#diagnostic-title').inner_text())
+ snapshot=page.evaluate('HL.spectrumState.peakSnapshot');measurements['peaks']=snapshot['peaks'][:6]
+ check('Optional decomposition finds the harmonic family',len(snapshot['peaks'])>=12 and any(h['harmonic']==2 for h in snapshot['peaks'][1]['harmonics']))
+ check('Peaks default to descending amplitude',all(a['level']>=b['level'] for a,b in zip(snapshot['peaks'],snapshot['peaks'][1:])))
+ check('Peak n follows the A4 reference',abs(snapshot['peaks'][0]['n']+29)<.03)
+ page.evaluate("document.getElementById('freeze-spectrum').click()")
+ freeze=page.locator('#peaks-body').inner_text();release(page);page.wait_for_timeout(600)
+ check('Freeze preserves table with the spectrum',page.locator('#peaks-body').inner_text()==freeze and 'Frozen' in page.locator('#peaks-summary').inner_text())
+ page.select_option('#peaks-sort','frequency');page.select_option('#peaks-count','24')
+ check('Peak sorting and count controls work',page.locator('#peaks-body tr').count()==len(snapshot['peaks']))
+ page.screenshot(path=str(OUT/'spectrum-desktop.png'),full_page=True)
+ page.click('#freeze-spectrum');page.wait_for_timeout(1000)
+ # Stronger upper partials remain recognized without a demo button.
+ page.evaluate('HL.play([-29],{duration:3,strongSecond:true})');page.wait_for_timeout(1300)
+ measurements['harmonic_diagnostic']=page.locator('#diagnostic-title').inner_text()
+ check('A louder second harmonic does not become the tuning target','2nd harmonic' in measurements['harmonic_diagnostic'] and 'in tune' in measurements['harmonic_diagnostic'])
+ page.click('#panic');page.wait_for_timeout(250)
+ # Library and featured route share one instance of the player.
+ page.click('[data-view=practice]')
+ check('Library contains 68 non-featured selections',page.locator('.library-item').count()==68)
+ check('One play/pause button replaces duplicated transport',page.locator('#tab-pause').count()==0 and page.locator('#tab-play').inner_text()=='▶ Play')
+ page.select_option('#library-category','Classical');check('Classical collection retained',page.locator('.library-item').count()==17)
+ page.locator('[data-tab-id="classical-elise"]').click();page.locator('#tab-favorite').click();page.locator('#library-favorites').check()
+ check('Favorites filter works',page.locator('.library-item').count()==1)
+ page.locator('#library-reset').click();page.select_option('#library-category','Chord progressions');check('Progression collection retained',page.locator('.library-item').count()==24)
+ page.locator('[data-tab-id="prog-ii-v-i"]').click();page.click('#tab-play');page.wait_for_timeout(600)
+ check('Play button becomes Pause',page.evaluate('HL.practiceState.playing') and 'Pause' in page.locator('#tab-play').inner_text())
+ page.click('#tab-play');check('Same button pauses',not page.evaluate('HL.practiceState.playing') and 'Resume' in page.locator('#tab-play').inner_text())
+ page.click('#tab-play');page.wait_for_timeout(200)
+ page.locator('#tab-seek').evaluate("e=>{e.value=8;e.dispatchEvent(new Event('input',{bubbles:true}))}");page.wait_for_timeout(100)
+ check('Seeking during playback respects requested position',7.9<=page.evaluate('HL.practiceState.anchorBeat')<=8.1)
+ page.click('#tab-stop')
+ page.screenshot(path=str(OUT/'library-desktop.png'),full_page=True)
+ page.click('[data-view=stairway]')
+ check('Featured score is a dedicated top-level route',page.evaluate('HL.view')=='stairway' and not page.locator('#library-browser').is_visible() and page.locator('#practice-heading').inner_text()=='Stairway to Tuning')
+ check('No duplicated player DOM',page.locator('.transport').count()==1 and page.locator('#tab-play').count()==1)
+ check('Complete reference arrangement retained',page.evaluate('HL.practiceState.total')==128 and page.evaluate('HL.practiceState.tab.events.length')>200)
+ for tuning in ['guitar','dropD','uke','lowG','baritone']:
+  page.select_option('#tab-tuning',tuning)
+  check('Featured score maps to '+tuning,not page.evaluate('HL.practiceState.mapped.some(e=>e.unplayable)'))
+ page.select_option('#tab-tuning','uke');page.select_option('#tab-key','2')
+ check('Key transposition remains available',page.evaluate('HL.T.mod(HL.practiceState.tab.key+HL.practiceState.transpose)')==2)
+ page.select_option('#tab-key','9')
+ page.locator('.arrangement-options').evaluate('e=>e.open=true');page.locator('#tab-fit').uncheck()
+ before=page.evaluate('HL.practiceState.mapped[0].notes');page.locator('#tab-transpose').fill('2');page.locator('#tab-transpose').dispatch_event('change');after=page.evaluate('HL.practiceState.mapped[0].notes')
+ check('Exact transposition preserves intervals',after==[n+2 for n in before])
+ page.locator('#tab-transpose').fill('0');page.locator('#tab-transpose').dispatch_event('change');page.locator('#tab-fit').check();page.locator('.arrangement-options').evaluate('e=>e.open=false')
+ page.click('#tab-page-next');check('Score pagination advances', '9–16' in page.locator('#tab-page-label').inner_text());page.click('#tab-page-prev')
+ page.screenshot(path=str(OUT/'stairway-desktop.png'),full_page=True)
+ page.click('[data-view=explore]');page.evaluate('HL.update({root:3,chord:"minor"})');page.wait_for_timeout(500)
+ check('Root-aligned keyboard and scale degrees remain correct','E♭4' in page.locator('#piano-range').inner_text() and 'deg 1' in page.locator('#piano-labels [data-pitch="-6"]').inner_text())
+ page.screenshot(path=str(OUT/'explore-desktop.png'),full_page=True)
+ # Privacy and help are site documentation, with no deployment directions in the UI.
+ page.click('#privacy-open');check('Privacy statement specifies local compute',page.locator('#privacy-dialog').is_visible() and 'no remote compute' in page.locator('#privacy-dialog').inner_text())
+ page.locator('#privacy-dialog .close-button').click();page.click('#help-open');check('Guide opens and closes',page.locator('#help-dialog').is_visible());page.locator('#help-dialog .close-button').click()
+ # Responsive overflow and screenshots.
+ page.set_viewport_size({'width':390,'height':844})
+ for view in ['explore','practice','stairway','spectrum','math']:
+  page.locator('[data-view='+view+']').click();page.wait_for_timeout(150)
+  check(view+' fits a 390px viewport',page.evaluate('document.documentElement.scrollWidth')<=390)
+  if view!='math':page.screenshot(path=str(OUT/(view+'-mobile.png')),full_page=True)
+ check('No browser exceptions',not errors);check('CSP does not block application code',not console)
+ check('No remote data requests',not [u for u in requests if u.startswith(('http:','https:'))])
+ # Touch hold with pointer capture, on an independent mobile page.
+ touch=browser.new_page(viewport={'width':390,'height':844},is_mobile=True,has_touch=True)
+ touch.set_content(fixture(),wait_until='load')
+ el=touch.locator('#piano [data-pitch="-9"]');el.scroll_into_view_if_needed();b=el.bounding_box();cdp=touch.context.new_cdp_session(touch)
+ cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':b['x']+b['width']/2,'y':b['y']+b['height']*.85}]});touch.wait_for_timeout(1100)
+ check('Touch press sustains a note',touch.evaluate('[...HL.audio.active].some(v=>v.sustain&&!v.released)'))
+ cdp.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});touch.wait_for_timeout(350)
+ check('Touch release stops the note',active(touch)==0)
+ touch.close();browser.close()
+result={'checks':len(checks),'passed':checks,'measurements':measurements,'browser_errors':errors,'console_errors':console,'external_requests':requests}
+(ROOT/'tests/browser-results.json').write_text(json.dumps(result,indent=2,ensure_ascii=False))
+print(json.dumps({'checks':len(checks),'browser_errors':errors,'result':'passed'},indent=2))

@@ -1,0 +1,32 @@
+{
+  "checks": 22,
+  "passed": [
+    "Native synthetic MediaStream activates real mic analysis",
+    "Low E is recognized above louder 50 Hz interference",
+    "Mic judgment pauses for whole reference hold, beyond old timeout",
+    "Mic judgment resumes after reference release",
+    "Room calibration ends with valid gate",
+    "Stop mic releases tracks and processing chain",
+    "Leaving tuner stops microphone access",
+    "Late permission result cannot leave microphone running",
+    "Permission denial is recoverable and explained",
+    "Delayed audio resume cannot start a note after navigation",
+    "Pointer cancellation releases voice",
+    "Window blur releases voice",
+    "Cancelled audio initialization does not request microphone permission",
+    "Optional peak analysis performs no analysis while off",
+    "Peak analysis runs only when enabled",
+    "Turning off peak analysis stops further measurements",
+    "explore fits a 320px viewport",
+    "practice fits a 320px viewport",
+    "stairway fits a 320px viewport",
+    "spectrum fits a 320px viewport",
+    "math fits a 320px viewport",
+    "No lifecycle exceptions"
+  ],
+  "measurements": {
+    "rumble_diagnostic": "E2 in tune"
+  },
+  "browser_errors": [],
+  "input": "Native synthetic MediaStream only; no physical microphone"
+}

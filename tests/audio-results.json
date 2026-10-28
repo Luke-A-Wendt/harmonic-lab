@@ -1,0 +1,1304 @@
+{
+  "cases": 64,
+  "filter_response_db": [
+    [
+      50,
+      -46.852535611632156
+    ],
+    [
+      55,
+      -33.60858820383532
+    ],
+    [
+      60,
+      -21.54477555214088
+    ],
+    [
+      70.0459976196289,
+      -3.0101544055278486
+    ],
+    [
+      82.40689086914062,
+      -0.023875832680926284
+    ],
+    [
+      110,
+      -3.1063167540634294e-06
+    ],
+    [
+      440,
+      1.0354386711532726e-06
+    ]
+  ],
+  "results": [
+    {
+      "frequency": 329.62737417427974,
+      "reason": "pitch",
+      "confidence": 0.9971286277286708,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10267348800581233,
+        "db": -19.77083367901965,
+        "peak": 0.17877885699272156
+      },
+      "peak": {
+        "frequency": 329.6612982510829,
+        "db": -31.5123348236084,
+        "bin": 61
+      },
+      "name": "guitar string 1 @ 44100",
+      "error_cents": -0.0009597600396982223
+    },
+    {
+      "frequency": 246.94253684536486,
+      "reason": "pitch",
+      "confidence": 0.9977943359408528,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.1027843698912119,
+        "db": -19.761458443408774,
+        "peak": 0.20189107954502106
+      },
+      "peak": {
+        "frequency": 246.9190226682895,
+        "db": -31.349445343017578,
+        "bin": 46
+      },
+      "name": "guitar string 2 @ 44100",
+      "error_cents": 0.006212993282187645
+    },
+    {
+      "frequency": 195.99807806134348,
+      "reason": "pitch",
+      "confidence": 0.9999900739912846,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10246970708020088,
+        "db": -19.78809010530918,
+        "peak": 0.20733380317687988
+      },
+      "peak": {
+        "frequency": 196.02372421506794,
+        "db": -32.009765625,
+        "bin": 36
+      },
+      "name": "guitar string 3 @ 44100",
+      "error_cents": 0.0031804741886356006
+    },
+    {
+      "frequency": 146.83142452985447,
+      "reason": "pitch",
+      "confidence": 0.9999448125818162,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10247451555000474,
+        "db": -19.78768252282146,
+        "peak": 0.18615224957466125
+      },
+      "peak": {
+        "frequency": 146.86753681857758,
+        "db": -31.608989715576172,
+        "bin": 27
+      },
+      "name": "guitar string 4 @ 44100",
+      "error_cents": -0.011312227408157365
+    },
+    {
+      "frequency": 110.00009044867083,
+      "reason": "pitch",
+      "confidence": 0.9997377163672354,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10295314204421159,
+        "db": -19.74720789075096,
+        "peak": 0.16276077926158905
+      },
+      "peak": {
+        "frequency": 110.02002246047311,
+        "db": -32.10273742675781,
+        "bin": 20
+      },
+      "name": "guitar string 5 @ 44100",
+      "error_cents": 0.0014235250388769515
+    },
+    {
+      "frequency": 82.40677053136727,
+      "reason": "pitch",
+      "confidence": 0.9998326037457446,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10223245182794631,
+        "db": -19.80822446901987,
+        "peak": 0.16346882283687592
+      },
+      "peak": {
+        "frequency": 82.44172318026763,
+        "db": -31.71595573425293,
+        "bin": 15
+      },
+      "name": "guitar string 6 @ 44100",
+      "error_cents": -0.0024936286096664735
+    },
+    {
+      "frequency": 329.6271804122819,
+      "reason": "pitch",
+      "confidence": 0.9971469826996326,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10270731289205946,
+        "db": -19.76797265958322,
+        "peak": 0.19338786602020264
+      },
+      "peak": {
+        "frequency": 329.66129777058967,
+        "db": -31.51234245300293,
+        "bin": 61
+      },
+      "name": "dropD string 1 @ 44100",
+      "error_cents": -0.001977416620789865
+    },
+    {
+      "frequency": 246.94256925946013,
+      "reason": "pitch",
+      "confidence": 0.9977784203365445,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10267801546319111,
+        "db": -19.770450677244888,
+        "peak": 0.1881313920021057
+      },
+      "peak": {
+        "frequency": 246.91901388486403,
+        "db": -31.349458694458008,
+        "bin": 46
+      },
+      "name": "dropD string 2 @ 44100",
+      "error_cents": 0.0064402379783084635
+    },
+    {
+      "frequency": 195.99790174799347,
+      "reason": "pitch",
+      "confidence": 0.9999900301809248,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10256482532722351,
+        "db": -19.780031105239548,
+        "peak": 0.20965653657913208
+      },
+      "peak": {
+        "frequency": 196.02372384665586,
+        "db": -32.0097770690918,
+        "bin": 36
+      },
+      "name": "dropD string 3 @ 44100",
+      "error_cents": 0.001623112937202092
+    },
+    {
+      "frequency": 146.83141091748635,
+      "reason": "pitch",
+      "confidence": 0.9999446385154442,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10250616679612712,
+        "db": -19.78500013119543,
+        "peak": 0.17483700811862946
+      },
+      "peak": {
+        "frequency": 146.86755874991653,
+        "db": -31.609025955200195,
+        "bin": 27
+      },
+      "name": "dropD string 4 @ 44100",
+      "error_cents": -0.011472725723615436
+    },
+    {
+      "frequency": 110.00013475595507,
+      "reason": "pitch",
+      "confidence": 0.9997372277430259,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10272642570557411,
+        "db": -19.766356451939107,
+        "peak": 0.1941867470741272
+      },
+      "peak": {
+        "frequency": 110.0200256552728,
+        "db": -32.10284423828125,
+        "bin": 20
+      },
+      "name": "dropD string 5 @ 44100",
+      "error_cents": 0.0021208541348819066
+    },
+    {
+      "frequency": 73.41554906849987,
+      "reason": "pitch",
+      "confidence": 0.9999447060727107,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10238245561072987,
+        "db": -19.79548916490862,
+        "peak": 0.16361819207668304
+      },
+      "peak": {
+        "frequency": 73.38380428123413,
+        "db": -31.87528419494629,
+        "bin": 14
+      },
+      "name": "dropD string 6 @ 44100",
+      "error_cents": -0.01516060695839679
+    },
+    {
+      "frequency": 439.99917082904886,
+      "reason": "pitch",
+      "confidence": 0.9949086806736887,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10287617105469792,
+        "db": -19.75370416226202,
+        "peak": 0.1960509568452835
+      },
+      "peak": {
+        "frequency": 439.9642260713999,
+        "db": -31.586362838745117,
+        "bin": 82
+      },
+      "name": "uke string 1 @ 44100",
+      "error_cents": -0.003262478035617007
+    },
+    {
+      "frequency": 329.6259229891525,
+      "reason": "pitch",
+      "confidence": 0.9971452553290874,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10292958413854612,
+        "db": -19.74919563759501,
+        "peak": 0.17562304437160492
+      },
+      "peak": {
+        "frequency": 329.6613202587403,
+        "db": -31.512365341186523,
+        "bin": 61
+      },
+      "name": "uke string 2 @ 44100",
+      "error_cents": -0.008581537934630176
+    },
+    {
+      "frequency": 261.62572142365883,
+      "reason": "pitch",
+      "confidence": 0.9996100907737855,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10239833984677636,
+        "db": -19.79414168775625,
+        "peak": 0.16374695301055908
+      },
+      "peak": {
+        "frequency": 261.59870312906395,
+        "db": -32.00448989868164,
+        "bin": 49
+      },
+      "name": "uke string 3 @ 44100",
+      "error_cents": 0.0010331004034592449
+    },
+    {
+      "frequency": 391.9950990272553,
+      "reason": "pitch",
+      "confidence": 0.9939577463082969,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10289886596858273,
+        "db": -19.751788229979855,
+        "peak": 0.1943366378545761
+      },
+      "peak": {
+        "frequency": 391.9655470511753,
+        "db": -31.42438316345215,
+        "bin": 73
+      },
+      "name": "uke string 4 @ 44100",
+      "error_cents": -0.0014881483050928376
+    },
+    {
+      "frequency": 439.99975634131823,
+      "reason": "pitch",
+      "confidence": 0.9949000058695674,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10261125761010138,
+        "db": -19.77609979233181,
+        "peak": 0.2011110782623291
+      },
+      "peak": {
+        "frequency": 439.9642288190135,
+        "db": -31.58635711669922,
+        "bin": 82
+      },
+      "name": "lowG string 1 @ 44100",
+      "error_cents": -0.0009587052796079144
+    },
+    {
+      "frequency": 329.6266625141384,
+      "reason": "pitch",
+      "confidence": 0.9971556637901813,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10284354049583232,
+        "db": -19.756459614652808,
+        "peak": 0.19566529989242554
+      },
+      "peak": {
+        "frequency": 329.66131091697633,
+        "db": -31.512338638305664,
+        "bin": 61
+      },
+      "name": "lowG string 2 @ 44100",
+      "error_cents": -0.004697470237893891
+    },
+    {
+      "frequency": 261.6260206462143,
+      "reason": "pitch",
+      "confidence": 0.9996104991878383,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10279070651664564,
+        "db": -19.76092297743523,
+        "peak": 0.16293080151081085
+      },
+      "peak": {
+        "frequency": 261.59863220279755,
+        "db": -31.98060417175293,
+        "bin": 49
+      },
+      "name": "lowG string 3 @ 44100",
+      "error_cents": 0.003013119711695708
+    },
+    {
+      "frequency": 195.9987786673032,
+      "reason": "pitch",
+      "confidence": 0.9999902746058069,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10274158035326673,
+        "db": -19.765075166349927,
+        "peak": 0.16392196714878082
+      },
+      "peak": {
+        "frequency": 196.02390522545653,
+        "db": -32.0339469909668,
+        "bin": 36
+      },
+      "name": "lowG string 4 @ 44100",
+      "error_cents": 0.009368854894479616
+    },
+    {
+      "frequency": 329.6269940668241,
+      "reason": "pitch",
+      "confidence": 0.9971396496985108,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10282759074394257,
+        "db": -19.75780679239342,
+        "peak": 0.20111554861068726
+      },
+      "peak": {
+        "frequency": 329.66130410354276,
+        "db": -31.512344360351562,
+        "bin": 61
+      },
+      "name": "baritone string 1 @ 44100",
+      "error_cents": -0.0029561213872339345
+    },
+    {
+      "frequency": 246.9427161679335,
+      "reason": "pitch",
+      "confidence": 0.9977882106322795,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10286928883682066,
+        "db": -19.754285251001484,
+        "peak": 0.1956356018781662
+      },
+      "peak": {
+        "frequency": 246.91905135693136,
+        "db": -31.349414825439453,
+        "bin": 46
+      },
+      "name": "baritone string 2 @ 44100",
+      "error_cents": 0.007470165205121373
+    },
+    {
+      "frequency": 195.99871358359087,
+      "reason": "pitch",
+      "confidence": 0.9999902688732618,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10284253663446015,
+        "db": -19.75654439850607,
+        "peak": 0.16276611387729645
+      },
+      "peak": {
+        "frequency": 196.02380813134536,
+        "db": -32.00993347167969,
+        "bin": 36
+      },
+      "name": "baritone string 3 @ 44100",
+      "error_cents": 0.00879397805979557
+    },
+    {
+      "frequency": 146.83175376774332,
+      "reason": "pitch",
+      "confidence": 0.999945328283502,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10291916660015088,
+        "db": -19.75007478394449,
+        "peak": 0.16360436379909515
+      },
+      "peak": {
+        "frequency": 146.86757617860704,
+        "db": -31.632883071899414,
+        "bin": 27
+      },
+      "name": "baritone string 4 @ 44100",
+      "error_cents": -0.007430311760944144
+    },
+    {
+      "frequency": 329.6294809299021,
+      "reason": "pitch",
+      "confidence": 0.9958080067299306,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10268106551196379,
+        "db": -19.7701926668671,
+        "peak": 0.17885208129882812
+      },
+      "peak": {
+        "frequency": 329.6653863329666,
+        "db": -31.56536865234375,
+        "bin": 56
+      },
+      "name": "guitar string 1 @ 48000",
+      "error_cents": 0.010105083771493606
+    },
+    {
+      "frequency": 246.9421070601843,
+      "reason": "pitch",
+      "confidence": 0.9975727421697229,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10270422970137708,
+        "db": -19.768233406897263,
+        "peak": 0.20222903788089752
+      },
+      "peak": {
+        "frequency": 246.96844922706256,
+        "db": -31.36903190612793,
+        "bin": 42
+      },
+      "name": "guitar string 2 @ 48000",
+      "error_cents": 0.0031999061268520456
+    },
+    {
+      "frequency": 195.99926324667402,
+      "reason": "pitch",
+      "confidence": 0.9995323101757094,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.1024633483010313,
+        "db": -19.788629126737565,
+        "peak": 0.20720554888248444
+      },
+      "peak": {
+        "frequency": 196.01471291405485,
+        "db": -32.168094635009766,
+        "bin": 33
+      },
+      "name": "guitar string 3 @ 48000",
+      "error_cents": 0.01364908191880179
+    },
+    {
+      "frequency": 146.83228921518776,
+      "reason": "pitch",
+      "confidence": 0.999603837786708,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10275784013906637,
+        "db": -19.763700654393148,
+        "peak": 0.18628092110157013
+      },
+      "peak": {
+        "frequency": 146.8431489476959,
+        "db": -31.292985916137695,
+        "bin": 25
+      },
+      "name": "guitar string 4 @ 48000",
+      "error_cents": -0.0011170781906486979
+    },
+    {
+      "frequency": 110.00130590174841,
+      "reason": "pitch",
+      "confidence": 0.9999687895178795,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10313405655833738,
+        "db": -19.73195799732786,
+        "peak": 0.1627548336982727
+      },
+      "peak": {
+        "frequency": 109.96345841622072,
+        "db": -31.50303077697754,
+        "bin": 19
+      },
+      "name": "guitar string 5 @ 48000",
+      "error_cents": 0.020552801378575413
+    },
+    {
+      "frequency": 82.40639441227826,
+      "reason": "pitch",
+      "confidence": 0.9997550435946323,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10238437785726254,
+        "db": -19.79532608751022,
+        "peak": 0.16352738440036774
+      },
+      "peak": {
+        "frequency": 82.41960271971304,
+        "db": -31.318803787231445,
+        "bin": 14
+      },
+      "name": "guitar string 6 @ 48000",
+      "error_cents": -0.01039530531891949
+    },
+    {
+      "frequency": 329.62952617434553,
+      "reason": "pitch",
+      "confidence": 0.9958198461681604,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10271684711444692,
+        "db": -19.7671663941128,
+        "peak": 0.19341939687728882
+      },
+      "peak": {
+        "frequency": 329.66538819879906,
+        "db": -31.565387725830078,
+        "bin": 56
+      },
+      "name": "dropD string 1 @ 48000",
+      "error_cents": 0.010342710319075682
+    },
+    {
+      "frequency": 246.94212908074758,
+      "reason": "pitch",
+      "confidence": 0.9975716669578105,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10272467662609526,
+        "db": -19.7665043441738,
+        "peak": 0.18834041059017181
+      },
+      "peak": {
+        "frequency": 246.9684445455448,
+        "db": -31.369054794311523,
+        "bin": 42
+      },
+      "name": "dropD string 2 @ 48000",
+      "error_cents": 0.00335428541735957
+    },
+    {
+      "frequency": 195.99960937353657,
+      "reason": "pitch",
+      "confidence": 0.9995290733641014,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10252882078853455,
+        "db": -19.783080750693294,
+        "peak": 0.20965524017810822
+      },
+      "peak": {
+        "frequency": 196.01470813602108,
+        "db": -32.16802978515625,
+        "bin": 33
+      },
+      "name": "dropD string 3 @ 48000",
+      "error_cents": 0.016706369332784413
+    },
+    {
+      "frequency": 146.83241718832417,
+      "reason": "pitch",
+      "confidence": 0.9996042135753669,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10266852203336704,
+        "db": -19.771253796545583,
+        "peak": 0.17479300498962402
+      },
+      "peak": {
+        "frequency": 146.8431352124382,
+        "db": -31.29301643371582,
+        "bin": 25
+      },
+      "name": "dropD string 4 @ 48000",
+      "error_cents": 0.00039179533969425684
+    },
+    {
+      "frequency": 110.00091767671462,
+      "reason": "pitch",
+      "confidence": 0.9999688469943067,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.1033472647714052,
+        "db": -19.714020261799163,
+        "peak": 0.19409514963626862
+      },
+      "peak": {
+        "frequency": 109.96347609568164,
+        "db": -31.502853393554688,
+        "bin": 19
+      },
+      "name": "dropD string 5 @ 48000",
+      "error_cents": 0.014442786795370992
+    },
+    {
+      "frequency": 73.4158560630478,
+      "reason": "pitch",
+      "confidence": 0.999724770517787,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10212118435736556,
+        "db": -19.817683141577096,
+        "peak": 0.1635054349899292
+      },
+      "peak": {
+        "frequency": 73.40503099069869,
+        "db": -32.2718391418457,
+        "bin": 13
+      },
+      "name": "dropD string 6 @ 48000",
+      "error_cents": -0.007921291721022522
+    },
+    {
+      "frequency": 439.99961462209717,
+      "reason": "pitch",
+      "confidence": 0.9966037198901176,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10273232437223377,
+        "db": -19.765857712726373,
+        "peak": 0.19569623470306396
+      },
+      "peak": {
+        "frequency": 440.01771951359814,
+        "db": -31.315261840820312,
+        "bin": 75
+      },
+      "name": "uke string 1 @ 48000",
+      "error_cents": -0.0015163173621299375
+    },
+    {
+      "frequency": 329.6283628250597,
+      "reason": "pitch",
+      "confidence": 0.995791420340538,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10292605042851093,
+        "db": -19.749493840900897,
+        "peak": 0.17571420967578888
+      },
+      "peak": {
+        "frequency": 329.66543273879415,
+        "db": -31.565343856811523,
+        "bin": 56
+      },
+      "name": "uke string 2 @ 48000",
+      "error_cents": 0.004232719287680635
+    },
+    {
+      "frequency": 261.6252157326747,
+      "reason": "pitch",
+      "confidence": 0.9997020730515942,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10236505720640801,
+        "db": -19.7969653305343,
+        "peak": 0.1635310798883438
+      },
+      "peak": {
+        "frequency": 261.5897118616208,
+        "db": -31.835058212280273,
+        "bin": 45
+      },
+      "name": "uke string 3 @ 48000",
+      "error_cents": -0.002313169571169516
+    },
+    {
+      "frequency": 391.9950200062681,
+      "reason": "pitch",
+      "confidence": 0.9944380708038807,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10285435227356858,
+        "db": -19.755546528893582,
+        "peak": 0.19438710808753967
+      },
+      "peak": {
+        "frequency": 391.9758131424554,
+        "db": -31.32181167602539,
+        "bin": 67
+      },
+      "name": "uke string 4 @ 48000",
+      "error_cents": -0.0018371420497079645
+    },
+    {
+      "frequency": 439.9998991992813,
+      "reason": "pitch",
+      "confidence": 0.9966001808643341,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10271389996290631,
+        "db": -19.767415613213586,
+        "peak": 0.20095328986644745
+      },
+      "peak": {
+        "frequency": 440.0177097126631,
+        "db": -31.315244674682617,
+        "bin": 75
+      },
+      "name": "lowG string 1 @ 48000",
+      "error_cents": -0.00039661285537982135
+    },
+    {
+      "frequency": 329.6282395677438,
+      "reason": "pitch",
+      "confidence": 0.9958110121078789,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10291086951340665,
+        "db": -19.750775046949617,
+        "peak": 0.1958131492137909
+      },
+      "peak": {
+        "frequency": 329.6654235357551,
+        "db": -31.565359115600586,
+        "bin": 56
+      },
+      "name": "lowG string 2 @ 48000",
+      "error_cents": 0.003585362063479546
+    },
+    {
+      "frequency": 261.62418877333323,
+      "reason": "pitch",
+      "confidence": 0.9997023787873331,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10276764967432621,
+        "db": -19.7628715159655,
+        "peak": 0.16293925046920776
+      },
+      "peak": {
+        "frequency": 261.58978997225114,
+        "db": -31.81109619140625,
+        "bin": 45
+      },
+      "name": "lowG string 3 @ 48000",
+      "error_cents": -0.009108808375983754
+    },
+    {
+      "frequency": 195.99784331101296,
+      "reason": "pitch",
+      "confidence": 0.9995275636902079,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10271025349349269,
+        "db": -19.76772397842153,
+        "peak": 0.16393548250198364
+      },
+      "peak": {
+        "frequency": 196.01481522763828,
+        "db": -32.19224166870117,
+        "bin": 33
+      },
+      "name": "lowG string 4 @ 48000",
+      "error_cents": 0.0011069436082588172
+    },
+    {
+      "frequency": 329.6288497005513,
+      "reason": "pitch",
+      "confidence": 0.9958152594044805,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10281993999341255,
+        "db": -19.758453078536945,
+        "peak": 0.20083463191986084
+      },
+      "peak": {
+        "frequency": 329.66541259305524,
+        "db": -31.565370559692383,
+        "bin": 56
+      },
+      "name": "baritone string 1 @ 48000",
+      "error_cents": 0.006789825718248755
+    },
+    {
+      "frequency": 246.9421206664176,
+      "reason": "pitch",
+      "confidence": 0.9975777238141745,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10274873987685314,
+        "db": -19.764469913200404,
+        "peak": 0.19600719213485718
+      },
+      "peak": {
+        "frequency": 246.9684444167415,
+        "db": -31.369016647338867,
+        "bin": 42
+      },
+      "name": "baritone string 2 @ 48000",
+      "error_cents": 0.0032952951797734493
+    },
+    {
+      "frequency": 195.99818506349783,
+      "reason": "pitch",
+      "confidence": 0.9995325604686514,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10291927596183717,
+        "db": -19.750065554341646,
+        "peak": 0.16285653412342072
+      },
+      "peak": {
+        "frequency": 196.01474326270187,
+        "db": -32.16817855834961,
+        "bin": 33
+      },
+      "name": "baritone string 3 @ 48000",
+      "error_cents": 0.004125614693241804
+    },
+    {
+      "frequency": 146.8329620886059,
+      "reason": "pitch",
+      "confidence": 0.9995987382717431,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10265999895954663,
+        "db": -19.771974889536132,
+        "peak": 0.16362568736076355
+      },
+      "peak": {
+        "frequency": 146.8433105682774,
+        "db": -31.31682586669922,
+        "bin": 25
+      },
+      "name": "baritone string 4 @ 48000",
+      "error_cents": 0.006816454067846913
+    },
+    {
+      "frequency": 82.4069736405122,
+      "reason": "pitch",
+      "confidence": 0.9998621727136197,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.09156206107905156,
+        "db": -20.765688796755448,
+        "peak": 0.12964846193790436
+      },
+      "peak": {
+        "frequency": 82.41966587641527,
+        "db": -31.319494247436523,
+        "bin": 14
+      },
+      "name": "filter-response",
+      "error_cents": 0.0017733634320514374
+    },
+    {
+      "frequency": 82.40464085327372,
+      "reason": "pitch",
+      "confidence": 0.9995611776248552,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.06302515314581086,
+        "db": -24.009721807024846,
+        "peak": 0.11581002175807953
+      },
+      "peak": {
+        "frequency": 82.4197733909239,
+        "db": -35.53690719604492,
+        "bin": 14
+      },
+      "name": "low E + louder 50 Hz rumble",
+      "error_cents": -0.04723532699495786
+    },
+    {
+      "frequency": 82.33749754301392,
+      "reason": "pitch",
+      "confidence": 0.9959400738589466,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.06323203739938328,
+        "db": -23.981256491189576,
+        "peak": 0.11880704015493393
+      },
+      "peak": {
+        "frequency": 82.41975122158287,
+        "db": -35.53728485107422,
+        "bin": 14
+      },
+      "name": "low E + louder 55 Hz rumble",
+      "error_cents": -1.458420011819842
+    },
+    {
+      "frequency": 82.40645985184769,
+      "reason": "pitch",
+      "confidence": 0.9997813158552162,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.06291719988618603,
+        "db": -24.02461227565977,
+        "peak": 0.11383222043514252
+      },
+      "peak": {
+        "frequency": 82.41964525058583,
+        "db": -35.548492431640625,
+        "bin": 14
+      },
+      "name": "low E + louder 60 Hz rumble",
+      "error_cents": -0.009020519216873817
+    },
+    {
+      "frequency": 110.01060907009696,
+      "reason": "pitch",
+      "confidence": 0.9989886345574632,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.0730974599123582,
+        "db": -22.721954284430463,
+        "peak": 0.1396762728691101
+      },
+      "peak": {
+        "frequency": 109.96360950131279,
+        "db": -34.69615173339844,
+        "bin": 19
+      },
+      "name": "A2 + sub-string rumble",
+      "error_cents": 0.16696270668626556
+    },
+    {
+      "frequency": 82.40687000565754,
+      "reason": "pitch",
+      "confidence": 0.9994467211072333,
+      "dominant": 2,
+      "delta": 18.029611587524414,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.14437255928309264,
+        "db": -16.810306894942396,
+        "peak": 0.22604094445705414
+      },
+      "peak": {
+        "frequency": 164.83796272613282,
+        "db": -27.607847213745117,
+        "bin": 28
+      },
+      "name": "dominant second",
+      "error_cents": -0.00040383461268304096
+    },
+    {
+      "frequency": 109.99998929941289,
+      "reason": "pitch",
+      "confidence": 0.9998804874994676,
+      "dominant": 3,
+      "delta": 16.924057006835938,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.13035142809847344,
+        "db": -17.69768412890205,
+        "peak": 0.21723005175590515
+      },
+      "peak": {
+        "frequency": 330.03817436481313,
+        "db": -28.899078369140625,
+        "bin": 56
+      },
+      "name": "dominant third",
+      "error_cents": -0.00016841110586038435
+    },
+    {
+      "frequency": 82.4068698214755,
+      "reason": "pitch",
+      "confidence": 0.9993027835153043,
+      "dominant": 2,
+      "delta": null,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.12570310448586838,
+        "db": -18.013079928471353,
+        "peak": 0.2515864372253418
+      },
+      "peak": {
+        "frequency": 164.83798730118826,
+        "db": -29.546066284179688,
+        "bin": 28
+      },
+      "name": "missing fundamental with harmonics 2,3,4",
+      "error_cents": -0.00040770397717276505
+    },
+    {
+      "frequency": 107.61187369651098,
+      "reason": "pitch",
+      "confidence": 0.9994985247612931,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.11188666902691179,
+        "db": -19.024433106419963,
+        "peak": 0.19897578656673431
+      },
+      "peak": {
+        "frequency": 107.64618131827666,
+        "db": -30.62041473388672,
+        "bin": 18
+      },
+      "name": "detuned -38 cents",
+      "error_cents": 0.0004966982677472861
+    },
+    {
+      "frequency": 111.72912923397986,
+      "reason": "pitch",
+      "confidence": 0.9996399805531837,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.1121009661932571,
+        "db": -19.007812884480252,
+        "peak": 0.1937558650970459
+      },
+      "peak": {
+        "frequency": 111.7425385682011,
+        "db": -30.055362701416016,
+        "bin": 19
+      },
+      "name": "detuned 27 cents",
+      "error_cents": 0.002208516907237094
+    },
+    {
+      "frequency": null,
+      "reason": "quiet",
+      "confidence": null,
+      "dominant": null,
+      "delta": null,
+      "ambiguity": null,
+      "input": {
+        "rms": 0,
+        "db": -180,
+        "peak": 0
+      },
+      "peak": null,
+      "name": "quiet"
+    },
+    {
+      "frequency": null,
+      "reason": "unclear",
+      "confidence": null,
+      "dominant": null,
+      "delta": null,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.0009656462740643387,
+        "db": -60.30363861775696,
+        "peak": 0.001362911076284945
+      },
+      "peak": null,
+      "name": "sub-string rumble only"
+    },
+    {
+      "frequency": null,
+      "reason": "unclear",
+      "confidence": null,
+      "dominant": null,
+      "delta": null,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.02863804026031632,
+        "db": -30.86113409407905,
+        "peak": 0.0766025111079216
+      },
+      "peak": {
+        "frequency": 4299.428629113669,
+        "db": -67.32554626464844,
+        "bin": 734
+      },
+      "name": "broadband noise only"
+    },
+    {
+      "frequency": 164.81380972162995,
+      "reason": "pitch",
+      "confidence": 0.9998641182173742,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": "The measured periodic pitch is near 2\u00d7 the locked string. It may be an isolated harmonic or a different note; the lower fundamental is not established. Pluck the open string normally. No automatic octave correction was applied.",
+      "input": {
+        "rms": 0.14118124631727255,
+        "db": -17.00445977132759,
+        "peak": 0.20002061128616333
+      },
+      "peak": {
+        "frequency": 164.8379570377555,
+        "db": -27.6077938079834,
+        "bin": 28
+      },
+      "name": "isolated harmonic with low E locked",
+      "error_cents": 0.00032841529041182006
+    },
+    {
+      "frequency": null,
+      "reason": "clipping",
+      "confidence": null,
+      "dominant": null,
+      "delta": null,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.7834105089576096,
+        "db": -2.120212139253261,
+        "peak": 1
+      },
+      "peak": {
+        "frequency": 109.96362774721716,
+        "db": -12.917929649353027,
+        "bin": 19
+      },
+      "name": "clipping"
+    },
+    {
+      "frequency": 110.00001104591287,
+      "reason": "pitch",
+      "confidence": 0.9999863827488298,
+      "dominant": 1,
+      "delta": 0,
+      "ambiguity": null,
+      "input": {
+        "rms": 0.10613183583013588,
+        "db": -19.483086468727006,
+        "peak": 0.15000000596046448
+      },
+      "peak": {
+        "frequency": 109.96362823875934,
+        "db": -30.259214401245117,
+        "bin": 19
+      },
+      "name": "filter bypass",
+      "error_cents": 0.0001738459955021089
+    }
+  ],
+  "hardware": "synthetic only; no physical microphone"
+}

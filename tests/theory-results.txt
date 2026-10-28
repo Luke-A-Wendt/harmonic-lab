@@ -1,0 +1,17 @@
+PASS A4 reference and middle C
+PASS Whole octaves plus Euclidean remainder, including negatives
+PASS Note parsing round trips
+PASS Scale spelling preserves sounding octaves
+PASS C and G scales differ by exactly one member
+PASS Every root appears once across cycles
+PASS Tuning error uses log ratios, not divisor counts
+PASS Refinement contains original grid
+PASS Guitar C4 has five standard-fret positions
+PASS Fingerings preserve all notes; unplayable pitches flagged
+PASS Repertoire validation rejects malformed and oversized note lists
+PASS Periodicity estimator tracks standard guitar and ukulele tones
+PASS Fundamental differs from loudest second harmonic
+PASS Silence is not a note
+PASS All built-in tabs validate and original fingerings agree with tuning
+
+15 theory and DSP test groups passed.

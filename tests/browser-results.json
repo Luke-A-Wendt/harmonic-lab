@@ -1,0 +1,209 @@
+{
+  "checks": 60,
+  "passed": [
+    "Default master volume is 100%",
+    "Five top-level workspaces include Stairway to Tuning",
+    "No import/export tab controls or pop-study content",
+    "Piano exposes one octave and mixed pitch exponents",
+    "All guitar positions are labeled",
+    "Octave is an enclosed region, not nested note rings",
+    "Out-of-scale chord tone uses its chord spelling",
+    "Chord and octave colors are magenta and yellow",
+    "Hover connects every identical n",
+    "Pointer hold sustains beyond 1.7 seconds",
+    "Held pitch lights matching fret positions",
+    "Release outside the key stops the voice",
+    "Space holds a sustained note",
+    "Keyboard release has no duplicate click voice",
+    "Out-of-scale notes stay silent",
+    "Fretboard supports sustained notes",
+    "Escape releases all sustained voices",
+    "Navigation releases held notes",
+    "Harmonics control changes global timbre",
+    "Peak analysis is off by default",
+    "Tuner target supports indefinite hold",
+    "Held target is detected as E2",
+    "Optional decomposition finds the harmonic family",
+    "Peaks default to descending amplitude",
+    "Peak n follows the A4 reference",
+    "Freeze preserves table with the spectrum",
+    "Peak sorting and count controls work",
+    "A louder second harmonic does not become the tuning target",
+    "Library contains 68 non-featured selections",
+    "One play/pause button replaces duplicated transport",
+    "Classical collection retained",
+    "Favorites filter works",
+    "Progression collection retained",
+    "Play button becomes Pause",
+    "Same button pauses",
+    "Seeking during playback respects requested position",
+    "Featured score is a dedicated top-level route",
+    "No duplicated player DOM",
+    "Complete reference arrangement retained",
+    "Featured score maps to guitar",
+    "Featured score maps to dropD",
+    "Featured score maps to uke",
+    "Featured score maps to lowG",
+    "Featured score maps to baritone",
+    "Key transposition remains available",
+    "Exact transposition preserves intervals",
+    "Score pagination advances",
+    "Root-aligned keyboard and scale degrees remain correct",
+    "Privacy statement specifies local compute",
+    "Guide opens and closes",
+    "explore fits a 390px viewport",
+    "practice fits a 390px viewport",
+    "stairway fits a 390px viewport",
+    "spectrum fits a 390px viewport",
+    "math fits a 390px viewport",
+    "No browser exceptions",
+    "CSP does not block application code",
+    "No remote data requests",
+    "Touch press sustains a note",
+    "Touch release stops the note"
+  ],
+  "measurements": {
+    "sustain_rms": 0.24062375746870143,
+    "peaks": [
+      {
+        "bin": 15,
+        "frequency": 82.44247310059089,
+        "level": -23.831614445259273,
+        "n": -28.992526023572427,
+        "nearestN": -29,
+        "cents": 0.7473976427572637,
+        "prominence": 59.0827751159668,
+        "harmonics": [],
+        "rank": 1
+      },
+      {
+        "bin": 31,
+        "frequency": 164.78431022333913,
+        "level": -32.51843429376498,
+        "n": -17.00309567381544,
+        "nearestN": -17,
+        "cents": -0.3095673815440847,
+        "prominence": 58.00066375732422,
+        "harmonics": [
+          {
+            "rank": 1,
+            "frequency": 82.44247310059089,
+            "n": -28.992526023572427,
+            "harmonic": 2,
+            "error": -1.056965024301275,
+            "tolerance": 40
+          }
+        ],
+        "rank": 2
+      },
+      {
+        "bin": 46,
+        "frequency": 247.20696148109081,
+        "level": -37.68142449785404,
+        "n": -9.98140983440083,
+        "nearestN": -10,
+        "cents": 1.8590165599169595,
+        "prominence": 74.43586349487305,
+        "harmonics": [
+          {
+            "rank": 1,
+            "frequency": 82.44247310059089,
+            "n": -28.992526023572427,
+            "harmonic": 3,
+            "error": -0.8433819482275029,
+            "tolerance": 37.29558147920355
+          }
+        ],
+        "rank": 3
+      },
+      {
+        "bin": 61,
+        "frequency": 329.66116844380576,
+        "level": -41.284021573317204,
+        "n": -4.998234781678807,
+        "nearestN": -5,
+        "cents": 0.17652183211929184,
+        "prominence": 60.44770050048828,
+        "harmonics": [
+          {
+            "rank": 1,
+            "frequency": 82.44247310059089,
+            "n": -28.992526023572427,
+            "harmonic": 4,
+            "error": -0.5708758106377484,
+            "tolerance": 28.042359956179304
+          },
+          {
+            "rank": 2,
+            "frequency": 164.78431022333913,
+            "n": -17.00309567381544,
+            "harmonic": 2,
+            "error": 0.48608921366328633,
+            "tolerance": 28.042359956179304
+          }
+        ],
+        "rank": 4
+      },
+      {
+        "bin": 77,
+        "frequency": 412.02163925755343,
+        "level": -44.03771725092393,
+        "n": -1.1374009730950414,
+        "nearestN": -1,
+        "cents": -13.74009730950414,
+        "prominence": 56.78862762451172,
+        "harmonics": [
+          {
+            "rank": 1,
+            "frequency": 82.44247310059089,
+            "n": -28.992526023572427,
+            "harmonic": 5,
+            "error": -0.8012088170959307,
+            "tolerance": 22.47307889602906
+          }
+        ],
+        "rank": 5
+      },
+      {
+        "bin": 92,
+        "frequency": 494.4158432487972,
+        "level": -46.403530253823895,
+        "n": 2.0186574060016427,
+        "nearestN": 2,
+        "cents": 1.8657406001642673,
+        "prominence": 62.96888732910156,
+        "harmonics": [
+          {
+            "rank": 1,
+            "frequency": 82.44247310059089,
+            "n": -28.992526023572427,
+            "harmonic": 6,
+            "error": -0.8366579079801032,
+            "tolerance": 18.748147652278575
+          },
+          {
+            "rank": 2,
+            "frequency": 164.78431022333913,
+            "n": -17.00309567381544,
+            "harmonic": 3,
+            "error": 0.22030711632127334,
+            "tolerance": 18.748147652278575
+          },
+          {
+            "rank": 3,
+            "frequency": 247.20696148109081,
+            "n": -9.98140983440083,
+            "harmonic": 2,
+            "error": 0.0067240402473846645,
+            "tolerance": 18.748147652278575
+          }
+        ],
+        "rank": 6
+      }
+    ],
+    "harmonic_diagnostic": "E2 in tune · 2nd harmonic is louder"
+  },
+  "browser_errors": [],
+  "console_errors": [],
+  "external_requests": []
+}

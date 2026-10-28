@@ -1,0 +1,9 @@
+PASS Silence and non-finite inputs have no peaks
+PASS A4 has n=0 and a sub-bin frequency estimate
+PASS Peaks are ranked by level, not frequency
+PASS Several lower-frequency relationships can be retained
+PASS No unmeasured fundamental is invented
+PASS Non-harmonic tones are not labeled as members of one family
+PASS Weak sidelobes below the adaptive threshold are excluded
+PASS The decomposition works at common audio sample rates
+8 spectral analysis test groups passed.

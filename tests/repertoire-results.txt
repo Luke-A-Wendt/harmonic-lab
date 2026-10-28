@@ -1,0 +1,6 @@
+PASS 69 unique universal entries with scope, source and learning metadata
+PASS All 69 pieces fit all five tuning presets with an explicit whole-octave shift
+PASS Progression voicings preserve pitch classes in 12 keys × 5 tunings
+PASS Full supplied page: 16 printed bars repeated, 128 quarter-note beats
+PASS Metadata and non-four meter survive JSON validation
+{"groups":5,"arrangements":345,"voicings":13200,"entries":69}
