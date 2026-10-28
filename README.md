@@ -1,4 +1,5 @@
-# Harmonic Lab
+# Harmonic Lab 
+[PLAY](https://luke-a-wendt.github.io/harmonic-lab/)
 
 **Music, mathematics & sound.**
 
