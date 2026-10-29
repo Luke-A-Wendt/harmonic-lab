@@ -1,4 +1,4 @@
-# Harmonic Lab
+# [Harmonic Lab](https://luke-a-wendt.github.io/harmonic-lab/)
 
 A browser-based music workbench for exploring pitch, scales, chords, string instruments, harmonics, tuning, and transposition. Version 0.4 uses compact, viewport-sized workspaces for portrait phones, landscape phones, tablets, and desktops.
 
