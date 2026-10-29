@@ -1,3 +1,0 @@
-# Obsolete asset from releases 0.1–0.3; not included or referenced in this release.
-# An overlay copy does not delete an existing copy of this file.
-assets/stairway-score.png

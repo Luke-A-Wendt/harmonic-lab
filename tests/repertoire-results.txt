@@ -3,7 +3,4 @@ PASS All 69 pieces fit all five tuning presets with an explicit whole-octave shi
 PASS Progression voicings preserve pitch classes in 12 keys × 5 tunings
 PASS Full supplied page: 16 printed bars repeated, 128 quarter-note beats
 PASS Metadata and non-four meter survive JSON validation
-PASS Single alphabetical Songs library, with no score assets or import UI metadata
-PASS 36 source melodies retain exact notes and times beneath enriched arrangements
-PASS Constant transposition preserves successive melodic gaps, rhythms and chords
-{"groups":8,"arrangements":345,"voicings":59400,"entries":69}
+{"groups":5,"arrangements":345,"voicings":13200,"entries":69}

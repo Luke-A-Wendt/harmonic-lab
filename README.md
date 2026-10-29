@@ -1,148 +1,128 @@
-# [Harmonic Lab](https://luke-a-wendt.github.io/harmonic-lab/)
+# Harmonic Lab 
 
-A browser-based music workbench for exploring pitch, scales, chords, string instruments, harmonics, tuning, and transposition. Version 0.5 uses compact, viewport-sized workspaces for portrait phones, landscape phones, tablets, and desktops.
+**[PLAY](https://luke-a-wendt.github.io/harmonic-lab/) with Music, mathematics & sound.**
 
-The application is a static website. There is no build step, application server, account system, external library, remote audio processor, or runtime data service.
+Harmonic Lab is an interactive music-learning website connecting a piano, guitar and ukulele fretboards, scales, chords, a live spectrum analyzer, an instrument tuner, playable tablature, and visual mathematics. One pitch coordinate links every workspace: **A4 is n = 0 at 440 Hz**.
 
-## Four workspaces
+Audio and calculations run in the browser. The website has no application server, accounts, remote data APIs, analytics, external libraries, or externally loaded fonts.
 
-### Explore
+## Workspaces
 
-- **Harmonic comparison:** Pin one note or chord as A, then play another as B. The weighted shared-n-bin score compares modeled harmonic frequencies rounded to equal-tempered semitone bins; a separate simplified critical-band roughness proxy describes nearby-partial interactions. Neither metric is a universal judgment of consonance or musical quality. Both are meaningful only for the assumed harmonic amplitude model.
+| Workspace | Purpose |
+| --- | --- |
+| **Explore** | Connect a pitch to its piano key, fret positions, scale degree, chord membership, and frequency. |
+| **Spectrum & tuner** | Examine partials, filter low-frequency noise, and tune an open string using its estimated fundamental. |
+| **Tab library** | Browse 68 classical, traditional, harmony, and technique selections with one shared practice player. |
+| **Stairway to Tuning** | A dedicated score workspace with the same playback and arrangement controls. |
+| **Math lab** | Investigate pitch equations, sets, modular circles, vibrating strings, and equal-division tuning systems. |
 
-Choose a root and scale, then use **Piano**, **Fretboard**, **Harmonics**, or **Circles**. On larger screens the Piano workspace includes a clickable circle of fifths alongside the keyboard and chord controls. On smaller screens these instruments remain available as focused workspace tabs.
+## Explore
 
-- A root-aligned piano shows exactly one octave, including the repeated tonic.
-- Each piano button displays `n`, its reduced mixed exponent, the note name, and scale degree.
-- Guitar and ukulele fretboards show `n` at every position. Previous/next windows expose the whole neck without horizontal scrolling. Find octave moves the window to the current range.
-- Cyan fills indicate individually playable scale notes. Thick magenta outlines indicate chord pitch classes. A yellow perimeter encloses positions in the piano's displayed octave.
-- Press and hold keys, fret markers, mini keys, or Hold chord to sustain sound. Pointer, touch, Space, and Enter are supported. Release, navigation, cancellation, window blur, and Stop terminate held voices.
-- Chords can contain pitches outside the scale; individual out-of-scale notes remain silent.
-- Circle orderings include fifths, fourths, chromatic steps, whole tones, major thirds, and minor thirds. Non-coprime steps produce separate cycles, not repeated copies of one cycle. Previous/current scale differences remain available in Circles.
-- Five tuning presets: standard guitar, drop-D guitar, high-G ukulele, low-G ukulele, and baritone ukulele.
+The piano displays one octave from the selected scale’s tonic. Changing the root shifts the visible keyboard; the frequency reference remains fixed. Each piano annotation shows its note, scale degree, integer **n**, and reduced mixed-form exponent.
 
-### Harmonics within Explore
+The fretboard displays every note on every string as an **n** value. Identical values represent identical pitches, even on different strings. Hover or focus a position to highlight all occurrences of that pitch and identify its note and frequency. The instrument head is on the left, with treble strings above bass strings; the standard high-G ukulele preset retains its re-entrant tuning.
 
-Explore's Harmonics surface offers **Scroll**, **Live**, and **Partials** views plus a playable mini keyboard. It analyzes app-generated sound only; it never opens the microphone.
+| Visual cue | Meaning |
+| --- | --- |
+| **Cyan fill** | The pitch belongs to the selected scale and can be played individually. |
+| **Thick magenta outline** | The pitch class belongs to the selected chord. |
+| **Bold yellow enclosure** | This part of the fretboard lies within the octave displayed on the piano, including both endpoints. |
+| **White matching / held highlight** | Occurrences of the exact same pitch, not merely the same letter name. |
+| **Grayscale marker** | Outside the selected scale; silent when played individually. |
 
-Live and Scroll show the measured app audio. Partials shows a labeled mathematical model of the selected pitches. Enable the global Harmonics control to include upper partials. Pin A stores a note or chord for comparison with the next selection B. Near-partial guides and Details identify pairs within 12 cents, their frequencies, and their separation in hertz.
+The octave boundary surrounds the region instead of adding another ring to each note. It does not make out-of-scale pitches playable. Chord buttons play the complete chord, including any tones outside the current scale.
 
-The partial model uses integer multiples of each fundamental and a relative amplitude envelope. It is not an instrument-separation algorithm. Near alignment is one useful way to study intervals; it is not a universal consonance or musical-quality score. Real string inharmonicity, timbre, level, bandwidth, and musical context also matter.
+Eight scale patterns are available: major, natural minor, harmonic minor, Dorian, Mixolydian, major pentatonic, minor pentatonic, and chromatic. Chords include major, minor, diminished, augmented, sus2, sus4, sixth, dominant seventh, major seventh, and minor seventh.
 
-### Tuner
+Pitch-circle choices use steps of 1, 2, 3, 4, 5, or 7 modulo 12. Multi-cycle orderings display their distinct cycles. Previous and current scale membership can be compared without changing the absolute pitch reference.
 
-The compact tuner combines a tuning strip, pitch and cents meter, diagnosis, dominant-frequency readouts, and one graph. **Scroll** is the default; **Live** selects the instantaneous spectrum. The same layout adapts to portrait and landscape.
+### Sound and sustained notes
 
-- Explicit microphone permission, with app-generated audio as an alternative input.
-- Automatic string targeting or a selected target. Hold target plays its reference continuously until released.
-- Automatic/manual/bypassed low-cut, 50/60 Hz hum notch, noise gate, and room-noise measurement.
-- Fundamental estimation is separate from the strongest spectral peak. A louder upper harmonic is identified when the signal supports a lower fundamental; uncertain octave cases remain uncertain.
-- Five-frame median smoothing for the loudest-peak readout and an approximately 850 ms dominant-peak overview improve readability. A recently stable fundamental may remain for up to 1.4 seconds while a pluck fades, explicitly labeled as a last reading.
-- Freeze, logarithmic/linear axes, target fundamental and harmonic markers, raw overlay in Live, input levels, and filter details remain available.
-- **Peaks** opens the optional detailed, paginated analysis: frequency, level, note, cents, measured `n`, nearest integer `n`, and possible harmonic relations to lower measured peaks. Sort by level or frequency and display up to 48 peaks.
+**Pure sine** isolates the fundamental. **Harmonics** adds a synthesized series of upper partials. This sound setting applies to the instruments, chord playback, reference tones, and tab player.
 
-Tuning is monophonic and approximate. The display uses relative digital levels in dBFS, not calibrated sound pressure. Browser processing, microphones, room noise, polyphony, and clipping can affect results. Headphones avoid feeding reference tones into the microphone. No physical microphone or phone is certified by the included synthetic tests.
+Press and hold a piano key, numbered piano button, or fret marker to sustain it. Release to stop. Space and Enter provide the same behavior when a note has keyboard focus. A brief tap produces a short tone. Pointer cancellation, focus loss, changing the workspace, or Escape releases held notes. **Stop sound** stops all playback.
 
-### Songs
+Master volume starts at **100%** on first use. Later volume choices are saved locally. Output remains dependent on the device volume; begin with a comfortable listening level. Playback is synthesized rather than sampled from physical instruments.
 
-One **Songs** library contains **69 entries in alphabetical order**. Search by title, composer, or concept; filter difficulty or favorites. Stairway to Heaven is a normal library entry, not a separate navigation destination. No source-score image is distributed.
+## Spectrum & tuner
 
-- 36 classical/traditional source melodies have educational harmonic arrangements with dyads or chords, independently timed voices, and accompaniment figures where the melody leaves space. **Melody only** keeps the original monophonic source available.
-- 24 progression studies include rhythmic attacks, with a Block chords alternative.
-- Eight technique studies and the source-derived Stairway opening-page arrangement are retained.
-- A single player provides Play/Pause/Resume, Stop, seeking, tempo, metronome, loop regions, section jumps, and following the current tab page.
-- Adaptive tab pages show fewer bars on a small screen. Optional 4/8/16-bar overview sizes remain available; larger overviews trade readability for density.
-- Frets at the same horizontal position sound together. Horizontal position represents time; strokes extending from notes indicate duration. The melody is distinguished from accompaniment.
-- Key transposition, whole-octave register fitting, manual register choice, and optional compact progression voicings are separate operations.
-- Fingerings are suggestions, not engraved performance editions. Wide spans and unplayable events are flagged. Overlapping synthesized voices need not correspond to a physically sustained fingering on one string.
+The tuner accepts microphone input or the app’s synthesized audio. Its live spectrum and scrolling spectrogram share the target fundamental and harmonic markers. Logarithmic and linear frequency axes, freeze, and optional raw-input overlay support comparison.
 
-Classical entries specify their actual extent, such as a theme, first strain, or opening pattern. Added harmonizations are educational arrangements, not claims to reproduce the composer's complete original score. The Stairway entry covers the existing 16 printed bars with their repeat (32 played bars), not the whole commercial song. Its four-line source is interpreted as high-G ukulele and re-fingered for other tunings. Articulation is simplified. See `CATALOG.md` and `CONTENT_NOTICE.md`.
+The tuning presets are standard guitar, drop-D guitar, high-G ukulele, low-G ukulele, and baritone ukulele. Select a tuning peg to lock a target, or use automatic nearest-open-string matching. **Hold to play target** sustains the reference tone until release. Microphone pitch judgment pauses throughout reference playback and briefly after release to avoid treating the app’s own tone as the instrument.
 
-#### Transposition as a visible invariant
+Input cleanup includes an automatic low-cut filter relative to the lowest string, manual cutoff, bypass, an optional 50/60 Hz notch, a noise gate, and a two-second room-noise measurement. The raw and filtered levels remain visible. These controls affect the analysis signal, not the audible synthesizer.
 
-The **Δn pattern** view compares a source voice and its transposed version. Each lane is normalized to its first pitch, so its shape remains aligned. Raw `n` labels move; signed gaps and rhythmic positions do not. The Tab view can annotate melody gaps, absolute `n`, scale degrees, or durations.
+The fundamental estimate and loudest spectral peak are reported separately. A stronger second or third harmonic is identified when the lower fundamental is sufficiently established. Uncertain octave relationships, clipping, quiet input, and unstable estimates receive distinct diagnostics rather than a forced tuning result. Detection is monophonic and is not a calibrated acoustic measurement.
+
+### Optional spectral-peak analysis
+
+**Analyze peaks** opens a measurement table below the live spectrum. It is off by default. The table reports:
+
+- Frequency and relative digital level in dBFS, sorted by amplitude or frequency.
+- Nearest equal-tempered note, cents offset, continuous **n**, and nearest integer **n**.
+- Possible integer-multiple relationships to lower measured peaks, with references to those rows.
+
+The display can show 12, 24, or 48 peaks. Freeze captures the spectrum and table together. Weak or unresolved peaks can be omitted. Harmonic labels describe measured frequency relationships: they do not separate concurrent instruments or prove that a missing fundamental exists. Algorithm details and limits are documented in [TUNER_NOTES.md](TUNER_NOTES.md).
+
+## Repertoire and practice
+
+The general library contains **68 selections**: 17 classical themes and studies, 19 traditional and early popular melodies, 24 chord progressions, and 8 technique exercises. Search by title, composer, or musical concept; filter by collection and difficulty; sort; and save favorites. [CATALOG.md](CATALOG.md) lists every selection and its scope.
+
+One player serves both the library and the featured score. **Play** becomes **Pause** during playback and **Resume** when paused. Stop, tempo, seeking, metronome, loop ranges, section jumps, page size, and follow-playback support practice. Individual tablature events are also playable.
+
+Each piece is available on every instrument preset. Three arrangement operations remain distinct:
+
+| Operation | Musical effect |
+| --- | --- |
+| **Key transposition** | Adds the same semitone offset to every pitch, preserving the melody’s intervals and rhythm. |
+| **Whole-octave fit** | Moves the entire piece by an explicitly reported octave offset to fit the instrument. |
+| **Compact chord voicing** | Preserves chord pitch classes while allowing different registers and inversions for a playable shape. |
+
+The main controls show instrument, key, and tempo. **Arrangement & practice options** contains exact semitone shift, register, voicing, and loop-range controls. Unplayable exact pitches and wide fingering spans are flagged. Suggested fingerings are educational arrangements, not definitive performance editions. Tab importing is not part of the interface.
+
+### Stairway to Tuning
+
+This dedicated workspace contains an opening arrangement transcribed from the bundled four-line reference page: **16 printed bars with the written repeat represented as 32 played bars**. The source is interpreted as high-G ukulele tuning and re-fingered for the other presets. It does not include sections absent from that page. Hammer-ons use separate attacks; articulation and sustained voices are simplified.
+
+The original reference image and attribution are available within the score workspace. See [CONTENT_NOTICE.md](CONTENT_NOTICE.md) for the distinction between the educational library and the credited reference material.
+
+## Math lab
+
+The primary equations are:
 
 ```text
-n′ᵢ = nᵢ + k
-Δnᵢ = nᵢ₊₁ − nᵢ
-Δn′ᵢ = (nᵢ₊₁ + k) − (nᵢ + k) = Δnᵢ
+f(n) = 440 × 2^(n/12)
+n = 12 × log₂(f / 440)
+
+n = 12m + r, where m = floor(n/12) and 0 ≤ r < 12
+n/12 = m + r/12, with the remaining fraction reduced
 ```
 
-For exact transposition, the same `k` applies to every voice, including simultaneous chord notes. The visual path follows an explicitly identified melody where available; otherwise it uses the highest attacked voice. A lowest-voice path is also available. A path is not a complete representation of polyphony.
+Thus `n = 25` has exponent `2 + 1/12`, while middle C (`n = −9`) has exponent `−1 + 1/4`. The plus sign is explicit for negative mixed forms.
 
-Degree remapping into a different kind of scale can change semitone gaps. Compact chord revoicing can change octaves and inversions; the interface labels it as revoicing rather than claiming one fixed shift.
-
-### Math
-
-Six paginated chapters cover pitch coordinates and reduced fractions, scale sets and modular circles, melody and transposition, string harmonics, equal-division tuning comparisons, and a learning path. Interactive calculations, tables, standing-wave animation, and audition controls are preserved. Dense comparison tables page their columns on small screens.
-
-## One pitch reference
-
-```text
-A4: n = 0
-f(n) = 440 × 2^(n/12) Hz
-n(f) = 12 × log₂(f/440)
-```
-
-The reduced exponent uses Euclidean division:
-
-```text
-n = 12m + r, with 0 ≤ r < 12
-n/12 = m + r/12
-```
-
-Examples: `25/12 = 2 + 1/12`, `−9/12 = −1 + 1/4`, and `24/12 = 2`. The explicit plus sign avoids ambiguity for negative values. This fraction is an exponent, not itself a frequency ratio.
-
-## Mobile interaction
-
-The primary workspaces fit the available viewport without document scrolling. Subviews, focused settings sheets, tab pages, fret windows, and mathematical pages replace long stacked sections. Browser chrome and rotation are handled through the dynamic visual viewport. Fullscreen is optional where supported.
-
-The piano and scores benefit from landscape; the tuner works in either orientation. All functions remain available without fullscreen. Long explanatory text and unusually large accessibility text can still use contained sheet scrolling rather than clipping information.
-
-## Audio
-
-The global **Pure sine / Harmonics** switch changes the synthesized timbre. Volume starts at 100% and subsequent choices are stored locally. A master compressor limits extreme sums; output loudness still depends on the device, so adjust headphones and system volume appropriately. Playback is synthesized, not a sampled guitar or ukulele.
+Interactive sections cover scale and chord sets, complements, scale degrees, interval names, transposition, modular circles, string modes, harmonic frequencies, logarithmic ratios, and nearest-grid tuning error. Equal-division comparisons include factorization, divisor counts, individual errors, and an explicitly weighted mean. Changing the compared ratios changes the metric; it is not a universal score of musical quality. Explore and playback remain in 12-tone equal temperament.
 
 ## Privacy
 
-All application computation and audio processing run locally in the browser. There are no remote compute resources, data APIs, analytics, accounts, cloud synchronization, recording, or uploads. Microphone samples are analyzed in memory and are not saved. Microphone access requires a user gesture, permission, and HTTPS or localhost; leaving the tuner stops its tracks.
+All synthesis, analysis, pitch detection, fingering, and music calculations run locally in the browser. The application uses **no remote compute resources or remote data sources**. No audio, pitch measurements, preferences, or repertoire queries are sent to an API.
 
-Preferences and favorites use browser-local storage. A static web host necessarily receives requests for the website files and may keep its ordinary access logs. That hosting traffic is separate from app audio and settings, which are not sent to the host.
+Microphone access requires permission and is used only for in-memory analysis. Audio is not recorded, stored, uploaded, or monitored through the speakers. Stop mic and leaving the tuner release the input tracks. Settings and favorites use local browser storage; clearing the site’s data removes those preferences.
 
-## Project structure
+A static host supplies the website files and may keep normal access logs. This does not provide authentication or make a publicly hosted site private. External reference links open only when selected. There are no accounts, advertisements, tracking scripts, or cloud synchronization. The site’s content security policy disables network data connections.
 
-```text
-index.html                 Application shell and accessible settings sheets
-assets/icon.svg            Local application icon
-src/theory.js              Pitch, scales, chords, tuning, and fingering mathematics
-src/audio.js               Web Audio synthesis and local analysis routing
-src/tuner-dsp.js            Monophonic tuning assessment and filter configuration
-src/spectral-peaks.js       FFT peak measurement and harmonic relations
-src/explore.js              Piano, circle, chord, and fretboard surfaces
-src/explore-spectrum.js     Live app spectra and partial comparison
-src/practice.js             Shared song player, tab paging, and interval paths
-src/library.js              Built-in arrangements and attribution metadata
-src/math.js                 Mathematical calculators and plots
-src/layout.js               Viewport, settings sheets, and chapter pagination
-src/hold.js                 Shared sustain/release lifecycle
-src/app.js, src/boot.js     State, preferences, navigation, initialization
-src/style.css              Responsive grayscale/cyan/magenta/yellow interface
-tests/                     Theory, data, audio, UI, and static-delivery tests
-```
+## Browser and implementation
 
-## Compatibility and validation
+The application is a static HTML/CSS/JavaScript site with relative asset paths and hash-based workspace navigation. It needs no build process or runtime packages. Browser audio starts after interaction. Microphone access requires a secure context such as HTTPS or localhost, plus browser and operating-system permission.
 
-A current browser with JavaScript, Canvas, SVG, and Web Audio is required. Microphone access depends on browser permissions and secure context. The website uses relative asset paths and a restrictive Content Security Policy; it has no runtime dependency on a package registry or CDN.
+| Path | Responsibility |
+| --- | --- |
+| `index.html`, `src/style.css` | Responsive workspaces and visual system. |
+| `src/theory.js`, `src/math.js` | Pitch coordinates, music structures, fingering, and mathematical views. |
+| `src/audio.js`, `src/hold.js` | Local synthesis, analysis routing, and sustained-note lifecycle. |
+| `src/tuner-dsp.js`, `src/spectral-peaks.js`, `src/spectrum.js` | Periodicity estimation, filtering, peak relationships, and visual analysis. |
+| `src/app.js`, `src/explore.js` | Shared state, navigation, and connected instrument controls. |
+| `src/library.js`, `src/practice.js` | Bundled repertoire and the shared practice player. |
+| `assets/` | Local reference material. |
+| `tests/` | Theory, audio, repertoire, interaction, and lifecycle checks. |
 
-See `TEST_REPORT.md` for the tested viewport sizes, synthesis/DSP cases, lifecycle checks, and limitations. See `tests/README.md` for development-only test dependencies and commands.
-
-## Content and licensing
-
-Original application code is intended for the repository's MIT license. Musical compositions, third-party transcriptions, and other source material retain their own rights; the code license does not license that music. See `CONTENT_NOTICE.md`. The release archive does not replace an existing repository `LICENSE` file.
-
-## Interface refinements in 0.5
-
-- The main tuner keeps the interactive instrument tuning pegs visible beside its pitch and cents readouts.
-- The song browser button explicitly names the library and its classical, traditional, chord, and theory content.
-- The large-screen Explore piano brings the circle of fifths and keyboard back into one shared view.
-- The Harmonics workspace displays weighted same-bin partial overlap and a separate modeled roughness estimate, with source frequencies available in Details.
+[TEST_REPORT.md](TEST_REPORT.md) records the validation scope. Physical-instrument microphone behavior, browser processing, room acoustics, and device output vary; test results are not a universal accuracy guarantee.

@@ -33,7 +33,7 @@
     }
     disposeChain(chain){if(!chain)return;try{chain.source.disconnect(chain.raw)}catch{};for(const node of [chain.raw,...chain.filters,chain.notch,chain.analyser,chain.silent])try{node.disconnect()}catch{};this.analysisChains=this.analysisChains.filter(c=>c!==chain);}
     setVolume(value){this.volume=Math.max(0,Math.min(1,Number(value)));if(this.master)this.master.gain.setTargetAtTime(this.volume,this.context.currentTime,.02);}
-    schedule(ns,{when,duration=.9,timbre='sine',group='manual',strongSecond=false,sustain=false,level=1}={}) {
+    schedule(ns,{when,duration=.9,timbre='sine',group='manual',strongSecond=false,sustain=false}={}) {
       if(!this.context) throw new Error('Audio has not been initialized.');
       const ctx=this.context, time=Math.max(ctx.currentTime,when??ctx.currentTime), voices=[];
       ns.forEach(n=>{
@@ -44,12 +44,12 @@
           for(let h=1;h<17;h++) if(h*f<ctx.sampleRate*.45) imag[h]=strongSecond?(h===1?.18:h===2?1:1/(h*h)):1/(h**1.45);
           osc.setPeriodicWave(ctx.createPeriodicWave(real,imag));
         } else osc.type='sine';
-        const amp=.34*Math.max(.05,Math.min(1,Number(level)||1))/Math.max(1,Math.sqrt(ns.length)), d=Math.max(.08,duration), end=time+d;
+        const amp=.34/Math.max(1,Math.sqrt(ns.length)), d=Math.max(.08,duration), end=time+d;
         gain.gain.setValueAtTime(.00001,time);
         gain.gain.exponentialRampToValueAtTime(amp,time+.012);
         if(!sustain) gain.gain.exponentialRampToValueAtTime(.00001,end+.12);
         osc.connect(gain); gain.connect(this.bus);
-        const entry={n,osc,gain,group,start:time,amp,sustain,released:false,end:sustain?Infinity:end+.15};
+        const entry={osc,gain,group,start:time,amp,sustain,released:false,end:sustain?Infinity:end+.15};
         this.active.add(entry);
         osc.onended=()=>{try{osc.disconnect();gain.disconnect();}catch{} this.active.delete(entry)};
         osc.start(time); if(!sustain) osc.stop(end+.15); voices.push(entry);

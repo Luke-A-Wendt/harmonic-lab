@@ -1,7 +1,7 @@
 {
-  "assets": 17,
-  "http_checks": 36,
-  "unique_element_ids": 197,
+  "assets": 14,
+  "http_checks": 30,
+  "unique_element_ids": 155,
   "paths": "relative, root and subpath verified",
   "csp_network_data_connections": "disabled",
   "result": "passed"
