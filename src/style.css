@@ -99,3 +99,40 @@ body{grid-template-rows:40px 36px minmax(0,1fr);padding-bottom:env(safe-area-ins
 
 @media(max-height:540px) and (min-width:600px){#explore-options #chord-buttons{gap:5px}#explore-options #chord-buttons button{min-height:27px;font-size:10px;padding:4px 8px}#explore-options .sheet-body>p{margin:4px 0}}
 @media(max-width:700px) and (max-height:700px){.piano-harmony-strip{display:none}.piano-surface{justify-content:flex-start}.pitch-label{min-height:72px}.pitch-label .note-small{font-size:8px}.ex-pane[data-ex-content=keys]>.instrument-info{font-size:9px;gap:4px}}
+
+/* 0.5 · at-a-glance desktop explorer and top-level instrument tuner */
+.tuner-instrument-panel{display:grid;grid-template-columns:minmax(170px,.85fr) minmax(180px,1fr);align-items:center;gap:12px}
+.tuner-headstock-inline{min-width:0;width:100%;height:100%;min-height:185px;display:flex;align-items:center;justify-content:center}
+.tuner-headstock-inline svg{width:100%;height:100%;max-height:260px}
+.tuner-readout-stack{display:flex;flex-direction:column;gap:10px;min-width:0}
+.harmonic-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.harmonic-metrics>div{border:1px solid #555;background:#272727;border-radius:8px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;gap:7px;min-width:0}
+.harmonic-metrics span{font-size:11px;color:#bbb}.harmonic-metrics strong{font:600 12px ui-monospace,monospace;color:var(--cyan);white-space:nowrap}
+.song-library-primary{border:2px solid var(--cyan)!important;color:var(--cyan)!important;font-weight:700!important;white-space:normal;text-align:left}
+.compact-circle-panel{display:none}
+@media(min-width:900px) and (min-height:650px){
+ .ex-pane[data-ex-content=keys]{display:grid;grid-template-columns:minmax(220px,.36fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;gap:10px;padding:12px}
+ .ex-pane[data-ex-content=keys]>.compact-circle-panel{display:flex;grid-column:1;grid-row:1/5;min-height:0;flex-direction:column;gap:9px;border:1px solid #444;border-radius:10px;padding:12px;background:#1b1b1b}
+ .compact-circle-panel svg{width:100%;max-height:290px;flex:1;min-height:160px}
+ .compact-circle-panel .compact-circle-label{font-size:11px;color:#aaa}
+ .ex-pane[data-ex-content=keys]>.board-top{grid-column:2;grid-row:1}
+ .ex-pane[data-ex-content=keys]>.piano-surface{grid-column:2;grid-row:2;min-height:0}
+ .ex-pane[data-ex-content=keys]>.instrument-info{grid-column:2;grid-row:3}
+ .ex-pane[data-ex-content=keys]>.compact-legend{grid-column:2;grid-row:4}
+ .ex-pane[data-ex-content=keys]>.piano-harmony-strip{display:none}
+}
+@media(max-width:1100px){.tuner-instrument-panel{grid-template-columns:minmax(110px,.65fr) minmax(140px,1fr);gap:7px}.tuner-headstock-inline{min-height:100px}.tuner-headstock-inline svg{max-height:200px}}
+@media(max-width:700px){.tuner-instrument-panel{grid-template-columns:minmax(92px,.55fr) minmax(145px,1fr);gap:6px}.tuner-headstock-inline{min-height:95px}.tuner-headstock-inline svg{max-height:155px}.tuner-readout-stack{gap:4px}.harmonic-metrics{gap:4px}.harmonic-metrics>div{padding:4px;display:block}.harmonic-metrics span{font-size:9px}.harmonic-metrics strong{display:block;font-size:10px}.song-library-primary{font-size:10px!important;max-width:135px;line-height:1.15}}
+@media(max-height:540px) and (min-width:760px){.tuner-headstock-inline{min-height:90px}.tuner-headstock-inline svg{max-height:150px}.tuner-instrument-panel{grid-template-columns:minmax(125px,.65fr) minmax(140px,1fr)}.harmonic-metrics>div{padding:3px 6px}.harmonic-metrics span{font-size:9px}}
+@media(max-height:540px) and (min-width:760px){
+ .tuner-instrument-panel{min-height:0;overflow:hidden;padding:5px 8px;align-items:center;grid-template-columns:minmax(105px,.55fr) minmax(145px,1fr)}
+ .tuner-headstock-inline{min-height:0;height:100%;overflow:hidden}
+ .tuner-headstock-inline svg{height:100%;max-height:120px}
+ .tuner-readout-stack{gap:2px;min-height:0;justify-content:space-between}
+ .tuner-readout-stack .pitch-main>strong{font-size:28px}
+ .tuner-readout-stack .pitch-main>div strong{font-size:12px}
+ .tuner-readout-stack .meter-track{margin:2px 0}
+ .tuner-readout-stack .tuning-diagnostic{min-height:20px;padding-top:0}
+ .tuner-readout-stack .dominant-readout strong{font-size:13px}
+ .tuner-readout-stack .tuner-actions button{min-height:25px;padding:2px 6px}
+}

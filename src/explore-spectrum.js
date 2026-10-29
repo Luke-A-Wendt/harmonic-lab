@@ -16,14 +16,41 @@
   else current.forEach((a,i)=>current.slice(i+1).forEach(b=>{if(a.n!==b.n)compare(a,b)}));
   return out.sort((a,b)=>a.cents-b.cents||(a.a.h+a.b.h)-(b.a.h+b.b.h));
  }
+ function acousticMetrics(){
+  // Weighted spectral coincidence and a simple pairwise critical-band roughness proxy.
+  // Both are descriptive models, not universal consonance ratings.
+  const aa=partials(S.pinned||S.current.slice(0,1),'A');
+  const bb=partials(S.pinned?S.current:S.current.slice(1),'B');
+  if(!bb.length||!aa.length||!H.state.harmonics)return null;
+  const binsA=new Map(),binsB=new Map();
+  for(const [parts,map] of [[aa,binsA],[bb,binsB]])for(const p of parts){
+   const n=Math.round(12*Math.log2(p.f/440));map.set(n,(map.get(n)||0)+p.amp);
+  }
+  let common=0,total=0;
+  for(const v of binsA.values())total+=v;
+  for(const v of binsB.values())total+=v;
+  for(const [n,a] of binsA)common+=Math.min(a,binsB.get(n)||0);
+  const coincidence=100*2*common/Math.max(.00001,total);
+  let rough=0,weight=0;
+  for(const a of aa)for(const b of bb){
+   const fmin=Math.min(a.f,b.f),df=Math.abs(a.f-b.f);
+   const s=0.24/(0.0207*fmin+18.96);
+   const x=s*df;
+   const dis=Math.max(0,Math.exp(-3.5*x)-Math.exp(-5.75*x));
+   const w=a.amp*b.amp;rough+=w*dis;weight+=w;
+  }
+  return {coincidence,rough:100*rough/Math.max(.00001,weight),bins:[...binsA.keys()].filter(n=>binsB.has(n)).length};
+ }
  function update(){
-  S.pairs=pairs();$('harmonic-current').textContent='B · '+names(S.current);$('harmonic-pinned').textContent=S.pinned?'A · '+names(S.pinned):'A not pinned';
+  S.pairs=pairs();const metric=acousticMetrics();
+  $('harmonic-bin-score').textContent=metric?`${metric.coincidence.toFixed(1)}% · ${metric.bins} bins`:'Select two tones';
+  $('harmonic-roughness').textContent=metric?`${metric.rough.toFixed(1)} / 100 · model`:'Enable Harmonics';$('harmonic-current').textContent='B · '+names(S.current);$('harmonic-pinned').textContent=S.pinned?'A · '+names(S.pinned):'A not pinned';
   $('piano-harmony-notes').textContent=S.current.map(name).join(' · ')+(H.state.harmonics?' · fundamental + upper partials':' · fundamental only');
   const text=!H.state.harmonics?'Pure sine: only fundamentals. Turn on Harmonics to compare upper partials.':S.pairs.length?`${S.pairs.length} near partial pairs within 12¢ · closest ${S.pairs[0].cents.toFixed(2)}¢ / ${S.pairs[0].hz.toFixed(2)} Hz apart.`:'No partial pairs within 12¢ in the modeled range. Pin A or hold a chord to compare.';
   $('harmonic-overlap-summary').textContent=text;
   const list=$('harmonic-pair-list');list.innerHTML='';
   const make=text=>{const p=document.createElement('div');p.className='partial-pair';p.textContent=text;list.appendChild(p)};
-  make('B: '+names(S.current));if(S.pinned)make('A: '+names(S.pinned));
+  make('Shared n-bin score: weighted partials rounded to nearest equal-tempered semitone. Roughness: simple partial-pair critical-band proxy, not a goodness score.');make('B: '+names(S.current));if(S.pinned)make('A: '+names(S.pinned));
   if(!S.pairs.length)make(text);
   S.pairs.slice(0,20).forEach(({a,b,cents,hz})=>make(`${a.kind} ${name(a.n)} × ${a.h} ↔ ${b.kind} ${name(b.n)} × ${b.h} · ${a.f.toFixed(2)} / ${b.f.toFixed(2)} Hz · Δ ${cents.toFixed(2)}¢ (${hz.toFixed(2)} Hz)`));
  }

@@ -1,6 +1,6 @@
-# Harmonic Lab
+# [Harmonic Lab](https://luke-a-wendt.github.io/harmonic-lab/)
 
-A browser-based music workbench for exploring pitch, scales, chords, string instruments, harmonics, tuning, and transposition. Version 0.4 uses compact, viewport-sized workspaces for portrait phones, landscape phones, tablets, and desktops.
+A browser-based music workbench for exploring pitch, scales, chords, string instruments, harmonics, tuning, and transposition. Version 0.5 uses compact, viewport-sized workspaces for portrait phones, landscape phones, tablets, and desktops.
 
 The application is a static website. There is no build step, application server, account system, external library, remote audio processor, or runtime data service.
 
@@ -8,7 +8,9 @@ The application is a static website. There is no build step, application server,
 
 ### Explore
 
-Choose a root and scale, then use **Piano**, **Fretboard**, **Harmonics**, or **Circles**. Controls stay in the same workspace while the main instrument surface changes.
+- **Harmonic comparison:** Pin one note or chord as A, then play another as B. The weighted shared-n-bin score compares modeled harmonic frequencies rounded to equal-tempered semitone bins; a separate simplified critical-band roughness proxy describes nearby-partial interactions. Neither metric is a universal judgment of consonance or musical quality. Both are meaningful only for the assumed harmonic amplitude model.
+
+Choose a root and scale, then use **Piano**, **Fretboard**, **Harmonics**, or **Circles**. On larger screens the Piano workspace includes a clickable circle of fifths alongside the keyboard and chord controls. On smaller screens these instruments remain available as focused workspace tabs.
 
 - A root-aligned piano shows exactly one octave, including the repeated tonic.
 - Each piano button displays `n`, its reduced mixed exponent, the note name, and scale degree.
@@ -137,3 +139,10 @@ See `TEST_REPORT.md` for the tested viewport sizes, synthesis/DSP cases, lifecyc
 ## Content and licensing
 
 Original application code is intended for the repository's MIT license. Musical compositions, third-party transcriptions, and other source material retain their own rights; the code license does not license that music. See `CONTENT_NOTICE.md`. The release archive does not replace an existing repository `LICENSE` file.
+
+## Interface refinements in 0.5
+
+- The main tuner keeps the interactive instrument tuning pegs visible beside its pitch and cents readouts.
+- The song browser button explicitly names the library and its classical, traditional, chord, and theory content.
+- The large-screen Explore piano brings the circle of fifths and keyboard back into one shared view.
+- The Harmonics workspace displays weighted same-bin partial overlap and a separate modeled roughness estimate, with source frequencies available in Details.
