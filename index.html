@@ -1,1102 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="dark" name="color-scheme"/>
-  <meta content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'" http-equiv="Content-Security-Policy"/>
-  <meta content="no-referrer" name="referrer"/>
-  <title>
-   Harmonic Lab — Music, mathematics &amp; sound
-  </title>
-  <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23171717'/%3E%3Cpath d='M12 32Q22 3 32 32T52 32' fill='none' stroke='%2343e7ed' stroke-width='5'/%3E%3C/svg%3E" rel="icon"/>
-  <link href="src/style.css" rel="stylesheet"/>
-  <meta content="An interactive music workbench: connected piano and fretboard, harmonic analysis, instrument tuning, playable tablature, and visual mathematics." name="description"/>
- </head>
- <body>
-  <header class="app-header">
-   <a aria-label="Harmonic Lab home" class="brand" href="#explore">
-    <svg aria-hidden="true" viewbox="0 0 42 42">
-     <path d="M4 21 Q12 -2 21 21 T38 21">
-     </path>
-     <circle cx="21" cy="21" r="3">
-     </circle>
-    </svg>
-    <span>
-     HARMONIC
-     <span class="brand-light">
-      LAB
-     </span>
-     <small>
-      MUSIC · MATHEMATICS · SOUND
-     </small>
-    </span>
-   </a>
-   <nav aria-label="Workspace" class="main-nav">
-    <button class="active" data-view="explore">
-     Explore
-    </button>
-    <button data-view="spectrum">
-     Spectrum &amp; tuner
-    </button>
-    <button data-view="practice">
-     Tab library
-    </button>
-    <button class="stairway-nav" data-view="stairway">
-     Stairway to Tuning
-    </button>
-    <button data-view="math">
-     Math lab
-    </button>
-   </nav>
-   <div class="header-actions">
-    <span class="private-label">
-     <i>
-     </i>
-     ON-DEVICE AUDIO
-    </span>
-    <button aria-label="Open help" class="icon-button" id="help-open" title="Guide and controls">
-     ?
-    </button>
-   </div>
-  </header>
-  <div class="audio-bar">
-   <span class="anchor">
-    <span class="dot cyan">
-    </span>
-    A4
-    <b>
-     n = 0
-    </b>
-    <span class="muted">
-     440 Hz
-    </span>
-   </span>
-   <div class="audio-controls">
-    <div aria-label="Sound character" class="tone-control" role="group">
-     <span class="tone-caption">
-      SOUND
-     </span>
-     <button aria-pressed="true" id="sine-mode">
-      <svg aria-hidden="true" viewbox="0 0 32 18">
-       <path d="M1 9 Q8 -6 16 9 T31 9">
-       </path>
-      </svg>
-      Pure sine
-     </button>
-     <button aria-pressed="false" id="harmonics">
-      <svg aria-hidden="true" viewbox="0 0 32 18">
-       <path d="M1 9 L4 9 L7 2 L10 16 L13 5 L16 12 L19 7 L22 10 L26 9 L31 9">
-       </path>
-      </svg>
-      Harmonics
-     </button>
-    </div>
-    <label class="volume-label">
-     Volume
-     <input aria-label="Master volume" id="volume" max="1" min="0" step="0.01" type="range" value="1"/>
-     <output for="volume" id="volume-value">
-      100%
-     </output>
-    </label>
-    <button class="small ghost" id="panic" title="Stop all playback · Escape">
-     Stop sound
-    </button>
-   </div>
-  </div>
-  <main>
-   <section aria-label="Explore instruments" class="view active" id="view-explore">
-    <div class="page-heading">
-     <div>
-      <p class="eyebrow">
-       EXPLORE / PITCH RELATIONSHIPS
-      </p>
-      <h1>
-       Hear the pattern. See the connection.
-      </h1>
-      <p>
-       Press and hold a note to sustain it. Follow its exact pitch across instruments.
-      </p>
-     </div>
-     <div class="formula-chip">
-      f(n) = 440 × 2
-      <sup>
-       n/12
-      </sup>
-     </div>
-    </div>
-    <div class="explore-top">
-     <section class="panel circle-panel">
-      <div class="panel-heading">
-       <h2>
-        Pitch circles
-       </h2>
-       <select aria-label="Circle interval" id="circle-step">
-        <option value="7">
-         Fifths · +7
-        </option>
-        <option value="5">
-         Fourths · +5
-        </option>
-        <option value="1">
-         Chromatic · +1
-        </option>
-        <option value="4">
-         Major thirds · +4
-        </option>
-        <option value="3">
-         Minor thirds · +3
-        </option>
-        <option value="2">
-         Whole tones · +2
-        </option>
-       </select>
-      </div>
-      <div id="circle-holder">
-      </div>
-      <p class="micro" id="cycle-description">
-      </p>
-     </section>
-     <section class="panel relation-panel">
-      <div class="panel-heading">
-       <div>
-        <p class="eyebrow">
-         SELECTED SCALE
-        </p>
-        <h2 class="scale-title" id="scale-title">
-         C major
-        </h2>
-       </div>
-       <select aria-label="Scale type" id="scale-mode">
-       </select>
-      </div>
-      <div class="scale-note-chips" id="scale-note-chips">
-      </div>
-      <div class="set-readout">
-       <span>
-        OFFSETS FROM TONIC
-       </span>
-       <code id="scale-offsets">
-       </code>
-      </div>
-      <div class="comparison">
-       <div>
-        <span class="micro">
-         PREVIOUS → CURRENT
-        </span>
-        <p id="comparison-title">
-         Select a second root to compare.
-        </p>
-       </div>
-       <div class="micro" id="comparison-diff">
-        The circle changes the root. The scale type stays the same.
-       </div>
-      </div>
-      <div class="chord-header">
-       <h3>
-        Try a chord on this root
-       </h3>
-       <button class="ghost small" id="clear-chord">
-        Clear
-       </button>
-      </div>
-      <div class="chord-buttons" id="chord-buttons">
-      </div>
-      <p class="micro" id="chord-description">
-       Magenta outlines identify chord tones. Only cyan scale notes play individually.
-      </p>
-     </section>
-    </div>
-    <section class="panel instrument-panel">
-     <div class="panel-heading">
-      <div>
-       <p class="eyebrow">
-        PIANO · ONE OCTAVE
-       </p>
-       <h2 id="piano-range">
-        C4 → C5
-       </h2>
-      </div>
-      <div class="inline-controls">
-       <button aria-label="Down one octave" class="small" id="octave-down">
-        − Octave
-       </button>
-       <button class="small" id="play-scale">
-        Play scale
-       </button>
-       <button aria-label="Up one octave" class="small" id="octave-up">
-        + Octave
-       </button>
-      </div>
-     </div>
-     <div class="instrument-scroll">
-      <div class="piano-content">
-       <div class="piano" id="piano">
-       </div>
-       <div class="piano-labels" id="piano-labels">
-       </div>
-      </div>
-     </div>
-     <div class="instrument-foot">
-      <span>
-       <b>
-        n
-       </b>
-       above · reduced
-       <b>
-        n/12
-       </b>
-       below · note &amp; degree
-      </span>
-      <span class="mono" id="selected-note-info">
-       A4 = 0 · 440.00 Hz
-      </span>
-     </div>
-    </section>
-    <section class="panel neck-panel">
-     <div class="panel-heading">
-      <div>
-       <p class="eyebrow">
-        FRETBOARD · SAME PITCH, EVERY POSITION
-       </p>
-       <h2 id="neck-title">
-        Guitar
-       </h2>
-      </div>
-      <div class="inline-controls">
-       <select aria-label="Fretboard instrument and tuning" id="explore-tuning">
-       </select>
-       <select aria-label="Fret count" id="fret-count">
-        <option value="24">
-         24 frets
-        </option>
-        <option value="36">
-         36 · extended
-        </option>
-        <option value="48">
-         48 · theoretical
-        </option>
-       </select>
-      </div>
-     </div>
-     <div class="legend">
-      <span class="legend-item">
-       <i class="legend-note playable">
-        0
-       </i>
-       <b>
-        Cyan fill
-       </b>
-       · playable scale tone
-      </span>
-      <span class="legend-item">
-       <i class="legend-note chord-example">
-        4
-       </i>
-       <b>
-        Magenta outline
-       </b>
-       · chord tone
-      </span>
-      <span class="legend-item">
-       <i class="legend-region">
-       </i>
-       <b>
-        Yellow enclosure
-       </b>
-       ·
-       <span id="octave-legend-range">
-        C4–C5
-       </span>
-      </span>
-      <span class="legend-item">
-       <i class="legend-match">
-       </i>
-       Exact-pitch match
-      </span>
-     </div>
-     <div class="instrument-scroll" id="neck-scroll">
-      <div class="neck" id="neck">
-      </div>
-     </div>
-     <div class="instrument-foot">
-      <span id="neck-note">
-       Headstock left · string 1 on top · each marker is n
-      </span>
-      <span id="neck-pitch-info">
-       Hold a cyan note to sustain. Gray notes remain silent, even inside the yellow region.
-      </span>
-     </div>
-    </section>
-    <div class="callout">
-     <span class="callout-icon">
-      ∑
-     </span>
-     <p>
-      <b>
-       A note has one number.
-      </b>
-      C4 is n = −9; A4 is n = 0. An octave adds 12. A fret adds 1. Scale degrees are separate labels relative to the selected tonic.
-     </p>
-     <button class="ghost small" data-goto="math">
-      See the math →
-     </button>
-    </div>
-   </section>
-   <section aria-label="Spectrum analyzer and tuner" class="view" hidden="" id="view-spectrum">
-    <div class="page-heading">
-     <div>
-      <p class="eyebrow">
-       SPECTRUM / ANALYSIS &amp; TUNING
-      </p>
-      <h1>
-       A string is more than one frequency.
-      </h1>
-      <p>
-       Compare its fundamental, its strongest peak, and its harmonic family.
-      </p>
-     </div>
-     <span class="badge" id="mic-status">
-      MIC OFF
-     </span>
-    </div>
-    <div class="tuner-top">
-     <section class="panel tuning-panel">
-      <div class="panel-heading">
-       <h2>
-        Tuning pegs
-       </h2>
-       <select aria-label="Tuner instrument" id="tuner-tuning">
-       </select>
-      </div>
-      <div id="tuning-headstock">
-      </div>
-      <p class="micro">
-       Choose a peg to hear and lock its reference pitch. Press and hold Play target for a sustained tone. Auto matches the nearest open-string pitch.
-      </p>
-      <div class="inline-controls">
-       <button class="small active" id="tuner-auto">
-        Auto open string
-       </button>
-       <button class="small" id="tuner-reference" title="Press and hold with mouse, touch, Space, or Enter">
-        Hold to play target
-       </button>
-      </div>
-     </section>
-     <section class="panel tuner-readout">
-      <div class="panel-heading">
-       <h2>
-        Live pitch
-       </h2>
-       <select aria-label="Spectrum source" id="spectrum-source">
-        <option value="synth">
-         App instruments
-        </option>
-        <option value="mic">
-         Microphone
-        </option>
-       </select>
-      </div>
-      <div class="pitch-main">
-       <span id="detected-note">
-        —
-       </span>
-       <div>
-        <span id="detected-frequency">
-         Waiting for a note
-        </span>
-        <small id="detected-n">
-         n = 12 log₂(f / 440)
-        </small>
-       </div>
-      </div>
-      <div class="tuning-meter">
-       <div class="meter-range">
-        <span>
-         FLAT
-        </span>
-        <span>
-         IN TUNE
-        </span>
-        <span>
-         SHARP
-        </span>
-       </div>
-       <div class="meter-track">
-        <i class="meter-center">
-        </i>
-        <span id="meter-needle">
-        </span>
-       </div>
-       <div class="meter-labels">
-        <span>
-         −50¢
-        </span>
-        <strong id="cents-readout">
-         —
-        </strong>
-        <span>
-         +50¢
-        </span>
-       </div>
-      </div>
-      <div class="detection-grid">
-       <div>
-        <span>
-         ESTIMATED FUNDAMENTAL
-        </span>
-        <b id="f0-readout">
-         —
-        </b>
-        <small id="confidence-readout">
-         Pluck one open string at a time
-        </small>
-       </div>
-       <div>
-        <span>
-         LOUDEST SPECTRAL PEAK
-        </span>
-        <b id="peak-readout">
-         —
-        </b>
-        <small id="peak-note">
-         Not necessarily the fundamental
-        </small>
-       </div>
-      </div>
-      <div class="inline-controls">
-       <button class="primary" id="mic-start">
-        Start microphone
-       </button>
-       <button class="small" disabled="" id="mic-stop">
-        Stop mic
-       </button>
-      </div>
-      <div class="tuning-diagnostic" data-kind="waiting" id="tuning-diagnostic" role="status">
-       <strong id="diagnostic-title">
-        Ready for a clean pluck
-       </strong>
-       <p id="diagnostic-detail">
-        Low-cut filtering and harmonic-aware pitch detection are active. The loudest peak does not have to be the fundamental.
-       </p>
-      </div>
-      <p class="micro" id="tuner-message">
-       Audio stays in this browser. No recording, upload, or microphone monitoring.
-      </p>
-     </section>
-    </div>
-    <section class="panel noise-panel">
-     <div class="panel-heading">
-      <div>
-       <p class="eyebrow">
-        INPUT CLEANUP · BEFORE ANALYSIS
-       </p>
-       <h2>
-        Input cleanup
-       </h2>
-      </div>
-      <span class="badge">
-       LOCAL DSP
-      </span>
-     </div>
-     <div class="noise-controls">
-      <label>
-       Low-frequency filter
-       <select id="lowcut-mode">
-        <option value="auto">
-         Auto · follows lowest string
-        </option>
-        <option value="manual">
-         Manual cutoff
-        </option>
-        <option value="off">
-         Off · bypass
-        </option>
-       </select>
-      </label>
-      <label>
-       Cutoff · Hz
-       <input disabled="" id="lowcut-hz" max="78" min="20" step="0.1" type="number" value="70"/>
-      </label>
-      <label>
-       Mains hum
-       <select id="hum-notch">
-        <option value="0">
-         No notch
-        </option>
-        <option value="50">
-         50 Hz notch
-        </option>
-        <option value="60">
-         60 Hz notch
-        </option>
-       </select>
-      </label>
-      <label>
-       Noise gate · dBFS
-       <input id="noise-gate" max="-28" min="-80" type="number" value="-62"/>
-      </label>
-      <button id="calibrate-noise">
-       Measure room noise
-      </button>
-      <label class="switch">
-       <input id="show-raw" type="checkbox"/>
-       <span>
-       </span>
-       Raw overlay
-      </label>
-     </div>
-     <div class="instrument-foot">
-      <span id="filter-summary">
-      </span>
-      <span class="mono" id="input-level">
-       Waiting for audio
-      </span>
-     </div>
-     <p class="micro">
-      The cutoff stays below the lowest open string in this tuning. A steep high-pass filters both the spectrum and the pitch detector, not the audible reference tones. Measure room noise with strings muted. Choose the correct tuning first. Manual cutoff changes the filter; a note far below this preset’s safe pitch range is flagged rather than forced onto a string.
-     </p>
-    </section>
-    <section class="panel spectrum-panel">
-     <div class="panel-heading">
-      <div>
-       <p class="eyebrow">
-        FREQUENCY DOMAIN
-       </p>
-       <h2>
-        Live spectrum
-       </h2>
-      </div>
-      <div class="inline-controls">
-       <label class="compact">
-        Axis
-        <select id="frequency-axis">
-         <option value="log">
-          Log · octaves
-         </option>
-         <option value="linear">
-          Linear · hertz
-         </option>
-        </select>
-       </label>
-       <button class="small" id="freeze-spectrum">
-        Freeze display
-       </button>
-       <button aria-controls="peak-analysis-panel" aria-expanded="false" class="small peak-toggle" id="peak-analysis-toggle">
-        Analyze peaks
-       </button>
-      </div>
-     </div>
-     <div class="plot-wrap">
-      <canvas aria-label="Live amplitude versus frequency spectrum" height="245" id="spectrum-canvas">
-      </canvas>
-     </div>
-     <div class="legend">
-      <span>
-       <i class="line cyan">
-       </i>
-       Filtered spectrum
-      </span>
-      <span>
-       <i class="line" style="background:#888">
-       </i>
-       Raw input (optional)
-      </span>
-      <span>
-       <i class="line magenta">
-       </i>
-       Target fundamental
-      </span>
-      <span>
-       <i class="line yellow">
-       </i>
-       Target harmonics
-      </span>
-      <span class="mono micro" id="fft-info">
-       FFT: 8192 samples
-      </span>
-     </div>
-     <section aria-label="Spectral peak analysis" class="peak-analysis" hidden="" id="peak-analysis-panel">
-      <div class="panel-heading">
-       <div>
-        <p class="eyebrow">
-         MEASURED PARTIALS
-        </p>
-        <h3>
-         Spectral peaks
-        </h3>
-        <p aria-live="polite" class="micro" id="peaks-summary">
-         Waiting for audio.
-        </p>
-       </div>
-       <div class="inline-controls">
-        <label class="compact">
-         Order
-         <select id="peaks-sort">
-          <option value="level">
-           Loudest first
-          </option>
-          <option value="frequency">
-           Lowest frequency first
-          </option>
-         </select>
-        </label>
-        <label class="compact">
-         Show
-         <select id="peaks-count">
-          <option value="12">
-           12 peaks
-          </option>
-          <option value="24">
-           24 peaks
-          </option>
-          <option value="48">
-           48 peaks
-          </option>
-         </select>
-        </label>
-       </div>
-      </div>
-      <div class="table-scroll">
-       <table class="peak-table">
-        <caption class="sr-only">
-         Detected spectral peaks with pitch coordinates and possible harmonic relationships
-        </caption>
-        <thead>
-         <tr>
-          <th scope="col">
-           Rank
-          </th>
-          <th scope="col">
-           Frequency
-          </th>
-          <th scope="col">
-           Level
-          </th>
-          <th scope="col">
-           Nearest note
-          </th>
-          <th scope="col">
-           n · measured / nearest
-          </th>
-          <th scope="col">
-           Relationship to lower peaks
-          </th>
-         </tr>
-        </thead>
-        <tbody id="peaks-body">
-         <tr>
-          <td class="empty-peaks" colspan="6">
-           Play a note or enable the microphone.
-          </td>
-         </tr>
-        </tbody>
-       </table>
-      </div>
-      <p class="micro">
-       Near-integer frequency ratios indicate possible harmonic families, not separated sound sources. Missing fundamentals and overlapping partials can be ambiguous. The list uses the filtered signal, excludes weak or unresolved peaks, and pauses with Freeze display.
-      </p>
-     </section>
-    </section>
-    <section class="panel spectrum-panel">
-     <div class="panel-heading">
-      <div>
-       <p class="eyebrow">
-        FREQUENCY × TIME
-       </p>
-       <h2>
-        Scrolling spectrogram
-       </h2>
-      </div>
-      <span class="micro">
-       Newest sound at the bottom · brighter = stronger
-      </span>
-     </div>
-     <div class="plot-wrap">
-      <canvas aria-label="Scrolling frequency spectrogram" height="255" id="waterfall-canvas">
-      </canvas>
-     </div>
-     <p class="micro">
-      The display shows relative digital level in dBFS, not calibrated sound-pressure level. Octave/pitch estimates can be ambiguous on chords, noisy attacks, or weak fundamentals.
-     </p>
-    </section>
-   </section>
-   <section aria-label="Tab player and library" class="view" hidden="" id="view-practice">
-    <div class="page-heading">
-     <div>
-      <p class="eyebrow" id="practice-eyebrow">
-       LIBRARY / PLAY &amp; DISCOVER
-      </p>
-      <h1 id="practice-heading">
-       Music worth exploring.
-      </h1>
-      <p id="practice-subheading">
-       Classical themes, traditional melodies, chord progressions, and focused technique.
-      </p>
-     </div>
-     <span class="badge" id="repertoire-total">
-      68 library selections
-     </span>
-    </div>
-    <div class="practice-layout">
-     <aside class="panel library-panel" id="library-browser">
-      <div class="panel-heading">
-       <h2>
-        Browse the library
-       </h2>
-       <button class="ghost small" id="library-reset">
-        Reset
-       </button>
-      </div>
-      <input aria-label="Search all repertoire" id="library-search" placeholder="Title, composer, concept…" type="search"/>
-      <label class="library-filter">
-       Collection
-       <select id="library-category">
-       </select>
-      </label>
-      <div class="library-filter-row">
-       <label class="library-filter">
-        Level
-        <select id="library-difficulty">
-         <option value="all">
-          Any level
-         </option>
-         <option>
-          Beginner
-         </option>
-         <option>
-          Intermediate
-         </option>
-        </select>
-       </label>
-       <label class="library-filter">
-        Sort
-        <select id="library-sort">
-         <option value="recommended">
-          Curated order
-         </option>
-         <option value="title">
-          Title A–Z
-         </option>
-         <option value="composer">
-          Composer
-         </option>
-         <option value="short">
-          Shortest first
-         </option>
-        </select>
-       </label>
-      </div>
-      <label class="switch">
-       <input id="library-favorites" type="checkbox"/>
-       <span>
-       </span>
-       Saved favorites only
-      </label>
-      <p aria-live="polite" class="micro" id="library-count">
-      </p>
-      <div id="tab-library">
-      </div>
-     </aside>
-     <div class="practice-main">
-      <section class="panel player-panel">
-       <div class="panel-heading">
-        <div>
-         <p class="eyebrow" id="tab-category">
-         </p>
-         <h2 id="tab-title">
-         </h2>
-        </div>
-        <div class="inline-controls">
-         <button aria-pressed="false" class="small ghost" id="tab-favorite">
-          ☆ Save
-         </button>
-        </div>
-       </div>
-       <p class="micro" id="tab-credit">
-       </p>
-       <p class="muted" id="tab-description">
-       </p>
-       <div class="listen-for">
-        <span>
-         LISTEN FOR
-        </span>
-        <p id="tab-learning">
-        </p>
-       </div>
-       <div class="transport">
-        <button aria-label="Play" class="primary" id="tab-play">
-         ▶ Play
-        </button>
-        <button class="small" id="tab-stop">
-         Stop
-        </button>
-        <label class="compact">
-         Tempo
-         <input id="tab-tempo" max="240" min="30" type="number" value="90"/>
-        </label>
-        <label class="switch">
-         <input id="tab-loop" type="checkbox"/>
-         <span>
-         </span>
-         Loop
-        </label>
-        <label class="switch">
-         <input id="tab-metronome" type="checkbox"/>
-         <span>
-         </span>
-         Metronome
-        </label>
-       </div>
-       <div class="progress-line">
-        <input aria-label="Playback position" id="tab-seek" max="16" min="0" step="0.125" type="range" value="0"/>
-        <span class="mono micro" id="tab-time">
-         0:00
-        </span>
-       </div>
-       <div class="transpose-controls">
-        <label class="compact">
-         Instrument &amp; tuning
-         <select id="tab-tuning">
-         </select>
-        </label>
-        <label class="compact">
-         Key
-         <select id="tab-key">
-         </select>
-        </label>
-        <button class="small ghost" id="tab-to-explore">
-         Explore this scale →
-        </button>
-       </div>
-       <details class="arrangement-options">
-        <summary>
-         Arrangement &amp; practice options
-        </summary>
-        <div class="advanced-layout">
-         <label class="compact">
-          Exact transpose · semitones
-          <input id="tab-transpose" max="24" min="-24" step="1" type="number" value="0"/>
-         </label>
-         <div class="inline-controls register-controls">
-          <label class="switch" hidden="" id="voicing-control">
-           <input checked="" id="tab-voicing" type="checkbox"/>
-           <span>
-           </span>
-           Compact chord voicings
-          </label>
-          <label class="switch">
-           <input checked="" id="tab-fit" type="checkbox"/>
-           <span>
-           </span>
-           Fit whole octave to instrument
-          </label>
-          <label class="compact">
-           Register shift
-           <select id="tab-register">
-            <option value="-24">
-             −2 octaves
-            </option>
-            <option value="-12">
-             −1 octave
-            </option>
-            <option value="0">
-             Original octave
-            </option>
-            <option value="12">
-             +1 octave
-            </option>
-            <option value="24">
-             +2 octaves
-            </option>
-           </select>
-          </label>
-         </div>
-         <div class="loop-range">
-          <span class="micro">
-           Loop / playback region (beats from 0)
-          </span>
-          <label>
-           From
-           <input id="loop-from" min="0" step="0.25" type="number" value="0"/>
-          </label>
-          <label>
-           To
-           <input id="loop-to" min="0.25" step="0.25" type="number" value="16"/>
-          </label>
-         </div>
-         <p class="micro" id="fingering-status">
-         </p>
-        </div>
-       </details>
-       <div aria-label="Jump to section" class="tab-sections" id="tab-sections">
-       </div>
-      </section>
-      <section class="panel tab-sheet-panel">
-       <div class="panel-heading">
-        <div>
-         <p class="eyebrow">
-          PLAYABLE TABLATURE
-         </p>
-         <h2>
-          Tablature
-         </h2>
-        </div>
-        <div class="inline-controls">
-         <label class="compact">
-          Bars per page
-          <select id="tab-page-size">
-           <option value="4">
-            4
-           </option>
-           <option selected="" value="8">
-            8
-           </option>
-           <option value="16">
-            16
-           </option>
-          </select>
-         </label>
-         <label class="switch">
-          <input checked="" id="tab-follow" type="checkbox"/>
-          <span>
-          </span>
-          Follow playback
-         </label>
-        </div>
-       </div>
-       <div class="sheet-navigation">
-        <button class="small" id="tab-page-prev">
-         ← Previous
-        </button>
-        <span class="micro mono" id="tab-page-label">
-        </span>
-        <button class="small" id="tab-page-next">
-         Next →
-        </button>
-       </div>
-       <div class="tab-sheet" id="tab-sheet">
-       </div>
-       <p class="micro">
-        Top line = string 1. Click a column to hear it. Fret numbers sit on the strings; small numbers above show duration in beats.
-       </p>
-       <p class="micro source-note" id="tab-source">
-       </p>
-      </section>
-      <section class="panel score-panel" hidden="" id="score-panel">
-       <details>
-        <summary>
-         Score reference &amp; arrangement notes
-        </summary>
-        <p class="micro">
-         Sixteen written bars, repeated for 32 played bars. The four-line reference is interpreted as high-G ukulele; other tunings use corresponding pitches and suggested fingerings. Hammer-ons are separate attacks and sustain is simplified. This is the opening page, not the entire song.
-        </p>
-        <img alt="Stairway to Heaven: reference transcription, opening page, with original attribution" id="score-image" loading="lazy" src="assets/stairway-score.png"/>
-       </details>
-      </section>
-     </div>
-    </div>
-   </section>
-   <section aria-label="Mathematical music theory" class="view" hidden="" id="view-math">
-    <div class="page-heading">
-     <div>
-      <p class="eyebrow">
-       MATH / THE STRUCTURE OF SOUND
-      </p>
-      <h1>
-       Music, with the variables visible.
-      </h1>
-      <p>
-       One coordinate system. Separate pitch, scale, harmony, and sound.
-      </p>
-     </div>
-     <span class="badge">
-      INTERACTIVE NOTEBOOK
-     </span>
-    </div>
-    <nav aria-label="Math topics" class="math-nav">
-     <a href="#math-pitch">
-      01 Coordinates
-     </a>
-     <a href="#math-sets">
-      02 Sets &amp; circles
-     </a>
-     <a href="#math-melody">
-      03 Melodies
-     </a>
-     <a href="#math-harmonics">
-      04 String modes
-     </a>
-     <a href="#math-tuning">
-      05 Temperament
-     </a>
-     <a href="#math-roadmap">
-      06 Learning map
-     </a>
-    </nav>
-    <section class="panel math-section" id="math-pitch">
-     <div class="math-title">
-      <span>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="theme-color" content="#141414"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'"><title>Harmonic Lab · Music in patterns</title><meta name="description" content="An on-device music workbench. Play connected instruments, see harmonics, tune strings, and learn songs through their invariant interval patterns."><link rel="icon" href="assets/icon.svg"><link rel="stylesheet" href="src/style.css?v=0.4"></head><body>
+<header class="app-header"><a class="brand" href="#explore" aria-label="Harmonic Lab home"><svg viewBox="0 0 36 28" aria-hidden="true"><path d="M2 14 Q9 -8 18 14 T34 14"/></svg><span>HARMONIC <b>LAB</b></span></a><nav class="main-nav" aria-label="Workspace"><button data-view="explore" class="active">Explore</button><button data-view="spectrum">Tuner</button><button data-view="practice">Songs</button><button data-view="math">Math</button></nav><div class="header-actions"><button id="fullscreen" class="icon-button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button><button id="help-open" class="icon-button" aria-label="Guide and privacy">?</button></div></header>
+<div class="audio-bar"><span class="anchor">A4 <b>n = 0</b><span>440 Hz</span></span><div class="tone-control" role="group" aria-label="Sound character"><button id="sine-mode" aria-pressed="true">∿ <span>Pure sine</span></button><button id="harmonics" aria-pressed="false">≋ <span>Harmonics</span></button></div><button class="sound-settings small ghost" data-dialog="sound-dialog" aria-label="Volume settings">Volume <output id="volume-value">100%</output></button><button id="panic" class="small ghost" title="Stop all playback · Escape" aria-label="Stop all sounds">■ <span>Stop</span></button></div>
+<main>
+<section class="view active" id="view-explore" aria-label="Explore instruments">
+ <div class="workspace-toolbar"><label class="compact">Root<select id="explore-root" aria-label="Scale root"></select></label><label class="compact grow">Scale<select id="scale-mode" aria-label="Scale type"></select></label><label class="compact chord-select">Chord<select id="quick-chord" aria-label="Chord type"><option value="">None</option></select></label><button id="hold-chord" class="magenta-button" title="Press and hold to sustain the selected chord">Hold chord</button><button class="icon-button" data-dialog="explore-options" aria-label="Scale and chord details">⋯</button></div>
+ <div class="workspace-tabs" role="group" aria-label="Explore view"><button class="active" data-ex-pane="keys">Piano</button><button data-ex-pane="strings">Fretboard</button><button data-ex-pane="harmonics">Harmonics</button><button data-ex-pane="circles">Circles</button></div>
+ <div class="explore-stage">
+  <div class="ex-pane" data-ex-content="keys"><div class="board-top"><span id="piano-range" class="mono">C4 → C5</span><div class="inline-controls"><button id="octave-down" class="small" aria-label="Octave down">− Octave</button><button id="play-scale" class="small ghost">▶ Scale</button><button id="octave-up" class="small" aria-label="Octave up">Octave +</button></div></div><div class="piano-surface"><div id="piano" class="piano"></div><div id="piano-labels"></div></div><div class="instrument-info"><span id="selected-note-info">Hold a key to hear its pitch.</span><span class="micro">n · reduced exponent · note &amp; degree</span></div><div class="compact-legend"><span class="legend-scale">Scale / playable</span><span class="legend-chord">Chord</span><span>White outline = same pitch</span></div><div class="piano-harmony-strip" id="piano-harmony-strip"><span id="piano-harmony-notes">A single pitch, a family of overtones.</span><button class="ghost small" data-ex-pane="harmonics">See its harmonics →</button></div></div>
+  <div class="ex-pane" data-ex-content="strings" hidden><div class="board-top"><label class="compact grow"><span class="sr-only">Instrument tuning</span><select id="explore-tuning"></select></label><button class="small ghost" id="neck-find">Find octave</button><button class="icon-button" data-dialog="explore-options" aria-label="Fretboard settings">⋯</button></div><div class="compact-legend"><span class="legend-scale">Scale</span><span class="legend-chord">Chord</span><span class="legend-octave">Octave <span id="octave-legend-range"></span></span></div><div id="neck-scroll" class="neck-viewport"><div id="neck"></div></div><div class="pager"><button id="neck-prev" aria-label="Previous frets">←</button><span id="neck-page-label" class="mono"></span><button id="neck-next" aria-label="Next frets">→</button></div><div class="instrument-info"><span id="neck-pitch-info">Same n = same pitch, on any string.</span><span id="neck-note" class="micro"></span></div><span id="neck-title" class="sr-only"></span></div>
+  <div class="ex-pane" data-ex-content="harmonics" hidden><div class="harmonics-toolbar"><div class="segmented" aria-label="Explore spectral display"><button data-harm-plot="waterfall" class="active">Scroll</button><button data-harm-plot="live">Live</button><button data-harm-plot="partials">Partials</button></div><button id="harmonic-pin" class="small">Pin A</button><button id="harmonic-clear" class="small ghost" title="Clear pinned reference">Clear A</button><button class="icon-button" data-dialog="harmonic-guide" aria-label="Harmonic overlap guide">?</button></div><div class="harmonic-readout"><strong id="harmonic-current">C4</strong><span id="harmonic-pinned">A not pinned</span></div><div class="harmonic-plot"><canvas id="explore-spectrum-canvas" aria-label="Spectrum and partials of the app instruments"></canvas></div><div class="harmonic-overlap"><span id="harmonic-overlap-summary">Hold a note below or a chord above.</span><button id="harmonic-details" class="small ghost" data-dialog="harmonic-details-dialog">Details</button></div><div class="harmonic-keyboard" id="harmonic-keys" aria-label="Playable pitches for comparing harmonics"></div><div class="compact-legend"><span class="legend-scale">B / current</span><span class="legend-chord">A / pinned</span><span class="legend-octave">Near partials</span></div></div>
+  <div class="ex-pane" data-ex-content="circles" hidden><div class="board-top"><h2>Root cycles</h2><select id="circle-step" aria-label="Circle interval"><option value="7">Fifths · +7</option><option value="5">Fourths · +5</option><option value="1">Chromatic · +1</option><option value="4">Major thirds · +4</option><option value="3">Minor thirds · +3</option><option value="2">Whole tones · +2</option></select></div><div id="circle-holder"></div><div class="circle-bottom"><p id="cycle-description" class="micro"></p><strong id="comparison-title">Select a second root to compare.</strong><span id="comparison-diff">The ordering changes; the selected scale type stays the same.</span></div></div>
+ </div>
+</section>
+<section class="view" id="view-spectrum" hidden aria-label="Tuner and spectrum">
+ <div class="workspace-toolbar tuner-toolbar"><select id="tuner-tuning" aria-label="Tuner instrument"></select><button id="tuner-auto" class="small active" aria-pressed="true">Auto</button><button id="mic-start" class="primary">Start mic</button><button id="mic-stop" class="small" disabled>Stop mic</button><button class="icon-button" data-dialog="tuner-options" aria-label="Input, filter, and diagnostic settings">⚙</button></div>
+ <div class="tuner-strings" id="tuner-strings" aria-label="Select an open string"></div>
+ <div class="tuner-body">
+  <section class="tuner-instrument-panel"><div class="pitch-main"><strong id="detected-note">—</strong><div><strong id="detected-frequency">Waiting for a note</strong><span id="detected-n">n = 12 log₂(f / 440)</span></div></div><div class="tuning-meter"><div class="meter-range"><span>FLAT</span><span id="cents-readout">—</span><span>SHARP</span></div><div class="meter-track"><i class="meter-center"></i><span id="meter-needle"></span></div><div class="meter-labels"><span>−50¢</span><span id="tuner-target-label">E2 · 82.41 Hz</span><span>+50¢</span></div></div><div id="tuning-diagnostic" class="tuning-diagnostic" data-kind="waiting"><strong id="diagnostic-title">Pluck one open string</strong><button data-dialog="tuner-diagnostic-dialog" class="icon-button" aria-label="Full tuning diagnosis">ⓘ</button></div><div class="dominant-readout"><span>LOUDEST PEAK</span><strong id="peak-readout">—</strong><span id="peak-note">Not necessarily the fundamental</span></div><div class="tuner-actions"><button id="tuner-reference" class="magenta-button" title="Hold to sustain the target tone">Hold target</button><span id="mic-status" class="badge">MIC OFF</span></div></section>
+  <section class="tuner-graph"><div class="plot-toolbar"><div class="segmented" aria-label="Spectrum type"><button data-tuner-plot="waterfall" class="active">Scroll</button><button data-tuner-plot="live">Live</button></div><button id="freeze-spectrum" class="small ghost">Freeze</button><button id="peak-analysis-toggle" class="small" aria-controls="peak-analysis-panel" aria-expanded="false">Peaks</button></div><div class="tuner-plot-wrap"><canvas id="spectrum-canvas" hidden aria-label="Live frequency spectrum"></canvas><canvas id="waterfall-canvas" aria-label="Scrolling frequency spectrogram"></canvas></div><div class="compact-legend"><span class="legend-scale">Signal</span><span class="legend-chord">Target f₀</span><span class="legend-octave">h × f₀</span><span id="plot-status">Newest at bottom</span></div><div class="dominant-strip" id="dominant-strip" aria-label="Stable dominant frequencies"><span>Dominant frequencies appear here.</span></div></section>
+ </div>
+</section>
+<section class="view" id="view-practice" hidden aria-label="Songs and interval patterns">
+ <div class="song-top"><button data-dialog="song-library" class="small">♫ Songs</button><div class="song-heading"><h1 id="tab-title">Ode to Joy</h1><p id="tab-credit"></p></div><button id="tab-favorite" class="icon-button" aria-label="Save favorite">☆</button><button data-dialog="song-info" class="icon-button" aria-label="Song and arrangement information">ⓘ</button></div>
+ <div class="song-controls"><select id="tab-tuning" aria-label="Tab instrument"></select><label class="compact">Key<select id="tab-key" aria-label="Song key"></select></label><div class="segmented" aria-label="Song display"><button data-song-pane="tab" class="active">Tab</button><button data-song-pane="pattern">Δn pattern</button></div><button data-dialog="practice-options" class="icon-button" aria-label="Arrangement and practice settings">⚙</button></div>
+ <div class="song-stage"><div id="tab-sheet" class="tab-sheet"></div><div id="pattern-view" hidden><div class="pattern-heading"><span id="pattern-invariant">Same gaps. Different starting pitch.</span><label class="compact">Path<select id="pattern-voice"><option value="melody">Melody</option><option value="bass">Lowest voice</option></select></label></div><div class="pattern-canvas-wrap"><canvas id="pattern-canvas" aria-label="Original and transposed interval paths"></canvas></div><div id="pattern-detail"></div><p id="pattern-formula" class="micro">n′ᵢ = nᵢ + k → Δn′ᵢ = Δnᵢ. Beat positions and durations stay fixed.</p></div></div>
+ <div class="sheet-navigation pager"><button id="tab-page-prev" aria-label="Previous bars">←</button><span id="tab-page-label" class="mono"></span><button id="tab-page-next" aria-label="Next bars">→</button></div>
+ <div class="song-transport"><button id="tab-play" class="primary" aria-pressed="false">▶ Play</button><button id="tab-stop" class="small ghost" title="Return to start">↤</button><input id="tab-seek" aria-label="Playback position" type="range" min="0" max="16" step="0.05" value="0"><span id="tab-time" class="mono">0:00 / 0:00</span><label class="tempo-control"><input id="tab-tempo" aria-label="Tempo in beats per minute" type="number" min="30" max="240" value="90"><span>BPM</span></label></div>
+ <div class="song-foot"><span id="transposition-badge">k = 0 · intervals unchanged</span><span id="song-texture">Arranged score</span><button class="ghost small" data-dialog="transpose-guide">How transposition works</button></div>
+</section>
+<section class="view" id="view-math" hidden aria-label="Mathematical music theory"><div class="workspace-toolbar"><h1>Math lab</h1><select id="math-chapter" aria-label="Math chapter"><option value="math-pitch">01 · Pitch &amp; fractions</option><option value="math-sets">02 · Scales &amp; circles</option><option value="math-melody">03 · Melody &amp; transposition</option><option value="math-harmonics">04 · String harmonics</option><option value="math-tuning">05 · Tuning systems</option><option value="math-roadmap">06 · Learning path</option></select></div><div id="math-reader" tabindex="0"><section class="panel math-section" id="math-pitch">
+<div class="math-title">
+<span>
        01
       </span>
-      <div>
-       <h2>
+<div>
+<h2>
         Pitch is exponential. The coordinate is linear.
        </h2>
-       <p>
+<p>
         A4 is always n = 0. It does not move when the scale changes.
        </p>
-      </div>
-     </div>
-     <div class="math-two">
-      <div>
-       <div class="equation">
+</div>
+</div>
+<div class="math-two">
+<div>
+<div class="equation">
         f(n) = 440 × 2
         <sup>
          n/12
         </sup>
-       </div>
-       <div class="equation secondary">
+</div>
+<div class="equation secondary">
         n = 12 log₂(f / 440)
        </div>
-       <p>
+<p>
         The logarithm reverses the exponent: it asks, “how many octave doublings produce this frequency ratio?” A change of 12 in n doubles frequency. A change of 1 multiplies frequency by 2
         <sup>
          1/12
         </sup>
         .
        </p>
-       <label class="compact">
+<label class="compact">
         Choose n
         <input id="math-n" max="36" min="-36" step="1" type="range" value="-9"/>
-       </label>
-       <div class="math-output" id="mixed-example">
-       </div>
-       <button class="small" id="math-play-n">
+</label>
+<div class="math-output" id="mixed-example">
+</div>
+<button class="small" id="math-play-n">
         Hear this pitch
        </button>
-      </div>
-      <div>
-       <h3>
+</div>
+<div>
+<h3>
         Whole octaves + reduced remainder
        </h3>
-       <div class="equation secondary">
+<div class="equation secondary">
         m = floor(n / 12)
         <br/>
         r = n − 12m
         <br/>
         n/12 = m + r/12
        </div>
-       <p>
+<p>
         The remainder is always 0 ≤ r &lt; 12, then reduced. For negative n, the explicit plus sign matters:
         <b>
          −9/12 = −1 + 1/4
         </b>
         , not “negative one and a quarter.”
        </p>
-       <div class="table-scroll" id="mixed-table">
-       </div>
-       <p class="micro">
+<div class="table-scroll" id="mixed-table">
+</div>
+<p class="micro">
         Reducing the exponent reveals an octave subdivision. It does
         <em>
          not
@@ -1107,176 +102,176 @@
         </sup>
         = √2, not 1/2.
        </p>
-      </div>
-     </div>
-    </section>
-    <section class="panel math-section" id="math-sets">
-     <div class="math-title">
-      <span>
+</div>
+</div>
+</section>
+<section class="panel math-section" id="math-sets">
+<div class="math-title">
+<span>
        02
       </span>
-      <div>
-       <h2>
+<div>
+<h2>
         Scales are sets; degrees are positions within them.
        </h2>
-       <p>
+<p>
         A scale selects pitch classes. A chord selects a smaller pattern, not always inside that scale.
        </p>
-      </div>
-     </div>
-     <div class="math-two">
-      <div>
-       <div class="equation secondary">
+</div>
+</div>
+<div class="math-two">
+<div>
+<div class="equation secondary">
         C major = {0, 2, 4, 5, 7, 9, 11}
         <br/>
         C minor = {0, 2, 3, 5, 7, 8, 10}
        </div>
-       <p>
+<p>
         Those are
         <b>
          offsets from C
         </b>
         , not the absolute n values. For any tonic n₀, the notes are n = n₀ + s + 12k, with s in the scale set and integer octave shift k. The app keeps n anchored at A4.
        </p>
-       <div class="table-scroll" id="interval-table">
-       </div>
-      </div>
-      <div>
-       <h3>
+<div class="table-scroll" id="interval-table">
+</div>
+</div>
+<div>
+<h3>
         Different numbers answer different questions
        </h3>
-       <p>
-        <b>
+<p>
+<b>
          n:
         </b>
         absolute semitone distance from A4.
         <br/>
-        <b>
+<b>
          Degree:
         </b>
         position in a scale, counting its tonic as 1.
         <br/>
-        <b>
+<b>
          Interval name:
         </b>
         letter span plus quality.
         <br/>
-        <b>
+<b>
          Chord:
         </b>
         a root-relative interval set.
        </p>
-       <p>
+<p>
         A major triad is {0,4,7}; a minor triad is {0,3,7}. “Minor” means a minor third above its root, not “outside the scale.” Sus2 and sus4 replace the third with 2 or 5 semitones.
        </p>
-       <div class="callout compact-callout">
-        <p>
-         <b>
+<div class="callout compact-callout">
+<p>
+<b>
           No prohibition:
          </b>
          scale-lock is a learning feature in Explore. Music can use chromatic notes. The tab player and chord buttons are deliberately not scale-locked.
         </p>
-       </div>
-      </div>
-     </div>
-     <details>
-      <summary>
+</div>
+</div>
+</div>
+<details>
+<summary>
        All subsets, one-note swaps, and the circle
       </summary>
-      <p>
+<p>
        There are 2¹² = 4096 pitch-class subsets, including the empty set; not 4096 named scales. Seven-note subsets number C(12,7) = 792. A one-note exchange removes one included note and adds one excluded note: 7 × 5 = 35 neighbors per seven-note set. These form the Johnson graph J(12,7).
       </p>
-      <p>
+<p>
        The 12 major collections form a special cycle within that network. Adjacent fifth/fourth roots share six notes, but arbitrary one-note swaps need not produce another major scale. Choosing a tonic adds information a bare set does not contain.
       </p>
-      <div class="equation secondary">
+<div class="equation secondary">
        x → (x + d) mod 12
        <br/>
        cycle count = gcd(d,12)
        <br/>
        cycle length = 12 / gcd(d,12)
       </div>
-      <div class="table-scroll" id="cycle-math-table">
-      </div>
-      <p>
+<div class="table-scroll" id="cycle-math-table">
+</div>
+<p>
        Other circles are constant-step root orderings, not a promise of one-note scale differences. Fourths (+5) reverse fifths (+7), because 5 ≡ −7 (mod 12).
       </p>
-     </details>
-    </section>
-    <section class="panel math-section" id="math-melody">
-     <div class="math-title">
-      <span>
+</details>
+</section>
+<section class="panel math-section" id="math-melody">
+<div class="math-title">
+<span>
        03
       </span>
-      <div>
-       <h2>
+<div>
+<h2>
         A melody has both pitch intervals and time.
        </h2>
-       <p>
+<p>
         Exact transposition preserves semitone differences. Remapping degrees can change them.
        </p>
-      </div>
-     </div>
-     <div class="math-two">
-      <div>
-       <div class="equation secondary">
+</div>
+</div>
+<div class="math-two">
+<div>
+<div class="equation secondary">
         n′ᵢ = nᵢ + t
         <br/>
         n′ᵢ₊₁ − n′ᵢ = nᵢ₊₁ − nᵢ
        </div>
-       <p>
+<p>
         The tab player applies this exact transposition to every note, then finds frets for the new pitches. Rhythm is stored separately as beat positions and durations. Whole-octave fitting is explicitly reported and can be disabled. Compact chord voicings are a separate option: they preserve chord pitch classes but may change inversions and octaves. An unplayable exact pitch is flagged, not silently folded.
        </p>
-      </div>
-      <div>
-       <h3>
+</div>
+<div>
+<h3>
         Same degrees, different intervals
        </h3>
-       <div class="equation secondary">
+<div class="equation secondary">
         Degrees: 1 → 3 → 5
         <br/>
         Major: 0 → 4 → 7
         <br/>
         Minor: 0 → 3 → 7
        </div>
-       <div class="inline-controls">
-        <button class="small" id="hear-major">
+<div class="inline-controls">
+<button class="small" id="hear-major">
          Hear major shape
         </button>
-        <button class="small" id="hear-minor">
+<button class="small" id="hear-minor">
          Hear minor shape
         </button>
-       </div>
-       <p class="micro">
+</div>
+<p class="micro">
         A song may still be recognizable after interval changes, but this is a transformation, not exact transposition. A scale exercise conventionally starts on its tonic; a melody can start on any degree.
        </p>
-      </div>
-     </div>
-    </section>
-    <section class="panel math-section" id="math-harmonics">
-     <div class="math-title">
-      <span>
+</div>
+</div>
+</section>
+<section class="panel math-section" id="math-harmonics">
+<div class="math-title">
+<span>
        04
       </span>
-      <div>
-       <h2>
+<div>
+<h2>
         String modes are integer multiples of frequency.
        </h2>
-       <p>
+<p>
         Do not confuse harmonic number h with semitone index n.
        </p>
-      </div>
-     </div>
-     <div class="math-two">
-      <div>
-       <div class="equation">
+</div>
+</div>
+<div class="math-two">
+<div>
+<div class="equation">
         f
         <sub>
          h
         </sub>
         = h f₀
        </div>
-       <div class="equation secondary">
+<div class="equation secondary">
         y
         <sub>
          h
@@ -1285,23 +280,23 @@
         <br/>
         f₀ = (1/2L) √(T/μ)
        </div>
-       <p>
+<p>
         This is the ideal flexible-string model. Real strings can have inharmonic overtones due to stiffness. Every positive integer h is an allowed ideal harmonic—not just integers whose factors are 2 and 3.
        </p>
-       <label class="compact">
+<label class="compact">
         String mode h
         <input id="harmonic-mode" max="8" min="1" step="1" type="range" value="3"/>
-       </label>
-       <canvas aria-label="Ideal string standing wave and nodes" height="165" id="string-wave">
-       </canvas>
-       <p class="micro" id="mode-caption">
-       </p>
-      </div>
-      <div>
-       <h3>
+</label>
+<canvas aria-label="Ideal string standing wave and nodes" height="165" id="string-wave">
+</canvas>
+<p class="micro" id="mode-caption">
+</p>
+</div>
+<div>
+<h3>
         Bring the harmonic back into one octave
        </h3>
-       <div class="equation secondary">
+<div class="equation secondary">
         r
         <sub>
          h
@@ -1310,46 +305,46 @@
         <sup>
          floor(log₂ h)
         </sup>
-        <br/>
+<br/>
         octave position = log₂(r
         <sub>
          h
         </sub>
         )
        </div>
-       <div class="table-scroll" id="harmonics-table">
-       </div>
-       <p class="micro">
+<div class="table-scroll" id="harmonics-table">
+</div>
+<p class="micro">
         The first eight harmonics reduce to four distinct ratios: 1, 3/2, 5/4, 7/4. A 6/5 minor third is the ratio between harmonics 6 and 5, not the sixth harmonic reduced by octaves.
        </p>
-      </div>
-     </div>
-     <div class="callout compact-callout">
-      <p>
-       <b>
+</div>
+</div>
+<div class="callout compact-callout">
+<p>
+<b>
         The loudest peak may be harmonic 2 or 3.
        </b>
        The tuner uses a periodicity estimate for the fundamental and reports the strongest FFT peak separately. Frequency alone cannot uniquely identify the physical string: different strings/frets can produce the same n.
       </p>
-     </div>
-    </section>
-    <section class="panel math-section" id="math-tuning">
-     <div class="math-title">
-      <span>
+</div>
+</section>
+<section class="panel math-section" id="math-tuning">
+<div class="math-title">
+<span>
        05
       </span>
-      <div>
-       <h2>
+<div>
+<h2>
         Why 12? Compare the approximations.
        </h2>
-       <p>
+<p>
         Factorization controls symmetry. Approximation of logarithms controls tuning error.
        </p>
-      </div>
-     </div>
-     <div class="math-two">
-      <div>
-       <div class="equation secondary">
+</div>
+</div>
+<div class="math-two">
+<div>
+<div class="equation secondary">
         j = round(N log₂ r)
         <br/>
         r
@@ -1360,70 +355,70 @@
         <sup>
          j/N
         </sup>
-        <br/>
+<br/>
         error = 1200 |j/N − log₂ r| cents
        </div>
-       <p>
+<p>
         One octave is 1200 cents. For the fifth, r = 3/2 and log₂(r) ≈ 0.584963. With N = 12, j = 7 and the fifth is about 1.955 cents flat. There is no universally best N: choose the ratios, weights, and cost of complexity first.
        </p>
-       <label class="compact">
+<label class="compact">
         Compare N
         <input id="edo-N" max="720" min="2" type="number" value="12"/>
-       </label>
-       <label class="compact">
+</label>
+<label class="compact">
         Test ratios
         <select id="ratio-set">
-         <option value="four">
+<option value="four">
           3/2, 5/4, 6/5, 7/4 · equal weight
          </option>
-         <option value="three">
+<option value="three">
           3/2, 5/4, 6/5 · equal weight
          </option>
-         <option value="harmonic">
+<option value="harmonic">
           Odd harmonics 3–15, octave-reduced
          </option>
-        </select>
-       </label>
-       <div class="math-output" id="edo-summary">
-       </div>
-      </div>
-      <div>
-       <h3>
+</select>
+</label>
+<div class="math-output" id="edo-summary">
+</div>
+</div>
+<div>
+<h3>
         Where the targets land
        </h3>
-       <canvas aria-label="Equal division approximation to selected harmonic ratios" height="220" id="edo-plot">
-       </canvas>
-       <p class="micro">
+<canvas aria-label="Equal division approximation to selected harmonic ratios" height="220" id="edo-plot">
+</canvas>
+<p class="micro">
         Cyan ticks = N equal octave steps. Magenta lines = target ratios. Yellow dots = nearest grid step. Only this small comparison plot uses N-EDO; Explore, tabs, and the tuner remain in 12-EDO.
        </p>
-       <div class="table-scroll" id="edo-detail">
-       </div>
-      </div>
-     </div>
-     <h3 class="spaced-heading">
+<div class="table-scroll" id="edo-detail">
+</div>
+</div>
+</div>
+<h3 class="spaced-heading">
       Compare candidate systems
      </h3>
-     <div class="table-scroll" id="edo-table">
-     </div>
-     <p class="micro">
+<div class="table-scroll" id="edo-table">
+</div>
+<p class="micro">
       All values are computed in this browser from the displayed ratios. Mean error gives every selected ratio equal weight; it is not a universal measure of musical quality or a perceptual consonance score.
      </p>
-     <details>
-      <summary>
+<details>
+<summary>
        What divisors really tell us—and what they do not
       </summary>
-      <p>
+<p>
        If M divides N, every step of M-EDO lies on the N-EDO grid. Thus 360 contains 12-, 24-, 36- and 72-EDO exactly. It does
        <b>
         not
        </b>
        contain 19-, 31- or 53-EDO. Refining by an integer factor cannot worsen the nearest-step error for a fixed target; an arbitrary larger grid can improve one ratio and worsen another.
       </p>
-      <p>
+<p>
        For any N, the nearest-step error is at most 600/N cents. Finer grids eventually make errors small regardless of factorization. Prime N can be excellent approximations. 12 is a compact practical system, not a mathematically optimal universal winner. A complexity penalty such as mean_error + λN depends on your chosen λ.
       </p>
-      <p>
-       <b>
+<p>
+<b>
         Why a fifth never lands exactly on a finite equal-octave grid:
        </b>
        if 2
@@ -1440,248 +435,115 @@
        </sup>
        , impossible by prime factorization. Equal temperament approximates this ratio. Twelve pure fifths almost equal seven octaves, but overshoot by about 23.460 cents. In 12-EDO, twelve seven-semitone fifths close exactly because 12 × 7 = 7 × 12.
       </p>
-      <p>
+<p>
        Other equal divisions—including 19, 24, 31 and 53—are valid mathematical designs. Musical traditions also use non-equal and context-dependent tuning; a culture should not be reduced to a single equal-division number.
       </p>
-     </details>
-    </section>
-    <section class="panel math-section" id="math-roadmap">
-     <div class="math-title">
-      <span>
+</details>
+</section>
+<section class="panel math-section" id="math-roadmap">
+<div class="math-title">
+<span>
        06
       </span>
-      <div>
-       <h2>
+<div>
+<h2>
         A learning path, not a wall of terminology.
        </h2>
-       <p>
+<p>
         Follow the relationships from a single pitch to scales, harmony, and sound.
        </p>
-      </div>
-     </div>
-     <div class="roadmap">
-      <article>
-       <b>
+</div>
+</div>
+<div class="roadmap">
+<article>
+<b>
         1. Locate a pitch
        </b>
-       <p>
+<p>
         Find the same n on the piano and on two strings. Change its octave and predict the new number.
        </p>
-      </article>
-      <article>
-       <b>
+</article>
+<article>
+<b>
         2. Change one relationship
        </b>
-       <p>
+<p>
         Compare major and minor. Locate their thirds. Then move C → G and inspect the one-note scale exchange.
        </p>
-      </article>
-      <article>
-       <b>
+</article>
+<article>
+<b>
         3. Hear time and harmony
        </b>
-       <p>
+<p>
         Play an arpeggio and a block chord. Transpose a melody. Notice which intervals and rhythms stay fixed.
        </p>
-      </article>
-      <article>
-       <b>
+</article>
+<article>
+<b>
         4. Examine the sound
        </b>
-       <p>
+<p>
         Turn harmonics on. Compare sine and plucked timbres. Tune one open string, then explore different N in the tuning table.
        </p>
-      </article>
-     </div>
-     <details>
-      <summary>
+</article>
+</div>
+<details>
+<summary>
        Next layers: voice leading, harmonic function, rhythm, and form
       </summary>
-      <p>
-       <b>
+<p>
+<b>
         Voice leading:
        </b>
        changing C–E–G into C–F–A moves two voices by 1 and 2 semitones. Inversions reorder chord tones without changing their pitch classes; register and spacing still change the sound.
       </p>
-      <p>
-       <b>
+<p>
+<b>
         Harmonic function:
        </b>
        in C major, G7 contains B and F. Their movements B→C and F→E help establish C as tonic. Membership alone does not explain the feeling of arrival. The same seven-note set can support different tonal centers or modes.
       </p>
-      <p>
-       <b>
+<p>
+<b>
         Rhythm:
        </b>
        tempo sets beats per minute; meter groups beats; durations place sounds within that grid. Swing, articulation, dynamics and timing nuance are additional dimensions. The current player uses straight, explicitly timed beats.
       </p>
-      <p>
-       <b>
+<p>
+<b>
         Form:
        </b>
        repetition, contrast, phrases, and larger-scale organization help listeners recognize a musical idea. Notation, ear training, counterpoint, and musical traditions beyond this model are further subjects for study.
       </p>
-     </details>
-    </section>
-    <section class="panel sources">
-     <h3>
-      Sources &amp; implementation notes
-     </h3>
-     <p>
-      Formulas and simulations are calculated locally. The following references explain the physical model and browser audio methods; external links open only when you choose them.
-     </p>
-     <a href="https://www.phys.unsw.edu.au/jw/strings.html" rel="noreferrer" target="_blank">
-      UNSW Music Acoustics · strings, standing waves and harmonics ↗
-     </a>
-     <a href="https://phys.unsw.edu.au/jw/harmonics.html" rel="noreferrer" target="_blank">
-      UNSW · how harmonic are harmonics? ↗
-     </a>
-     <a href="https://www.hyperphysics.phy-astr.gsu.edu/hbase/Music/et.html" rel="noreferrer" target="_blank">
-      Georgia State University · equal temperament ↗
-     </a>
-     <a href="https://pubmed.ncbi.nlm.nih.gov/12002874/" rel="noreferrer" target="_blank">
-      de Cheveigné &amp; Kawahara (2002) · YIN pitch estimator ↗
-     </a>
-     <a href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getFloatFrequencyData" rel="noreferrer" target="_blank">
-      MDN · Web Audio frequency analysis ↗
-     </a>
-     <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia" rel="noreferrer" target="_blank">
-      MDN · microphone permissions and secure contexts ↗
-     </a>
-    </section>
-   </section>
-  </main>
-  <footer>
-   <span class="footer-brand">
-    HARMONIC LAB
-    <span class="muted">
-     0.3
-    </span>
-   </span>
-   <span>
-    Local audio &amp; calculations · No accounts or analytics
-   </span>
-   <div>
-    <button class="ghost small" id="privacy-open">
-     Privacy
-    </button>
-    <button class="ghost small" id="guide-open">
-     Guide
-    </button>
-   </div>
-  </footer>
-  <div aria-live="polite" id="toast" role="status">
-  </div>
-  <dialog aria-labelledby="help-title" id="help-dialog">
-   <form method="dialog">
-    <button aria-label="Close guide" class="close-button">
-     ×
-    </button>
-   </form>
-   <p class="eyebrow">
-    GUIDE
-   </p>
-   <h2 id="help-title">
-    Music, from every angle.
-   </h2>
-   <div class="help-content">
-    <p>
-     <b>
-      Explore.
-     </b>
-     Choose a root and scale. Press and hold a cyan piano key or fret marker to sustain its pitch. Matching numbers identify identical pitches. Magenta outlines show chord tones; the yellow fretboard enclosure marks the octave shown on the piano.
-    </p>
-    <p>
-     <b>
-      Sound.
-     </b>
-     Pure sine isolates one frequency. Harmonics adds upper partials to the same pitch. The sound control is shared across instruments and tab playback. Release a held note to stop it; Escape stops all playback.
-    </p>
-    <p>
-     <b>
-      Spectrum &amp; tuner.
-     </b>
-     Select a tuning, start the microphone, and pluck one open string. Auto low-cut removes low-frequency rumble. Measure room noise while the strings are muted. Analyze peaks lists measured frequencies and possible harmonic relationships. Headphones prevent reference tones feeding back into the microphone.
-    </p>
-    <p>
-     <b>
-      Tab library.
-     </b>
-     Browse a collection, choose an instrument and key, and press Play. The same control pauses and resumes. Arrangement &amp; practice options provides register, voicing, and loop-range controls. Stairway to Tuning has a dedicated workspace with the same player.
-    </p>
-    <p>
-     <b>
-      Math lab.
-     </b>
-     Follow the equations, compare octave divisions, and animate string modes. The pitch coordinate is always A4 = n = 0. A reduced exponent is not a frequency ratio: the ratio is 2 raised to that exponent.
-    </p>
-    <p class="micro">
-     Mouse, touch, and keyboard are supported. Hold Space or Enter on a note to sustain it. Pitch detection is monophonic; chords and noisy attacks can be ambiguous.
-    </p>
-   </div>
-  </dialog>
-  <dialog aria-labelledby="privacy-title" id="privacy-dialog">
-   <form method="dialog">
-    <button aria-label="Close privacy statement" class="close-button">
-     ×
-    </button>
-   </form>
-   <p class="eyebrow">
-    PRIVACY
-   </p>
-   <h2 id="privacy-title">
-    Local computation. Private audio.
-   </h2>
-   <div class="help-content">
-    <p>
-     All audio synthesis, spectrum analysis, pitch detection, and music calculations run locally in this browser. The application uses no remote compute services, remote data sources, accounts, analytics, or advertising.
-    </p>
-    <p>
-     <b>
-      Microphone.
-     </b>
-     Access requires explicit permission. Audio is analyzed in memory only: it is not recorded, saved, or uploaded. Stop mic releases access. Leaving the tuner also stops the microphone.
-    </p>
-    <p>
-     <b>
-      Browser storage.
-     </b>
-     Settings and library favorites are stored locally on this device. There is no synchronization or cloud storage. Clearing the site’s browser data removes these preferences.
-    </p>
-    <p>
-     <b>
-      Website delivery.
-     </b>
-     A static host serves the website’s files and may retain ordinary access logs. The app makes no API requests and sends no audio, pitch measurements, or preferences to that host. Reference links open external sites only when selected.
-    </p>
-   </div>
-  </dialog>
-  <noscript>
-   This application needs JavaScript to play audio and connect its views.
-  </noscript>
-  <script src="src/theory.js">
-  </script>
-  <script src="src/tuner-dsp.js">
-  </script>
-  <script src="src/library.js">
-  </script>
-  <script src="src/spectral-peaks.js">
-  </script>
-  <script src="src/audio.js">
-  </script>
-  <script src="src/app.js">
-  </script>
-  <script src="src/hold.js">
-  </script>
-  <script src="src/explore.js">
-  </script>
-  <script src="src/spectrum.js">
-  </script>
-  <script src="src/practice.js">
-  </script>
-  <script src="src/math.js">
-  </script>
-  <script src="src/boot.js">
-  </script>
- </body>
-</html>
+</details>
+</section></div><div class="pager"><button id="math-prev" aria-label="Previous math page">←</button><span id="math-page-label"></span><button id="math-next" aria-label="Next math page">→</button></div></section>
+</main>
+<div id="toast" role="status"></div>
+<dialog id="sound-dialog" class="sheet "><div class="sheet-title"><h2>Sound</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-body"><label class="field">Master volume<input id="volume" type="range" min="0" max="1" step="0.01" value="1"></label><p>Pure sine isolates the fundamental. Harmonics adds upper partials to the same pitch. These controls apply to all app instruments and songs.</p><p class="micro">Use a comfortable device volume, especially with headphones. Escape stops every voice.</p></div></dialog>
+<dialog id="explore-options" class="sheet "><div class="sheet-title"><h2>Scale & chord</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-body"><div class="board-top"><h3 id="scale-title">C major</h3><button id="clear-chord" class="small ghost">Clear chord</button></div><div id="scale-note-chips" class="scale-note-chips"></div><div class="set-readout">Offsets from tonic <code id="scale-offsets"></code></div><div id="chord-buttons" class="chord-buttons"></div><p id="chord-description"></p><label class="field">Fretboard range<select id="fret-count"><option value="24">0–24 frets</option><option value="36">0–36 · extended</option><option value="48">0–48 · theoretical</option></select></label><div class="compact-legend"><span class="legend-scale">Playable scale</span><span class="legend-chord">Chord pitches</span><span class="legend-octave">Displayed octave</span></div><p class="micro">The yellow enclosure marks a pitch range, not permission to play. Only cyan scale notes play individually; chords may include notes outside the scale.</p></div></dialog>
+<dialog id="harmonic-guide" class="sheet "><div class="sheet-title"><h2>Reading harmonic overlap</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-body"><p><b>Scroll / Live</b> measures the synthesized sound. Hold a note or chord to see its spectrum. Turn on Harmonics in the sound bar to add upper partials.</p><p><b>Partials</b> shows the harmonic model for the selected pitches, even in silence. Pin A, choose a different pitch or chord for B, then compare their harmonic families.</p><div class="equation">fₕ = h f₀<br>Δf = |h f₁ − j f₂|</div><p>Yellow links mark partial pairs within 12 cents. Their frequency difference suggests a beating rate when both tones are sustained; actual roughness depends on level, timbre, register, and auditory bandwidth.</p><p class="micro">Overlap is one acoustic clue, not a score of musical goodness. Equal-tempered chords generally have near coincidences rather than exact coincidences. The plotted partial heights are a synthesis model, not measured string amplitudes.</p></div></dialog>
+<dialog id="harmonic-details-dialog" class="sheet "><div class="sheet-title"><h2>Partial relationships</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-body"><div id="harmonic-pair-list"></div><p class="micro">Pairs are sorted by closeness in cents. Only partials at or below 8 kHz are shown, up to harmonic 12. Near overlap does not imply identical frequencies.</p></div></dialog>
+<dialog id="tuner-options" class="sheet "><div class="sheet-title"><h2>Tuner settings</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-tabs"><button data-sheet-tab="input" class="active">Input</button><button data-sheet-tab="filter">Cleanup</button><button data-sheet-tab="instrument">Instrument</button></div><div class="sheet-body"><div data-sheet-content="input"><label class="field">Source<select id="spectrum-source"><option value="synth">App instruments</option><option value="mic">Microphone</option></select></label><label class="field">Frequency axis<select id="frequency-axis"><option value="log">Log · equal octaves</option><option value="linear">Linear · hertz</option></select></label><label class="check"><input id="show-raw" type="checkbox">Raw overlay on live spectrum</label><p id="tuner-message" class="micro">Audio stays in this browser. No recording, upload, or microphone monitoring.</p><p id="fft-info" class="mono micro">8192 samples</p><p class="micro">Microphone access requires HTTPS or localhost and explicit permission. Use headphones with reference tones. Relative digital level is dBFS, not calibrated sound pressure.</p></div><div data-sheet-content="filter" hidden><div class="form-grid"><label class="field">Low cut<select id="lowcut-mode"><option value="auto">Auto · follows tuning</option><option value="manual">Manual</option><option value="off">Off</option></select></label><label class="field">Cutoff · Hz<input id="lowcut-hz" type="number" min="20" max="78" step="0.1" value="70" disabled></label><label class="field">Hum notch<select id="hum-notch"><option value="0">None</option><option value="50">50 Hz</option><option value="60">60 Hz</option></select></label><label class="field">Gate · dBFS<input id="noise-gate" type="number" min="-80" max="-28" value="-62"></label></div><button id="calibrate-noise">Measure room noise</button><p id="filter-summary" class="micro"></p><p id="input-level" class="mono micro">Waiting for audio</p><p class="micro">Measure with strings muted. Filters affect analysis, not the audible reference. A pitch below this tuning’s safe range is flagged, not forced to a string.</p></div><div data-sheet-content="instrument" hidden><div id="tuning-headstock"></div><p class="micro">Tap a peg to hear and lock a string. Auto returns to the nearest open-string estimate. Hold target sustains the selected reference.</p></div></div></dialog>
+<dialog id="tuner-diagnostic-dialog" class="sheet "><div class="sheet-title"><h2>Pitch diagnostics</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-body"><div class="detection-grid"><div><span>Estimated fundamental</span><strong id="f0-readout">—</strong><small id="confidence-readout">Pluck one string</small></div></div><p id="diagnostic-detail">The loudest peak does not have to be the fundamental.</p><p class="micro">Main readouts use a short median history. A last stable reading stays visible briefly when a note fades, explicitly marked as held. Clipping, contradictory spectra, and ambiguous octaves are not declared in tune.</p></div></dialog>
+<dialog id="peak-analysis-panel" class="sheet peaks-sheet"><div class="sheet-title"><h2>Spectral peaks</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="peak-controls"><select id="peaks-sort" aria-label="Peak order"><option value="level">Loudest first</option><option value="frequency">Frequency order</option></select><select id="peaks-count" aria-label="Number of peaks"><option value="12">12 peaks</option><option value="24">24 peaks</option><option value="48">48 peaks</option></select><button id="peaks-freeze" class="small">Freeze</button></div><p id="peaks-summary" class="micro">Waiting for audio</p><div class="peak-list" id="peaks-body"></div><div class="pager"><button id="peaks-prev" aria-label="Previous peaks">←</button><span id="peaks-page"></span><button id="peaks-next" aria-label="Next peaks">→</button></div><p class="micro">Possible harmonic families, not separated sound sources. Level is dBFS. n is measured / nearest integer. Missing fundamentals and overlapping partials may be ambiguous.</p></dialog>
+<dialog id="song-library" class="sheet library-sheet"><div class="sheet-title"><h2>Songs</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="library-controls"><input id="library-search" type="search" placeholder="Find a song, composer, or concept" aria-label="Search songs"><button id="library-reset" class="small ghost">Reset</button></div><div class="library-filters"><select id="library-difficulty" aria-label="Difficulty"><option value="all">Any level</option><option>Beginner</option><option>Intermediate</option></select><label class="check"><input id="library-favorites" type="checkbox">Saved only</label><span class="micro">A–Z</span></div><div id="tab-library" class="tab-library"></div><div class="pager"><button id="library-prev" aria-label="Previous songs">←</button><span id="library-count"></span><button id="library-next" aria-label="Next songs">→</button></div></dialog>
+<dialog id="song-info" class="sheet "><div class="sheet-title"><h2>About this arrangement</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-body"><p id="tab-category" class="eyebrow">SONGS</p><p id="tab-description"></p><p id="tab-learning"></p><p id="tab-source" class="micro"></p><p id="fingering-status" class="micro"></p><button id="tab-to-explore">Explore this scale →</button></div></dialog>
+<dialog id="practice-options" class="sheet "><div class="sheet-title"><h2>Practice settings</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-tabs"><button data-sheet-tab="play" class="active">Playback</button><button data-sheet-tab="arrange">Arrangement</button><button data-sheet-tab="reading">Reading</button></div><div class="sheet-body"><div data-sheet-content="play"><div class="inline-controls"><label class="check"><input id="tab-loop" type="checkbox">Loop</label><label class="check"><input id="tab-metronome" type="checkbox">Metronome</label></div><div class="form-grid"><label class="field">From beat<input id="loop-from" type="number" min="0" step="0.25" value="0"></label><label class="field">To beat<input id="loop-to" type="number" min="0.25" step="0.25" value="16"></label></div><h3>Jump to section</h3><div id="tab-sections" class="tab-sections"></div></div><div data-sheet-content="arrange" hidden><label class="field">Exact transpose · semitones<input id="tab-transpose" type="number" min="-24" max="24" step="1" value="0"></label><label class="field">Texture<select id="tab-texture"><option value="arranged">Arranged · melody + harmony</option><option value="melody">Melody only</option></select></label><label class="check" id="voicing-control"><input id="tab-voicing" type="checkbox" checked>Compact progression voicings</label><label class="check"><input id="tab-fit" type="checkbox" checked>Fit whole octave to instrument</label><label class="field">Register<select id="tab-register"><option value="-24">−2 octaves</option><option value="-12">−1 octave</option><option value="0" selected>Original octave</option><option value="12">+1 octave</option><option value="24">+2 octaves</option></select></label><p class="micro">An octave fit moves every note together. Compact chord voicings are different: inversions and individual octave placements may change. Unreachable pitches are marked ×, never silently removed.</p></div><div data-sheet-content="reading" hidden><label class="field">Bars per page<select id="tab-page-size"><option value="auto">Auto · fit screen</option><option value="1">1</option><option value="2">2</option><option value="4">4</option><option value="8">8</option><option value="16">16</option></select></label><label class="check"><input id="tab-follow" type="checkbox" checked>Follow playback</label><label class="field">Numbers above the tab<select id="tab-annotation"><option value="gaps">Melody Δn</option><option value="n">Absolute n</option><option value="degrees">Scale degree</option><option value="rhythm">Duration in beats</option></select></label><p class="micro">Simultaneous notes share a vertical column. Time runs horizontally; bars and beat ticks align with duration strokes. Δn follows the melody line, not every accompaniment note.</p></div></div></dialog>
+<dialog id="transpose-guide" class="sheet "><div class="sheet-title"><h2>The pattern survives a key change</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-body"><div class="equation">n′ᵢ = nᵢ + k<br>Δn′ᵢ = (nᵢ₊₁ + k) − (nᵢ + k)<br>= nᵢ₊₁ − nᵢ = Δnᵢ</div><p>A melody is not tied to one absolute starting note. Its <b>signed semitone gaps and rhythm</b> survive exact transposition. Pick a starting pitch, then keep the same gaps.</p><p><b>Δn pattern</b> aligns the original and current melodic contours. Each lane is measured relative to its first pitch; horizontal spacing represents rhythm. The numbers below show unchanged gaps, while the absolute n labels move. In Tab, choose the Δn annotation to see the same pattern above the frets.</p><p>Harmony matters too: all simultaneous notes must move by the same k to preserve their intervals. The pattern view follows one named voice, not the entire polyphonic texture.</p><p class="micro">Mapping degrees into a different scale is a different operation and can change the gaps. Compact progression voicings preserve pitch classes, not every melodic interval. The display labels that distinction.</p></div></dialog>
+<dialog id="help-dialog" class="sheet "><div class="sheet-title"><h2>Harmonic Lab</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-tabs"><button data-sheet-tab="guide" class="active">Guide</button><button data-sheet-tab="privacy">Privacy</button></div><div class="sheet-body"><div data-sheet-content="guide"><p><b>Explore.</b> Choose a root, scale, and chord. Hold cyan notes to sustain; magenta outlines are chord tones. Fretboard pages keep every pitch accessible without shrinking the instrument.</p><p><b>Harmonics.</b> See measured sound or modeled partials. Pin A and change B to compare two harmonic families.</p><p><b>Tuner.</b> Select an instrument, start the microphone, and pluck one open string. Scroll and Live share one plot. Peaks opens the full decomposition; settings holds cleanup and diagnostics.</p><p><b>Songs.</b> One alphabetized library. Play an arrangement, change its key, and open Δn pattern to see what stays fixed.</p><p><b>Math.</b> Paged equations and experiments, all anchored at A4 = n = 0.</p><p class="micro">Landscape gives the piano, fretboard, and tab more room. The ⛶ control enters fullscreen where supported. Mouse, touch, and Space/Enter holds are supported. Escape stops audio.</p></div><div data-sheet-content="privacy" hidden><h3>Local computation. Private audio.</h3><p>Synthesis, spectrum analysis, pitch detection, and music calculations run in this browser. There are no remote compute services, remote data sources, accounts, analytics, or advertising.</p><p>Microphone access needs explicit permission. Audio is analyzed in memory, not recorded, saved, or uploaded. Stop mic or leave the tuner to release it.</p><p>Settings and favorites are stored locally. No cloud synchronization occurs. A static host delivers the app files and may keep ordinary access logs; the application sends it no audio, pitch data, or preferences.</p><p class="micro">External reference links are opened only when selected. Pitch detection is monophonic and approximate; playback is synthesized, not a sampled guitar.</p></div></div></dialog><noscript>Harmonic Lab needs JavaScript for audio and interactive instruments.</noscript>
+<script src="src/theory.js?v=0.4"></script>
+<script src="src/tuner-dsp.js?v=0.4"></script>
+<script src="src/library.js?v=0.4"></script>
+<script src="src/spectral-peaks.js?v=0.4"></script>
+<script src="src/audio.js?v=0.4"></script>
+<script src="src/app.js?v=0.4"></script>
+<script src="src/hold.js?v=0.4"></script>
+<script src="src/layout.js?v=0.4"></script>
+<script src="src/explore.js?v=0.4"></script>
+<script src="src/explore-spectrum.js?v=0.4"></script>
+<script src="src/spectrum.js?v=0.4"></script>
+<script src="src/practice.js?v=0.4"></script>
+<script src="src/math.js?v=0.4"></script>
+<script src="src/boot.js?v=0.4"></script>
+</body></html>

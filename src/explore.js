@@ -2,7 +2,8 @@
 (function () {
   'use strict';
   const H=window.HL, T=H.T, $=H.$, NS='http://www.w3.org/2000/svg';
-  const NECK={label:64,open:52,fret:46,row:54,header:30};
+  const NECK={label:42,open:44,fret:44,row:44,header:24};
+  let firstFret=0, visibleFrets=8;
   function se(tag,attrs,parent) {
     const el=document.createElementNS(NS,tag);
     Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));
@@ -92,69 +93,65 @@
     $('octave-legend-range').textContent=`${H.noteName(a)}–${H.noteName(b)}`;
     $('octave-down').disabled=H.state.octave<=-3;$('octave-up').disabled=H.state.octave>=3;
   }
-  function neckRegion(neck,bands,strings,frets) {
-    // A stepped perimeter encloses the union of contiguous octave bands; it never bridges a gap.
-    const width=NECK.label+NECK.open+NECK.fret*frets,height=NECK.header+strings*NECK.row;
+  function neckRegion(neck,bands,strings,count) {
+    const width=NECK.label+NECK.fret*count,height=NECK.header+strings*NECK.row;
     const svg=se('svg',{class:'octave-enclosure',width,height,viewBox:`0 0 ${width} ${height}`,'aria-hidden':'true'},neck);
-    const x=col=>NECK.label+(col===0?0:NECK.open+(col-1)*NECK.fret);
+    const x=col=>NECK.label+col*NECK.fret;
     const regions=[];
-    for(const band of bands) {
-      const last=regions.at(-1),prev=last?.at(-1);
-      if(prev && band.row===prev.row+1 && band.lo<=prev.hi && band.hi>=prev.lo) last.push(band);
-      else regions.push([band]);
-    }
-    for(const group of regions) {
+    for(const band of bands){const last=regions.at(-1),prev=last?.at(-1);if(prev&&band.row===prev.row+1&&band.lo<=prev.hi&&band.hi>=prev.lo)last.push(band);else regions.push([band]);}
+    for(const group of regions){
       const first=group[0],last=group.at(-1),points=[];
       const l=b=>x(b.lo)+2.5,r=b=>x(b.hi+1)-2.5,top=b=>NECK.header+b.row*NECK.row+2.5,bottom=b=>NECK.header+(b.row+1)*NECK.row-2.5;
       points.push([l(first),top(first)],[r(first),top(first)]);
-      group.forEach((b,i)=>{
-        const y=i===group.length-1?bottom(b):NECK.header+(b.row+1)*NECK.row;
-        points.push([r(b),y]);if(i<group.length-1)points.push([r(group[i+1]),y]);
-      });
+      group.forEach((b,i)=>{const y=i===group.length-1?bottom(b):NECK.header+(b.row+1)*NECK.row;points.push([r(b),y]);if(i<group.length-1)points.push([r(group[i+1]),y]);});
       points.push([l(last),bottom(last)]);
-      for(let i=group.length-1;i>=0;i--) {
-        const b=group[i],y=i===0?top(b):NECK.header+b.row*NECK.row;
-        points.push([l(b),y]);if(i>0)points.push([l(group[i-1]),y]);
-      }
+      for(let i=group.length-1;i>=0;i--){const b=group[i],y=i===0?top(b):NECK.header+b.row*NECK.row;points.push([l(b),y]);if(i>0)points.push([l(group[i-1]),y]);}
       se('path',{d:'M'+points.map(p=>p.join(',')).join(' L')+' Z',class:'octave-region'},svg);
     }
   }
   function neck() {
-    const el=$('neck'),sc=$('neck-scroll'),scroll=sc.scrollLeft,s=H.state,t=T.tunings[s.tuning];el.innerHTML='';$('neck-title').textContent=t.name;
-    function row(label,header=false) {
-      const div=document.createElement('div');div.className='fret-row'+(header?' fret-header':'');
-      const name=document.createElement('div');name.className='string-name';name.textContent=label;div.appendChild(name);el.appendChild(div);return div;
-    }
+    const el=$('neck'),vp=$('neck-scroll'),s=H.state,t=T.tunings[s.tuning];el.innerHTML='';$('neck-title').textContent=t.name;
+    const width=vp.clientWidth||Math.min(innerWidth-50,1000),height=vp.clientHeight||310;
+    visibleFrets=Math.min(s.frets+1,Math.max(5,Math.floor((width-NECK.label)/44)));
+    firstFret=Math.max(0,Math.min(s.frets+1-visibleFrets,firstFret));
+    NECK.fret=(width-NECK.label)/visibleFrets;NECK.open=NECK.fret;NECK.row=Math.max(20,Math.min(66,(height-NECK.header)/t.open.length));
+    function row(label,header=false){const div=document.createElement('div');div.className='fret-row'+(header?' fret-header':'');const name=document.createElement('div');name.className='string-name';name.textContent=label;name.style.width=NECK.label+'px';name.style.height=(header?NECK.header:NECK.row)+'px';div.appendChild(name);el.appendChild(div);return div;}
     const top=row('FRET',true);
-    for(let f=0;f<=s.frets;f++) {
-      const cell=document.createElement('div');cell.className=`fret-cell header ${f===0?'open':''} ${[3,5,7,9,12,15,17,19,21,24].includes(f)?'mark':''}`;cell.textContent=f===0?'OPEN':f;top.appendChild(cell);
-    }
+    for(let j=0;j<visibleFrets;j++){const f=firstFret+j,cell=document.createElement('div');cell.className=`fret-cell header ${f===0?'open':''} ${[3,5,7,9,12,15,17,19,21,24].includes(f)?'mark':''}`;cell.textContent=f===0?'0':f;cell.style.width=NECK.fret+'px';cell.style.height=NECK.header+'px';top.appendChild(cell);}
     const bands=[];
     t.open.forEach((open,i)=>{
-      const line=row(t.labels[i]),lo=Math.max(0,H.startN()-open),hi=Math.min(s.frets,H.startN()+12-open);
-      if(lo<=hi) bands.push({row:i,lo,hi});
-      for(let f=0;f<=s.frets;f++) {
-        const n=open+f,status=flags(n),cell=document.createElement('div');
-        cell.className=`fret-cell ${f===0?'open':''} ${f>24?'extended':''} ${status.octave?'octave-cell':''}`;
-        const button=document.createElement('button');button.type='button';
-        button.className=`fret-note ${status.scale?'scale':'outside'} ${status.octave?'in-octave':'out-of-octave'} ${status.chord?'chord':''}`;
-        button.textContent=H.signed(n);button.setAttribute('aria-disabled',String(!status.scale));
-        button.setAttribute('aria-label',`${H.noteName(n)}, n ${n}; string ${i+1}, fret ${f}; ${status.scale?'hold to play':'outside scale'}; ${status.octave?'inside':'outside'} displayed octave${status.chord?'; chord tone':''}`);
-        button.title=`${H.noteName(n)} · ${T.frequency(n).toFixed(2)} Hz`;playable(button,n);cell.appendChild(button);line.appendChild(cell);
+      const line=row(t.labels[i]),lo=Math.max(firstFret,H.startN()-open),hi=Math.min(firstFret+visibleFrets-1,H.startN()+12-open);
+      if(lo<=hi)bands.push({row:i,lo:lo-firstFret,hi:hi-firstFret});
+      for(let j=0;j<visibleFrets;j++){
+        const f=firstFret+j,n=open+f,status=flags(n),cell=document.createElement('div');cell.className=`fret-cell ${f===0?'open':''} ${f>24?'extended':''} ${status.octave?'octave-cell':''}`;cell.style.width=NECK.fret+'px';cell.style.height=NECK.row+'px';
+        const button=document.createElement('button');button.type='button';button.className=`fret-note ${status.scale?'scale':'outside'} ${status.octave?'in-octave':'out-of-octave'} ${status.chord?'chord':''}`;button.textContent=H.signed(n);button.dataset.fret=f;button.dataset.string=i;
+        const size=Math.min(36,NECK.row-6);button.style.width=size+'px';button.style.height=size+'px';button.style.minHeight=size+'px';
+        button.setAttribute('aria-disabled',String(!status.scale));button.setAttribute('aria-label',`${H.noteName(n)}, n ${n}; string ${i+1}, fret ${f}; ${status.scale?'hold to play':'outside scale'}; ${status.octave?'inside':'outside'} displayed octave${status.chord?'; chord tone':''}`);button.title=`${H.noteName(n)} · ${T.frequency(n).toFixed(2)} Hz`;playable(button,n);cell.appendChild(button);line.appendChild(cell);
       }
     });
-    neckRegion(el,bands,t.open.length,s.frets);
-    $('neck-note').textContent=s.tuning==='uke'?'High-G is reentrant: the bottom G4 string is higher than C4.':'Headstock left · string 1 on top · every marker is n';
-    if(s.frets>24) $('neck-note').textContent+=' · extended theoretical frets above 24';
-    const reachable=Array.from({length:13},(_,i)=>H.startN()+i).filter(n=>T.positions(n,t,s.frets).length).length;
-    if(reachable<13) $('neck-note').textContent+=` · ${reachable}/13 displayed pitches reachable`;
-    sc.scrollLeft=scroll;
+    neckRegion(el,bands,t.open.length,visibleFrets);
+    $('neck-page-label').textContent=`Frets ${firstFret}–${firstFret+visibleFrets-1} / ${s.frets}`;$('neck-prev').disabled=firstFret===0;$('neck-next').disabled=firstFret+visibleFrets>s.frets;
+    $('neck-note').textContent=s.tuning==='uke'?'Reentrant G4 · same n = same pitch.':'Headstock ← · string 1 on top.';
+    if(s.frets>24)$('neck-note').textContent+=' 25+ theoretical.';
+    H.neckWindow={first:firstFret,count:visibleFrets};
   }
   function render() {
     drawCircles();summary();piano();neck();
+    $('explore-root').value=H.state.root;$('quick-chord').value=H.state.chord||'';
+    $('hold-chord').textContent=H.state.chord?'Hold '+T.rootName(H.state.root,H.state.mode)+T.chords[H.state.chord].symbol:'Hold chord';
     $('scale-mode').value=H.state.mode;$('circle-step').value=H.state.step;$('explore-tuning').value=H.state.tuning;$('fret-count').value=H.state.frets;
   }
   H.initExplore=()=>{
+    H.options($('explore-root'),T.roots.map((v,i)=>[i,v]),H.state.root);
+    H.options($('quick-chord'),[['','None'],...Object.entries(T.chords).map(([k,v])=>[k,v.name])],H.state.chord||'');
+    $('explore-root').addEventListener('change',e=>H.update({root:Number(e.target.value)}));
+    $('quick-chord').addEventListener('change',e=>{const c=e.target.value||null;H.update({chord:c});if(c)H.play(T.chords[c].offsets.map(o=>H.startN()+o),{duration:1});});
+    H.bindHold($('hold-chord'),()=>T.chords[H.state.chord||'major'].offsets.map(o=>H.startN()+o),{before:()=>{if(!H.state.chord)H.update({chord:'major'})},group:'chord-held'});
+    $('neck-prev').addEventListener('click',()=>{H.releaseHolds();firstFret=Math.max(0,firstFret-visibleFrets+1);neck()});
+    $('neck-next').addEventListener('click',()=>{H.releaseHolds();firstFret=Math.min(H.state.frets+1-visibleFrets,firstFret+visibleFrets-1);neck()});
+    $('neck-find').addEventListener('click',()=>{firstFret=Math.max(0,H.startN()-T.tunings[H.state.tuning].open[0]-1);neck()});
+    H.on('resize',()=>{if(H.view==='explore'&&H.exPane==='strings'){H.releaseHolds();neck()}});
+    H.on('ex-pane',pane=>{if(pane==='strings')neck()});
     H.options($('scale-mode'),Object.entries(T.scales).map(([k,v])=>[k,v.name]),H.state.mode);H.tuningOptions($('explore-tuning'));
     Object.entries(T.chords).forEach(([type,c])=>{
       const b=document.createElement('button');b.textContent=c.name;b.dataset.chord=type;

@@ -13,14 +13,17 @@ for tag,attr in [('script','src'),('link','href'),('img','src')]:
   value=el.get(attr,'')
   if not value or value.startswith('data:'):continue
   assert not urlparse(value).scheme and not value.startswith('/'),value
-  assert (ROOT/value).is_file(),value
+  assert (ROOT/value.split('?')[0]).is_file(),value
   assets.append(value)
 ids=[el['id'] for el in soup.find_all(id=True)];assert len(ids)==len(set(ids))
 csp=soup.find('meta',attrs={'http-equiv':'Content-Security-Policy'})['content'];assert "connect-src 'none'" in csp
 assert soup.find('input',id='volume')['value']=='1'
 assert not soup.select('#import-dialog, #import-open, #export-library')
-assert len(soup.select('.main-nav [data-view]'))==5
+assert len(soup.select('.main-nav [data-view]'))==4
 assert (ROOT/'.nojekyll').exists()
+assert not (ROOT/'assets/stairway-score.png').exists()
+assert not soup.select('[data-view=stairway]')
+assert len(soup.select('[data-ex-pane]'))>=4
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 responses=[]
@@ -32,7 +35,7 @@ with tempfile.TemporaryDirectory() as tmp:
   try:
    for asset in ['index.html',*assets]:
     with urlopen(f'http://127.0.0.1:{server.server_port}/{prefix_url}{asset}',timeout=5) as response:
-     assert response.status==200 and response.read()==(ROOT/asset).read_bytes(),asset
+     assert response.status==200 and response.read()==(ROOT/asset.split('?')[0]).read_bytes(),asset
      responses.append({'path':prefix_url+asset,'status':response.status})
   finally:server.shutdown();server.server_close();thread.join()
 result={'assets':len(assets),'http_checks':len(responses),'unique_element_ids':len(ids),'paths':'relative, root and subpath verified','csp_network_data_connections':'disabled','result':'passed'}

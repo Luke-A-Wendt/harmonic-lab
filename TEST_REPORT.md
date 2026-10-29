@@ -1,83 +1,77 @@
-# Validation report · Harmonic Lab 0.3
+# Validation report · Harmonic Lab 0.4
 
-## Scope
+## Completed suites
 
-Validation covers the bundled static source, mathematical functions, repertoire mapping, native browser audio processing, interaction behavior, privacy-related lifecycle handling, and responsive layouts. All checks below passed against this release.
+The recorded results apply to the bundled static sources. Development tests use Chromium, native Web Audio, deterministic synthetic signals, and offline HTML fixtures. They do not certify a physical instrument, microphone, or phone.
 
-| Suite | Completed checks |
-| --- | ---: |
-| Theory and basic DSP | 15 test groups |
-| Spectral-peak analysis | 8 test groups |
-| Repertoire | 5 groups, including 345 piece/tuning mappings and 13,200 chord voicings |
-| Native-browser audio regression | 64 deterministic audio cases |
-| Browser interactions | 60 checks |
-| Microphone and playback lifecycle | 22 checks |
-| Static delivery | 30 HTTP file checks at root and project-subpath locations |
+| Suite | Successful checks |
+|---|---:|
+| Theory and basic DSP | 15 groups |
+| Spectral-peak analysis | 8 groups |
+| Repertoire and transposition | 8 groups; 345 piece/tuning mappings; 59,400 progression-voicing cases |
+| Native-browser audio | 64 deterministic signal cases |
+| UI, playback, and touch | 97 checks |
+| Microphone and asynchronous lifecycle | 21 checks |
+| Viewport, settings, and mathematical pages | 297 checks |
+| Static HTTP delivery | 34 file responses, root and nested paths |
 
-JavaScript syntax checks passed for all source files. The static document has 155 unique element IDs and 14 local linked assets. No runtime package installation or build artifact is required.
+All source JavaScript passed syntax checking. The document contains 195 unique IDs and 16 relative linked assets. The runtime fixture recorded no JavaScript exceptions, CSP violations, or remote data requests.
 
-## Interface and playback
+## Responsive workspaces
 
-Chromium interaction tests verify:
+The layout suite examined 360×640, 390×700, 412×850, 844×390, 915×412, and 1440×900 CSS-pixel viewports. The UI suite also covered 1365×900. Lifecycle checks included 320-pixel document width.
 
-- Five main workspaces, including a dedicated Stairway to Tuning route and one shared tablature player.
-- Maximum default volume, visible Pure sine / Harmonics selection, and no tab import/export controls or pop-study collection.
-- Root-aligned piano keys, A4-based n values, reduced negative exponents, and correct scale/chord note spelling.
-- All standard-fretboard positions, magenta chord borders, and the yellow enclosed octave region.
-- Matching exact pitches across instruments without confusing octave-equivalent pitches.
-- Sustained mouse, keyboard, fretboard, and mobile touch playback; release outside the control; Escape; cancellation; navigation; and window blur.
-- Held tuner reference playback, fundamental recognition, stronger second-harmonic diagnostics, optional peak analysis, freeze, frequency sorting, and displayed row count.
-- Library collection filters, favorites, one-button play/pause/resume, seeking during playback, exact transposition, pagination, and all five tuning presets for the featured arrangement.
-- Guide and privacy dialogs.
-- No browser JavaScript exceptions, application CSP violations, or remote data requests in the interaction fixture.
+Primary workspaces fit without document scrolling in the tested layouts. Piano, fretboard, harmonic, and circle surfaces were checked separately for content clipping. Controls, canvases, page navigation, and active workspaces were checked after orientation changes. Every mathematical chapter page was traversed; settings-sheet tabs were inspected in small portrait and landscape viewports.
 
-All five workspaces fit 390-pixel and 320-pixel viewports without document-level horizontal overflow. Piano, fretboard, and wide data tables retain intentional internal scrolling. The spectrum, library, featured score, and Explore layouts were also captured at a 1440-pixel desktop width.
+Fret windows, score pages, library pages, peak pages, and chapter/table-column pagination expose content beyond the active view. Portrait and landscape use different layouts rather than simply shrinking one desktop page. Large text scaling, alternative fonts, mobile browser chrome, and real operating-system audio routing remain outside this emulation-based validation.
 
-## Sustained audio and microphone lifecycle
+## Instruments and harmonic comparison
 
-The hold test measured a non-decaying synthesized tone beyond 1.7 seconds; releasing the pointer outside the key stopped the active voice. Keyboard release did not create a duplicate click tone. Touch input was exercised using Chromium’s native touch event interface.
+Tests verified A4-based pitch values, mixed exponents, one-octave piano range, individually restricted scale notes, complete chord tones, matching fret pitches, magenta chord highlighting, and yellow octave enclosure.
 
-Microphone tests feed a native synthetic MediaStream into the real microphone processing path. They verify low-E identification in the presence of a louder 50 Hz tone, suppression of tuning judgments throughout a reference hold longer than the old timeout, and recovery after release.
+Pointer, keyboard, and native emulated touch holds produced sustained sound. Release outside the control, Escape, cancellation, navigation, and blur stopped held notes. Delayed audio initialization did not start a cancelled note later.
 
-Room calibration completes with a bounded gate. Stop mic and leaving the tuner end the media tracks. Permission denial is recoverable. A delayed permission result cannot leave the microphone running, and cancelling audio initialization before permission is requested prevents a later permission request. Cancelled audio initialization likewise cannot start a held note after navigation.
+Explore's live, scrolling, and modeled-partial views remained selectable. Pinning C4 and comparing G4 produced the expected near coincidence between the third C partial and second G partial, approximately 1.955 cents and 0.886 Hz apart. The model preserved the selected absolute pitches and labeled its theoretical amplitudes separately from measured audio.
 
-Peak-analysis instrumentation confirms that its extra measurement function is not called while the panel is off, runs while enabled, and stops when disabled.
+## Song content and transposition
 
-## Numerical and repertoire checks
+All 69 entries have unique identifiers and source/scope/learning metadata, appear in the single alphabetized Songs library, and map to all five tuning presets with an explicit whole-octave choice: 345 piece/tuning mappings. No source-score image is included or referenced by the application.
 
-Theory tests cover frequency/n conversion, Euclidean mixed fractions for negative and positive n, note parsing, enharmonic octave spelling, circle cycle counts, scale intersections, equal-division error, and fret positions.
+The 36 enriched classical/traditional entries preserve their source melody notes, event positions, and durations. Their arrangements contain simultaneous notes and valid per-voice duration/level data; rests are retained. Progressions have rhythmic and block alternatives.
 
-All **69 entries** have unique IDs, source/scope/learning metadata, and valid event structures. Every entry maps to each of the five tuning presets with an explicitly selected whole-octave shift: **345 mappings**. The **13,200 progression-voicing cases** span all 12 keys and five tunings; each preserves distinct chord pitch classes, assigns distinct strings, and respects the specified fretted-span limit.
+Constant shifts preserve every note's relative displacement and all event times. The live Δn view was checked against the source path after changing key. Compact progression revoicing is explicitly labeled and not represented as exact interval preservation. Across 59,400 voicing cases, distinct pitch classes were preserved, placements used distinct strings, and the defined fretted-span constraint held.
 
-The featured reference arrangement has 128 quarter-note beats: 16 printed 4/4 bars, repeated for 32 played bars. The repeat preserves pitches and event durations. This verifies internal consistency and page extent, not a full-song transcription or professional engraving accuracy.
+The source-derived Stairway arrangement retains 128 quarter-note beats: the existing 16 printed bars and their repeat. Pitches and durations repeat consistently. This checks the supplied page's encoded structure, not a full-song transcription or professional engraving.
 
-## Spectrum and tuning checks
+One shared player was exercised for start, pause, resume, seeking, loops, tempo-independent pitch mapping, melody-only playback, page following, and tuning/key changes. Calculated fingerings remain suggestions. Per-event placement does not guarantee that every overlapping synthesized voice can remain physically sustained on a string instrument.
 
-The 64 native-browser audio cases cover 44.1 and 48 kHz, the open strings of all presets, detuning, low-frequency interference, stronger upper harmonics, missing fundamentals, isolated-harmonic ambiguity, silence, broadband noise, clipping, bypass, and notch behavior.
+## Tuning and spectral analysis
 
-For the automatic standard-guitar low-cut filter, measured transfer gains include **−46.85 dB at 50 Hz**, **−33.61 dB at 55 Hz**, and **−0.024 dB at the E2 fundamental**. These characterize the filter; they are not real-room pitch-error bounds.
+The 64 audio cases cover common 44.1/48 kHz sample rates, all open-string presets, detuning, lower-band interference, stronger second/third harmonics, missing fundamentals, isolated-overtone ambiguity, noise, silence, clipping, filter bypass, and notch behavior.
 
-Spectral unit tests cover amplitude ranking, sub-bin peak estimation, A4 n = 0, simultaneous candidate harmonic relationships, rejection of unrelated ratios, adaptive thresholding, and common sample rates. An absent lower peak is not manufactured into a measured fundamental.
+The unchanged automatic standard-guitar filter measured −46.85 dB at 50 Hz, −33.61 dB at 55 Hz, and approximately −0.024 dB at the E2 fundamental. Those numbers characterize a digital filter response, not real-room tuning accuracy.
 
-## Static website checks
+Synthetic native MediaStreams tested the actual microphone processing path: low E above louder low-frequency interference, held-reference suppression, release recovery, bounded noise calibration, track shutdown, leaving the tuner, permission denial, late permission results, and cancellation before permission request.
 
-Each local asset was fetched and byte-compared against its source at both a root URL and a nested project URL: **30 successful HTTP responses**. Application asset paths are relative. Workspace navigation uses hashes and does not require server-side route rewriting. The content security policy uses `connect-src 'none'`; the application has no fetch, analytics, or remote-compute endpoint.
+The compact dominant-frequency display populated separately from the fundamental. A stronger second harmonic retained the low-E tuning target and produced the appropriate diagnostic. The detailed peak sheet preserved frequency, amplitude ranking, note/n, and harmonic relationships; freeze and sorting operated on the shared snapshot. Closing the sheet left the compact overview active without keeping the full table open.
 
-Browser UI tests use the exact HTML, CSS, and JavaScript loaded into an offline fixture with per-script CSP hashes. The test environment disallows normal browser URL navigation, so static HTTP delivery was checked independently. This is not a live hosting-provider deployment test.
+## Static delivery and privacy checks
+
+All linked local assets were fetched and byte-compared at a root path and a nested project path. Asset URLs remain relative and navigation uses hash-based workspaces; server-side route rewriting is not required.
+
+The Content Security Policy includes `connect-src 'none'`. There are no runtime fetch, telemetry, audio upload, account, or remote-processing endpoints. Tests verified microphone track cleanup. Static-host access logs are outside the application's control.
 
 ## Evidence
 
-Machine-readable results and screenshots are included in `tests/`:
+The `tests/` directory includes the executable suites, machine-readable results, and captured layouts:
 
-- `browser-results.json`, `lifecycle-results.json`
+- `browser-results.json`, `lifecycle-results.json`, `layout-results.json`
 - `audio-results.json`, `static-results.json`
 - `theory-results.txt`, `spectral-results.txt`, `repertoire-results.txt`
 - `screenshots/`
 
-The test source and reproduction commands are documented in `tests/README.md`.
+Test dependencies and commands are in `tests/README.md`.
 
 ## Remaining limits
 
-No physical guitar, ukulele, or microphone was used. Safari, Firefox, mobile operating-system audio routing, and real permission dialogs were not independently validated. Synthetic MediaStreams verify the application path, not a particular microphone’s hardware or driver behavior.
-
-The tuner is monophonic. Room acoustics, multiple sources, inharmonicity, noisy attacks, and weak fundamentals can produce ambiguity. Spectral relationships are not source separation. The tab arrangements simplify articulation and sustain, and calculated fingerings are not professional performance editions. Visual and keyboard checks do not constitute a formal accessibility certification.
+No physical Pixel 9, guitar, ukulele, or microphone was used. Safari, Firefox, mobile OS permission dialogs, Bluetooth latency, real acoustic noise, reverberation, and hardware processing were not independently verified. Monophonic pitch detection can be ambiguous. Spectral relationships do not identify every source or infer absent fundamentals without evidence. The layouts are not a formal accessibility certification; very large accessibility text may require contained sheet scrolling.

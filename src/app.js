@@ -3,13 +3,14 @@
   'use strict';
   const H = window.HL, T = H.T;
   const STORAGE_KEY = 'harmonic-lab-settings-v3';
-  const views = ['explore', 'spectrum', 'practice', 'stairway', 'math'];
+  const views = ['explore', 'spectrum', 'practice', 'math'];
   H.$ = id => document.getElementById(id);
   H.escape = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
   H.signed = n => String(n).replace(/-/g, '−');
   H.state = {root:0, mode:'major', octave:0, tuning:'guitar', frets:24, chord:null, step:7, harmonics:false, volume:1};
   H.previous = null;
   H.view = 'explore';
+  H.exPane = 'keys';
   H.events = new EventTarget();
   H.emit = (name, detail) => H.events.dispatchEvent(new CustomEvent(name, {detail}));
   H.on = (name, fn) => H.events.addEventListener(name, e => fn(e.detail));
@@ -93,6 +94,7 @@
   };
   H.stopAll = () => { H.releaseHolds?.(); H.audio.stop(); H.emit('panic'); };
   H.setView = view => {
+    if (view === 'stairway') view = 'practice';
     if (!views.includes(view)) return;
     const old = H.view;
     if (old !== view) H.releaseHolds?.();
@@ -102,7 +104,8 @@
     }
     H.view = view;
     clearTimeout(H.toastTimer); H.$('toast').classList.remove('show');
-    const surface = view === 'stairway' ? 'practice' : view;
+    document.querySelectorAll('dialog[open]').forEach(d => d.close());
+    const surface = view;
     document.querySelectorAll('.view').forEach(el => { el.hidden = el.id !== `view-${surface}`; el.classList.toggle('active', !el.hidden); });
     document.querySelectorAll('.main-nav button').forEach(b => {
       const on = b.dataset.view === view; b.classList.toggle('active', on);
@@ -128,8 +131,8 @@
     H.$('panic').addEventListener('click', () => { H.stopAll(); H.toast('Playback stopped.'); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') H.stopAll(); });
     const guide = () => H.$('help-dialog').showModal();
-    H.$('help-open').addEventListener('click', guide); H.$('guide-open').addEventListener('click', guide);
-    H.$('privacy-open').addEventListener('click', () => H.$('privacy-dialog').showModal());
+    H.$('help-open').addEventListener('click', guide); H.$('guide-open')?.addEventListener('click', guide);
+    H.$('privacy-open')?.addEventListener('click', () => H.$('privacy-dialog')?.showModal());
     // No server-side session, data fetch, account, or telemetry is used.
     window.addEventListener('beforeunload', () => { H.stopAll(); H.audio.stopMic(); });
     window.addEventListener('hashchange', () => { const v=location.hash.slice(1); if (views.includes(v)) H.setView(v); });
@@ -142,6 +145,7 @@
       clearTimeout(H.playedTimer);
       H.playedTimer = setTimeout(() => document.querySelectorAll('.playing-note').forEach(el => el.classList.remove('playing-note')), 450);
     });
-    const initial = location.hash.slice(1); H.setView(views.includes(initial)?initial:'explore');
+    const initial = location.hash.slice(1); H.setView(initial==='stairway'?'practice':views.includes(initial)?initial:'explore');
+    if(initial==='stairway') H.selectTab?.('stairway-to-tuning');
   };
 })();

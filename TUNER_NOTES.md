@@ -65,7 +65,7 @@ A missing fundamental is different from an isolated overtone. Several consistent
 
 ## Sustained references and microphone lifecycle
 
-Pressing **Hold to play target** starts a steady reference envelope. Pointer, touch, or keyboard release ends it with a short decay. Navigation, pointer cancellation, window blur, and global stop release held voices. Async audio initialization uses a generation guard to prevent a cancelled interaction from starting later.
+Pressing **Hold target** starts a steady reference envelope. Pointer, touch, or keyboard release ends it with a short decay. Navigation, pointer cancellation, window blur, and global stop release held voices. Async audio initialization uses a generation guard to prevent a cancelled interaction from starting later.
 
 While a target is held, microphone tuning judgments remain paused for the entire hold. After release, a 450 ms settling window allows the reference sound to decay. Brief app-generated tones also have a suppression interval. Headphones remain useful because room reverberation and speaker feedback can outlast any fixed delay.
 
@@ -73,7 +73,11 @@ Microphone permission is explicit. Stopping the input or leaving the tuner stops
 
 ## Optional spectral-peak decomposition
 
-The **Analyze peaks** panel is off by default. When enabled, it analyzes the current filtered FFT up to four times per second. Freeze preserves its values together with the spectrum display.
+The **Peaks** detail sheet is closed by default. The compact dominant-frequency overview analyzes the filtered FFT roughly twice per second; opening Peaks uses those snapshots for a complete paginated list. Closing the sheet stops detailed rendering, not the compact overview. Freeze preserves the shared measurements and spectrum display.
+
+The main loudest-peak frequency uses a five-frame median while estimates stay within 45 cents of the same peak. The three compact frequency chips cluster recent measurements over approximately 850 ms. Fading peaks are marked as held rather than presented as new input. A stable fundamental may remain for up to 1.4 seconds during quiet/unclear decay, with a “Last stable reading” label. Clipping, inconsistent spectra, and other contradictory diagnoses clear it.
+
+The scrolling spectrogram is the initial graph. Live is a toggle, not a second stacked panel. Axis, raw overlay, source routing, and filter settings are in the tuner settings sheet; detailed detection confidence and diagnostic text have their own view.
 
 ### Peak selection
 

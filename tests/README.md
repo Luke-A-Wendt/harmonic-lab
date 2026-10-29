@@ -1,30 +1,26 @@
-# Validation suite
+# Development tests
 
-The runtime website has no package dependencies. The test tools are separate development utilities.
+The application has no runtime dependencies. These tests use development-only tools:
 
-## Deterministic theory and repertoire checks
+- Node.js for theory, spectral-peak, and repertoire assertions.
+- Python 3, Playwright, NumPy, and Beautiful Soup for browser/audio/static tests.
+- Chromium, available on PATH or selected with `CHROMIUM_PATH`.
 
-A recent Node.js installation runs the pure JavaScript tests:
+Run from the project root:
 
 ```sh
 node tests/theory.test.js
 node tests/spectral.test.js
 node tests/repertoire.test.js
+python3 tests/audio_regression.py
+python3 tests/browser.test.py
+python3 tests/lifecycle.test.py
+python3 tests/layout.test.py
+python3 tests/static.test.py
 ```
 
-These cover pitch-coordinate conversions, negative mixed fractions, enharmonic octave spelling, circles, tuning-grid error, guitar positions, all repertoire mappings, chord voicings, and spectral relationships.
+`fixture.py` builds an offline, CSP-hashed in-memory page from the same source files. It does not modify the production website. The static test separately checks actual HTTP delivery at both a root path and a nested path.
 
-## Browser and audio checks
+The browser suite tests a clean preference store, pointer/keyboard/touch sustain, cancellation, pitch mapping, octave enclosure, spectrum toggles, partial comparison, spectral analysis, search, song playback, transposition, loops, paginated layouts, and privacy/no-network behavior. Screenshots are local test outputs.
 
-Python tests require `playwright`, `beautifulsoup4`, and `numpy`, together with Chromium. `CHROMIUM_PATH` can specify the browser executable; otherwise the scripts find `chromium` on the local path.
-
-```sh
-python tests/browser.test.py
-python tests/lifecycle.test.py
-python tests/audio_regression.py
-python tests/static.test.py
-```
-
-`fixture.py` loads the exact static JavaScript and CSS into an offline document with per-script CSP hashes. It does not change the runtime files. Browser interaction tests cover desktop, touch, keyboard, and responsive layouts. Lifecycle tests replace microphone permission with a native synthetic MediaStream; no real microphone is opened. The audio regression uses native browser filter nodes and deterministic samples at 44.1 and 48 kHz. The static audit verifies local asset paths and root/subpath HTTP delivery.
-
-Results are written beside the tests, and UI screenshots are placed in `tests/screenshots/`. See the project’s `TEST_REPORT.md` for the recorded validation and remaining limits.
+Audio tests use deterministic synthetic samples through actual Web Audio filter nodes. Lifecycle tests use a native synthetic MediaStream, not a physical microphone. No test asserts universal accuracy for acoustic instruments, microphones, or phones.

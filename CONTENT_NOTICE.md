@@ -1,17 +1,21 @@
-# Repertoire and reference material
+# Music and source material
 
-Harmonic Lab contains simplified educational arrangements, original exercises, and a credited reference-score transcription.
+Harmonic Lab is an educational software application. Its code license and the rights in musical source material are separate.
 
-## Classical and traditional repertoire
+## Classical and traditional selections
 
-Each library entry identifies a composer or traditional source, the musical extent of the arrangement, and its learning focus. A theme, first strain, motive, or accompaniment study is labeled accordingly; it is not presented as the full original work or a critical edition. The classical and traditional source compositions are historical works. The bundled event sequences are teaching arrangements rather than scans of modern published editions.
+The library contains independently encoded educational excerpts and traditional melodies, with source/composer metadata and an explicit scope for each entry. These are not editions of complete symphonies, sonatas, or concert works. Added accompaniment, dyads, voicings, and rhythmic textures are teaching arrangements rather than representations of a composer's complete original accompaniment. The underlying melody is retained separately where available.
 
-Chord progressions and technique exercises are Harmonic Lab studies. They illustrate musical structures rather than reproducing commercial recordings.
+Traditional songs may have modern copyrighted arrangements even when an older melody is in the public domain. Copyright status can depend on jurisdiction and the particular edition. No claim is made that a code license grants rights to every musical work or performance.
 
-## Stairway to Tuning
+## Stairway to Heaven
 
-The reference image `assets/stairway-score.png` contains a page headed **Stairway to Heaven**, as recorded by Led Zeppelin, credited on the page to **Jimmy Page and Robert Plant**. Its transcription credits are retained in the image. The application’s title **Stairway to Tuning** identifies the teaching workspace; it does not change the authorship or copyright of the source.
+Composition: Jimmy Page and Robert Plant. The source transcription is attributed to Jim using Andy Aledort's 1996 Guitar World transcription.
 
-The playable arrangement covers that page’s sixteen written bars and indicated repeat. The four-line tablature is interpreted in high-G ukulele tuning. Re-fingering on other instruments, separate attacks for hammer-ons, and simplified sustain are educational adaptations.
+The library retains a source-derived opening-page arrangement: 16 printed bars with the indicated repeat, totaling 32 played bars. The four-line tablature is interpreted as high-G ukulele and mapped to other tuning presets. Articulation and sustain are simplified. The entry is not a transcription of portions absent from that source page and is not the complete commercial song.
 
-The reference image and its musical transcription are not asserted to be public domain. Inclusion does not grant a license to redistribute the underlying copyrighted music. The site’s software, original exercises, historical source compositions, and this credited reference material have distinct rights considerations.
+The original uploaded score image is not distributed in this release. The composition and third-party transcription are not relicensed under MIT. Their attribution remains in the song metadata.
+
+## Studies
+
+Chord-progression, rhythm, and technique studies are educational constructions. Progression labels describe harmonic structures, not claims to reproduce commercial recordings. Compact voicing changes are labeled separately from exact pitch transposition.

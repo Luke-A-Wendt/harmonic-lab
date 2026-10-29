@@ -1,5 +1,5 @@
 {
-  "checks": 22,
+  "checks": 21,
   "passed": [
     "Native synthetic MediaStream activates real mic analysis",
     "Low E is recognized above louder 50 Hz interference",
@@ -14,12 +14,11 @@
     "Pointer cancellation releases voice",
     "Window blur releases voice",
     "Cancelled audio initialization does not request microphone permission",
-    "Optional peak analysis performs no analysis while off",
-    "Peak analysis runs only when enabled",
-    "Turning off peak analysis stops further measurements",
+    "Dominant-frequency overview keeps updating without the detailed table",
+    "Opening detailed peaks activates its paginated view",
+    "Closing detailed peaks leaves the overview active",
     "explore fits a 320px viewport",
     "practice fits a 320px viewport",
-    "stairway fits a 320px viewport",
     "spectrum fits a 320px viewport",
     "math fits a 320px viewport",
     "No lifecycle exceptions"
