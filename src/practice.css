@@ -1,0 +1,166 @@
+/* Tab Studio only. No body, navigation, audio-bar, Explore, tuner or Math overrides. */
+#view-practice.tabs-workspace {
+  --tabs-border: #404040;
+  display: flex; flex-direction: column; gap: 12px;
+  height: var(--tabs-height, 680px); min-height: 470px; max-height: 920px;
+}
+#view-practice [hidden], dialog[data-tabs-dialog] [hidden] { display: none !important; }
+#view-practice .song-top {display:flex;align-items:center;gap:14px;flex-shrink:0;min-width:0;}
+#view-practice .song-library-primary {display:flex;flex-direction:column;align-items:flex-start;gap:3px;border:1px solid var(--cyan);background:#183135;color:var(--cyan);padding:10px 14px;flex:none;text-align:left;}
+#view-practice .song-library-primary strong {font-size:13px;white-space:nowrap;}
+#view-practice .song-library-primary strong span {display:inline-block;font:10px monospace;border:1px solid #4f7477;border-radius:4px;padding:0 4px;margin-left:4px;}
+#view-practice .song-library-primary small {font-size:10px;color:#c2dadd;font-weight:400;}
+#view-practice .song-heading {flex:1;min-width:0;}
+#view-practice .song-heading h1 {font-size:clamp(18px,2.2vw,29px);letter-spacing:-.5px;overflow-wrap:anywhere;}
+#view-practice .song-heading p {font-size:11px;line-height:1.4;color:var(--muted);margin-top:5px;}
+#view-practice .song-top .icon-button {flex:none;min-width:36px;width:36px;height:36px;}
+#view-practice .song-controls {display:flex;align-items:center;gap:12px;flex-shrink:0;flex-wrap:wrap;}
+#view-practice .song-controls>select {flex:1;max-width:290px;min-width:170px;}
+#view-practice .song-controls .compact {display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:11px;color:var(--muted);}
+#view-practice .song-controls .segmented {display:flex;gap:3px;background:#202020;border:1px solid #444;border-radius:9px;padding:3px;}
+#view-practice .song-controls .segmented button {min-height:32px;font-size:12px;padding:5px 14px;background:transparent;border-color:transparent;}
+#view-practice .song-controls .segmented button.active {background:#343434;border-color:#5d5d5d;color:var(--cyan);}
+#view-practice .tab-settings-button {margin-left:auto;}
+#view-practice .song-stage {flex:1;min-height:180px;min-width:0;position:relative;background:#1c1c1c;border:1px solid #414141;border-radius:12px;overflow:hidden;}
+#view-practice .tab-sheet {height:100%;width:100%;padding:10px;overflow:hidden;}
+#view-practice .tab-sheet svg {width:100%;height:100%;min-width:0;display:block;}
+#view-practice .tab-event:focus-visible {outline:none;}
+#view-practice .tab-event:focus-visible .event-bg {stroke:#fff;stroke-width:2;}
+#view-practice .sheet-navigation {display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0;margin:0;border:0;flex-shrink:0;}
+#view-practice .sheet-navigation button {min-height:32px;padding:3px 18px;}
+#view-practice .sheet-navigation span {font-size:11px;color:var(--muted);}
+#view-practice .song-transport {display:flex;align-items:center;gap:12px;flex-shrink:0;}
+#view-practice .song-transport #tab-play {min-width:100px;}
+#view-practice .song-transport #tab-stop {min-width:35px;}
+#view-practice #tab-seek {flex:1;width:100%;min-width:30px;}
+#view-practice #tab-time {font-size:11px;color:#ccc;white-space:nowrap;}
+#view-practice .tempo-control {display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);}
+#view-practice .tempo-control input {width:64px;min-height:36px;font-size:12px;padding:6px;}
+#view-practice .song-foot {display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;flex-shrink:0;font-size:10px;color:var(--muted);}
+#view-practice #transposition-badge {color:var(--cyan);}
+#view-practice .song-foot button {font-size:10px;min-height:26px;padding:3px 7px;}
+#view-practice #pattern-view {height:100%;display:flex;flex-direction:column;padding:14px 16px;gap:8px;}
+#view-practice .pattern-heading {display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;color:var(--cyan);}
+#view-practice .pattern-heading .compact {display:flex;align-items:center;gap:7px;font-size:10px;color:var(--muted);white-space:nowrap;}
+#view-practice .pattern-heading select {min-height:28px;padding:4px 7px;font-size:10px;}
+#view-practice .pattern-canvas-wrap {min-height:70px;flex:1;position:relative;}
+#view-practice #pattern-canvas {height:100%;width:100%;position:absolute;inset:0;cursor:crosshair;}
+#view-practice #pattern-detail {display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:#ccc;font-size:10px;}
+#view-practice #pattern-detail b {font-family:monospace;color:var(--cyan);font-weight:600;}
+#view-practice #pattern-formula {font-size:10px;line-height:1.5;}
+#view-practice .pattern-table-button {align-self:flex-start;font-size:10px;padding:3px 7px;min-height:25px;}
+/* Dialogs are scoped with an attribute; existing help/privacy dialogs are untouched. */
+dialog[data-tabs-dialog] {width:min(680px,calc(100vw - 28px));max-width:none;max-height:calc(100dvh - 28px);padding:20px;border-radius:14px;overflow:hidden;border-color:#555;}
+dialog[data-tabs-dialog][open] {display:flex;flex-direction:column;gap:14px;}
+dialog[data-tabs-dialog] .sheet-title {display:flex;align-items:center;justify-content:space-between;gap:10px;flex-shrink:0;}
+dialog[data-tabs-dialog] .sheet-title h2 {font-size:19px;}
+dialog[data-tabs-dialog] .sheet-title .icon-button {width:36px;height:36px;min-width:36px;font-size:22px;}
+dialog[data-tabs-dialog] .sheet-body {min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:0 4px 2px 0;}
+dialog[data-tabs-dialog] .sheet-body p {font-size:13px;line-height:1.65;margin:0 0 12px;}
+dialog[data-tabs-dialog] .sheet-body p.micro {font-size:11px;color:var(--muted);}
+dialog[data-tabs-dialog] .sheet-tabs {display:flex;gap:5px;flex-shrink:0;border-bottom:1px solid #444;padding-bottom:9px;}
+dialog[data-tabs-dialog] .sheet-tabs button {font-size:12px;padding:7px 14px;min-height:34px;}
+dialog[data-tabs-dialog] .sheet-tabs button.active {color:var(--cyan);border-color:var(--cyan);}
+dialog[data-tabs-dialog] .field {display:flex;flex-direction:column;gap:6px;margin-bottom:15px;font-size:11px;color:var(--muted);}
+dialog[data-tabs-dialog] .field select {font-size:12px;}
+dialog[data-tabs-dialog] .field input[type=number] {width:110px;}
+dialog[data-tabs-dialog] .check {display:flex;align-items:center;gap:8px;min-height:32px;margin:2px 0 10px;font-size:12px;}
+dialog[data-tabs-dialog] .check input {width:17px;height:17px;margin:0;}
+dialog[data-tabs-dialog] .form-grid {display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+dialog[data-tabs-dialog] .tab-sections {display:flex;gap:6px;flex-wrap:wrap;overflow:visible;}
+dialog[data-tabs-dialog] .tab-sections button {font-size:11px;min-height:34px;}
+dialog[data-tabs-dialog] .equation {font-size:17px;line-height:1.65;overflow-x:auto;margin-bottom:15px;}
+dialog[data-tabs-dialog] .error-text {color:var(--magenta);}
+dialog[data-tabs-dialog].tabs-library-dialog {height:min(720px,calc(100dvh - 28px));width:min(760px,calc(100vw - 28px));}
+dialog[data-tabs-dialog] .tabs-library-groups {display:flex;gap:6px;flex-shrink:0;}
+dialog[data-tabs-dialog] .tabs-library-groups button {flex:1;min-height:35px;font-size:11px;padding:7px;}
+dialog[data-tabs-dialog] .tabs-library-groups button[aria-pressed=true] {color:var(--cyan);border-color:var(--cyan);background:#203336;}
+dialog[data-tabs-dialog] .library-controls {display:flex;gap:8px;flex-shrink:0;}
+dialog[data-tabs-dialog] .library-controls input {width:100%;min-width:0;flex:1;font-size:12px;}
+dialog[data-tabs-dialog] .library-filters {display:flex;align-items:center;gap:12px;flex-wrap:wrap;flex-shrink:0;}
+dialog[data-tabs-dialog] .library-filters select {font-size:11px;}
+dialog[data-tabs-dialog] .library-filters .check {font-size:11px;margin:0;}
+dialog[data-tabs-dialog] .library-filters .micro {margin-left:auto;}
+dialog[data-tabs-dialog] #tab-library {flex:1;min-height:70px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;display:flex;flex-direction:column;gap:5px;}
+dialog[data-tabs-dialog] .library-item {flex:none;display:flex;flex-direction:column;gap:3px;min-width:0;width:100%;margin:0;padding:10px 13px;text-align:left;border:1px solid #3c3c3c;background:#262626;min-height:74px;}
+dialog[data-tabs-dialog] .library-item.active {border-color:var(--cyan);border-left:3px solid var(--cyan);background:#283435;}
+dialog[data-tabs-dialog] .library-item strong {font-size:12px;font-weight:600;line-height:1.35;}
+dialog[data-tabs-dialog] .library-item small {font-size:10px;color:var(--muted);line-height:1.4;margin:0;}
+dialog[data-tabs-dialog] .library-scope {font-size:10px;line-height:1.4;margin:0;color:#aaa;}
+dialog[data-tabs-dialog] .pager {display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #444;padding-top:9px;flex-shrink:0;font-size:11px;color:var(--muted);}
+dialog[data-tabs-dialog] .pager button {min-height:32px;padding:4px 16px;}
+dialog[data-tabs-dialog] .tabs-interval-scroll {overflow-x:auto;}
+dialog[data-tabs-dialog] .interval-data {width:100%;border-collapse:collapse;font-family:monospace;font-size:11px;}
+dialog[data-tabs-dialog] .interval-data th,dialog[data-tabs-dialog] .interval-data td {padding:8px;border-bottom:1px solid #444;text-align:right;white-space:nowrap;}
+dialog[data-tabs-dialog] .interval-data th {color:var(--muted);font-size:10px;font-weight:500;}
+dialog[data-tabs-dialog] .interval-data td:nth-child(3) {color:var(--cyan);}
+dialog[data-tabs-dialog] .interval-data td:nth-child(5) {color:var(--yellow);}
+@media(max-width:700px) {
+ #view-practice.tabs-workspace {gap:9px;min-height:500px;}
+ #view-practice .song-top {display:grid;grid-template-columns:1fr auto auto;gap:8px;}
+ #view-practice .song-library-primary {grid-column:1;grid-row:1;padding:7px 11px;justify-self:start;}
+ #view-practice .song-top .icon-button {grid-row:1;}
+ #view-practice .song-heading {grid-row:2;grid-column:1/-1;}
+ #view-practice .song-heading h1 {font-size:21px;}
+ #view-practice .song-heading p {font-size:10px;margin-top:3px;}
+ #view-practice .song-controls {display:grid;grid-template-columns:1fr auto;gap:7px;}
+ #view-practice .song-controls>select {max-width:none;min-width:0;width:100%;height:34px;min-height:34px;padding:5px 8px;font-size:11px;}
+ #view-practice .song-controls .compact select {min-height:34px;padding:5px 8px;font-size:11px;}
+ #view-practice .song-controls .segmented {width:max-content;max-width:100%;}
+ #view-practice .song-controls .segmented button {font-size:11px;min-height:29px;padding:4px 12px;}
+ #view-practice .tab-settings-button {justify-self:end;font-size:11px;min-height:32px;}
+ #view-practice .song-stage {min-height:185px;}
+ #view-practice .song-transport {gap:7px;flex-wrap:wrap;}
+ #view-practice .song-transport #tab-play {min-width:85px;min-height:36px;font-size:12px;padding:7px 10px;}
+ #view-practice .song-transport #tab-stop {min-height:34px;}
+ #view-practice #tab-seek {flex-basis:calc(100% - 135px);order:5;}
+ #view-practice #tab-time {order:6;min-width:85px;text-align:right;}
+ #view-practice .tempo-control {margin-left:auto;}
+ #view-practice .tempo-control input {min-height:34px;width:57px;}
+ #view-practice .song-foot {gap:5px;font-size:9px;}
+ #view-practice .song-foot button {margin-left:auto;font-size:9px;}
+ #view-practice #pattern-view {padding:9px 10px;gap:5px;}
+ #view-practice .pattern-heading {font-size:10px;}
+ #view-practice #pattern-detail {font-size:9px;gap:3px;}
+ #view-practice #pattern-formula {font-size:9px;}
+ dialog[data-tabs-dialog] {padding:15px;gap:10px;}
+ dialog[data-tabs-dialog] .sheet-title h2 {font-size:17px;}
+ dialog[data-tabs-dialog] .library-filters {gap:8px;}
+ dialog[data-tabs-dialog] .library-filters .micro {font-size:9px;}
+}
+@media(max-height:550px) and (min-width:701px) {
+ #view-practice.tabs-workspace {gap:7px;min-height:390px;}
+ #view-practice .song-top {gap:8px;}
+ #view-practice .song-heading h1 {font-size:20px;}
+ #view-practice .song-top .icon-button {min-width:30px;width:30px;height:30px;}
+ #view-practice .song-library-primary {padding:5px 9px;gap:1px;}
+ #view-practice .song-controls>select {height:32px;min-height:32px;font-size:11px;}
+ #view-practice .song-stage {min-height:140px;}
+ #view-practice .song-foot {font-size:9px;}
+ #view-practice .song-transport button {min-height:33px;padding:5px 9px;font-size:11px;}
+ dialog[data-tabs-dialog] {padding:11px 15px;gap:7px;}
+ dialog[data-tabs-dialog] .sheet-title h2 {font-size:16px;}
+ dialog[data-tabs-dialog] .sheet-title .icon-button {height:29px;min-width:29px;width:29px;min-height:29px;}
+ dialog[data-tabs-dialog] .tabs-library-groups button {min-height:29px;padding:3px;font-size:10px;}
+ dialog[data-tabs-dialog] .library-controls input {min-height:30px;padding:5px 9px;}
+ dialog[data-tabs-dialog] .library-filters select {min-height:29px;padding:4px 8px;}
+ dialog[data-tabs-dialog] .library-filters .check {min-height:25px;}
+ dialog[data-tabs-dialog] #tab-library {display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:5px;}
+ dialog[data-tabs-dialog] .library-item {min-height:67px;padding:8px 10px;}
+ dialog[data-tabs-dialog] .pager {padding-top:5px;}
+ dialog[data-tabs-dialog] .pager button {min-height:27px;}
+ dialog[data-tabs-dialog] [data-sheet-content=arrange] {display:grid;grid-template-columns:1fr 1fr;gap:2px 18px;}
+ dialog[data-tabs-dialog] [data-sheet-content=arrange] p {grid-column:1/-1;}
+}
+/* Keep the interval comparison legible instead of compressing its two lanes. */
+#view-practice .song-controls .segmented {width:auto;flex:none;}
+#view-practice .song-controls .segmented button {white-space:nowrap;}
+#view-practice .pattern-canvas-wrap {min-height:172px;}
+#view-practice.show-pattern .song-stage {min-height:310px;}
+@media(max-width:700px){
+ #view-practice.show-pattern {min-height:685px;}
+ #view-practice.show-pattern .song-stage {min-height:310px;}
+}
+@media(max-height:550px) and (min-width:701px){
+ #view-practice.show-pattern {min-height:500px;}
+}

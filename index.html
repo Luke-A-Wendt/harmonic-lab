@@ -11,6 +11,7 @@
   </title>
   <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23171717'/%3E%3Cpath d='M12 32Q22 3 32 32T52 32' fill='none' stroke='%2343e7ed' stroke-width='5'/%3E%3C/svg%3E" rel="icon"/>
   <link href="src/style.css" rel="stylesheet"/>
+  <link href="src/practice.css?v=tabs-1" rel="stylesheet"/>
   <meta content="An interactive music workbench: connected piano and fretboard, harmonic analysis, instrument tuning, playable tablature, and visual mathematics." name="description"/>
  </head>
  <body>
@@ -41,9 +42,6 @@
     </button>
     <button data-view="practice">
      Tab library
-    </button>
-    <button class="stairway-nav" data-view="stairway">
-     Stairway to Tuning
     </button>
     <button data-view="math">
      Math lab
@@ -721,282 +719,14 @@
      </p>
     </section>
    </section>
-   <section aria-label="Tab player and library" class="view" hidden="" id="view-practice">
-    <div class="page-heading">
-     <div>
-      <p class="eyebrow" id="practice-eyebrow">
-       LIBRARY / PLAY &amp; DISCOVER
-      </p>
-      <h1 id="practice-heading">
-       Music worth exploring.
-      </h1>
-      <p id="practice-subheading">
-       Classical themes, traditional melodies, chord progressions, and focused technique.
-      </p>
-     </div>
-     <span class="badge" id="repertoire-total">
-      68 library selections
-     </span>
-    </div>
-    <div class="practice-layout">
-     <aside class="panel library-panel" id="library-browser">
-      <div class="panel-heading">
-       <h2>
-        Browse the library
-       </h2>
-       <button class="ghost small" id="library-reset">
-        Reset
-       </button>
-      </div>
-      <input aria-label="Search all repertoire" id="library-search" placeholder="Title, composer, concept…" type="search"/>
-      <label class="library-filter">
-       Collection
-       <select id="library-category">
-       </select>
-      </label>
-      <div class="library-filter-row">
-       <label class="library-filter">
-        Level
-        <select id="library-difficulty">
-         <option value="all">
-          Any level
-         </option>
-         <option>
-          Beginner
-         </option>
-         <option>
-          Intermediate
-         </option>
-        </select>
-       </label>
-       <label class="library-filter">
-        Sort
-        <select id="library-sort">
-         <option value="recommended">
-          Curated order
-         </option>
-         <option value="title">
-          Title A–Z
-         </option>
-         <option value="composer">
-          Composer
-         </option>
-         <option value="short">
-          Shortest first
-         </option>
-        </select>
-       </label>
-      </div>
-      <label class="switch">
-       <input id="library-favorites" type="checkbox"/>
-       <span>
-       </span>
-       Saved favorites only
-      </label>
-      <p aria-live="polite" class="micro" id="library-count">
-      </p>
-      <div id="tab-library">
-      </div>
-     </aside>
-     <div class="practice-main">
-      <section class="panel player-panel">
-       <div class="panel-heading">
-        <div>
-         <p class="eyebrow" id="tab-category">
-         </p>
-         <h2 id="tab-title">
-         </h2>
-        </div>
-        <div class="inline-controls">
-         <button aria-pressed="false" class="small ghost" id="tab-favorite">
-          ☆ Save
-         </button>
-        </div>
-       </div>
-       <p class="micro" id="tab-credit">
-       </p>
-       <p class="muted" id="tab-description">
-       </p>
-       <div class="listen-for">
-        <span>
-         LISTEN FOR
-        </span>
-        <p id="tab-learning">
-        </p>
-       </div>
-       <div class="transport">
-        <button aria-label="Play" class="primary" id="tab-play">
-         ▶ Play
-        </button>
-        <button class="small" id="tab-stop">
-         Stop
-        </button>
-        <label class="compact">
-         Tempo
-         <input id="tab-tempo" max="240" min="30" type="number" value="90"/>
-        </label>
-        <label class="switch">
-         <input id="tab-loop" type="checkbox"/>
-         <span>
-         </span>
-         Loop
-        </label>
-        <label class="switch">
-         <input id="tab-metronome" type="checkbox"/>
-         <span>
-         </span>
-         Metronome
-        </label>
-       </div>
-       <div class="progress-line">
-        <input aria-label="Playback position" id="tab-seek" max="16" min="0" step="0.125" type="range" value="0"/>
-        <span class="mono micro" id="tab-time">
-         0:00
-        </span>
-       </div>
-       <div class="transpose-controls">
-        <label class="compact">
-         Instrument &amp; tuning
-         <select id="tab-tuning">
-         </select>
-        </label>
-        <label class="compact">
-         Key
-         <select id="tab-key">
-         </select>
-        </label>
-        <button class="small ghost" id="tab-to-explore">
-         Explore this scale →
-        </button>
-       </div>
-       <details class="arrangement-options">
-        <summary>
-         Arrangement &amp; practice options
-        </summary>
-        <div class="advanced-layout">
-         <label class="compact">
-          Exact transpose · semitones
-          <input id="tab-transpose" max="24" min="-24" step="1" type="number" value="0"/>
-         </label>
-         <div class="inline-controls register-controls">
-          <label class="switch" hidden="" id="voicing-control">
-           <input checked="" id="tab-voicing" type="checkbox"/>
-           <span>
-           </span>
-           Compact chord voicings
-          </label>
-          <label class="switch">
-           <input checked="" id="tab-fit" type="checkbox"/>
-           <span>
-           </span>
-           Fit whole octave to instrument
-          </label>
-          <label class="compact">
-           Register shift
-           <select id="tab-register">
-            <option value="-24">
-             −2 octaves
-            </option>
-            <option value="-12">
-             −1 octave
-            </option>
-            <option value="0">
-             Original octave
-            </option>
-            <option value="12">
-             +1 octave
-            </option>
-            <option value="24">
-             +2 octaves
-            </option>
-           </select>
-          </label>
-         </div>
-         <div class="loop-range">
-          <span class="micro">
-           Loop / playback region (beats from 0)
-          </span>
-          <label>
-           From
-           <input id="loop-from" min="0" step="0.25" type="number" value="0"/>
-          </label>
-          <label>
-           To
-           <input id="loop-to" min="0.25" step="0.25" type="number" value="16"/>
-          </label>
-         </div>
-         <p class="micro" id="fingering-status">
-         </p>
-        </div>
-       </details>
-       <div aria-label="Jump to section" class="tab-sections" id="tab-sections">
-       </div>
-      </section>
-      <section class="panel tab-sheet-panel">
-       <div class="panel-heading">
-        <div>
-         <p class="eyebrow">
-          PLAYABLE TABLATURE
-         </p>
-         <h2>
-          Tablature
-         </h2>
-        </div>
-        <div class="inline-controls">
-         <label class="compact">
-          Bars per page
-          <select id="tab-page-size">
-           <option value="4">
-            4
-           </option>
-           <option selected="" value="8">
-            8
-           </option>
-           <option value="16">
-            16
-           </option>
-          </select>
-         </label>
-         <label class="switch">
-          <input checked="" id="tab-follow" type="checkbox"/>
-          <span>
-          </span>
-          Follow playback
-         </label>
-        </div>
-       </div>
-       <div class="sheet-navigation">
-        <button class="small" id="tab-page-prev">
-         ← Previous
-        </button>
-        <span class="micro mono" id="tab-page-label">
-        </span>
-        <button class="small" id="tab-page-next">
-         Next →
-        </button>
-       </div>
-       <div class="tab-sheet" id="tab-sheet">
-       </div>
-       <p class="micro">
-        Top line = string 1. Click a column to hear it. Fret numbers sit on the strings; small numbers above show duration in beats.
-       </p>
-       <p class="micro source-note" id="tab-source">
-       </p>
-      </section>
-      <section class="panel score-panel" hidden="" id="score-panel">
-       <details>
-        <summary>
-         Score reference &amp; arrangement notes
-        </summary>
-        <p class="micro">
-         Sixteen written bars, repeated for 32 played bars. The four-line reference is interpreted as high-G ukulele; other tunings use corresponding pitches and suggested fingerings. Hammer-ons are separate attacks and sustain is simplified. This is the opening page, not the entire song.
-        </p>
-        <img alt="Stairway to Heaven: reference transcription, opening page, with original attribution" id="score-image" loading="lazy" src="assets/stairway-score.png"/>
-       </details>
-      </section>
-     </div>
-    </div>
-   </section>
+<section class="view tabs-workspace" id="view-practice" hidden aria-label="Tab library and interval patterns">
+ <div class="song-top"><button data-dialog="song-library" class="song-library-primary" aria-controls="song-library" aria-haspopup="dialog"><strong>♫ Browse library <span>69</span></strong><small>Songs · Chords · Theory</small></button><div class="song-heading"><h1 id="tab-title">Ode to Joy</h1><p id="tab-credit"></p></div><button id="tab-favorite" class="icon-button" aria-label="Save favorite">☆</button><button data-dialog="song-info" class="icon-button" aria-label="Song and arrangement information">ⓘ</button></div>
+ <div class="song-controls"><select id="tab-tuning" aria-label="Tab instrument"></select><label class="compact">Key<select id="tab-key" aria-label="Song key"></select></label><div class="segmented" aria-label="Song display" role="group"><button data-song-pane="tab" class="active" aria-pressed="true">Tab</button><button data-song-pane="pattern" aria-pressed="false">Δn pattern</button></div><button data-dialog="practice-options" class="small tab-settings-button" aria-label="Arrangement and practice settings">Settings</button></div>
+ <div class="song-stage" id="song-stage"><div id="tab-sheet" class="tab-sheet"></div><div id="pattern-view" hidden><div class="pattern-heading"><span id="pattern-invariant">Same gaps. Different starting pitch.</span><label class="compact">Path<select id="pattern-voice"><option value="melody">Melody</option><option value="bass">Lowest voice</option></select></label></div><div class="pattern-canvas-wrap"><canvas id="pattern-canvas" role="img" aria-label="Original and transposed interval paths. Values are also available in the interval table."></canvas></div><div id="pattern-detail" aria-live="polite"></div><button class="small ghost pattern-table-button" data-dialog="tabs-interval-dialog">View exact intervals</button><p id="pattern-formula" class="micro">n′ᵢ = nᵢ + k → Δn′ᵢ = Δnᵢ. Beat positions and durations stay fixed.</p></div></div>
+ <div class="sheet-navigation pager"><button id="tab-page-prev" aria-label="Previous bars">←</button><span id="tab-page-label" class="mono"></span><button id="tab-page-next" aria-label="Next bars">→</button></div>
+ <div class="song-transport"><button id="tab-play" class="primary" aria-pressed="false">▶ Play</button><button id="tab-stop" class="small ghost" aria-label="Stop and return to start" title="Stop and return to start">■</button><input id="tab-seek" aria-label="Playback position" type="range" min="0" max="16" step="0.05" value="0"><span id="tab-time" class="mono">0:00 / 0:00</span><label class="tempo-control"><input id="tab-tempo" aria-label="Tempo in beats per minute" type="number" min="30" max="240" value="90"><span>BPM</span></label></div>
+ <div class="song-foot"><span id="transposition-badge">k = 0 · intervals unchanged</span><span id="song-texture">Arranged score</span><button class="ghost small" data-dialog="transpose-guide">How transposition works</button></div>
+</section>
    <section aria-label="Mathematical music theory" class="view" hidden="" id="view-math">
     <div class="page-heading">
      <div>
@@ -1572,6 +1302,11 @@
   </footer>
   <div aria-live="polite" id="toast" role="status">
   </div>
+<dialog aria-labelledby="song-library-title" class="tabs-dialog tabs-library-dialog" data-tabs-dialog="" id="song-library"><div class="sheet-title"><h2 id="song-library-title">Tab library</h2><button aria-label="Close" class="icon-button" data-close="">×</button></div><div aria-label="Repertoire type" class="tabs-library-groups" role="group"><button aria-pressed="true" data-library-kind="all" type="button">All 69</button><button aria-pressed="false" data-library-kind="songs" type="button">Songs 37</button><button aria-pressed="false" data-library-kind="chords" type="button">Chords 24</button><button aria-pressed="false" data-library-kind="theory" type="button">Theory 8</button></div><div class="library-controls"><input aria-label="Search the complete library" id="library-search" placeholder="Title, composer, chord or concept…" type="search"/><button class="small ghost" id="library-reset">Reset</button></div><div class="library-filters"><select aria-label="Difficulty" id="library-difficulty"><option value="all">Any level</option><option>Beginner</option><option>Intermediate</option></select><label class="check"><input id="library-favorites" type="checkbox"/>Saved only</label><span class="micro">Alphabetical A–Z</span></div><div aria-label="Matching selections, alphabetical order" class="tab-library" id="tab-library"></div><div class="pager"><button aria-label="Previous songs" id="library-prev">←</button><span id="library-count"></span><button aria-label="Next songs" id="library-next">→</button></div></dialog>
+<dialog aria-labelledby="song-info-title" class="tabs-dialog" data-tabs-dialog="" id="song-info"><div class="sheet-title"><h2 id="song-info-title">About this arrangement</h2><button aria-label="Close" class="icon-button" data-close="">×</button></div><div class="sheet-body"><p class="eyebrow" id="tab-category">SONGS</p><p id="tab-description"></p><p id="tab-learning"></p><p class="micro" id="tab-source"></p><p class="micro" id="fingering-status"></p><button id="tab-to-explore">Explore this scale →</button></div></dialog>
+<dialog aria-labelledby="practice-options-title" class="tabs-dialog" data-tabs-dialog="" id="practice-options"><div class="sheet-title"><h2 id="practice-options-title">Practice settings</h2><button aria-label="Close" class="icon-button" data-close="">×</button></div><div class="sheet-tabs"><button aria-pressed="true" class="active" data-sheet-tab="play">Playback</button><button aria-pressed="false" data-sheet-tab="arrange">Arrangement</button><button aria-pressed="false" data-sheet-tab="reading">Reading</button></div><div class="sheet-body"><div data-sheet-content="play"><div class="inline-controls"><label class="check"><input id="tab-loop" type="checkbox"/>Loop</label><label class="check"><input id="tab-metronome" type="checkbox"/>Metronome</label></div><div class="form-grid"><label class="field">From beat<input id="loop-from" min="0" step="0.25" type="number" value="0"/></label><label class="field">To beat<input id="loop-to" min="0.25" step="0.25" type="number" value="16"/></label></div><h3>Jump to section</h3><div class="tab-sections" id="tab-sections"></div></div><div data-sheet-content="arrange" hidden=""><label class="field">Exact transpose · semitones<input id="tab-transpose" max="24" min="-24" step="1" type="number" value="0"/></label><label class="field">Texture<select id="tab-texture"><option value="arranged">Arranged · melody + harmony</option><option value="melody">Melody only</option></select></label><label class="check" id="voicing-control"><input checked="" id="tab-voicing" type="checkbox"/>Compact progression voicings</label><label class="check"><input checked="" id="tab-fit" type="checkbox"/>Fit whole octave to instrument</label><label class="field">Register<select id="tab-register"><option value="-24">−2 octaves</option><option value="-12">−1 octave</option><option selected="" value="0">Original octave</option><option value="12">+1 octave</option><option value="24">+2 octaves</option><option value="-36">−3 octaves</option><option value="36">+3 octaves</option></select></label><p class="micro">An octave fit moves every note together. Compact chord voicings are different: inversions and individual octave placements may change. Unreachable pitches are marked ×, never silently removed.</p></div><div data-sheet-content="reading" hidden=""><label class="field">Bars per page<select id="tab-page-size"><option value="auto">Auto · fit screen</option><option value="1">1</option><option value="2">2</option><option value="4">4</option><option value="8">8</option><option value="16">16</option></select></label><label class="check"><input checked="" id="tab-follow" type="checkbox"/>Follow playback</label><label class="field">Numbers above the tab<select id="tab-annotation"><option value="gaps">Melody Δn</option><option value="n">Absolute n</option><option value="degrees">Scale degree</option><option value="rhythm">Duration in beats</option></select></label><p class="micro">Simultaneous notes share a vertical column. Time runs horizontally; bars and beat ticks align with duration strokes. Δn follows the melody line, not every accompaniment note.</p></div></div></dialog>
+<dialog aria-labelledby="transpose-guide-title" class="tabs-dialog" data-tabs-dialog="" id="transpose-guide"><div class="sheet-title"><h2 id="transpose-guide-title">The pattern survives a key change</h2><button aria-label="Close" class="icon-button" data-close="">×</button></div><div class="sheet-body"><div class="equation">n′ᵢ = nᵢ + k<br/>Δn′ᵢ = (nᵢ₊₁ + k) − (nᵢ + k)<br/>= nᵢ₊₁ − nᵢ = Δnᵢ</div><p>A melody is not tied to one absolute starting note. Its <b>signed semitone gaps and rhythm</b> survive exact transposition. Pick a starting pitch, then keep the same gaps.</p><p><b>Δn pattern</b> aligns the original and current melodic contours. Each lane is measured relative to its first pitch; horizontal spacing represents rhythm. The numbers below show unchanged gaps, while the absolute n labels move. In Tab, choose the Δn annotation to see the same pattern above the frets.</p><p>Harmony matters too: all simultaneous notes must move by the same k to preserve their intervals. The pattern view follows one named voice, not the entire polyphonic texture.</p><p class="micro">Mapping degrees into a different scale is a different operation and can change the gaps. Compact progression voicings preserve pitch classes, not every melodic interval. The display labels that distinction.</p></div></dialog>
+<dialog id="tabs-interval-dialog" class="tabs-dialog" data-tabs-dialog aria-labelledby="interval-table-title"><div class="sheet-title"><h2 id="interval-table-title">Exact interval pattern</h2><button data-close class="icon-button" aria-label="Close">×</button></div><div class="sheet-body"><p class="micro" id="interval-table-caption"></p><div class="tabs-interval-scroll"><table class="interval-data"><thead><tr><th scope="col">Beat</th><th scope="col">Original n</th><th scope="col">Current n</th><th scope="col">Δn original</th><th scope="col">Δn current</th><th scope="col">Duration</th></tr></thead><tbody id="interval-table-body"></tbody></table></div></div></dialog>
   <dialog aria-labelledby="help-title" id="help-dialog">
    <form method="dialog">
     <button aria-label="Close guide" class="close-button">
@@ -1607,7 +1342,7 @@
      <b>
       Tab library.
      </b>
-     Browse a collection, choose an instrument and key, and press Play. The same control pauses and resumes. Arrangement &amp; practice options provides register, voicing, and loop-range controls. Stairway to Tuning has a dedicated workspace with the same player.
+     Browse the alphabetical library, choose an instrument and key, and press Play. Songs, chord studies, and theory exercises share one player, including Stairway to Heaven. Δn pattern compares the original and transposed melody. Settings provides arrangement, register, reading, and loop-range controls.
     </p>
     <p>
      <b>
@@ -1663,13 +1398,13 @@
   </script>
   <script src="src/tuner-dsp.js">
   </script>
-  <script src="src/library.js">
+  <script src="src/library.js?v=tabs-1">
   </script>
   <script src="src/spectral-peaks.js">
   </script>
   <script src="src/audio.js">
   </script>
-  <script src="src/app.js">
+  <script src="src/app.js?v=tabs-1">
   </script>
   <script src="src/hold.js">
   </script>
@@ -1677,7 +1412,7 @@
   </script>
   <script src="src/spectrum.js">
   </script>
-  <script src="src/practice.js">
+  <script src="src/practice.js?v=tabs-1">
   </script>
   <script src="src/math.js">
   </script>

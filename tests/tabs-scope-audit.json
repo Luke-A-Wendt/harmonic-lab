@@ -1,0 +1,231 @@
+{
+  "protected_files": {
+    "README.md": {
+      "unchanged": true,
+      "sha256": "26a419f8aea3d90b486ce85a53490b761151e254352d69f6a2068e6b5021f9a1"
+    },
+    "LICENSE": {
+      "unchanged": true,
+      "sha256": "f81bd7cae237568be45af53048b74a07b899e412b1a233f1887bf8656f9ffbce"
+    },
+    "TUNER_NOTES.md": {
+      "unchanged": true,
+      "sha256": "a48e0949479694fc36075aa90672b572d1630b5d6710d0ebc306879d43d3d3e0"
+    },
+    "src/style.css": {
+      "unchanged": true,
+      "sha256": "e5d9f9e85eab1dc3eef01ddaf6a576977a3ac2ece5241375ba5cfb8f37f9171e"
+    },
+    "src/explore.js": {
+      "unchanged": true,
+      "sha256": "92d64cd3a136cab29072122ebebf378db6c129cb4a079c83a31b9e0783b6b6de"
+    },
+    "src/spectrum.js": {
+      "unchanged": true,
+      "sha256": "101c6f5c031aa53f7932ecbe0009404ad8675b9ba29513ff7f85ce14392e8c72"
+    },
+    "src/math.js": {
+      "unchanged": true,
+      "sha256": "3d72e679a66393f297b18e29d39df0d689a87e2876f0d97d26340f8ad28b146e"
+    },
+    "src/theory.js": {
+      "unchanged": true,
+      "sha256": "46d494af2d2b5615b6fcb59eafec8dc2f6fb147a13ed1700955f13ee5a034e7a"
+    },
+    "src/audio.js": {
+      "unchanged": true,
+      "sha256": "e8c0fc97e5f002402b957cf5ab5f4308a13de5df1cb64f72adde412dc609ba80"
+    },
+    "src/hold.js": {
+      "unchanged": true,
+      "sha256": "d203233f3a496bed65e730d95ac02693885b53e15da70c275dc27f0c851f334c"
+    },
+    "src/tuner-dsp.js": {
+      "unchanged": true,
+      "sha256": "e8b7fc401e378c1e73b3978dfc52347ac76e8ea3708d6422c24ac4f18b2378b9"
+    },
+    "src/spectral-peaks.js": {
+      "unchanged": true,
+      "sha256": "ec6fbe7fcf46303b618555e54dd5fde78abc85c947e9dfaf63ca0519eaf67968"
+    },
+    "src/boot.js": {
+      "unchanged": true,
+      "sha256": "2919d41c7af95ba7757482cde27194e26dbd0e7f2c76a4afbd2e0be26aaa4b24"
+    }
+  },
+  "markup": {
+    "#view-explore": "identical",
+    "#view-spectrum": "identical",
+    "#view-math": "identical",
+    ".audio-bar": "identical",
+    "footer": "identical",
+    "#privacy-dialog": "identical",
+    "header": "identical except removal of Stairway navigation button"
+  },
+  "visual_comparisons": [
+    {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "element": "#view-explore",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          1368,
+          1636
+        ],
+        [
+          1368,
+          1636
+        ]
+      ]
+    },
+    {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "element": "#tuning-headstock",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          304,
+          251
+        ],
+        [
+          304,
+          251
+        ]
+      ]
+    },
+    {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "element": "#math-pitch",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          1368,
+          795
+        ],
+        [
+          1368,
+          795
+        ]
+      ]
+    },
+    {
+      "viewport": [
+        412,
+        850
+      ],
+      "element": "#view-explore",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          382,
+          2448
+        ],
+        [
+          382,
+          2448
+        ]
+      ]
+    },
+    {
+      "viewport": [
+        412,
+        850
+      ],
+      "element": "#tuning-headstock",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          346,
+          231
+        ],
+        [
+          346,
+          231
+        ]
+      ]
+    },
+    {
+      "viewport": [
+        412,
+        850
+      ],
+      "element": "#math-pitch",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          382,
+          1288
+        ],
+        [
+          382,
+          1288
+        ]
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "element": "#view-explore",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          796,
+          1720
+        ],
+        [
+          796,
+          1720
+        ]
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "element": "#tuning-headstock",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          254,
+          251
+        ],
+        [
+          254,
+          251
+        ]
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "element": "#math-pitch",
+      "pixel_identical": true,
+      "sizes": [
+        [
+          796,
+          833
+        ],
+        [
+          796,
+          833
+        ]
+      ]
+    }
+  ],
+  "css_scope": "Every added selector is confined to #view-practice or a tab-owned dialog.",
+  "app_js_diff": "--- baseline/src/app.js\n+++ updated/src/app.js\n@@ -3,7 +3,7 @@\n   'use strict';\n   const H = window.HL, T = H.T;\n   const STORAGE_KEY = 'harmonic-lab-settings-v3';\n-  const views = ['explore', 'spectrum', 'practice', 'stairway', 'math'];\n+  const views = ['explore', 'spectrum', 'practice', 'math'];\n   H.$ = id => document.getElementById(id);\n   H.escape = s => String(s).replace(/[&<>\"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '\"':'&quot;', \"'\":'&#39;'}[c]));\n   H.signed = n => String(n).replace(/-/g, '\u2212');\n@@ -93,6 +93,8 @@\n   };\n   H.stopAll = () => { H.releaseHolds?.(); H.audio.stop(); H.emit('panic'); };\n   H.setView = view => {\n+    // Preserve bookmarks to the retired dedicated score workspace.\n+    if (view === 'stairway') { view = 'practice'; H.selectTab?.('stairway-to-tuning'); }\n     if (!views.includes(view)) return;\n     const old = H.view;\n     if (old !== view) H.releaseHolds?.();\n@@ -102,7 +104,7 @@\n     }\n     H.view = view;\n     clearTimeout(H.toastTimer); H.$('toast').classList.remove('show');\n-    const surface = view === 'stairway' ? 'practice' : view;\n+    const surface = view;\n     document.querySelectorAll('.view').forEach(el => { el.hidden = el.id !== `view-${surface}`; el.classList.toggle('active', !el.hidden); });\n     document.querySelectorAll('.main-nav button').forEach(b => {\n       const on = b.dataset.view === view; b.classList.toggle('active', on);\n@@ -132,7 +134,7 @@\n     H.$('privacy-open').addEventListener('click', () => H.$('privacy-dialog').showModal());\n     // No server-side session, data fetch, account, or telemetry is used.\n     window.addEventListener('beforeunload', () => { H.stopAll(); H.audio.stopMic(); });\n-    window.addEventListener('hashchange', () => { const v=location.hash.slice(1); if (views.includes(v)) H.setView(v); });\n+    window.addEventListener('hashchange', () => { const v=location.hash.slice(1); if (views.includes(v) || v === 'stairway') H.setView(v); });\n     document.addEventListener('visibilitychange', () => {\n       if (document.hidden) { H.stopAll(); if (H.audio.stream) { H.audio.stopMic(); H.emit('mic-stopped'); } else H.audio.cancelMicRequest?.(); }\n     });\n@@ -142,6 +144,6 @@\n       clearTimeout(H.playedTimer);\n       H.playedTimer = setTimeout(() => document.querySelectorAll('.playing-note').forEach(el => el.classList.remove('playing-note')), 450);\n     });\n-    const initial = location.hash.slice(1); H.setView(views.includes(initial)?initial:'explore');\n+    const initial = location.hash.slice(1); H.setView(views.includes(initial)||initial==='stairway'?initial:'explore');\n   };\n })();\n"
+}

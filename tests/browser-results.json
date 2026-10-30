@@ -2,7 +2,7 @@
   "checks": 60,
   "passed": [
     "Default master volume is 100%",
-    "Five top-level workspaces include Stairway to Tuning",
+    "Four workspaces; Stairway is no longer separate navigation",
     "No import/export tab controls or pop-study content",
     "Piano exposes one octave and mixed pitch exponents",
     "All guitar positions are labeled",
@@ -29,31 +29,31 @@
     "Freeze preserves table with the spectrum",
     "Peak sorting and count controls work",
     "A louder second harmonic does not become the tuning target",
-    "Library contains 68 non-featured selections",
     "One play/pause button replaces duplicated transport",
-    "Classical collection retained",
+    "Library visibly identifies Songs, Chords and Theory",
     "Favorites filter works",
     "Progression collection retained",
     "Play button becomes Pause",
     "Same button pauses",
     "Seeking during playback respects requested position",
-    "Featured score is a dedicated top-level route",
+    "Stairway is an ordinary library entry",
     "No duplicated player DOM",
     "Complete reference arrangement retained",
-    "Featured score maps to guitar",
-    "Featured score maps to dropD",
-    "Featured score maps to uke",
-    "Featured score maps to lowG",
-    "Featured score maps to baritone",
+    "Stairway arrangement maps to guitar",
+    "Stairway arrangement maps to dropD",
+    "Stairway arrangement maps to uke",
+    "Stairway arrangement maps to lowG",
+    "Stairway arrangement maps to baritone",
     "Key transposition remains available",
     "Exact transposition preserves intervals",
     "Score pagination advances",
+    "Delta-n path retains timing and gaps",
+    "Exact interval table is available",
     "Root-aligned keyboard and scale degrees remain correct",
     "Privacy statement specifies local compute",
     "Guide opens and closes",
     "explore fits a 390px viewport",
     "practice fits a 390px viewport",
-    "stairway fits a 390px viewport",
     "spectrum fits a 390px viewport",
     "math fits a 390px viewport",
     "No browser exceptions",
@@ -63,34 +63,34 @@
     "Touch release stops the note"
   ],
   "measurements": {
-    "sustain_rms": 0.24062375746870143,
+    "sustain_rms": 0.24064645937776838,
     "peaks": [
       {
         "bin": 15,
-        "frequency": 82.44247310059089,
-        "level": -23.831614445259273,
-        "n": -28.992526023572427,
+        "frequency": 82.44244481073768,
+        "level": -23.831744403531456,
+        "n": -28.992531964243987,
         "nearestN": -29,
-        "cents": 0.7473976427572637,
-        "prominence": 59.0827751159668,
+        "cents": 0.7468035756012625,
+        "prominence": 59.05081748962402,
         "harmonics": [],
         "rank": 1
       },
       {
         "bin": 31,
-        "frequency": 164.78431022333913,
-        "level": -32.51843429376498,
-        "n": -17.00309567381544,
+        "frequency": 164.7845268462968,
+        "level": -32.51832966576657,
+        "n": -17.00307291528988,
         "nearestN": -17,
-        "cents": -0.3095673815440847,
-        "prominence": 58.00066375732422,
+        "cents": -0.307291528988074,
+        "prominence": 57.67814254760742,
         "harmonics": [
           {
             "rank": 1,
-            "frequency": 82.44247310059089,
-            "n": -28.992526023572427,
+            "frequency": 82.44244481073768,
+            "n": -28.992531964243987,
             "harmonic": 2,
-            "error": -1.056965024301275,
+            "error": -1.0540951045892561,
             "tolerance": 40
           }
         ],
@@ -98,104 +98,104 @@
       },
       {
         "bin": 46,
-        "frequency": 247.20696148109081,
-        "level": -37.68142449785404,
-        "n": -9.98140983440083,
+        "frequency": 247.20691263541008,
+        "level": -37.681581483127935,
+        "n": -9.981413255150533,
         "nearestN": -10,
-        "cents": 1.8590165599169595,
-        "prominence": 74.43586349487305,
+        "cents": 1.858674484946654,
+        "prominence": 72.85396194458008,
         "harmonics": [
           {
             "rank": 1,
-            "frequency": 82.44247310059089,
-            "n": -28.992526023572427,
+            "frequency": 82.44244481073768,
+            "n": -28.992531964243987,
             "harmonic": 3,
-            "error": -0.8433819482275029,
-            "tolerance": 37.29558147920355
+            "error": -0.8431299560418185,
+            "tolerance": 37.29558876963749
           }
         ],
         "rank": 3
       },
       {
         "bin": 61,
-        "frequency": 329.66116844380576,
-        "level": -41.284021573317204,
-        "n": -4.998234781678807,
+        "frequency": 329.66112808072046,
+        "level": -41.28390732400618,
+        "n": -4.998236901368918,
         "nearestN": -5,
-        "cents": 0.17652183211929184,
-        "prominence": 60.44770050048828,
+        "cents": 0.17630986310823715,
+        "prominence": 60.34893035888672,
         "harmonics": [
           {
             "rank": 1,
-            "frequency": 82.44247310059089,
-            "n": -28.992526023572427,
+            "frequency": 82.44244481073768,
+            "n": -28.992531964243987,
             "harmonic": 4,
-            "error": -0.5708758106377484,
-            "tolerance": 28.042359956179304
+            "error": -0.5704937124930107,
+            "tolerance": 28.042363361974978
           },
           {
             "rank": 2,
-            "frequency": 164.78431022333913,
-            "n": -17.00309567381544,
+            "frequency": 164.7845268462968,
+            "n": -17.00307291528988,
             "harmonic": 2,
-            "error": 0.48608921366328633,
-            "tolerance": 28.042359956179304
+            "error": 0.48360139209605696,
+            "tolerance": 28.042363361974978
           }
         ],
         "rank": 4
       },
       {
         "bin": 77,
-        "frequency": 412.02163925755343,
-        "level": -44.03771725092393,
-        "n": -1.1374009730950414,
+        "frequency": 412.02171137398443,
+        "level": -44.037683690324016,
+        "n": -1.1373979429044387,
         "nearestN": -1,
-        "cents": -13.74009730950414,
-        "prominence": 56.78862762451172,
+        "cents": -13.739794290443875,
+        "prominence": 56.69863510131836,
         "harmonics": [
           {
             "rank": 1,
-            "frequency": 82.44247310059089,
-            "n": -28.992526023572427,
+            "frequency": 82.44244481073768,
+            "n": -28.992531964243987,
             "harmonic": 5,
-            "error": -0.8012088170959307,
-            "tolerance": 22.47307889602906
+            "error": -0.8003117308801903,
+            "tolerance": 22.4730749879713
           }
         ],
         "rank": 5
       },
       {
         "bin": 92,
-        "frequency": 494.4158432487972,
-        "level": -46.403530253823895,
-        "n": 2.0186574060016427,
+        "frequency": 494.41583626180676,
+        "level": -46.40349745848905,
+        "n": 2.018657161346946,
         "nearestN": 2,
-        "cents": 1.8657406001642673,
-        "prominence": 62.96888732910156,
+        "cents": 1.8657161346946172,
+        "prominence": 62.90454864501953,
         "harmonics": [
           {
             "rank": 1,
-            "frequency": 82.44247310059089,
-            "n": -28.992526023572427,
+            "frequency": 82.44244481073768,
+            "n": -28.992531964243987,
             "harmonic": 6,
-            "error": -0.8366579079801032,
-            "tolerance": 18.748147652278575
+            "error": -0.8360883062940696,
+            "tolerance": 18.748147915794394
           },
           {
             "rank": 2,
-            "frequency": 164.78431022333913,
-            "n": -17.00309567381544,
+            "frequency": 164.7845268462968,
+            "n": -17.00307291528988,
             "harmonic": 3,
-            "error": 0.22030711632127334,
-            "tolerance": 18.748147652278575
+            "error": 0.21800679829481726,
+            "tolerance": 18.748147915794394
           },
           {
             "rank": 3,
-            "frequency": 247.20696148109081,
-            "n": -9.98140983440083,
+            "frequency": 247.20691263541008,
+            "n": -9.981413255150533,
             "harmonic": 2,
-            "error": 0.0067240402473846645,
-            "tolerance": 18.748147652278575
+            "error": 0.007041649747671557,
+            "tolerance": 18.748147915794394
           }
         ],
         "rank": 6

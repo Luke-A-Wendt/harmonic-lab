@@ -1,0 +1,23 @@
+{
+  "CATALOG.md": "6d95d9c47fcae2ce9b4bd34cdb32eb37b4199ccd608561d784967bb26dca7f26",
+  "CONTENT_NOTICE.md": "9f720ba63268732fbcf3e7bf62c36514edc142a509a84d6dd2195635cd3d01d1",
+  "LICENSE": "f81bd7cae237568be45af53048b74a07b899e412b1a233f1887bf8656f9ffbce",
+  "README.md": "26a419f8aea3d90b486ce85a53490b761151e254352d69f6a2068e6b5021f9a1",
+  "TEST_REPORT.md": "0c6302ab4fcb571f5ec309242f6f9ef5b2c125371867cb19ecc22bde9eb0d0e7",
+  "TUNER_NOTES.md": "a48e0949479694fc36075aa90672b572d1630b5d6710d0ebc306879d43d3d3e0",
+  "index.html": "41fecb442edf6728e4716b12135a14b82532772b2704b17cec633ffb8a527c59",
+  "src/app.js": "3ef4bdec0088ebe84ddf2fe072b162bd65b4f9f2fc66e66cb4e03149e5b52213",
+  "src/audio.js": "e8c0fc97e5f002402b957cf5ab5f4308a13de5df1cb64f72adde412dc609ba80",
+  "src/boot.js": "2919d41c7af95ba7757482cde27194e26dbd0e7f2c76a4afbd2e0be26aaa4b24",
+  "src/explore.js": "92d64cd3a136cab29072122ebebf378db6c129cb4a079c83a31b9e0783b6b6de",
+  "src/hold.js": "d203233f3a496bed65e730d95ac02693885b53e15da70c275dc27f0c851f334c",
+  "src/library.js": "4684557ee39e93fe74dba2e2400cb9d096bc22d9030c037d48aa8a9ea3aee3fa",
+  "src/math.js": "3d72e679a66393f297b18e29d39df0d689a87e2876f0d97d26340f8ad28b146e",
+  "src/practice.css": "7dde2e47eff7d16d331ec0290401f04aa8e937d4b221f69f7c062b826d61f683",
+  "src/practice.js": "62e7cc78f88c38072e8278f486789069b46a5206ab6b69da38a4ed0a4544f981",
+  "src/spectral-peaks.js": "ec6fbe7fcf46303b618555e54dd5fde78abc85c947e9dfaf63ca0519eaf67968",
+  "src/spectrum.js": "101c6f5c031aa53f7932ecbe0009404ad8675b9ba29513ff7f85ce14392e8c72",
+  "src/style.css": "e5d9f9e85eab1dc3eef01ddaf6a576977a3ac2ece5241375ba5cfb8f37f9171e",
+  "src/theory.js": "46d494af2d2b5615b6fcb59eafec8dc2f6fb147a13ed1700955f13ee5a034e7a",
+  "src/tuner-dsp.js": "e8b7fc401e378c1e73b3978dfc52347ac76e8ea3708d6422c24ac4f18b2378b9"
+}

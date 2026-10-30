@@ -3,7 +3,7 @@
   'use strict';
   const H = window.HL, T = H.T;
   const STORAGE_KEY = 'harmonic-lab-settings-v3';
-  const views = ['explore', 'spectrum', 'practice', 'stairway', 'math'];
+  const views = ['explore', 'spectrum', 'practice', 'math'];
   H.$ = id => document.getElementById(id);
   H.escape = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
   H.signed = n => String(n).replace(/-/g, '−');
@@ -93,6 +93,8 @@
   };
   H.stopAll = () => { H.releaseHolds?.(); H.audio.stop(); H.emit('panic'); };
   H.setView = view => {
+    // Preserve bookmarks to the retired dedicated score workspace.
+    if (view === 'stairway') { view = 'practice'; H.selectTab?.('stairway-to-tuning'); }
     if (!views.includes(view)) return;
     const old = H.view;
     if (old !== view) H.releaseHolds?.();
@@ -102,7 +104,7 @@
     }
     H.view = view;
     clearTimeout(H.toastTimer); H.$('toast').classList.remove('show');
-    const surface = view === 'stairway' ? 'practice' : view;
+    const surface = view;
     document.querySelectorAll('.view').forEach(el => { el.hidden = el.id !== `view-${surface}`; el.classList.toggle('active', !el.hidden); });
     document.querySelectorAll('.main-nav button').forEach(b => {
       const on = b.dataset.view === view; b.classList.toggle('active', on);
@@ -132,7 +134,7 @@
     H.$('privacy-open').addEventListener('click', () => H.$('privacy-dialog').showModal());
     // No server-side session, data fetch, account, or telemetry is used.
     window.addEventListener('beforeunload', () => { H.stopAll(); H.audio.stopMic(); });
-    window.addEventListener('hashchange', () => { const v=location.hash.slice(1); if (views.includes(v)) H.setView(v); });
+    window.addEventListener('hashchange', () => { const v=location.hash.slice(1); if (views.includes(v) || v === 'stairway') H.setView(v); });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) { H.stopAll(); if (H.audio.stream) { H.audio.stopMic(); H.emit('mic-stopped'); } else H.audio.cancelMicRequest?.(); }
     });
@@ -142,6 +144,6 @@
       clearTimeout(H.playedTimer);
       H.playedTimer = setTimeout(() => document.querySelectorAll('.playing-note').forEach(el => el.classList.remove('playing-note')), 450);
     });
-    const initial = location.hash.slice(1); H.setView(views.includes(initial)?initial:'explore');
+    const initial = location.hash.slice(1); H.setView(views.includes(initial)||initial==='stairway'?initial:'explore');
   };
 })();
