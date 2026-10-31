@@ -1,6 +1,6 @@
-# Harmonic Lab 
+# [Harmonic Lab](https://luke-a-wendt.github.io/harmonic-lab/)
 
-**[PLAY](https://luke-a-wendt.github.io/harmonic-lab/) with Music, mathematics & sound.**
+**Music, mathematics & sound.**
 
 Harmonic Lab is an interactive music-learning website connecting a piano, guitar and ukulele fretboards, scales, chords, a live spectrum analyzer, an instrument tuner, playable tablature, and visual mathematics. One pitch coordinate links every workspace: **A4 is n = 0 at 440 Hz**.
 
