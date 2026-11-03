@@ -2396,6 +2396,381 @@ dialog.hb-help::backdrop{background:#000c}
 
 #view-practice #tf-voices p{font-size:10px;color:#bdc4c5;line-height:1.5;margin:6px 0}
 #view-practice #tf-voices .tf-finger-choice{padding:6px 8px;border:1px solid #3e5356;border-radius:5px;font:10px/1.5 ui-monospace,monospace;color:#dde7e9;overflow-wrap:anywhere}
+</style><style id="tonic-selector-style">
+#view-explore .recipe-clean-panel #tonic-select{height:38px;min-height:38px;width:100%;border:1px solid #5a7478;border-radius:8px;background:#151515;color:#f1f1f1;padding:5px 12px;font-size:13px;font-weight:650}
+#view-explore .recipe-clean-panel #tonic-select:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+</style><style id="scale-specific-circle-style">
+#view-explore .circle-scale-choice{display:flex;align-items:center;gap:7px;margin:4px 0 2px;justify-content:center}
+#view-explore .circle-scale-choice label{font-size:10px;color:#b7c8cc;white-space:nowrap}
+#view-explore .circle-scale-choice select{width:min(100%,205px);min-width:0;max-width:205px;padding:5px 7px;min-height:30px;font-size:11px;border:1px solid #4d676b;border-radius:6px;background:#191919;color:#e8e8e8}
+@media(max-width:480px){#view-explore .circle-scale-choice{justify-content:center}#view-explore .circle-scale-choice select{max-width:190px}}
+</style><style id="nearest-neighbor-tonic-ring-layout">
+/* Recipe selection comes first, then its optimized tonic ring and the comparison. */
+#view-explore{grid-template-columns:minmax(280px,360px) minmax(0,1fr)!important}
+#view-explore>.explore-top{display:contents!important}
+#view-explore .explore-top>.relation-panel.recipe-clean-panel{
+  grid-column:1/-1!important;grid-row:2!important;align-self:stretch!important;
+}
+#view-explore .explore-top>.circle-panel{
+  grid-column:1!important;grid-row:3!important;min-height:0!important;height:auto!important;
+  display:flex;flex-direction:column;justify-content:flex-start;
+}
+#view-explore>.pitch-matrix-panel{grid-column:2!important;grid-row:3!important;min-width:0}
+#view-explore>.instrument-drawer{grid-column:1/-1!important;grid-row:4!important}
+#view-explore .relationship-switch{display:none!important}
+#view-explore .circle-panel #circle-holder{width:100%;min-height:0;max-width:350px;display:block;margin:auto}
+#view-explore .circle-panel #circle-holder svg,
+#view-explore .circle-panel #circle-holder:not(.multi) svg{
+ width:100%!important;max-width:340px!important;height:auto!important;max-height:none!important;
+ aspect-ratio:1;display:block;margin:auto;
+}
+#view-explore .neighbor-cycle-tag{font-size:10px;color:#a6e8ee}
+#view-explore .neighbor-cycle-metric{font-size:11px;color:#b8c9cb;line-height:1.4;margin:4px 0}
+#view-explore .circle-panel .circle-heading{align-items:center;justify-content:space-between}
+@media(max-width:900px){
+ #view-explore{grid-template-columns:minmax(0,1fr)!important}
+ #view-explore .explore-top>.relation-panel.recipe-clean-panel{grid-column:1!important;grid-row:2!important}
+ #view-explore .explore-top>.circle-panel{grid-column:1!important;grid-row:3!important}
+ #view-explore>.pitch-matrix-panel{grid-column:1!important;grid-row:4!important}
+ #view-explore>.instrument-drawer{grid-column:1!important;grid-row:5!important}
+ #view-explore .circle-panel #circle-holder{max-width:310px}
+}
+</style><style id="combined-recipe-ring-layout">
+#view-explore{grid-template-columns:minmax(300px,420px) minmax(0,1fr)!important}
+#view-explore>.explore-top{display:contents!important}
+#view-explore .explore-top>.relation-panel.recipe-clean-panel{
+ grid-column:1!important;grid-row:2!important;min-width:0;display:block!important;
+}
+#view-explore>.pitch-matrix-panel{grid-column:2!important;grid-row:2!important;min-width:0}
+#view-explore>.instrument-drawer{grid-column:1/-1!important;grid-row:3!important}
+#view-explore .recipe-clean-panel .recipe-clean-rows{margin-bottom:10px}
+#view-explore .recipe-clean-panel .tonic-stage-heading{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:10px 0 4px;color:#c3d4d6;font-size:10px;font-weight:700;letter-spacing:.07em}
+#view-explore .recipe-clean-panel .tonic-stage-heading span:last-child{font-weight:400;letter-spacing:0;color:#9fb0b3}
+#view-explore .recipe-clean-panel .circle-panel{border:0!important;background:transparent!important;padding:0!important;margin:0!important;min-height:0!important;box-shadow:none!important}
+#view-explore .recipe-clean-panel .circle-heading{margin-bottom:3px}
+#view-explore .recipe-clean-panel .circle-heading .eyebrow{display:none}
+#view-explore .recipe-clean-panel .circle-heading h2{font-size:15px;margin:0}
+#view-explore .recipe-clean-panel .neighbor-cycle-metric{font-size:10px;margin:3px 0}
+#view-explore .recipe-clean-panel #circle-holder{width:100%;max-width:330px;min-height:0;margin:0 auto;display:block}
+#view-explore .recipe-clean-panel #circle-holder svg{width:100%!important;max-width:330px!important;height:auto!important;max-height:none!important;aspect-ratio:1}
+#view-explore .recipe-clean-panel .cycle-more{margin-top:4px}
+@media(max-width:900px){
+ #view-explore{grid-template-columns:minmax(0,1fr)!important}
+ #view-explore .explore-top>.relation-panel.recipe-clean-panel{grid-column:1!important;grid-row:2!important}
+ #view-explore>.pitch-matrix-panel{grid-column:1!important;grid-row:3!important}
+ #view-explore>.instrument-drawer{grid-column:1!important;grid-row:4!important}
+ #view-explore .recipe-clean-panel #circle-holder{max-width:300px}
+}
+</style><style id="expanded-instrument-tabs">
+#view-explore .instrument-tabs{display:flex!important;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;gap:4px;padding-bottom:5px;scrollbar-width:thin}
+#view-explore .instrument-tabs button{flex:0 0 auto!important;min-width:80px;max-width:none!important;white-space:nowrap;padding:7px 12px}
+#view-explore .alternative-instrument{min-width:max-content;display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:16px 10px}
+#view-explore .alternative-note{border:1px solid #555;background:#252525;color:#aaa;font:600 11px/1.2 ui-monospace,monospace;cursor:pointer}
+#view-explore .alternative-note.scale{background:var(--cyan);color:#102022;border-color:var(--cyan)}
+#view-explore .alternative-note.chord{background:var(--magenta);border-color:var(--magenta);color:#171018}
+#view-explore .alternative-note:disabled{cursor:default;opacity:.5}
+#view-explore .kalimba-tine{width:38px;border-radius:7px 7px 12px 12px;display:flex;align-items:flex-end;justify-content:center;padding:8px 2px}
+#view-explore .accordion-board{display:flex;flex-direction:column;align-items:center;gap:4px}
+#view-explore .accordion-row{display:flex;gap:5px}
+#view-explore .accordion-row:nth-child(even){transform:translateX(16px)}
+#view-explore .accordion-button{width:43px;height:43px;border-radius:50%}
+@media(max-width:600px){#view-explore .instrument-tabs button{min-width:74px;padding:7px 9px}#view-explore .alternative-instrument{justify-content:flex-start}}
+</style><style id="matrix-playback-flash-style">
+/* One white perimeter spans the note and n cells, following the cyan/magenta
+   perimeter exactly; the degree, delta, and fraction cells are not flashed. */
+#view-explore>.pitch-matrix-panel #pitch-matrix .matrix-value.matrix-note.playback-flash{
+  border-top:3px solid white!important;
+  border-left:3px solid white!important;
+  border-right:3px solid white!important;
+  border-bottom:0!important;
+  border-radius:7px 7px 0 0!important;
+  box-shadow:none!important;
+  position:relative;z-index:3;
+}
+#view-explore>.pitch-matrix-panel #pitch-matrix .matrix-n.playback-flash{
+  border-left:3px solid white!important;
+  border-right:3px solid white!important;
+  border-bottom:3px solid white!important;
+  border-top:0!important;
+  border-radius:0 0 7px 7px!important;
+  outline:none!important;
+  box-shadow:none!important;
+  position:relative;z-index:3;
+}
+</style><style id="pitch-matrix-about-style">
+#view-explore .pitch-matrix-panel .pitch-matrix-about{margin-top:9px;border:1px solid #40484a;border-radius:8px;background:#222}
+#view-explore .pitch-matrix-panel .pitch-matrix-about>summary{cursor:pointer;padding:8px 11px;font-size:11px;color:#dce4e5;display:flex;align-items:center;justify-content:space-between;list-style:none}
+#view-explore .pitch-matrix-panel .pitch-matrix-about>summary::-webkit-details-marker{display:none}
+#view-explore .pitch-matrix-panel .pitch-matrix-about[open]>summary{border-bottom:1px solid #40484a}
+#view-explore .pitch-matrix-panel .pitch-matrix-about-content{padding:5px 11px 10px;display:grid;gap:5px}
+#view-explore .pitch-matrix-panel .pitch-matrix-about-content p{font-size:11px;line-height:1.5;color:#b8c5c7;margin:0}
+</style><style id="octavon-visual-style">
+#view-explore #instrument-octavon .octavon-scroll{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+#view-explore #instrument-octavon .octavon-keyboard{
+ --octavon-width:48px;
+ position:relative;display:flex;align-items:stretch;
+ width:max-content;min-width:0;padding:3px 0;
+}
+#view-explore #instrument-octavon .octavon-key{
+ position:relative;flex:0 0 var(--octavon-width);width:var(--octavon-width);
+ height:132px;display:flex;flex-direction:column;justify-content:space-between;
+ align-items:center;gap:5px;padding:18px 2px 10px;
+ border:1px solid #1a3439;border-radius:3px;
+ background:var(--cyan);color:#092024;
+ font:700 11px/1.25 ui-monospace,monospace;cursor:pointer;
+ touch-action:pan-x;
+}
+#view-explore #instrument-octavon .octavon-note{font-size:11px;font-weight:750}
+#view-explore #instrument-octavon .octavon-n{font-size:10px;font-weight:600}
+#view-explore #instrument-octavon .octavon-key:focus-visible{outline:3px solid #fff;outline-offset:-5px}
+#view-explore #instrument-octavon .octavon-octave-boundary{
+ position:absolute;top:1px;bottom:1px;border:4px solid #fff;border-radius:9px;
+ pointer-events:none;z-index:5;
+}
+#view-explore #instrument-octavon .octavon-about{
+ margin-top:7px;border:1px solid #414141;border-radius:8px;
+ background:#232323;font-size:11px;color:#d6d6d6;
+}
+#view-explore #instrument-octavon .octavon-about summary{padding:9px 12px;cursor:pointer}
+#view-explore #instrument-octavon .octavon-explanation{padding:0 12px 12px;line-height:1.55;color:#bfc9cb}
+@media(max-width:600px){
+ #view-explore #instrument-octavon .octavon-key{height:112px}
+}
+</style><style id="recipe-dropdown-readable-fix">
+/* The menu needs its own width: a long scale name and a step sequence
+   cannot share the narrow width of the collapsed selector. */
+#view-explore .recipe-clean-panel .recipe-picker-menu{
+  left:0;
+  right:auto;
+  width:max(100%, min(430px, calc(100vw - 30px)));
+  max-width:calc(100vw - 30px);
+}
+#view-explore .recipe-clean-panel .recipe-menu-item{
+  grid-template-columns:minmax(140px,1fr) var(--recipe-steps-width, 175px);
+  gap:10px;
+}
+#view-explore .recipe-clean-panel .recipe-menu-item .recipe-menu-name{
+  overflow-wrap:normal;
+  word-break:normal;
+  white-space:normal;
+  min-width:0;
+  line-height:1.35;
+}
+@media(max-width:600px){
+  #view-explore .recipe-clean-panel .recipe-picker-menu{
+    left:0;
+    right:auto;
+    width:min(390px,calc(100vw - 30px));
+  }
+  #view-explore .recipe-clean-panel .recipe-menu-item{
+    grid-template-columns:minmax(0,1fr);
+    gap:3px;
+    padding:8px 10px;
+  }
+  #view-explore .recipe-clean-panel .recipe-menu-item .recipe-menu-name{
+    white-space:normal;
+    overflow-wrap:normal;
+    word-break:normal;
+  }
+  #view-explore .recipe-clean-panel .recipe-menu-item .recipe-menu-steps{
+    white-space:normal;
+    overflow-wrap:normal;
+  }
+}
+</style><style id="octavon-index-below-keys">
+/* Keep the playable key and its plain n label as separate elements. */
+#view-explore #instrument-octavon .octavon-column{
+  flex:0 0 var(--octavon-width);width:var(--octavon-width);
+  display:flex;flex-direction:column;align-items:stretch;
+}
+#view-explore #instrument-octavon .octavon-key{
+  flex:0 0 auto;width:100%;height:118px;
+  justify-content:flex-start;padding-top:18px;
+}
+#view-explore #instrument-octavon .octavon-index{
+  display:block;text-align:center;height:24px;padding-top:5px;
+  font:500 11px/16px ui-monospace,monospace;
+  color:#aab6b9;background:transparent;border:0;
+  pointer-events:none;user-select:none;
+}
+#view-explore #instrument-octavon .octavon-octave-boundary{
+  bottom:25px; /* surround keys only, not the n labels */
+}
+@media(max-width:600px){
+ #view-explore #instrument-octavon .octavon-key{height:102px}
+}
+</style><style id="stacked-recipe-selector-labels">
+/* Always display the selected recipe name and semitone pattern on separate lines. */
+#view-explore .recipe-clean-panel .recipe-picker-trigger{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) 16px!important;
+ grid-template-rows:auto auto!important;
+ align-content:center!important;
+ height:auto!important;
+ min-height:49px!important;
+ gap:3px 8px!important;
+ padding:6px 10px!important;
+}
+#view-explore .recipe-clean-panel .recipe-picker-name{
+ grid-column:1!important;grid-row:1!important;
+ white-space:normal!important;overflow:visible!important;
+ text-overflow:clip!important;overflow-wrap:normal!important;
+ word-break:normal!important;line-height:1.25!important;
+}
+#view-explore .recipe-clean-panel .recipe-picker-steps{
+ grid-column:1!important;grid-row:2!important;
+ white-space:normal!important;overflow-wrap:normal!important;
+ word-break:normal!important;line-height:1.3!important;
+}
+#view-explore .recipe-clean-panel .recipe-picker-steps:empty{display:none!important}
+#view-explore .recipe-clean-panel .recipe-chevron{
+ grid-column:2!important;grid-row:1/3!important;align-self:center!important;
+}
+@media(max-width:460px){
+ #view-explore .recipe-clean-panel .recipe-picker-trigger{min-height:46px!important;padding:5px 8px!important}
+}
+</style><style id="octavon-chord-tone-fill">
+#view-explore #instrument-octavon .octavon-key.chord-tone {
+  background:var(--magenta);
+  border-color:var(--magenta);
+  color:#171018;
+}
+</style><style id="octavon-slide-to-play">
+#view-explore #instrument-octavon .octavon-key{
+ touch-action:none;
+ user-select:none;
+ -webkit-user-select:none;
+}
+#view-explore #instrument-octavon .octavon-key.octavon-pressed{
+ outline:3px solid #fff;
+ outline-offset:-4px;
+ z-index:3;
+}
+</style><style id="all-instruments-glissando-style">
+#view-explore #instrument-piano .piano-key,
+#view-explore #instrument-neck .fret-note,
+#view-explore #instrument-other .alternative-note{
+  touch-action:none;-webkit-user-select:none;user-select:none;
+}
+#view-explore .instrument-gliss-active{
+  outline:3px solid white!important;outline-offset:-3px!important;
+  z-index:15!important;
+}
+</style><style id="compact-unified-tuner">
+/* One responsive tuning surface, with both original instrument and meter intact. */
+#view-spectrum>.tuner-combined{padding:10px 12px;margin-bottom:10px}
+#view-spectrum>.tuner-combined>.tuner-top{
+ display:grid;grid-template-columns:minmax(210px,290px) minmax(0,1fr);
+ gap:16px;align-items:start;margin:0;
+}
+#view-spectrum .tuner-combined .tuning-panel,
+#view-spectrum .tuner-combined .tuner-readout{
+ border:0;background:transparent;box-shadow:none;
+ padding:0;min-width:0;border-radius:0;
+}
+#view-spectrum .tuner-combined .tuning-panel{
+ padding-right:14px;border-right:1px solid #3a3a3a;
+}
+#view-spectrum .tuner-combined .panel-heading{margin-bottom:5px}
+#view-spectrum .tuner-combined .panel-heading h2{font-size:16px}
+#view-spectrum .tuner-combined .panel-heading select{max-width:160px;min-width:0;font-size:11px}
+#view-spectrum .tuner-combined #tuning-headstock{max-width:265px;margin:auto}
+#view-spectrum .tuner-combined #tuning-headstock svg{max-height:210px;width:100%;height:auto}
+#view-spectrum .tuner-combined .tuning-panel>p.micro{margin:3px 0 5px;font-size:10px;line-height:1.35}
+#view-spectrum .tuner-combined .tuning-panel>.inline-controls{display:flex;gap:5px;flex-wrap:wrap}
+#view-spectrum .tuner-combined .tuning-panel>.inline-controls button{padding:5px 7px;min-height:31px;font-size:10px}
+#view-spectrum .tuner-combined .pitch-main{margin:3px 0 5px}
+#view-spectrum .tuner-combined .pitch-main>span{font-size:34px}
+#view-spectrum .tuner-combined .tuning-meter{max-width:520px;margin:4px 0 7px;padding:2px 0}
+#view-spectrum .tuner-combined .meter-range{margin-bottom:3px}
+#view-spectrum .tuner-combined .meter-track{height:25px}
+#view-spectrum .tuner-combined .meter-labels{margin-top:3px}
+#view-spectrum .tuner-combined .detection-grid{margin:7px 0;padding-top:8px;gap:8px}
+#view-spectrum .tuner-combined .detection-grid>div{min-width:0}
+#view-spectrum .tuner-combined .detection-grid small{font-size:10px}
+#view-spectrum .tuner-combined .tuner-readout>.inline-controls{margin:6px 0;gap:6px}
+#view-spectrum .tuner-combined .tuner-readout>.inline-controls button{padding:6px 10px;min-height:33px}
+#view-spectrum .tuner-combined .tuning-diagnostic{padding:7px 9px;margin-top:5px}
+#view-spectrum .tuner-combined .tuning-diagnostic p{font-size:10px;margin:3px 0 0}
+#view-spectrum .tuner-combined #tuner-message{font-size:10px;margin:5px 0 0}
+@media(max-width:700px){
+ #view-spectrum>.tuner-combined{padding:8px}
+ #view-spectrum>.tuner-combined>.tuner-top{grid-template-columns:1fr;gap:9px}
+ #view-spectrum .tuner-combined .tuning-panel{
+   padding:0 0 9px;border-right:0;border-bottom:1px solid #3a3a3a;
+ }
+ #view-spectrum .tuner-combined #tuning-headstock{max-width:260px}
+ #view-spectrum .tuner-combined #tuning-headstock svg{max-height:190px}
+ #view-spectrum .tuner-combined .tuning-panel>.inline-controls{justify-content:center}
+ #view-spectrum .tuner-combined .tuning-panel>p.micro{text-align:center}
+ #view-spectrum .tuner-combined .tuning-meter{max-width:none}
+}
+</style><style id="spectroscope-mirror-style">
+#view-explore>.spectrum-mirror,#view-practice>.spectrum-mirror{grid-column:1/-1;min-width:0;margin-top:10px;padding:12px}
+.spectrum-mirror-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.spectrum-mirror-heading h2{font-size:17px;margin:2px 0}
+.spectrum-mirror-tabs{display:flex;gap:4px;flex-wrap:wrap}
+.spectrum-mirror-tabs button{border:1px solid #454545;border-radius:7px;background:#292929;color:#ddd;padding:7px 12px;font-size:12px}
+.spectrum-mirror-tabs button.active{background:var(--cyan);border-color:var(--cyan);color:#142124;font-weight:700}
+.spectrum-mirror-display{background:#121212;border:1px solid #343434;border-radius:8px;overflow:hidden}
+.spectrum-mirror-canvas{display:block;width:100%;height:192px}
+.spectrum-mirror-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px;font-size:10px;color:#aaa}
+.spectrum-mirror-footer button{font-size:11px}
+@media(max-width:600px){
+ .spectrum-mirror-heading{align-items:flex-start}
+ .spectrum-mirror-tabs{width:100%}
+ .spectrum-mirror-tabs button{flex:1}
+ .spectrum-mirror-canvas{height:165px}
+}
+</style><style id="tuner-input-cleanup-layout">
+#view-spectrum .tuner-input-cleanup{
+ margin-top:10px;border:1px solid #3b4142;border-radius:8px;background:#222;
+}
+#view-spectrum .tuner-input-cleanup summary{
+ display:flex;align-items:center;justify-content:space-between;gap:10px;
+ padding:10px 12px;cursor:pointer;list-style:revert;font-size:12px;
+}
+#view-spectrum .tuner-cleanup-status{font-size:10px;color:#a9c6ca;font-weight:400}
+#view-spectrum .tuner-cleanup-content{border-top:1px solid #383838;padding:10px}
+#view-spectrum .tuner-cleanup-content .noise-panel{
+ padding:0!important;margin:0!important;border:0!important;background:transparent!important;
+}
+#view-spectrum .tuner-cleanup-content .noise-controls{display:flex;flex-wrap:wrap;gap:8px 12px}
+#view-spectrum .tuner-cleanup-content .noise-controls label{min-width:100px}
+#view-spectrum .tuner-cleanup-content .panel-heading{margin-bottom:8px}
+#view-spectrum .tuner-cleanup-content .panel-heading h2{font-size:14px}
+#view-spectrum .spectrum-mode-tabs button{min-width:110px}
+@media(max-width:600px){
+ #view-spectrum .tuner-input-cleanup summary{padding:9px}
+ #view-spectrum .tuner-cleanup-content{padding:8px}
+}
+</style><style id="instrument-scroll-navigation-style">
+#view-explore .instrument-pan-controls{display:flex;align-items:center;gap:9px;justify-content:space-between;margin:4px 0 8px}
+#view-explore .instrument-pan-controls[hidden]{display:none}
+#view-explore .instrument-pan-controls button{flex:0 0 48px;min-height:38px;border:1px solid #566366;border-radius:7px;background:#292929;color:#dffaff;font-size:18px;font-weight:700;cursor:pointer}
+#view-explore .instrument-pan-controls button:disabled{opacity:.25;cursor:default}
+#view-explore .instrument-pan-controls span{flex:1;text-align:center;font-size:11px;color:#aebfc2}
+#view-explore .instrument-scroll{scrollbar-width:auto!important;scrollbar-color:#83b9c0 #242424!important;padding-bottom:12px!important}
+#view-explore .instrument-scroll::-webkit-scrollbar{height:17px}
+#view-explore .instrument-scroll::-webkit-scrollbar-track{background:#292929;border-radius:12px}
+#view-explore .instrument-scroll::-webkit-scrollbar-thumb{background:#80b8c0;border:3px solid #292929;border-radius:12px}
+@media(max-width:600px){#view-explore .instrument-pan-controls button{min-height:44px;flex-basis:54px}}
+</style><style id="instrument-pan-side-arrows">
+/* Place arrows alongside the playable instrument, not on a separate row. */
+#view-explore .instrument-pan-frame{position:relative;display:flex;align-items:center;min-width:0;width:100%;padding:0 46px;box-sizing:border-box}
+#view-explore .instrument-pan-frame>.instrument-scroll{flex:1 1 auto;min-width:0;width:100%;max-width:100%}
+#view-explore .instrument-pan-frame>.instrument-pan-controls{position:absolute;inset:0;pointer-events:none;display:flex!important;align-items:center;justify-content:space-between;margin:0!important;gap:0}
+#view-explore .instrument-pan-frame>.instrument-pan-controls[hidden]{display:none!important}
+#view-explore .instrument-pan-frame>.instrument-pan-controls span{display:none!important}
+#view-explore .instrument-pan-frame>.instrument-pan-controls button{pointer-events:auto;flex:0 0 40px!important;width:40px;height:56px;min-height:0;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0}
+@media(max-width:600px){#view-explore .instrument-pan-frame{padding:0 37px}#view-explore .instrument-pan-frame>.instrument-pan-controls button{flex-basis:33px!important;width:33px;height:52px}}
+</style><style id="mirror-axis-freeze-controls">
+.spectrum-mirror-controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.spectrum-mirror-controls label{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.spectrum-mirror-controls select{min-height:34px;font-size:11px;max-width:145px}
+.spectrum-mirror-controls button{min-height:34px;padding:6px 10px;font-size:11px}
+.spectrum-mirror-controls button[aria-pressed="true"]{color:var(--cyan);border-color:var(--cyan)}
+@media(max-width:600px){.spectrum-mirror-controls{width:100%;justify-content:space-between;gap:6px}.spectrum-mirror-controls label{flex:1}.spectrum-mirror-controls select{flex:1;min-width:0}}
 </style></head>
 <body>
 <header class="app-header">
@@ -2511,27 +2886,24 @@ dialog.hb-help::backdrop{background:#000c}
 <button class="rel-tab" type="button" data-rel-view="scale" aria-pressed="false">▦ Scale <span id="rel-current-scale">· C major</span></button>
 </div>
 <div class="explore-top">
-<section class="panel circle-panel">
-  <div class="panel-heading circle-heading"><div><p class="eyebrow">HOW TONICS ARE RELATED</p><h2>Key relationships</h2></div>
-  <select aria-label="Choose circle root interval" id="circle-step">
-    <option value="7">Fifths · +7</option><option value="5">Fourths · +5</option>
-    <option value="1">Chromatic · +1</option><option value="4">Major thirds · +4</option>
-    <option value="3">Minor thirds · +3</option><option value="2">Whole tones · +2</option>
-  </select></div>
-  <div id="circle-holder"></div>
-  <details class="cycle-more"><summary>More about this circle <span aria-hidden="true">⌄</span></summary>
-    <p class="micro" id="cycle-extra"></p>
-    <p class="micro" id="cycle-description"></p>
-  </details>
-</section>
 <section class="panel relation-panel relation-card-compact recipe-clean-panel" aria-label="Selected tonic, chord and scale recipes">
   <header class="recipe-clean-heading">
-    <p class="eyebrow">SELECTED TONIC & SCALE</p>
+    <p class="eyebrow">SCALE RECIPE · CHORD · TONIC</p>
     <h2 class="scale-title" id="scale-title">C major · Ionian</h2>
   </header>
-  <div class="recipe-clean-rows" aria-label="Choose a chord first, then a compatible scale">
+  <div class="recipe-clean-rows" aria-label="Choose a scale, then an optional chord; select the tonic from the ring">
     <div class="recipe-clean-row">
-      <div class="recipe-clean-label">1 · CHORD</div>
+      <div class="recipe-clean-label">1 · SCALE</div>
+      <div class="recipe-custom-picker" data-picker="scale">
+        <select id="scale-mode" class="recipe-native-input" aria-hidden="true" tabindex="-1"></select>
+        <button type="button" class="recipe-picker-trigger" id="recipe-scale-trigger" aria-label="Choose scale recipe" aria-expanded="false" aria-haspopup="listbox" aria-controls="recipe-scale-menu">
+          <span class="recipe-picker-name" id="recipe-scale-name">Major · Ionian</span><span class="recipe-picker-steps" id="recipe-scale-steps">2 · 2 · 1 · 2 · 2 · 2 · 1</span><span class="recipe-chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="recipe-picker-menu" id="recipe-scale-menu" role="listbox" aria-label="Scale recipes" hidden></div>
+      </div><button id="hb-scale-open" type="button" class="recipe-help-button" aria-haspopup="dialog" aria-controls="hb-scale-help" title="Scales, modes, tonic relationships" aria-label="Help: Scales, modes, tonic relationships">?</button>
+    </div>
+    <div class="recipe-clean-row">
+      <div class="recipe-clean-label">2 · CHORD</div>
       <div class="recipe-custom-picker" data-picker="chord">
         <select id="chord-select" class="recipe-native-input" aria-hidden="true" tabindex="-1"><option value="">No chord</option></select>
         <button type="button" class="recipe-picker-trigger" id="recipe-chord-trigger" aria-label="Choose chord recipe" aria-expanded="false" aria-haspopup="listbox" aria-controls="recipe-chord-menu">
@@ -2540,19 +2912,14 @@ dialog.hb-help::backdrop{background:#000c}
         <div class="recipe-picker-menu" id="recipe-chord-menu" role="listbox" aria-label="Chord recipes" hidden></div>
       </div><button id="hb-chord-open" type="button" class="recipe-help-button" aria-haspopup="dialog" aria-controls="hb-chord-help" title="Chord structure and diatonic harmony" aria-label="Help: Chord structure and diatonic harmony">?</button>
     </div>
-    <div class="recipe-clean-row">
-      <div class="recipe-clean-label">2 · SCALE</div>
-      <div class="recipe-custom-picker" data-picker="scale">
-        <select id="scale-mode" class="recipe-native-input" aria-hidden="true" tabindex="-1"></select>
-        <button type="button" class="recipe-picker-trigger" id="recipe-scale-trigger" aria-label="Choose scale recipe" aria-expanded="false" aria-haspopup="listbox" aria-controls="recipe-scale-menu">
-          <span class="recipe-picker-name" id="recipe-scale-name">Change scale</span><span class="recipe-picker-steps" id="recipe-scale-steps">2 · 2 · 1 · 2 · 2 · 2 · 1</span><span class="recipe-chevron" aria-hidden="true">⌄</span>
-        </button>
-        <div class="recipe-picker-menu" id="recipe-scale-menu" role="listbox" aria-label="Scale recipes" hidden></div>
-      </div><button id="hb-scale-open" type="button" class="recipe-help-button" aria-haspopup="dialog" aria-controls="hb-scale-help" title="Scales, modes, tonic relationships" aria-label="Help: Scales, modes, tonic relationships">?</button>
-    </div>
   </div>
   <p class="recipe-sr-only" id="recipe-compat-status" aria-live="polite"></p>
   <div class="recipe-internal-data" hidden aria-hidden="true">
+    <div class="recipe-clean-row recipe-tonic-row">
+      <label class="recipe-clean-label" for="tonic-select">1 · TONIC</label>
+      <select id="tonic-select" aria-label="Starting note / tonic"></select>
+    </div>
+
     <div class="interval-patterns">
       <p id="scale-lesson" class="scale-lesson"></p>
       <div id="chord-pattern" class="chord-pattern" hidden></div>
@@ -2563,10 +2930,22 @@ dialog.hb-help::backdrop{background:#000c}
     <div class="scale-note-chips" id="scale-note-chips"></div>
     <div class="set-readout"><code id="scale-offsets"></code></div>
   </div>
+  <div class="tonic-stage-heading"><span>3 · TONIC</span><span>Choose on the ring · tap to play</span></div>
+<section class="panel circle-panel">
+  <div class="panel-heading circle-heading"><div><p class="eyebrow">HOW TONICS ARE RELATED</p><h2>Key relationships</h2></div>
+<span class="neighbor-cycle-tag" id="neighbor-cycle-tag">Minimum-change cycle</span></div>
+<p class="neighbor-cycle-metric" id="neighbor-cycle-metric" aria-live="polite"></p>
+<div id="circle-holder"></div>
+  <details class="cycle-more"><summary>More about this circle <span aria-hidden="true">⌄</span></summary>
+    <p class="micro" id="cycle-extra"></p>
+    <p class="micro" id="cycle-description"></p>
+  </details>
 </section>
+</section>
+
 </div>
 <section class="panel pitch-matrix-panel" aria-label="Pitch coordinates and scale changes">
- <div class="panel-heading"><div><p class="eyebrow">PITCH COORDINATES · SCALE COMPARISON</p><h2>One octave · one comparison</h2></div>
+ <div class="panel-heading"><div><p class="eyebrow">PITCH COORDINATES · SCALE COMPARISON</p></div>
  <div class="matrix-toolbar" aria-label="Scale and octave controls">
    <div class="matrix-control-group" role="group" aria-label="Play notes">
      <button type="button" class="small" id="play-scale">▲ Scale up</button>
@@ -2585,15 +2964,51 @@ dialog.hb-help::backdrop{background:#000c}
  <div class="pitch-matrix-scroll" role="region" aria-label="Pitch coordinates; swipe horizontally to see all twelve notes" tabindex="0">
   <div id="pitch-matrix" class="pitch-matrix"></div>
  </div>
- <div class="pitch-matrix-foot"><span><b>Δ</b>: <b>+</b> entered · <b>−</b> left · blank = unchanged / absent</span><span>n/12 = floor(n/12) + remainder/12</span><span class="matrix-scroll-cue">Swipe sideways for all twelve pitches ↔</span></div>
+ <details class="pitch-matrix-about cycle-more">
+  <summary>More about this grid <span aria-hidden="true">⌄</span></summary>
+  <div class="pitch-matrix-about-content">
+    <p><b>Δ</b> compares the previous and current scale: <b>+</b> means a pitch class entered, <b>−</b> means it left, and a blank means unchanged or absent. The comparison uses pitch classes, regardless of octave.</p>
+    <p><b>deg</b> is the note's degree in the selected scale; blank cells are outside it. <b>note</b> gives its pitch name and octave. <b>n</b> counts semitones from A4 = 0; press and hold an active n button to play its pitch.</p>
+    <p><b>n/12</b> is the octave exponent in f(n) = 440 × 2<sup>n/12</sup>. It is displayed as <b>floor(n/12) + remainder/12</b>, with the remainder unreduced and between 0 and 11. The fraction is shown on the next line.</p>
+    <p><b>Colors:</b> cyan marks scale tones; magenta marks tones in the selected chord. The white perimeter follows sounding pitches during playback.</p>
+    <p>On narrow screens, swipe the grid horizontally to see all twelve semitone positions. Octave controls move the displayed register without changing the selected scale.</p>
+  </div>
+</details>
 </section>
 <details class="instrument-drawer" id="instrument-drawer" open>
  <summary><span>Instruments</span><small>Playable piano and string positions</small><span class="drawer-state">Collapse / expand ▾</span></summary>
  <div class="instrument-drawer-inner">
    <div class="instrument-tabs" role="group" aria-label="Choose instrument">
-    <button type="button" class="active" data-instrument="piano" aria-pressed="true" aria-controls="instrument-piano">Piano</button>
-    <button type="button" data-instrument="neck" aria-pressed="false" aria-controls="instrument-neck">Guitar / Ukulele</button>
+    <button type="button" class="active" data-instrument="octavon">Scaleboard</button>
+    <button type="button" data-instrument="piano">Piano</button>
+    <button type="button" data-instrument="guitar">Guitar</button>
+    <button type="button" data-instrument="ukulele">Ukulele</button>
+    <button type="button" data-instrument="bass">Bass</button>
+    <button type="button" data-instrument="mandolin">Mandolin</button>
+    <button type="button" data-instrument="banjo">Banjo</button>
+    <button type="button" data-instrument="violin">Violin</button>
+    <button type="button" data-instrument="viola">Viola</button>
+    <button type="button" data-instrument="cello">Cello</button>
+    <button type="button" data-instrument="kalimba">Kalimba</button>
+    <button type="button" data-instrument="accordion">Accordion</button>
    </div>
+<section class="panel instrument-panel" id="instrument-octavon">
+ <div class="panel-heading"><div><p class="eyebrow">SCALEBOARD · SCALE-ONLY KEYBOARD</p>
+ <h2 id="octavon-title">Scaleboard</h2></div></div>
+ <div class="instrument-scroll octavon-scroll" id="octavon-scroll">
+  <div class="octavon-keyboard" id="octavon-keyboard" aria-label="Playable scale notes across complete octaves"></div>
+ </div>
+ <details class="octavon-about"><summary>More about the Scaleboard</summary>
+ <div class="octavon-explanation">
+ The Scaleboard is a scale-only keyboard. Each key represents one note in the selected scale, with no intervening chromatic keys.
+ The number of keys per octave equals the number of distinct notes in that scale's semitone-step recipe.
+ Each key shows its note name and its fixed semitone index <em>n</em> (A4 = 0).
+ The bold white boundary marks the currently selected tonic-to-tonic octave.
+ The keyboard extends across the available C1–C8 range, and automatically centers on the selected octave.
+ Select a different scale to change the key count and the spacing between the <em>n</em> values.
+ Tap or hold a cyan key to hear its pitch. The Scaleboard uses the same equal-tempered tuning as the piano; only the layout changes.
+ </div></details>
+</section>
 <section class="panel instrument-panel" id="instrument-piano">
 <div class="panel-heading">
 <div>
@@ -2619,6 +3034,11 @@ dialog.hb-help::backdrop{background:#000c}
        A4 = 0 · 440.00 Hz
       </span>
 </div>
+</section>
+<section class="panel instrument-panel" id="instrument-other" hidden>
+<div class="panel-heading"><div><p class="eyebrow">ALTERNATIVE NOTE GEOMETRIES</p><h2 id="other-instrument-title">Kalimba</h2></div></div>
+<p class="micro" id="other-instrument-explainer"></p>
+<div class="instrument-scroll"><div id="other-instrument-keys" class="alternative-instrument"></div></div>
 </section>
 <section class="panel neck-panel" id="instrument-neck" hidden>
 <div class="panel-heading">
@@ -2677,6 +3097,23 @@ dialog.hb-help::backdrop{background:#000c}
       See the math →
      </button>
 </div>
+<section class="panel spectrum-mirror" aria-label="Spectrum analyzer">
+  <div class="spectrum-mirror-heading">
+    <div><p class="eyebrow">IDEAL HARMONIC MODEL · SYNTHESIZED NOTES</p><h2>Spectroscope</h2></div>
+    <div class="spectrum-mirror-tabs" role="tablist" aria-label="Spectroscope display">
+      <button type="button" class="active" data-mirror-mode="rolling" aria-selected="true">Scrolling</button>
+      <button type="button" data-mirror-mode="live" aria-selected="false">Live spectrum</button>
+    </div>
+    <div class="spectrum-mirror-controls"><label>Axis <select data-mirror-axis aria-label="Spectroscope frequency axis"><option value="log">Log · octaves</option><option value="linear">Linear · Hz</option></select></label><button type="button" data-mirror-freeze aria-pressed="false">Freeze display</button></div>
+  </div>
+  <div class="spectrum-mirror-display">
+    <canvas class="spectrum-mirror-canvas" role="img" aria-label="Ideal synthesized frequency components, not an audio measurement"></canvas>
+  </div>
+  <div class="spectrum-mirror-footer">
+    <span>Ideal Fourier components of the played notes · not a measured FFT. Pure sine = one frequency; Harmonics = overtones.</span>
+    <button type="button" class="small" data-mirror-open-spectrum>Measured tuner spectrum ↗</button>
+  </div>
+</section>
 </section>
 <section aria-label="Spectrum analyzer and tuner" class="view" hidden="" id="view-spectrum">
 <div class="page-heading">
@@ -2695,8 +3132,9 @@ dialog.hb-help::backdrop{background:#000c}
       MIC OFF
      </span>
 </div>
+<section class="panel tuner-combined" aria-label="Tuning pegs and live pitch">
 <div class="tuner-top">
-<section class="panel tuning-panel">
+<section class="tuning-panel">
 <div class="panel-heading">
 <h2>
         Tuning pegs
@@ -2820,25 +3258,9 @@ dialog.hb-help::backdrop{background:#000c}
       </p>
 </section>
 </div>
-<div class="spectrum-workspace" aria-label="Spectrum and input analysis">
-  <div class="spectrum-mode-bar">
-    <div class="spectrum-mode-tabs" role="tablist" aria-label="Spectrum display">
-      <button type="button" role="tab" id="spec-tab-rolling" data-spectrum-pane="rolling" aria-controls="spec-pane-rolling" aria-selected="true" class="active">Scrolling</button>
-      <button type="button" role="tab" id="spec-tab-live" data-spectrum-pane="live" aria-controls="spec-pane-live" aria-selected="false">Live spectrum</button>
-      <button type="button" role="tab" id="spec-tab-cleanup" data-spectrum-pane="cleanup" aria-controls="spec-pane-cleanup" aria-selected="false">Input cleanup</button>
-    </div>
-    <div class="spectrum-common-controls" id="spectrum-common-controls">
-      <label class="compact">Axis
-        <select id="frequency-axis">
-          <option value="log">Log · octaves</option>
-          <option value="linear">Linear · hertz</option>
-        </select>
-      </label>
-      <button class="small" id="freeze-spectrum">Freeze display</button><span id="spectrum-filter-brief" class="micro" aria-live="polite">Low-cut: auto</span>
-    </div>
-  </div>
-<div class="spectrum-mode-pane" id="spec-pane-cleanup" role="tabpanel" aria-labelledby="spec-tab-cleanup" hidden>
-<section class="panel noise-panel">
+<details class="tuner-input-cleanup" id="tuner-input-cleanup">
+ <summary><strong>Input cleanup &amp; calibration</strong><span class="tuner-cleanup-status" id="tuner-cleanup-status">Low-cut: auto</span></summary>
+ <div class="tuner-cleanup-content"><section class="panel noise-panel">
 <div class="panel-heading">
 <div>
 <p class="eyebrow">
@@ -2909,8 +3331,26 @@ dialog.hb-help::backdrop{background:#000c}
 <p class="micro">
       The cutoff stays below the lowest open string in this tuning. A steep high-pass filters both the spectrum and the pitch detector, not the audible reference tones. Measure room noise with strings muted. Choose the correct tuning first. Manual cutoff changes the filter; a note far below this preset’s safe pitch range is flagged rather than forced onto a string.
      </p>
+</section></div>
+</details>
 </section>
-</div>
+<div class="spectrum-workspace" aria-label="Spectrum and input analysis">
+  <div class="spectrum-mode-bar">
+    <div class="spectrum-mode-tabs" role="tablist" aria-label="Spectrum display">
+      <button type="button" role="tab" id="spec-tab-rolling" data-spectrum-pane="rolling" aria-controls="spec-pane-rolling" aria-selected="true" class="active">Scrolling</button>
+      <button type="button" role="tab" id="spec-tab-live" data-spectrum-pane="live" aria-controls="spec-pane-live" aria-selected="false">Live spectrum</button>
+      
+    </div>
+    <div class="spectrum-common-controls" id="spectrum-common-controls">
+      <label class="compact">Axis
+        <select id="frequency-axis">
+          <option value="log">Log · octaves</option>
+          <option value="linear">Linear · hertz</option>
+        </select>
+      </label>
+      <button class="small" id="freeze-spectrum">Freeze display</button>
+    </div>
+  </div>
 <div class="spectrum-mode-pane" id="spec-pane-live" role="tabpanel" aria-labelledby="spec-tab-live" hidden>
 <section class="panel spectrum-panel">
 <div class="panel-heading">
@@ -3095,6 +3535,23 @@ dialog.hb-help::backdrop{background:#000c}
 <div class="sheet-navigation pager"><button aria-label="Previous bars" id="tab-page-prev">←</button><span class="mono" id="tab-page-label"></span><button aria-label="Next bars" id="tab-page-next">→</button></div>
 <div class="song-transport"><button aria-pressed="false" class="primary" id="tab-play">▶ Play</button><button aria-label="Stop and return to start" class="small ghost" id="tab-stop" title="Stop and return to start">■</button><input aria-label="Playback position" id="tab-seek" max="16" min="0" step="0.05" type="range" value="0"/><span class="mono" id="tab-time">0:00 / 0:00</span><label class="tempo-control"><input aria-label="Tempo in beats per minute" id="tab-tempo" max="240" min="30" type="number" value="90"/><span>BPM</span></label></div>
 <div class="song-foot"><span id="transposition-badge">k = 0 · intervals unchanged</span><span id="song-texture">Arranged score</span><button class="ghost small" data-dialog="transpose-guide">How transposition works</button></div>
+<section class="panel spectrum-mirror" aria-label="Spectrum analyzer">
+  <div class="spectrum-mirror-heading">
+    <div><p class="eyebrow">IDEAL HARMONIC MODEL · SYNTHESIZED NOTES</p><h2>Spectroscope</h2></div>
+    <div class="spectrum-mirror-tabs" role="tablist" aria-label="Spectroscope display">
+      <button type="button" class="active" data-mirror-mode="rolling" aria-selected="true">Scrolling</button>
+      <button type="button" data-mirror-mode="live" aria-selected="false">Live spectrum</button>
+    </div>
+    <div class="spectrum-mirror-controls"><label>Axis <select data-mirror-axis aria-label="Spectroscope frequency axis"><option value="log">Log · octaves</option><option value="linear">Linear · Hz</option></select></label><button type="button" data-mirror-freeze aria-pressed="false">Freeze display</button></div>
+  </div>
+  <div class="spectrum-mirror-display">
+    <canvas class="spectrum-mirror-canvas" role="img" aria-label="Ideal synthesized frequency components, not an audio measurement"></canvas>
+  </div>
+  <div class="spectrum-mirror-footer">
+    <span>Ideal Fourier components of the played notes · not a measured FFT. Pure sine = one frequency; Harmonics = overtones.</span>
+    <button type="button" class="small" data-mirror-open-spectrum>Measured tuner spectrum ↗</button>
+  </div>
+</section>
 </section>
 <section aria-label="Mathematical music theory" class="view" hidden="" id="view-math">
 <div class="page-heading">
@@ -3804,7 +4261,16 @@ dialog.hb-help::backdrop{background:#000c}
     dropD:{name:'Guitar · drop D',family:'guitar',labels:['E4','B3','G3','D3','A2','D2'],open:[-5,-10,-14,-19,-24,-31]},
     uke:{name:'Ukulele · high G',family:'uke',labels:['A4','E4','C4','G4'],open:[0,-5,-9,-2]},
     lowG:{name:'Ukulele · low G',family:'uke',labels:['A4','E4','C4','G3'],open:[0,-5,-9,-14]},
-    baritone:{name:'Ukulele · baritone',family:'uke',labels:['E4','B3','G3','D3'],open:[-5,-10,-14,-19]}
+    baritone:{name:'Ukulele · baritone',family:'uke',labels:['E4','B3','G3','D3'],open:[-5,-10,-14,-19]},
+    bass4:{name:'Bass · 4 string',family:'bass',labels:['G2','D2','A1','E1'],open:[-26,-31,-36,-41]},
+    bass5:{name:'Bass · 5 string',family:'bass',labels:['G2','D2','A1','E1','B0'],open:[-26,-31,-36,-41,-46]},
+    bass6:{name:'Bass · 6 string',family:'bass',labels:['C3','G2','D2','A1','E1','B0'],open:[-21,-26,-31,-36,-41,-46]},
+    mandolin:{name:'Mandolin · GDAE',family:'mandolin',labels:['E5','A4','D4','G3'],open:[7,0,-7,-14]},
+    banjo:{name:'Banjo · open G (gDGBD)',family:'banjo',labels:['D4','B3','G3','D3','G4'],open:[-7,-10,-14,-19,-2]},
+    violin:{name:'Violin · GDAE',family:'bowed',labels:['E5','A4','D4','G3'],open:[7,0,-7,-14]},
+    viola:{name:'Viola · CGDA',family:'bowed',labels:['A4','D4','G3','C3'],open:[0,-7,-14,-21]},
+    cello:{name:'Cello · CGDA',family:'bowed',labels:['A3','D3','G2','C2'],open:[-12,-19,-26,-33]}
+
   };
   function mixed(n){
     if(!Number.isInteger(n)) throw new TypeError('n must be an integer');
@@ -70564,6 +71030,11 @@ dialog.hb-help::backdrop{background:#000c}
       if (legacy) H.state = H.validateState({...legacy, volume:1});
     }
   } catch {}
+  // Reconcile previously saved chord-first selections with scale-first rules.
+  if(H.state.chord && T.chords[H.state.chord] && T.scales[H.state.mode] &&
+     !T.chords[H.state.chord].offsets.every(o=>T.scales[H.state.mode].offsets.some(x=>T.mod(x)===T.mod(o)))){
+    H.state.chord=null;
+  }
   // Use the compact 12-fret board on each fresh page load.
   H.state.frets = 48;
   // Always open the circle on C, regardless of the last saved root.
@@ -70572,6 +71043,12 @@ dialog.hb-help::backdrop{background:#000c}
     if (['root','mode','octave','tuning','frets','chord','harmonics'].some(k => k in patch)) H.releaseHolds?.();
     if (('root' in patch && patch.root !== H.state.root) || ('mode' in patch && patch.mode !== H.state.mode)) {
       H.previous = {root:H.state.root, mode:H.state.mode};
+    }
+    const nextMode=patch.mode??H.state.mode;
+    const nextChord=patch.chord!==undefined?patch.chord:H.state.chord;
+    if(nextChord && T.scales[nextMode] && T.chords[nextChord] &&
+       !T.chords[nextChord].offsets.every(o=>T.scales[nextMode].offsets.some(x=>T.mod(x)===T.mod(o)))){
+      patch={...patch,chord:null};
     }
     Object.assign(H.state, patch); H.save(); H.emit('state', patch);
   };
@@ -70611,11 +71088,55 @@ dialog.hb-help::backdrop{background:#000c}
       await H.audio.play(ns, {timbre:H.state.harmonics?'pluck':'sine', ...options}); H.emit('played', ns); return true;
     } catch (e) { H.toast(e.message); return false; }
   };
+  // White playback perimeter follows both the note and n cells. Match exact
+  // pitches, not pitch classes: the closing octave tonic is NOT the lower tonic.
+  let matrixFlashTimers=[];
+  let matrixFlashGeneration=0;
+  function clearMatrixFlashes(){
+    matrixFlashGeneration++;
+    matrixFlashTimers.forEach(clearTimeout);
+    matrixFlashTimers=[];
+    document.querySelectorAll('#pitch-matrix .playback-flash')
+      .forEach(el=>el.classList.remove('playback-flash'));
+  }
+  function flashMatrixNotes(ns,durationMs=250){
+    const pitchSet=new Set(ns.map(Number));
+    const buttons=[...document.querySelectorAll('#pitch-matrix .matrix-n[data-pitch]')];
+    const cells=[...document.querySelectorAll('#pitch-matrix .matrix-note')];
+    const elements=[];
+    for(let i=0;i<buttons.length;i++){
+      if(!pitchSet.has(Number(buttons[i].dataset.pitch)))continue;
+      elements.push(buttons[i]);
+      if(cells[i])elements.push(cells[i]);
+    }
+    elements.forEach(el=>el.classList.add('playback-flash'));
+    const generation=matrixFlashGeneration;
+    const timer=setTimeout(()=>{
+      if(generation!==matrixFlashGeneration)return;
+      elements.forEach(el=>el.classList.remove('playback-flash'));
+    },durationMs);
+    matrixFlashTimers.push(timer);
+  }
+  H.clearMatrixFlashes=clearMatrixFlashes;
+  H.on('panic',clearMatrixFlashes);
+  H.on('played',ns=>{
+    clearMatrixFlashes();
+    flashMatrixNotes(ns,420);
+  });
   H.playSequence = async (events, secondsPerBeat=.4) => {
     try {
       await H.audio.ensure(); H.audio.stop('sequence');
+      clearMatrixFlashes();
+      const generation=matrixFlashGeneration;
       const t = H.audio.context.currentTime+.04;
-      events.forEach(e => H.audio.schedule(e.notes, {when:t+e.beat*secondsPerBeat, duration:e.duration*secondsPerBeat, timbre:H.state.harmonics?'pluck':'sine', group:'sequence'}));
+      events.forEach(e => {
+        H.audio.schedule(e.notes, {when:t+e.beat*secondsPerBeat, duration:e.duration*secondsPerBeat, timbre:H.state.harmonics?'pluck':'sine', group:'sequence'});
+        const startMs=Math.max(0,(t+e.beat*secondsPerBeat-H.audio.context.currentTime)*1000);
+        const timer=setTimeout(()=>{
+          if(generation===matrixFlashGeneration)flashMatrixNotes(e.notes,Math.max(150,e.duration*secondsPerBeat*900));
+        },startMs);
+        matrixFlashTimers.push(timer);
+      });
     } catch (e) { H.toast(e.message); }
   };
   H.stopAll = () => { H.releaseHolds?.(); H.audio.stop(); H.emit('panic'); };
@@ -70774,22 +71295,16 @@ dialog.hb-help::backdrop{background:#000c}
     }));
     H.playSequence(events,.24);
   }
-  // The circle is a tonic navigator: selecting a node transposes the
-  // tonic-rooted chord along with the scale. Compatibility therefore depends
-  // on the tonic-relative recipes, not the previous key's absolute notes.
-  function circleChordCompatible(candidateRoot,candidateMode){
-    const chord=H.state.chord;
-    if(!chord)return true;
-    const recipe=T.scales[candidateMode]?.offsets||[];
-    return T.chords[chord].offsets.every(o=>
-      recipe.some(x=>T.mod(x)===T.mod(o)));
-  }
-  // Share the same compatibility rule with the Patterns quick-action controls.
+  // Circle navigation selects the scale. Chords are optional subsets of that scale.
+  function circleChordCompatible(candidateRoot,candidateMode){ return true; }
   H.circleChordCompatible=circleChordCompatible;
-  function chooseAndAudition(selection) {
-    const root=selection.root??H.state.root,mode=selection.mode??H.state.mode;
-    if(!circleChordCompatible(root,mode))return;
-    H.update(selection);
+  let circleAudition=false;
+  function chooseAndAudition(selection){
+    circleAudition=true;
+    try{H.update(selection);}finally{circleAudition=false;}
+    const chord=H.state.chord;
+    if(chord)H.play(T.chords[chord].offsets.map(o=>H.startN()+o),{duration:1.2});
+    else auditionCurrentScale();
   }
   const cycleLessons={
     7:['Circle of fifths','A fifth spans 7 semitones. Adjacent major keys share 6 of their 7 notes; one note changes.','Major keys outside · relative natural minors inside. Radial pairs use the SAME seven pitch classes but have different tonics.'],
@@ -70799,71 +71314,89 @@ dialog.hb-help::backdrop{background:#000c}
     3:['Minor-third root cycles','Three semitones at a time: C → E♭ → F♯ → A → C. These roots form a diminished-seventh chord.','Three separate 4-root cycles cover all 12 roots. This is not the natural minor scale.'],
     2:['Whole-tone root cycles','Two semitones at a time: C → D → E → F♯ → G♯ → A♯ → C.','Two 6-root cycles. Each happens to be a whole-tone pitch collection, but the cycle control still only orders roots.']
   };
-  function drawCircles() {
-    const {root,step,mode}=H.state,holder=$('circle-holder'),cycles=T.cycles(step);
-    const [title,meaning,detail]=cycleLessons[step]||cycleLessons[7];
-    // Circle explanation lives only in the expandable details panel.
-    $('cycle-extra').textContent=`${title}. ${meaning} ${detail}`;
-    holder.replaceChildren();holder.classList.toggle('multi',cycles.length>1);
-    const paired=step===7||step===5;
-    const minorForMajor=p=>T.mod(p+9);
-    const rootForMode=(major,m)=>m==='minor'?minorForMajor(major):major;
-    const activeMajor=mode==='minor'?T.mod(root+3):root;
-    cycles.forEach((seq,ci)=>{
-      const many=cycles.length>1;
-      const svgSize=many?200:320;
-      const svg=se('svg',{viewBox:`0 0 ${svgSize} ${svgSize}`,role:'group',
-        'aria-label':`Cycle ${ci+1}: roots ordered by +${step} semitones`},holder);
-      const cx=svgSize/2,cy=svgSize/2,outer=many?70:115,inner=75;
-      se('circle',{cx,cy,r:outer,stroke:'#4f6365','stroke-width':1.5,fill:'none'},svg);
-      if(paired)se('circle',{cx,cy,r:inner,stroke:'#4f6365','stroke-width':1.5,fill:'none'},svg);
-      seq.forEach((major,j)=>{
-        const angle=-Math.PI/2+j*2*Math.PI/seq.length;
-        const rings=paired?[['major',outer],['minor',inner]]:[['root',outer]];
-        for(const [m,radius] of rings){
-          const p=m==='root'?major:rootForMode(major,m);
-          const selected=p===root&&(m==='root'||m===mode);
-          const candidateMode=m==='root'?mode:m;
-          const allowed=circleChordCompatible(p,candidateMode);
-          const x=cx+radius*Math.cos(angle),y=cy+radius*Math.sin(angle);
-          const g=se('g',{class:'circle-button'+(allowed?'':' circle-disabled'),
-            role:'button',tabindex:allowed?'0':'-1',
-            'aria-disabled':String(!allowed),
-            'aria-label':`${T.rootName(p,m==='minor'?'minor':'major')} ${m==='root'?'tonic':m}, cycle ${ci+1}${allowed?'':' — incompatible with selected chord'}`,
-            'aria-pressed':String(selected)},svg);
-          se('circle',{cx:x,cy:y,r:many?16:18,
-            fill:selected?'#50e3ed':'#262626',stroke:!allowed?'#555':selected?'#ffffff':'#50e3ed',
-            'stroke-width':selected?3.5:1.8},g);
-          se('text',{x,y:y+4,'text-anchor':'middle',
-            fill:!allowed?'#747474':selected?'#101010':'#9cecf1','font-size':many?13:12,'font-weight':650},g)
-            .textContent=T.rootName(p,m==='minor'?'minor':'major')+(m==='minor'?'m':'');
-          if(allowed){
-            const choose=()=>chooseAndAudition(m==='root'?{root:p}:{root:p,mode:m});
-            g.addEventListener('click',choose);
-            g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}});
-          }
+  // Find a minimum-total-change Hamiltonian cycle through all twelve tonics.
+  // Held–Karp DP: cost is the number of pitch classes replaced on each edge.
+  // This is a single complete ring, even for symmetric scales.
+  const neighborCycleCache=new Map();
+  function minimalTonicCycle(mode){
+    if(neighborCycleCache.has(mode))return neighborCycleCache.get(mode);
+    // Do not pass T.mod directly to Array.map: map supplies the index as
+    // the second argument, which T.mod interprets as its modulus.
+    const offsets=T.scales[mode].offsets.map(value=>T.mod(value));
+    const sets=Array.from({length:12},(_,root)=>new Set(offsets.map(x=>T.mod(x+root))));
+    const d=(a,b)=>[...sets[a]].filter(pc=>!sets[b].has(pc)).length;
+    const full=(1<<11)-1, dp=Array.from({length:1<<11},()=>new Float64Array(12).fill(Infinity));
+    const back=Array.from({length:1<<11},()=>new Int8Array(12).fill(-1));
+    // Tiny deterministic tie-breaker favors familiar fifth movements.
+    const edge=(a,b)=>d(a,b)+0.000001*(T.mod(b-a)===7?0:T.mod(b-a)===5?1:2);
+    dp[0][0]=0;
+    for(let mask=0;mask<=full;mask++){
+      for(let last=0;last<12;last++){
+        const base=dp[mask][last];if(!Number.isFinite(base))continue;
+        for(let next=1;next<12;next++){
+          const bit=1<<(next-1);if(mask&bit)continue;
+          const m=mask|bit,v=base+edge(last,next);
+          if(v<dp[m][next]){dp[m][next]=v;back[m][next]=last;}
         }
-      });
-      se('text',{x:cx,y:cy-5,'text-anchor':'middle',fill:'#ddd','font-size':many?10:13},svg)
-        .textContent=`+${step} mod 12`;
-      se('text',{x:cx,y:cy+12,'text-anchor':'middle',fill:'#aaa','font-size':many?9:10},svg)
-        .textContent=`${seq.length} roots`;
-    });
-    const cycleDescription=$('cycle-description');
-    cycleDescription.textContent=`${paired?'Outer: major keys · inner: relative natural minor keys.':'Single ring: root positions, with your selected scale recipe applied to each root.'} ${cycles.length} cycle${cycles.length===1?'':'s'}, ${cycles[0].length} roots per cycle.`;
-    let comparison=document.getElementById('circle-order-comparison');
-    if(!comparison){comparison=document.createElement('div');comparison.id='circle-order-comparison';
-      comparison.className='micro';cycleDescription.insertAdjacentElement('afterend',comparison);}
-    const old=H.circlePreviousStep;
-    if(old===undefined||old===step){
-      comparison.textContent='Changing the cycle changes root order, not the scale interval recipe.';
-    }else{
-      const oldNext=T.mod(activeMajor+old),newNext=T.mod(activeMajor+step);
-      const oldSet=T.scaleSet(oldNext,'major'),newSet=T.scaleSet(newNext,'major');
-      const shared=oldSet.filter(p=>newSet.includes(p)).length;
-      const g=(a,b)=>b?g(b,a%b):a;
-      comparison.textContent=`Root cycle +${old} → +${step}: next from ${T.rootName(activeMajor,'major')} changes ${T.rootName(oldNext,'major')} → ${T.rootName(newNext,'major')}. Those major scales share ${shared}/7 notes. Number of cycles: ${g(old,12)} → ${g(step,12)}. Current selected scale is unchanged.`;
+      }
     }
+    let best=Infinity,lastBest=1;
+    for(let last=1;last<12;last++){
+      const score=dp[full][last]+edge(last,0);
+      if(score<best){best=score;lastBest=last;}
+    }
+    const reversed=[];let mask=full,last=lastBest;
+    while(last!==0){
+      reversed.push(last);
+      const previous=back[mask][last];
+      mask^=1<<(last-1);last=previous;
+    }
+    const diatonicModes=new Set(['major','minor','dorian','phrygian','lydian','mixolydian','locrian']);
+    // The seven diatonic modes all have the same one-note fifth relationships.
+    // Use the conventional fifths orientation, starting with C at the top.
+    const order=diatonicModes.has(mode)?
+      Array.from({length:12},(_,i)=>T.mod(7*i)):
+      [0,...reversed.reverse()];
+    const distances=order.map((pc,i)=>d(pc,order[(i+1)%12]));
+    const result={order,distances,total:distances.reduce((a,b)=>a+b,0),sets};
+    neighborCycleCache.set(mode,result);return result;
+  }
+  function drawCircles(){
+    const {root,mode}=H.state,holder=$('circle-holder');
+    const {order,distances,total,sets}=minimalTonicCycle(mode);
+    holder.replaceChildren();holder.classList.remove('multi');
+    const metric=$('neighbor-cycle-metric');
+    metric.textContent=`${T.scales[mode].name} · ${total} total note replacements around 12 keys · ${Math.min(...distances)}–${Math.max(...distances)} per move`;
+    $('neighbor-cycle-tag').textContent='Minimum-change ring';
+    const svg=se('svg',{viewBox:'0 0 360 360',role:'group',
+      'aria-label':`Minimum-change tonic cycle for ${T.scales[mode].name}`},holder);
+    const cx=180,cy=180,r=126;
+    se('circle',{cx,cy,r,stroke:'#536669','stroke-width':1.5,fill:'none'},svg);
+    order.forEach((p,i)=>{
+      const angle=-Math.PI/2+i*2*Math.PI/12;
+      const x=cx+r*Math.cos(angle),y=cy+r*Math.sin(angle);
+      const nextAngle=-Math.PI/2+(i+.5)*2*Math.PI/12;
+      const ex=cx+(r+26)*Math.cos(nextAngle),ey=cy+(r+26)*Math.sin(nextAngle);
+      const edgeLabel=se('text',{x:ex,y:ey+3,'text-anchor':'middle',fill:'#9eaeb1','font-size':10},svg);
+      edgeLabel.textContent=String(distances[i]);
+      const selected=p===root;
+      const g=se('g',{class:'circle-button',role:'button',tabindex:'0',
+        'aria-label':`${T.rootName(p,mode)} ${T.scales[mode].name}; ${distances[i]} notes replaced moving to next tonic`,
+        'aria-pressed':String(selected)},svg);
+      se('circle',{cx:x,cy:y,r:19,fill:selected?'#50e3ed':'#262626',
+        stroke:selected?'#fff':'#50e3ed','stroke-width':selected?3.5:1.8},g);
+      se('text',{x,y:y+4,'text-anchor':'middle',fill:selected?'#101010':'#9cecf1',
+        'font-size':12,'font-weight':650},g).textContent=T.rootName(p,mode);
+      const choose=()=>chooseAndAudition({root:p});
+      g.addEventListener('click',choose);
+      g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});
+    });
+    se('text',{x:cx,y:cy-7,'text-anchor':'middle',fill:'#e4f3f4','font-size':13,'font-weight':650},svg)
+      .textContent='Nearest neighbors';
+    se('text',{x:cx,y:cy+12,'text-anchor':'middle',fill:'#a7b9bb','font-size':10},svg)
+      .textContent='Edge labels = changes';
+    $('cycle-extra').textContent=`The ring minimizes the total number of replaced pitch classes across a complete tour of all 12 tonics for ${T.scales[mode].name}. Numbers on edges show changes. A zero means two different tonics produce the same pitch collection. Multiple optimal rings may exist.`;
+    $('cycle-description').textContent='Every node uses the selected scale recipe. Selecting a node changes only the tonic and plays its scale. The ring is optimized for this scale, not necessarily a traditional circle of fifths.';
   }
   function summary() {
     const s=H.state, spellings=T.scaleSpellings(s.root,s.mode), set=T.scaleSet(s.root,s.mode),rootLabel=T.rootName(s.root,s.mode);
@@ -70914,24 +71447,24 @@ dialog.hb-help::backdrop{background:#000c}
     }
     $('chord-select').value=s.chord||'';
     $('play-chord').disabled=!s.chord;
-    $('play-chord').title=s.chord?'Play the selected chord':'Select a chord first';
+    $('play-chord').title=s.chord?'Play the selected chord':'Choose a chord after selecting a scale';
     const constraintNote=document.querySelector('.relation-card-compact .chord-scale-compat-hint');
     if(constraintNote){
       constraintNote.textContent=s.chord?
-        'Chord filters scales · chord tones are magenta':
-        'All scales available · chord tones are magenta';
+        'Scale filters chords · chord tones are magenta':
+        'Scale filters chords · chord tones are magenta';
     }
-    // A chord is built on the selected tonic in this workspace. Only offer
-    // scale recipes containing every pitch class of that chord.
-    const chordOffsets=s.chord?T.chords[s.chord].offsets:null;
-    for(const option of $('scale-mode').querySelectorAll('option')){
-      const recipe=T.scales[option.value];
-      option.disabled=!!(chordOffsets&&recipe&&!chordOffsets.every(
-        offset=>recipe.offsets.some(x=>T.mod(x)===T.mod(offset))));
+    // Scale-first dependency: only chords whose tonic-relative tones belong
+    // to the selected scale may be chosen.
+    const recipe=T.scales[s.mode]?.offsets||[];
+    for(const option of $('chord-select').querySelectorAll('option')){
+      const chord=T.chords[option.value];
+      option.disabled=!!(chord&&!chord.offsets.every(o=>
+        recipe.some(x=>T.mod(x)===T.mod(o))));
     }
-    $('scale-mode').title=chordOffsets?
-      'Only scales containing every tone of the selected tonic-rooted chord are available.':
-      'All scale recipes available.';
+    for(const option of $('scale-mode').querySelectorAll('option'))option.disabled=false;
+    $('chord-select').title='Only chord recipes contained in the selected scale are available.';
+    $('scale-mode').title='Choose any scale recipe; incompatible selected chords are cleared.';
   }
   const positions=[0,.5,1,1.5,2,3,3.5,4,4.5,5,5.5,6];
   const xOf=n=>7*Math.floor((n+9)/12)+positions[T.pc(n)];
@@ -71010,6 +71543,7 @@ dialog.hb-help::backdrop{background:#000c}
     $('octave-down').disabled=H.state.octave<=-3;$('octave-up').disabled=H.state.octave>=3;
   }
   function pitchMatrix() {
+    H.clearMatrixFlashes?.();
     const container=$('pitch-matrix'),current=H.state;
     const a=H.startN(),list=Array.from({length:12},(_,i)=>a+i);
     const previous=H.previous,oldSet=previous?T.scaleSet(previous.root,previous.mode):null;
@@ -71145,7 +71679,7 @@ dialog.hb-help::backdrop{background:#000c}
   }
   function render() {
     drawCircles();summary();piano();pitchMatrix();neck();
-    $('scale-mode').value=H.state.mode;$('circle-step').value=H.state.step;$('explore-tuning').value=H.state.tuning;$('fret-count').value=H.state.frets;
+    $('scale-mode').value=H.state.mode;$('explore-tuning').value=H.state.tuning;$('fret-count').value=H.state.frets;
   }
   H.initExplore=()=>{
     H.options($('scale-mode'),Object.entries(T.scales).map(([k,v])=>[k,v.name]),H.state.mode);
@@ -71183,6 +71717,19 @@ dialog.hb-help::backdrop{background:#000c}
     formatRecipeOptions();
     H.formatScaleRecipeOptions=formatRecipeOptions;
 
+    // Twelve equal-tempered tonic choices; circle and selector share one state.
+    for(let pc=0;pc<12;pc++){
+      const opt=document.createElement('option');opt.value=String(pc);
+      opt.textContent=[
+        'C','C♯ / D♭','D','E♭ / D♯','E','F',
+        'F♯ / G♭','G','A♭ / G♯','A','B♭ / A♯','B'
+      ][pc];$('tonic-select').appendChild(opt);
+    }
+    $('tonic-select').value=String(H.state.root);
+    $('tonic-select').addEventListener('change',e=>H.update({root:Number(e.target.value)}));
+    H.on('state',()=>{$('tonic-select').value=String(H.state.root)});
+    // Each scale has its own circle of tonics, ordered by the chosen interval.
+
     H.tuningOptions($('explore-tuning'));
     Object.entries(T.chords).forEach(([type,c])=>{
       const option=document.createElement('option');option.value=type;
@@ -71193,20 +71740,12 @@ dialog.hb-help::backdrop{background:#000c}
     $('chord-select').addEventListener('change',e=>{
       const type=e.target.value||null;
       if(type){
-        const offsets=T.chords[type].offsets;
-        // Choose the first compatible scale in the actual dropdown order,
-        // even when the previously selected scale is also compatible.
-        const firstCompatible=[...$('scale-mode').options].find(option=>{
-          const recipe=T.scales[option.value];
-          return recipe&&offsets.every(o=>
-            recipe.offsets.some(x=>T.mod(x)===T.mod(o)));
-        });
-        if(firstCompatible)H.update({chord:type,mode:firstCompatible.value});
-        else H.update({chord:type});
+        const offsets=T.chords[type].offsets,recipe=T.scales[H.state.mode].offsets;
+        if(!offsets.every(o=>recipe.some(x=>T.mod(x)===T.mod(o))))return;
+        H.update({chord:type});
         H.play(offsets.map(o=>H.startN()+o),{duration:1.2});
       }else H.update({chord:null});
     });
-    $('circle-step').addEventListener('change',e=>{H.circlePreviousStep=H.state.step;H.update({step:Number(e.target.value)});});
     $('scale-mode').addEventListener('change',e=>H.update({mode:e.target.value}));
     $('explore-tuning').addEventListener('change',e=>H.update({tuning:e.target.value}));
     $('fret-count').addEventListener('change',e=>H.update({frets:Number(e.target.value)}));
@@ -71225,7 +71764,7 @@ dialog.hb-help::backdrop{background:#000c}
     });
     H.on('state',patch=>{
       if(Object.keys(patch).some(k=>!['volume','harmonics'].includes(k)))render();
-      if(Object.hasOwn(patch,'root')||Object.hasOwn(patch,'mode'))auditionCurrentScale();
+      if(!circleAudition&&(Object.hasOwn(patch,'root')||Object.hasOwn(patch,'mode')))auditionCurrentScale();
     });
     render();
   };
@@ -71286,7 +71825,7 @@ dialog.hb-help::backdrop{background:#000c}
     const config=T.tuner.filterSettings(T.tunings[S.tuning],S.filterMode,S.cutoff,S.hum);S.filter=config;
     H.audio.configureAnalysis(config);$('lowcut-hz').max=(config.lowest*.95).toFixed(1);$('lowcut-hz').disabled=S.filterMode!=='manual';$('lowcut-hz').value=config.cutoff.toFixed(1);if(S.filterMode==='manual')S.cutoff=config.cutoff;
     $('filter-summary').textContent=config.enabled?`Low-cut ${config.cutoff.toFixed(1)} Hz · 96 dB/octave · lowest string ${config.lowest.toFixed(2)} Hz`:'Low-cut bypassed · sub-string noise may dominate';
-    $('spectrum-filter-brief').textContent=config.enabled?`Low-cut ${config.cutoff.toFixed(0)} Hz · ${S.filterMode==='auto'?'auto':'manual'}`:'Low-cut off';
+    $('tuner-cleanup-status').textContent=config.enabled?`Low-cut ${config.cutoff.toFixed(0)} Hz · ${S.filterMode==='auto'?'auto':'manual'}`:'Low-cut off';
     resetHistory();S.calibration=[];S.calibratingUntil=0;$('calibrate-noise').textContent='Measure room noise';
     hc.fillStyle='#141414';hc.fillRect(0,0,900,190);
   }
@@ -71424,9 +71963,9 @@ dialog.hb-help::backdrop{background:#000c}
   }
   let plotMode='rolling';
   function setPlotMode(mode) {
-    if(!['rolling','live','cleanup'].includes(mode))return;
+    if(!['rolling','live'].includes(mode))return;
     plotMode=mode;
-    for(const kind of ['rolling','live','cleanup']){
+    for(const kind of ['rolling','live']){
       const pane=$('spec-pane-'+kind),tab=$('spec-tab-'+kind),active=kind===mode;
       pane.hidden=!active;tab.classList.toggle('active',active);
       tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;
@@ -71443,8 +71982,8 @@ dialog.hb-help::backdrop{background:#000c}
       tab.addEventListener('keydown',e=>{
         if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
         e.preventDefault();
-        const kinds=['rolling','live','cleanup'],i=kinds.indexOf(tab.dataset.spectrumPane);
-        const next=e.key==='Home'?0:e.key==='End'?2:(i+(e.key==='ArrowRight'?1:2))%3;
+        const kinds=['rolling','live'],i=kinds.indexOf(tab.dataset.spectrumPane);
+        const next=e.key==='Home'?0:e.key==='End'?1:(i+1)%2;
         const dest=$('spec-tab-'+kinds[next]);dest.focus();setPlotMode(kinds[next]);
       });
     }
@@ -72446,20 +72985,213 @@ dialog.hb-help::backdrop{background:#000c}
 })();
 </script><script id="instrument-drawer-controls">
 (()=>{
- const root=document.getElementById('instrument-drawer');if(!root)return;
- const buttons=[...root.querySelectorAll('[data-instrument]')];
+ 'use strict';
+ const root=document.getElementById('instrument-drawer'),H=window.HL;
+ if(!root||!H)return;
+ const T=H.T,buttons=[...root.querySelectorAll('[data-instrument]')];
+ const configs={
+   guitar:['guitar','dropD'],ukulele:['uke','lowG','baritone'],
+   bass:['bass4','bass5','bass6'],mandolin:['mandolin'],
+   banjo:['banjo'],violin:['violin'],viola:['viola'],cello:['cello']
+ };
+ let selected='piano';
+ const native=document.getElementById('explore-tuning');
+ const originalOptions=[...native.options].map(o=>({value:o.value,label:o.textContent}));
+ const mod=x=>((x%12)+12)%12;
+ function noteName(n){return H.noteName(n);}
+ function makeKey(n,cls=''){
+   const inScale=T.scales[H.state.mode].offsets.some(o=>mod(o+H.state.root)===mod(n+9));
+   // n=0 is A4; root pitch class 0 is C, hence +9.
+   const chord=H.state.chord&&T.chords[H.state.chord].offsets.some(o=>mod(o+H.state.root)===mod(n+9));
+   const b=document.createElement('button');b.type='button';
+   b.className='alternative-note '+cls+(inScale?' scale':' outside')+(chord?' chord':'');
+   b.textContent=noteName(n);
+   b.dataset.pitch=String(n);
+   b.disabled=!inScale;b.title=`${noteName(n)} · n=${n}`;
+   if(inScale)H.bindHold(b,()=>[n],{group:'instrument'});
+   return b;
+ }
+ function renderOther(){
+   if(!['kalimba','accordion'].includes(selected))return;
+   const title=document.getElementById('other-instrument-title');
+   const explanation=document.getElementById('other-instrument-explainer');
+   const target=document.getElementById('other-instrument-keys');
+   target.replaceChildren();
+   if(selected==='kalimba'){
+     title.textContent='Kalimba · 17-key C major';
+     explanation.textContent='Fixed 17-tine C-major layout. The middle tine is C4; notes alternate left and right. Non-scale tones remain unplayable.';
+     const notes=[-9,-7,-5,-4,-2,0,2,3,5,7,8,10,12,14,15,17,19];
+     const order=[15,13,11,9,7,5,3,1,0,2,4,6,8,10,12,14,16];
+     target.className='alternative-instrument kalimba-board';
+     order.forEach((idx,pos)=>{
+       const n=notes[idx],b=makeKey(n,'kalimba-tine');
+       b.style.height=`${Math.round(98+70*(1-Math.abs(pos-8)/8))}px`;
+       target.append(b);
+     });
+   }else{
+     title.textContent='Chromatic button accordion · isomorphic treble layout';
+     explanation.textContent='A schematic chromatic button array. Each row shifts by a minor third (3 semitones), each column by a whole tone (2). Repeated pitches make fingering alternatives visible.';
+     target.className='alternative-instrument accordion-board';
+     for(let row=0;row<5;row++){
+       const line=document.createElement('div');line.className='accordion-row';
+       for(let col=0;col<14;col++){
+         const n=-21+3*row+2*col;
+         line.append(makeKey(n,'accordion-button'));
+       }
+       target.append(line);
+     }
+   }
+ }
  function choose(id){
-  for(const btn of buttons){const active=btn.dataset.instrument===id;btn.classList.toggle('active',active);btn.setAttribute('aria-pressed',String(active));}
-  document.getElementById('instrument-piano').hidden=id!=='piano';
-  document.getElementById('instrument-neck').hidden=id!=='neck';
+   if(!['piano','octavon','kalimba','accordion'].includes(id)&&!configs[id])return;
+   selected=id;
+   for(const btn of buttons){
+     const active=btn.dataset.instrument===id;
+     btn.classList.toggle('active',active);
+     btn.setAttribute('aria-pressed',String(active));
+   }
+   document.getElementById('instrument-piano').hidden=id!=='piano';
+   document.getElementById('instrument-octavon').hidden=id!=='octavon';
+   document.getElementById('instrument-neck').hidden=!configs[id];
+   document.getElementById('instrument-other').hidden=!['kalimba','accordion'].includes(id);
+   if(configs[id]){
+     const allowed=configs[id],next=allowed.includes(H.state.tuning)?H.state.tuning:allowed[0];
+     native.replaceChildren();
+     allowed.forEach(value=>{
+       const o=document.createElement('option');o.value=value;
+       o.textContent=T.tunings[value].name;native.append(o);
+     });
+     if(next!==H.state.tuning)H.update({tuning:next});
+     else native.value=next;
+     const label=document.querySelector('#instrument-neck .eyebrow');
+     label.textContent=['violin','viola','cello'].includes(id)?
+       'FRETLESS · SEMITONE POSITION GUIDES (NOT PHYSICAL FRETS)':
+       'FRETBOARD · SAME PITCH, EVERY POSITION';
+     const note=document.getElementById('neck-note');
+     if(id==='banjo')note.title='The fifth string is physically shorter and starts at fret five on a real banjo; this schematic shows its sounding pitches from the nut for comparison.';
+     if(['violin','viola','cello'].includes(id))note.title='Positions are semitone guides, not literal frets. Fretless intonation is continuous.';
+   }else renderOther();
  }
  buttons.forEach(btn=>btn.addEventListener('click',()=>choose(btn.dataset.instrument)));
- choose('piano');
+ H.on('state',()=>{if(['kalimba','accordion'].includes(selected))renderOther()});
+ choose('octavon');
 })();
-</script><script id="harmonic-compact-instrument-initial-state">
+</script><script id="octavon-instrument-engine">
+(()=>{
+ 'use strict';
+ const H=window.HL,T=H?.T,board=document.getElementById('octavon-keyboard');
+ const sc=document.getElementById('octavon-scroll');
+ if(!H||!T||!board||!sc)return;
+ const min=-45,max=39; // C1 to C8, matching the full piano
+ const mod=n=>((n%12)+12)%12;
+ // Pointer glissando: one sustained note at a time, switching as the
+ // pointer crosses keys. Keyboard/screen-reader activation still uses bindHold.
+ let gesture=null,gestureId=0;
+ function stopGesture(){
+   const g=gesture;gesture=null;++gestureId;
+   if(g?.voices)H.audio.release(g.voices);
+   if(g?.key)g.key.classList.remove('octavon-pressed');
+ }
+ function keyAt(x,y){
+   const hit=document.elementFromPoint(x,y);
+   return hit?.closest?.('#octavon-keyboard .octavon-key')||null;
+ }
+ function playAt(key){
+   const g=gesture;if(!g||g.key===key)return;
+   if(g.voices)H.audio.release(g.voices);
+   if(g.key)g.key.classList.remove('octavon-pressed');
+   g.key=key;g.voices=null;
+   if(!key)return;
+   key.classList.add('octavon-pressed');
+   const n=Number(key.dataset.pitch);
+   const id=++gestureId;
+   H.audio.ensure().then(()=>{
+     if(gesture!==g||g.key!==key||id!==gestureId)return;
+     g.voices=H.audio.schedule([n],{
+       sustain:true,timbre:H.state.harmonics?'pluck':'sine',group:'instrument'
+     });
+     H.emit('played',[n]);
+   }).catch(e=>{stopGesture();H.toast(e.message);});
+ }
+ // Capture on the board so the normal per-key hold listener does not
+ // start a second voice; pointer capture stays on the board while sliding.
+ board.addEventListener('pointerdown',e=>{
+   if(e.button!==0&&e.pointerType!=='touch')return;
+   const key=e.target.closest('.octavon-key');if(!key)return;
+   e.preventDefault();e.stopPropagation();
+   stopGesture();
+   gesture={pointerId:e.pointerId,key:null,voices:null};
+   try{board.setPointerCapture(e.pointerId)}catch{}
+   playAt(key);
+ },true);
+ board.addEventListener('pointermove',e=>{
+   if(!gesture||e.pointerId!==gesture.pointerId)return;
+   playAt(keyAt(e.clientX,e.clientY));
+ });
+ for(const type of ['pointerup','pointercancel','lostpointercapture']){
+   board.addEventListener(type,e=>{
+     if(gesture&&e.pointerId===gesture.pointerId)stopGesture();
+   });
+ }
+ H.on('panic',stopGesture);
+ function render(){
+   stopGesture();
+   const state=H.state,offsets=T.scales[state.mode]?.offsets;
+   if(!offsets)return;
+   const root=state.root,pcs=new Set(offsets.map(o=>mod(root+o)));
+   const pitches=[];
+   for(let n=min;n<=max;n++)if(pcs.has(T.pc(n)))pitches.push(n);
+   const a=H.startN(),b=a+12;
+   board.replaceChildren();
+   board.style.setProperty('--octavon-count',String(pitches.length));
+   let firstIndex=-1,lastIndex=-1;
+   pitches.forEach((n,index)=>{
+     const inOctave=n>=a&&n<=b;
+     if(inOctave&&firstIndex<0)firstIndex=index;
+     if(inOctave)lastIndex=index;
+     const key=document.createElement('button');
+     key.type='button';
+     const chordTone=!!(state.chord && T.chords[state.chord]?.offsets.some(
+       o=>mod(root+o)===T.pc(n)));
+     key.className='octavon-key'+(inOctave?' in-octave':'')+(chordTone?' chord-tone':'');
+     key.setAttribute('aria-label',`${H.noteName(n)}; n ${n}; hold to play or slide between keys`);
+     key.dataset.pitch=String(n);
+     key.innerHTML=`<span class="octavon-note">${H.escape(H.noteName(n))}</span>`;
+     H.registerPitch(key,n);
+     H.bindHold(key,()=>[n],{group:'instrument'});
+     const column=document.createElement('div');
+     column.className='octavon-column';
+     const indexLabel=document.createElement('span');
+     indexLabel.className='octavon-index';
+     indexLabel.textContent=String(n);
+     indexLabel.setAttribute('aria-hidden','true');
+     column.append(key,indexLabel);
+     board.append(column);
+   });
+   if(firstIndex>=0){
+     const outline=document.createElement('div');
+     outline.className='octavon-octave-boundary';
+     outline.style.left=`calc(${firstIndex} * var(--octavon-width))`;
+     outline.style.width=`calc(${lastIndex-firstIndex+1} * var(--octavon-width))`;
+     outline.setAttribute('aria-hidden','true');
+     board.append(outline);
+   }
+   document.getElementById('octavon-title').textContent=
+     `Scaleboard · ${T.scales[state.mode].name} · ${offsets.length} keys/octave`;
+   const center=()=>{if(firstIndex<0)return;
+     const middle=(firstIndex+lastIndex+1)/2*48;
+     sc.scrollLeft=Math.max(0,middle-sc.clientWidth/2);
+   };
+   requestAnimationFrame(center);
+ }
+ H.on('state',render);
+ render();
+})();
+</script>
+<script id="harmonic-compact-instrument-initial-state">
 (()=>{
  const drawer=document.getElementById('instrument-drawer');
- if(drawer&&window.matchMedia('(max-width:960px)').matches)drawer.open=false;
+ if(drawer)drawer.open=true;
  const viewport=document.querySelector('#view-explore .pitch-matrix-scroll');
  const cue=document.querySelector('#view-explore .matrix-scroll-cue');
  if(viewport&&cue){
@@ -72475,7 +73207,7 @@ dialog.hb-help::backdrop{background:#000c}
   'use strict';
   const H=window.HL,T=H?.T;if(!H||!T)return;
   const root=document.querySelector('#view-explore .recipe-clean-panel');if(!root)return;
-  const kinds=['chord','scale'];
+  const kinds=['scale','chord'];
   const lookup=k=>({
     native:document.getElementById(k==='chord'?'chord-select':'scale-mode'),
     trigger:document.getElementById(`recipe-${k}-trigger`),
@@ -72485,7 +73217,7 @@ dialog.hb-help::backdrop{background:#000c}
   });
   const info=(k,v)=>{
     if(k==='chord'){
-      if(!v)return {name:'No chord',steps:'—'};
+      if(!v)return {name:'No chord',steps:''};
       const d=T.chords[v];
       if(!d)return {name:'Unknown chord',steps:'—'};
       return {name:d.name,steps:d.offsets.slice(1).map((x,i)=>x-d.offsets[i]).join(' · ')};
@@ -72504,14 +73236,14 @@ dialog.hb-help::backdrop{background:#000c}
   function sync(){
     for(const k of kinds){
       const {native,name,steps,trigger}=lookup(k),v=native.value,d=info(k,v);
-      name.textContent=k==='scale'?'Change scale':d.name;
+      name.textContent=d.name;
       steps.textContent=d.steps;
       trigger.setAttribute('aria-label',k==='scale'?`Scale: ${d.name}; steps ${d.steps}. Choose another scale`:
         `Chord: ${d.name}; steps ${d.steps}. Choose another chord`);
     }
     const status=document.getElementById('recipe-compat-status');
     if(status){const n=lookup('scale').native,c=lookup('chord').native;
-      status.textContent=c.value?`${[...n.options].filter(o=>!o.disabled).length} scales contain the selected chord.`:'All scale recipes are available.';}
+      status.textContent=`${[...c.options].filter(o=>!o.disabled&&o.value).length} chord recipes fit the selected scale. All scale recipes are available.`;}
     if(opened)renderMenu(opened);
   }
   function renderMenu(k){
@@ -72884,5 +73616,248 @@ dialog.hb-help::backdrop{background:#000c}
  H.tabTransform={open:()=>setVisible(true),generate,render,returnSource};
 })();
 </script>
-</body>
+<script id="all-instruments-glissando">
+(()=>{
+ 'use strict';
+ const H=window.HL;
+ if(!H)return;
+ const panels=['instrument-piano','instrument-neck','instrument-other']
+   .map(id=>document.getElementById(id)).filter(Boolean);
+ let active=null,serial=0;
+ const selector='.piano-key:not(:disabled),.fret-note:not(:disabled),.alternative-note:not(:disabled)';
+ function stop(){
+   const g=active;active=null;serial++;
+   if(g?.voices)H.audio.release(g.voices);
+   if(g?.key)g.key.classList.remove('instrument-gliss-active');
+ }
+ function hit(x,y){
+   const el=document.elementFromPoint(x,y)?.closest(selector);
+   return el&&panels.some(p=>p.contains(el)&&!p.hidden)?el:null;
+ }
+ function moveTo(key){
+   const g=active;if(!g||g.key===key)return;
+   serial++;
+   if(g.voices)H.audio.release(g.voices);
+   if(g.key)g.key.classList.remove('instrument-gliss-active');
+   g.key=key;g.voices=null;
+   if(!key)return;
+   const n=Number(key.dataset.pitch);
+   if(!Number.isFinite(n))return;
+   key.classList.add('instrument-gliss-active');
+   const id=serial;
+   H.audio.ensure().then(()=>{
+     if(active!==g||g.key!==key||id!==serial)return;
+     g.voices=H.audio.schedule([n],{
+       sustain:true,timbre:H.state.harmonics?'pluck':'sine',group:'instrument'
+     });
+     H.emit('played',[n]);
+   }).catch(e=>{stop();H.toast(e.message)});
+ }
+ for(const panel of panels){
+   // Capture before the original individual key handlers so a drag produces
+   // only one voice. Their keyboard and assistive-technology handlers remain.
+   panel.addEventListener('pointerdown',e=>{
+     if(e.pointerType!=='touch'&&e.button!==0)return;
+     const key=e.target.closest(selector);
+     if(!key)return;
+     e.preventDefault();e.stopPropagation();
+     stop();
+     active={id:e.pointerId,key:null,voices:null};
+     moveTo(key);
+   },true);
+ }
+ window.addEventListener('pointermove',e=>{
+   if(active&&e.pointerId===active.id)moveTo(hit(e.clientX,e.clientY));
+ },true);
+ for(const event of ['pointerup','pointercancel']){
+   window.addEventListener(event,e=>{
+     if(active&&e.pointerId===active.id)stop();
+   },true);
+ }
+ window.addEventListener('blur',stop);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
+ H.on('state',stop);
+ H.on('panic',stop);
+})();
+</script><script id="spectroscope-mirror-controller">
+(()=>{
+  'use strict';
+  const H=window.HL;
+  const elements=[...document.querySelectorAll('.spectrum-mirror')];
+  if(!H||!elements.length)return;
+  // This intentionally draws *mathematical* components directly from the app's
+  // scheduled oscillator voices. It is NOT an FFT or a microphone measurement.
+  // The existing Spectrum & Tuner frequency analysis is left untouched.
+  const MIN=27.5,MAX=7040,LOG=Math.log2(MAX/MIN),W=1200,ROWS=190;
+  const ticks=[27.5,55,110,220,440,880,1760,3520,7040];
+  const views=elements.map(panel=>{
+    const canvas=panel.querySelector('canvas');
+    const history=document.createElement('canvas');
+    history.width=W;history.height=ROWS;
+    const hc=history.getContext('2d');
+    hc.fillStyle='#121212';hc.fillRect(0,0,W,ROWS);
+    panel.dataset.mode='rolling';
+    panel.dataset.axis='log';
+    const axis=panel.querySelector('[data-mirror-axis]');
+    axis?.addEventListener('change',()=>{panel.dataset.axis=axis.value;hc.fillStyle='#121212';hc.fillRect(0,0,W,ROWS);});
+    const freeze=panel.querySelector('[data-mirror-freeze]');
+    freeze?.addEventListener('click',()=>{const frozen=panel.dataset.frozen!=='true';panel.dataset.frozen=String(frozen);freeze.textContent=frozen?'Resume':'Freeze display';freeze.setAttribute('aria-pressed',String(frozen));});
+    for(const button of panel.querySelectorAll('[data-mirror-mode]')){
+      button.addEventListener('click',()=>{
+        panel.dataset.mode=button.dataset.mirrorMode;
+        for(const b of panel.querySelectorAll('[data-mirror-mode]')){
+          const current=b===button;
+          b.classList.toggle('active',current);
+          b.setAttribute('aria-selected',String(current));
+        }
+      });
+    }
+    panel.querySelector('[data-mirror-open-spectrum]')?.addEventListener('click',()=>{
+      document.querySelector('[data-view="spectrum"]')?.click();
+    });
+    return {panel,canvas,history,hc,frozenPeaks:[]};
+  });
+  const position=(f,axis='log')=>axis==='linear'?(f-MIN)/(MAX-MIN):Math.log2(f/MIN)/LOG;
+  // All sounding components share cyan; white is reserved for frequency guides.
+  const shade=(_type,brightness)=>[
+    Math.round(16+61*brightness),
+    Math.round(20+205*brightness),
+    Math.round(24+205*brightness)
+  ];
+  function components(){
+    const engine=H.audio,ctx=engine?.context;
+    if(!ctx||ctx.state!=='running')return [];
+    const now=ctx.currentTime;
+    const parts=new Map();
+    // Active voices include notes in tabs, manual notes, and sustained strings.
+    for(const voice of engine.active){
+      if(voice.start>now||voice.end<=now)continue;
+      const f=voice.osc?.frequency?.value;
+      if(!Number.isFinite(f)||f<=0)continue;
+      const age=now-voice.start;
+      const onset=Math.min(1,age/.012);
+      let release=1;
+      if(voice.released)release=Math.min(1,Math.max(0,(voice.end-now)/.17));
+      else if(!voice.sustain)release=Math.min(1,Math.max(0,(voice.end-now)/.15));
+      const gain=Math.max(0,voice.amp*onset*release);
+      if(gain<.0005)continue;
+      const harmonics=voice.osc.type==='custom';
+      const count=harmonics?16:1;
+      for(let h=1;h<=count;h++){
+        const hz=h*f;
+        if(hz<MIN||hz>MAX)continue;
+        // Same Fourier coefficients as the harmonic oscillator's pluck wave.
+        const amplitude=gain/(h===1?1:Math.pow(h,1.45));
+        const k=Math.round(hz*100)/100;
+        const existing=parts.get(k);
+        if(existing){existing.amplitude+=amplitude;if(h===1)existing.fundamental=true;}
+        else parts.set(k,{hz,amplitude,fundamental:h===1});
+      }
+    }
+    const peaks=[...parts.values()];
+    const maximum=Math.max(.05,...peaks.map(p=>p.amplitude));
+    for(const peak of peaks){
+      peak.strength=Math.min(1,Math.pow(peak.amplitude/maximum,.7));
+      peak.category=peak.fundamental?'fundamental':'harmonic';
+    }
+    return peaks;
+  }
+  function advance(item,peaks){
+    const {history,hc}=item;
+    hc.drawImage(history,0,1,W,ROWS-1,0,0,W,ROWS-1);
+    hc.fillStyle='#121212';hc.fillRect(0,ROWS-1,W,1);
+    // Fixed-width ideal lines deliberately have no onset/offset spectral smear.
+    for(const p of peaks){
+      const x=Math.round(position(p.hz,item.panel.dataset.axis)*(W-1));
+      if(x<0||x>=W)continue;
+      const [r,g,b]=shade(p.category,p.strength);
+      hc.fillStyle=`rgb(${r},${g},${b})`;
+      hc.fillRect(Math.max(0,x-1),ROWS-1,3,1);
+    }
+  }
+  function render(view,peaks){
+    const {panel,canvas,history}=view;
+    const width=Math.max(260,Math.round(canvas.clientWidth));
+    const height=Math.max(135,Math.round(canvas.clientHeight));
+    const dpr=Math.min(2,window.devicePixelRatio||1);
+    const pw=Math.round(width*dpr),ph=Math.round(height*dpr);
+    if(canvas.width!==pw||canvas.height!==ph){canvas.width=pw;canvas.height=ph;}
+    const c=canvas.getContext('2d');
+    c.setTransform(dpr,0,0,dpr,0,0);
+    c.fillStyle='#121212';c.fillRect(0,0,width,height);
+    const L=39,R=14,top=14,bottom=height-25,graphW=width-L-R,graphH=bottom-top;
+    if(panel.dataset.mode==='rolling'){
+      c.drawImage(history,L,top,graphW,graphH);
+      // White guides mark the fundamental and its harmonic frequencies.
+      // Guides are independent of the cyan signal drawn in the history.
+      c.save();c.strokeStyle='rgba(255,255,255,.58)';c.lineWidth=.75;
+      c.setLineDash([2,5]);
+      for(const p of peaks){
+        const x=L+position(p.hz,panel.dataset.axis)*graphW;
+        if(x<L||x>width-R)continue;
+        c.beginPath();c.moveTo(x,top);c.lineTo(x,bottom);c.stroke();
+      }
+      c.restore();
+      c.textAlign='left';c.fillStyle='#adb5b9';c.font='10px ui-monospace,monospace';
+      c.fillText('older',3,top+10);c.fillText('now',12,bottom-2);
+    }else{
+      for(const level of [.25,.5,.75]){
+        const y=top+(1-level)*graphH;
+        c.strokeStyle='#303030';c.lineWidth=1;
+        c.beginPath();c.moveTo(L,y);c.lineTo(width-R,y);c.stroke();
+      }
+      for(const p of peaks){
+        const x=L+position(p.hz,panel.dataset.axis)*graphW;
+        c.strokeStyle='#4de3ee';
+        c.lineWidth=p.category==='fundamental'?2.4:1.7;
+        c.beginPath();c.moveTo(x,bottom);
+        c.lineTo(x,bottom-p.strength*graphH*.94);c.stroke();
+        // White top tick marks the precise fundamental/harmonic frequency.
+        c.strokeStyle='#ffffff';c.lineWidth=1.2;
+        c.beginPath();c.moveTo(x,top);c.lineTo(x,top+7);c.stroke();
+      }
+    }
+    c.textAlign='center';c.font='10px ui-monospace,monospace';
+    let last=-999;
+    for(const f of (panel.dataset.axis==='linear'?[MIN,880,1760,2640,3520,4400,5280,6160,MAX]:ticks)){
+      const x=L+position(f,panel.dataset.axis)*graphW;
+      c.strokeStyle='#384042';c.lineWidth=.7;
+      c.beginPath();c.moveTo(x,top);c.lineTo(x,bottom);c.stroke();
+      if(x-last<31)continue;
+      c.fillStyle='#bbc2c4';c.fillText(f>=1000?Number((f/1000).toFixed(2))+'k':String(f),x,height-7);
+      last=x;
+    }
+  }
+  let last=0;
+  function frame(now){
+    requestAnimationFrame(frame);
+    if(now-last<55)return;
+    last=now;
+    const visible=views.filter(v=>!v.panel.closest('.view')?.hidden);
+    if(!visible.length)return;
+    const peaks=components();
+    for(const view of visible){
+      if(view.panel.dataset.frozen!=='true'){view.frozenPeaks=peaks;advance(view,peaks);}
+      render(view,view.panel.dataset.frozen==='true'?view.frozenPeaks:peaks);
+    }
+  }
+  requestAnimationFrame(frame);
+})();
+</script><script id="instrument-scroll-navigation">(()=>{
+for(const id of ['instrument-octavon','instrument-piano','instrument-neck','instrument-other']){
+ const panel=document.getElementById(id),view=panel?.querySelector('.instrument-scroll');if(!view)continue;
+ const bar=document.createElement('div');bar.className='instrument-pan-controls';
+ bar.innerHTML='<button type="button" aria-label="Scroll instrument left">◀</button><span>Scroll to explore more notes</span><button type="button" aria-label="Scroll instrument right">▶</button>';
+ const frame=document.createElement('div');frame.className='instrument-pan-frame';
+ view.before(frame);frame.append(view);frame.append(bar);
+ const [left,right]=bar.querySelectorAll('button');
+ const update=()=>{const max=Math.max(0,view.scrollWidth-view.clientWidth);bar.hidden=max<3;left.disabled=view.scrollLeft<2;right.disabled=view.scrollLeft>=max-2;};
+ const pan=dir=>{view.scrollBy({left:dir*Math.max(130,view.clientWidth*.7),behavior:'smooth'});setTimeout(update,450);};
+ left.addEventListener('click',()=>pan(-1));right.addEventListener('click',()=>pan(1));
+ view.addEventListener('scroll',update,{passive:true});
+ if(window.ResizeObserver)new ResizeObserver(update).observe(view);
+ new MutationObserver(()=>requestAnimationFrame(update)).observe(view,{childList:true,subtree:true});
+ requestAnimationFrame(update);
+}
+})();</script></body>
 </html>
