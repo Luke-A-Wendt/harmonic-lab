@@ -1,31 +1,57 @@
-# [Harmonic Lab](https://luke-a-wendt.github.io/harmonic-lab/)
+# Harmonic Lab
 
-Harmonic Lab is an interactive, browser-based music workbench for exploring pitch, scale and chord structures, playable instruments, tuning, harmonic spectra, and the mathematical patterns underlying melody and transposition.
+**Music · Mathematics · Sound**
 
-## Explore
+Harmonic Lab is an interactive, browser-based workspace for exploring pitch, scales, chords, instruments, tabs, and sound. The application runs from a standalone `index.html` file; no build step is required.
 
-Explore musical relationships through pitch circles, semitone-step recipes, and a pitch-coordinate comparison. Choose a chord to constrain scale recipes to compatible structures. Play notes and chords using the on-screen piano and guitar/ukulele fretboards, with scale tones and chord tones visually distinguished. The keyboard supports a full range of complete octaves, and the fretboard includes a 48-fret option.
+## Explore: pitch relationships
 
-Independent scale and chord reference windows provide focused explanations and examples.
+Choose a scale recipe and an optional compatible chord, then select a tonic on the key-relationship ring. Compare semitone steps, pitch coordinates, scale notes, and chord tones. The key ring arranges tonic choices by changes in their note sets.
 
-## Tab library and Transform
+Play notes on the **Scaleboard**, an adaptive keyboard with one key per scale note, or use the piano, guitar, ukulele, bass, mandolin, banjo, violin, viola, cello, kalimba, and accordion views. Cyan identifies scale notes and magenta identifies selected chord tones. Instrument views support note playback and horizontal navigation.
 
-The Tab library includes songs, chord progressions, and theory studies. Transform is a unified workspace for studying a melody's key-independent pitch offsets, consecutive semitone gaps, and its relationship to a scale's degree pattern. Compare exact transposition with degree-based remapping between different scale recipes, including major-to-minor changes. Chromatic notes that do not have an unambiguous degree mapping are identified explicitly.
+An **ideal harmonic spectroscope** at the bottom of Explore visualizes synthesized notes and their theoretical frequency components. It offers scrolling and live-spectrum views, logarithmic-octave or linear-Hz axes, and a freeze control. Cyan represents played signal components; white identifies the fundamental and harmonic markers.
 
-## Spectrum and tuner
+## Spectrum & Tuner
 
-The instrument tuner uses local microphone input, filtering, and pitch estimation. Live frequency spectra, a scrolling spectrogram, and input-cleanup controls help visualize fundamentals and harmonics. Microphone access requires permission.
+The tuning workspace includes a visual instrument headstock with selectable reference strings, live pitch detection, a flat-to-sharp tuning meter, and microphone controls. Input cleanup and calibration options include low-frequency filtering, mains-hum rejection, and noise-gate settings.
 
-## Math lab
+Unlike the ideal displays in Explore and Tab Library, the tuner analyzes **measured audio**. It therefore shows real transients, noise, and spectral leakage rather than only the theoretical frequencies.
 
-Mathematical explanations connect semitone indices, equal temperament, frequency ratios, and harmonic relationships.
+Microphone access requires browser permission and a secure context (HTTPS or localhost). Audio processing is local to the browser.
 
-## Privacy and architecture
+## Tab Library
 
-The application is a self-contained static website. Its music synthesis, microphone analysis, and interactive computations run in the browser. It does not require an application server, account, or remote audio-processing service. Reference links may lead to external educational websites if followed.
+Explore and play tab arrangements, examine their note and interval structures, and work with melody transformations between keys and scale recipes. The Tab Library also has an ideal harmonic spectroscope for notes played in the app.
 
-Browser permissions and local storage remain under the user's control. The tuner is an educational tool, not a certified measurement instrument.
+## Math Lab
 
-## License
+Investigate the mathematics of music, including exponential pitch-frequency relationships, semitone coordinates, scales, intervals, and harmonic series.
 
-MIT. See [LICENSE](LICENSE).
+## Run locally
+
+Open `index.html` in a modern browser. Some browser features, particularly microphone input, work best when the page is served from localhost or HTTPS.
+
+To serve the folder locally with Python:
+
+```bash
+python -m http.server 8000
+```
+
+Then visit `http://localhost:8000`.
+
+## Deploy with GitHub Pages
+
+This package includes `index.html` and `README.md`. Copy them into the root of your existing repository, replacing the corresponding files. **Keep the `.git` directory** and any existing GitHub Pages configuration or other files you need.
+
+```bash
+git add index.html README.md
+git commit -m "Update Harmonic Lab and documentation"
+git push
+```
+
+If GitHub Pages is configured to publish from the repository root on your selected branch, the updated `index.html` will be served after deployment.
+
+## Notes
+
+The educational spectroscopes show an **ideal harmonic model**, not a microphone recording. They are intended to explain the structure of synthesized notes; use Spectrum & Tuner for measured frequency analysis.
