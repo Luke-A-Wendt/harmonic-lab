@@ -40,18 +40,6 @@ python -m http.server 8000
 
 Then visit `http://localhost:8000`.
 
-## Deploy with GitHub Pages
-
-This package includes `index.html` and `README.md`. Copy them into the root of your existing repository, replacing the corresponding files. **Keep the `.git` directory** and any existing GitHub Pages configuration or other files you need.
-
-```bash
-git add index.html README.md
-git commit -m "Update Harmonic Lab and documentation"
-git push
-```
-
-If GitHub Pages is configured to publish from the repository root on your selected branch, the updated `index.html` will be served after deployment.
-
 ## Notes
 
 The educational spectroscopes show an **ideal harmonic model**, not a microphone recording. They are intended to explain the structure of synthesized notes; use Spectrum & Tuner for measured frequency analysis.
