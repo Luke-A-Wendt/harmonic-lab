@@ -3961,6 +3961,16 @@ dialog.hb-help::backdrop{background:#000c}
  #view-practice .song-top>button[data-dialog="song-info"]{grid-column:3;grid-row:2}
 }
 </style>
+<style id="prominent-main-page-navigation">
+/* Four primary destinations, visually distinct from secondary controls. */
+header .main-nav{display:flex;gap:9px;align-items:stretch;max-width:100%;}
+header .main-nav button[data-view]{flex:1 1 auto;min-width:92px;min-height:54px;padding:12px 19px;border:1px solid #565d60;border-radius:11px;background:#242729;color:#f1f5f6;font-size:clamp(15px,1.35vw,19px);font-weight:800;letter-spacing:.015em;line-height:1.2;box-shadow:inset 0 -2px 0 rgba(255,255,255,.07);transition:background .15s,border-color .15s;}
+header .main-nav button[data-view]:hover{background:#30383b;border-color:#86a7ad;}
+header .main-nav button[data-view].active{background:#17383e;border:2px solid var(--cyan);color:#fff;box-shadow:inset 0 -3px 0 var(--cyan);}
+header .main-nav button[data-view]:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;}
+@media(max-width:800px){header .main-nav{width:100%;gap:7px;justify-content:stretch;overflow:visible;}header .main-nav button[data-view]{min-width:0;min-height:51px;padding:10px 5px;font-size:clamp(14px,3.2vw,18px);}}
+@media(max-width:370px){header .main-nav{gap:4px;}header .main-nav button[data-view]{min-height:48px;padding:9px 3px;font-size:13px;border-radius:7px;}}
+</style>
 </head>
 <body>
 <header class="app-header">
