@@ -4216,6 +4216,1263 @@ body > header.app-header nav.main-nav > button[data-view]:focus-visible{
 #view-practice .tab-source-key{cursor:pointer}
 @media(max-width:650px){#view-practice .tab-version-switch{order:0}
  #view-practice .tab-version-switch button{padding:7px 9px}}
+</style><style id="tabs-toolbar-hierarchy-2026">
+/* A cohesive three-part control surface; all original controls and IDs remain intact. */
+#view-practice.tabs-workspace{
+ height:auto!important;min-height:0!important;max-height:none!important;
+ gap:13px!important;
+}
+#view-practice .song-top{
+ display:grid!important;grid-template-columns:minmax(290px,.95fr) minmax(250px,1.35fr) 42px 42px!important;
+ align-items:center!important;gap:12px!important;min-width:0;
+ padding:0 0 15px;border-bottom:1px solid #313d3f;
+}
+#view-practice .song-library-picker{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;
+ gap:6px!important;align-items:end!important;width:100%!important;min-width:0;
+}
+#view-practice .song-library-picker>label{
+ grid-column:1/-1!important;width:auto!important;min-width:0;
+ font-size:10px!important;letter-spacing:.085em;font-weight:800;color:#a8c2c7!important;
+}
+#view-practice .song-library-picker>select{
+ grid-column:1!important;width:100%!important;max-width:none!important;min-width:0!important;
+ height:43px!important;min-height:43px!important;padding:9px 33px 9px 12px!important;
+ font-size:13px!important;font-weight:700!important;
+}
+#view-practice .song-library-picker>button{
+ grid-column:2!important;height:43px!important;min-height:43px!important;
+ padding:8px 12px!important;font-size:12px!important;font-weight:700!important;
+ border-radius:9px!important;white-space:nowrap;
+}
+#view-practice .song-heading{grid-column:2!important;min-width:0!important;align-self:center;}
+#view-practice .song-heading h1{font-size:clamp(20px,2vw,26px);line-height:1.12;letter-spacing:-.025em;}
+#view-practice .song-heading p{font-size:11px;line-height:1.45;margin-top:6px;}
+#view-practice .song-top .icon-button{
+ width:42px!important;height:42px!important;min-width:42px!important;
+ border-radius:11px!important;border:1px solid #414c4f;
+}
+#view-practice .song-top>#tab-favorite{grid-column:3!important;}
+#view-practice .song-top>button[data-dialog="song-info"]{grid-column:4!important;}
+#view-practice .song-controls.inline-target-controls{
+ display:grid!important;
+ grid-template-columns:minmax(0,1.08fr) minmax(0,1.02fr) minmax(0,1.52fr)!important;
+ align-items:stretch!important;gap:11px!important;min-width:0;width:100%;
+}
+#view-practice .tab-setup-group{
+ display:flex;flex-direction:column;min-width:0;gap:10px;
+ padding:12px 13px!important;border:1px solid #3b4c50;border-radius:12px;
+ background:linear-gradient(160deg,#20282a,#181e20);
+}
+#view-practice .tab-group-heading{
+ display:flex;align-items:center;justify-content:space-between;gap:8px;
+ min-height:24px;color:#bad1d6;font-size:10px;font-weight:850;letter-spacing:.11em;
+}
+#view-practice .tab-group-fields{display:grid;min-width:0;gap:9px;align-items:end;}
+#view-practice .tab-setup-instrument .tab-group-fields{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);}
+#view-practice .tab-setup-version .tab-group-fields{grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);}
+#view-practice .tab-setup-target .tab-group-fields{grid-template-columns:minmax(66px,.51fr) minmax(110px,1.35fr) auto;}
+#view-practice .tab-group-fields>label,
+#view-practice .tab-group-fields .tab-version-control{
+ display:flex!important;flex-direction:column!important;gap:6px!important;
+ width:100%!important;min-width:0!important;max-width:none!important;margin:0!important;
+ flex:auto!important;
+}
+#view-practice .tab-control-caption{
+ color:#a5c0c5;font-size:10px!important;line-height:12px!important;
+ letter-spacing:.08em;font-weight:750;
+}
+#view-practice .tab-group-fields select{
+ display:block;width:100%!important;max-width:100%!important;min-width:0!important;
+ height:43px!important;min-height:43px!important;
+ padding:9px 26px 9px 10px!important;border-radius:9px!important;
+ border:1px solid #52676b!important;background-color:#121b1d!important;
+ color:#e9f2f3;font-size:12px!important;line-height:1.2!important;
+}
+#view-practice .tab-group-fields select:focus-visible,
+#view-practice .tab-group-fields button:focus-visible,
+#view-practice .song-transport button:focus-visible{
+ outline:2px solid var(--cyan);outline-offset:2px;
+}
+#view-practice .tab-setup-group .tab-source-key{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;
+ width:100%!important;min-width:0!important;max-width:none!important;
+ height:61px!important;min-height:61px!important;gap:5px!important;
+ padding:7px 11px!important;border:1px solid #52676b!important;
+ border-radius:9px!important;background:#142327!important;
+}
+#view-practice .tab-setup-group .tab-source-value{
+ display:flex;align-items:center;gap:8px;min-width:0;max-width:100%;font-size:12px;
+}
+#view-practice .tab-setup-group .tab-source-value b{font-size:17px;}
+#view-practice #tab-source-scale{
+ display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+ overflow:hidden!important;overflow-wrap:anywhere;line-height:1.15;
+}
+#view-practice .tab-setup-group .tab-version-switch{
+ display:grid!important;grid-template-columns:1fr 1fr;gap:3px!important;
+ margin:0!important;padding:3px!important;min-width:0;height:43px!important;
+ border-radius:9px!important;border:1px solid #52676b!important;background:#121b1d!important;
+}
+#view-practice .tab-setup-group .tab-version-switch button{
+ display:block!important;width:100%;min-width:0;min-height:0!important;height:35px!important;
+ padding:5px 6px!important;border-radius:6px!important;
+ font-size:12px!important;line-height:1.1!important;
+}
+#view-practice .tab-setup-group #tab-explore-target{
+ min-height:43px!important;height:43px!important;padding:7px 11px!important;
+ font-size:11px!important;font-weight:750;white-space:nowrap;border-radius:9px!important;
+ align-self:end;margin:0!important;
+}
+#view-practice .tab-setup-group .tab-settings-button{
+ display:inline-flex;align-items:center;justify-content:center;
+ height:29px!important;min-height:29px!important;margin:0!important;
+ padding:4px 10px!important;border:1px solid #4e6266;
+ border-radius:7px;background:#2a3538;color:#f2f5f5;
+ font-size:11px!important;font-weight:700;
+}
+#view-practice .song-stage{
+ height:clamp(245px,22vw,305px)!important;min-height:245px!important;
+ flex:none!important;border-color:#455356;
+}
+#view-practice .sheet-navigation{
+ display:grid!important;grid-template-columns:1fr auto 1fr!important;align-items:center;
+ gap:12px!important;padding:0!important;
+}
+#view-practice .sheet-navigation button{
+ min-width:50px;min-height:41px!important;border-radius:9px!important;
+ font-size:17px!important;padding:6px 13px!important;
+}
+#view-practice .sheet-navigation button:first-child{justify-self:start;}
+#view-practice .sheet-navigation button:last-child{justify-self:end;}
+#view-practice .sheet-navigation span{
+ padding:8px 12px;border:1px solid #333f42;border-radius:9px;
+ background:#1a2224;font-size:11px!important;white-space:nowrap;
+}
+#view-practice .song-transport{
+ display:grid!important;grid-template-columns:auto minmax(160px,1fr) auto!important;
+ gap:13px!important;align-items:center!important;
+ padding:12px!important;border:1px solid #3b4c50;border-radius:12px;
+ background:#192123;min-width:0;
+}
+#view-practice .transport-actions{display:flex;align-items:center;gap:7px;min-width:0;}
+#view-practice .transport-actions>button,
+#view-practice .transport-actions>.tab-melody-toggle{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ min-height:43px!important;height:43px!important;
+ padding:8px 13px!important;border-radius:9px!important;
+ font-size:12px!important;font-weight:750;
+}
+#view-practice .transport-actions #tab-play{min-width:95px!important;}
+#view-practice .transport-actions #tab-stop{min-width:43px!important;width:43px;}
+#view-practice .transport-timeline{display:flex;align-items:center;gap:12px;min-width:0;}
+#view-practice .transport-timeline #tab-seek{
+ flex:1 1 auto!important;min-width:60px!important;width:auto!important;
+ order:0!important;margin:0;accent-color:var(--cyan);
+}
+#view-practice .transport-timeline #tab-time{
+ order:0!important;flex:none;white-space:nowrap;font-size:11px;color:#c8d8db;
+}
+#view-practice .transport-tempo .tempo-control{
+ display:flex;align-items:center;gap:7px;
+ font-size:10px;font-weight:850;letter-spacing:.08em;color:#adc5ca;
+}
+#view-practice .transport-tempo #tab-tempo{
+ width:68px!important;min-width:68px;height:43px!important;min-height:43px!important;
+ font-size:13px!important;border-radius:8px;padding:6px 8px!important;
+ border:1px solid #52676b;background:#121b1d;
+}
+#view-practice .song-foot{column-gap:15px;row-gap:7px;}
+@media(max-width:1150px){
+ #view-practice .song-controls.inline-target-controls{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ }
+ #view-practice .tab-setup-target{grid-column:1/-1;}
+ #view-practice .tab-setup-target .tab-group-fields{
+  grid-template-columns:minmax(75px,.38fr) minmax(160px,1fr) auto;
+ }
+}
+@media(max-width:800px){
+ #view-practice .song-top{
+  grid-template-columns:minmax(0,1fr) 42px 42px!important;
+  row-gap:11px!important;
+ }
+ #view-practice .song-library-picker{grid-column:1/-1!important;grid-row:1!important;}
+ #view-practice .song-heading{grid-column:1!important;grid-row:2!important;}
+ #view-practice .song-top>#tab-favorite{grid-column:2!important;grid-row:2!important;}
+ #view-practice .song-top>button[data-dialog="song-info"]{grid-column:3!important;grid-row:2!important;}
+ #view-practice .song-transport{grid-template-columns:minmax(0,1fr) auto!important;gap:10px!important;}
+ #view-practice .transport-actions{grid-column:1!important;grid-row:1!important;}
+ #view-practice .transport-tempo{grid-column:2!important;grid-row:1!important;}
+ #view-practice .transport-timeline{grid-column:1/-1!important;grid-row:2!important;}
+}
+@media(max-width:650px){
+ #view-practice .song-controls.inline-target-controls{
+  grid-template-columns:minmax(0,1fr)!important;gap:9px!important;
+ }
+ #view-practice .tab-setup-group{grid-column:1/-1!important;grid-row:auto!important;padding:11px!important;gap:7px;}
+ #view-practice .tab-setup-instrument .tab-group-fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+ #view-practice .tab-setup-version .tab-group-fields{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);}
+ #view-practice .tab-setup-target .tab-group-fields{
+  grid-template-columns:minmax(80px,.43fr) minmax(0,1fr);
+ }
+ #view-practice .tab-setup-target #tab-explore-target{grid-column:1/-1;width:100%;}
+ #view-practice .song-stage{height:270px!important;min-height:240px!important;}
+ #view-practice .song-library-picker>button{font-size:11px!important;padding:8px!important;}
+ #view-practice .song-heading h1{font-size:20px;}
+}
+@media(max-width:410px){
+ #view-practice .tab-setup-group .tab-source-key{padding:6px!important;}
+ #view-practice .tab-setup-group .tab-source-value{font-size:10px;gap:4px;}
+ #view-practice .transport-actions{gap:5px;}
+ #view-practice .transport-actions>.tab-melody-toggle,
+ #view-practice .transport-actions>button{padding:7px 8px!important;font-size:11px!important;}
+ #view-practice .transport-actions #tab-play{min-width:76px!important;}
+ #view-practice .transport-tempo #tab-tempo{min-width:59px;width:59px!important;}
+ #view-practice .transport-tempo .tempo-control{gap:4px;}
+ #view-practice .song-transport{padding:9px!important;gap:9px!important;}
+ #view-practice .sheet-navigation{
+  grid-template-columns:44px minmax(0,1fr) 44px!important;gap:7px!important;
+ }
+ #view-practice .sheet-navigation button{
+  min-width:44px!important;width:44px!important;padding:6px!important;
+ }
+ #view-practice .sheet-navigation span{
+  min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;
+  padding:7px 5px!important;font-size:10px!important;
+ }
+}
+</style><style id="tabs-player-settings-location">
+/* Player settings belong with the player, not the transposition preset. */
+#view-practice .song-transport .transport-tempo{
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;
+ gap:10px!important;min-width:0!important;
+}
+#view-practice .song-transport .transport-tempo .tab-settings-button{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:0 0 auto!important;margin:0!important;padding:8px 12px!important;
+ min-height:43px!important;height:43px!important;
+ border:1px solid #52676b!important;border-radius:9px!important;
+ background:#293438!important;color:#edf5f6!important;
+ font-size:12px!important;font-weight:750!important;white-space:nowrap!important;
+}
+#view-practice .song-transport .transport-tempo .tab-settings-button:focus-visible{
+ outline:2px solid var(--cyan)!important;outline-offset:2px!important;
+}
+@media(min-width:801px){
+ #view-practice .song-transport{grid-template-columns:auto minmax(120px,1fr) auto!important;}
+}
+@media(max-width:800px){
+ #view-practice .song-transport{grid-template-columns:minmax(0,1fr)!important;}
+ #view-practice .song-transport .transport-actions{grid-column:1!important;grid-row:1!important;}
+ #view-practice .song-transport .transport-timeline{grid-column:1!important;grid-row:2!important;}
+ #view-practice .song-transport .transport-tempo{
+  grid-column:1!important;grid-row:3!important;justify-content:space-between!important;
+ }
+}
+@media(max-width:380px){
+ #view-practice .song-transport .transport-tempo .tab-settings-button{
+  font-size:11px!important;padding:7px 9px!important;
+ }
+}
+</style><style id="tabs-neutral-theme-aligned-with-other-pages">
+/* Match Explore, Tuner and Math: charcoal surfaces, neutral gray borders.
+   Cyan/magenta are reserved for active state and musical information. */
+#view-practice .tab-setup-group{
+ background:#202020!important;
+ border-color:#3d3d3d!important;
+}
+#view-practice .tab-group-heading{color:#d8d8d8!important}
+#view-practice .tab-control-caption,
+#view-practice .song-library-picker>label{color:#aaa!important}
+#view-practice .tab-group-fields select,
+#view-practice .transport-tempo #tab-tempo{
+ background:#171717!important;
+ border-color:#444!important;
+ color:#eee!important;
+}
+#view-practice .tab-setup-group .tab-source-key{
+ background:#252525!important;
+ border-color:#494949!important;
+}
+#view-practice .tab-source-key:hover{
+ background:#2d2d2d!important;
+ border-color:#686868!important;
+}
+#view-practice .tab-setup-group .tab-version-switch{
+ background:#171717!important;
+ border-color:#444!important;
+}
+#view-practice .tab-version-switch button:not([aria-pressed="true"]){
+ background:#292929!important;
+ color:#dedede!important;
+}
+#view-practice .tab-version-switch button[aria-pressed="true"]{
+ background:#303030!important;
+ border-color:var(--cyan)!important;
+ color:var(--cyan)!important;
+}
+#view-practice .tab-setup-group #tab-explore-target,
+#view-practice .tab-setup-group .tab-settings-button{
+ background:#2a2a2a!important;
+ border-color:#4a4a4a!important;
+ color:#eee!important;
+}
+#view-practice .tab-setup-group #tab-explore-target:hover,
+#view-practice .tab-setup-group .tab-settings-button:hover{
+ background:#363636!important;border-color:#666!important;
+}
+#view-practice .song-top{border-bottom-color:#383838!important}
+#view-practice .song-top .icon-button{border-color:#444!important}
+#view-practice .song-stage{border-color:#414141!important}
+#view-practice .sheet-navigation span{
+ background:#202020!important;border-color:#3d3d3d!important;
+}
+#view-practice .song-transport{
+ background:#202020!important;border-color:#3d3d3d!important;
+}
+#view-practice .transport-tempo .tempo-control{color:#aaa!important}
+#view-practice .transport-timeline #tab-time{color:#c5c5c5!important}
+</style><style id="score-version-below-tab">
+#view-practice .tab-score-version-bar{display:flex;justify-content:center;align-items:center;gap:10px;padding:10px 0 4px;min-width:0}
+#view-practice .tab-score-version-bar .tab-version-control{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;min-width:0}
+#view-practice .tab-score-version-bar .tab-control-caption{font-size:11px;font-weight:700;letter-spacing:.08em;color:#aaa}
+#view-practice .tab-score-version-bar .tab-version-switch{display:inline-flex;gap:3px;background:#202020;border:1px solid #444;border-radius:9px;padding:3px}
+#view-practice .tab-score-version-bar .tab-version-switch button{min-height:36px;min-width:76px}
+@media(max-width:450px){#view-practice .tab-score-version-bar .tab-version-control{gap:7px}#view-practice .tab-score-version-bar .tab-version-switch button{min-width:66px}}
+</style><style id="source-key-plain-text">
+#view-practice .tab-setup-version .tab-source-readonly,
+#view-practice .tab-setup-group .tab-source-readonly{
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+  gap:5px!important;width:100%!important;max-width:none!important;
+  min-height:0!important;padding:2px 0!important;margin:0!important;
+  background:transparent!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;cursor:default!important;
+}
+#view-practice .tab-setup-version .tab-source-readonly:hover{
+  background:transparent!important;border:0!important;
+}
+#view-practice .tab-source-readonly .tab-control-caption{
+  color:#aaa!important;font-size:11px!important;font-weight:700!important;
+}
+#view-practice .tab-source-readonly .tab-source-value{
+  color:#e8e8e8!important;font-size:14px!important;
+}
+</style><style id="tabs-layout-unified-2026">
+/* Consistent workspace geometry; no teal/green panel washes. */
+#view-practice .song-top{
+ display:grid!important;grid-template-columns:minmax(240px,.9fr) minmax(0,1.5fr) auto auto!important;
+ align-items:center!important;gap:12px!important;padding:0 0 16px!important;
+ margin-bottom:14px!important;border-bottom:1px solid #3b3b3b!important;
+}
+#view-practice .song-library-picker{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;
+ gap:6px!important;align-items:end!important;min-width:0!important;
+}
+#view-practice .song-library-picker>label{
+ grid-column:1/-1!important;font-size:11px!important;color:#aaa!important;
+}
+#view-practice .song-library-picker select{min-width:0!important;width:100%!important}
+#view-practice .song-heading{min-width:0!important}
+#view-practice .song-heading h1{font-size:clamp(20px,2.3vw,27px)!important;line-height:1.2!important}
+#view-practice .song-controls.inline-target-controls{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ gap:12px!important;align-items:stretch!important;margin:0 0 16px!important;
+}
+#view-practice .tab-setup-group{
+ min-width:0!important;padding:13px!important;background:#202020!important;
+ border:1px solid #3d3d3d!important;border-radius:11px!important;
+ display:flex!important;flex-direction:column!important;gap:10px!important;
+}
+#view-practice .tab-setup-instrument{grid-column:1!important;grid-row:1 / span 2!important}
+#view-practice .tab-setup-version{grid-column:2!important;grid-row:1!important}
+#view-practice .tab-setup-target{grid-column:2!important;grid-row:2!important}
+#view-practice .tab-group-heading{font-size:11px!important;font-weight:750!important;letter-spacing:.11em!important;color:#ddd!important}
+#view-practice .tab-group-fields{display:flex!important;align-items:end!important;gap:10px!important;flex-wrap:wrap!important;min-width:0!important}
+#view-practice .tab-group-fields label{min-width:0!important;flex:1 1 160px!important}
+#view-practice .tab-setup-instrument .tab-group-fields{display:grid!important;grid-template-columns:1fr 1fr!important}
+#view-practice .tab-control-caption{display:block!important;font-size:10px!important;letter-spacing:.08em!important;color:#aaa!important;margin-bottom:5px!important}
+#view-practice .tab-group-fields select{
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;
+ height:42px!important;padding:9px 12px!important;border-radius:8px!important;
+ background:#181818!important;border:1px solid #484848!important;color:#eee!important;
+ font-size:13px!important;
+}
+#view-practice .tab-source-readonly{
+ display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:8px!important;
+ padding:0!important;border:0!important;background:none!important;min-height:30px!important;
+}
+#view-practice .tab-source-readonly .tab-control-caption{margin:0!important}
+#view-practice .tab-source-value{display:inline-flex!important;align-items:baseline!important;gap:7px!important;font-size:14px!important;color:#eee!important}
+#view-practice .tab-setup-target .tab-group-fields{display:grid!important;grid-template-columns:minmax(95px,.65fr) minmax(160px,1.5fr) auto!important;align-items:end!important}
+#view-practice #tab-explore-target{height:42px!important;white-space:nowrap!important;padding:8px 12px!important;background:#2a2a2a!important;border:1px solid #494949!important;color:#eee!important}
+#view-practice .song-stage{margin:0!important;min-width:0!important;border:1px solid #404040!important;border-radius:11px!important;overflow:hidden!important}
+#view-practice .tab-score-version-bar{
+ display:flex!important;justify-content:space-between!important;align-items:center!important;
+ gap:10px!important;flex-wrap:wrap!important;margin:10px 0!important;
+ padding:8px 12px!important;background:#202020!important;
+ border:1px solid #3d3d3d!important;border-radius:10px!important;
+}
+#view-practice .tab-version-control{display:flex!important;align-items:center!important;gap:10px!important}
+#view-practice .tab-version-control .tab-control-caption{margin:0!important}
+#view-practice .tab-version-switch{display:flex!important;gap:3px!important}
+#view-practice .tab-version-switch button{min-height:36px!important;padding:7px 13px!important}
+#view-practice .sheet-navigation{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;flex:1 1 260px!important;min-width:0!important;margin:0!important;padding:0!important;border:0!important}
+#view-practice .sheet-navigation .mono{flex:1!important;text-align:center!important;min-width:0!important}
+#view-practice .song-transport{
+ display:grid!important;grid-template-columns:auto minmax(120px,1fr) auto!important;
+ align-items:center!important;gap:14px!important;padding:11px 12px!important;
+ margin:0 0 8px!important;background:#202020!important;
+ border:1px solid #3d3d3d!important;border-radius:10px!important;
+}
+#view-practice .transport-actions{display:flex!important;align-items:center!important;gap:9px!important;min-width:0!important}
+#view-practice .transport-timeline{display:flex!important;align-items:center!important;gap:10px!important;min-width:0!important}
+#view-practice #tab-seek{min-width:0!important;flex:1 1 auto!important}
+#view-practice #tab-time{white-space:nowrap!important}
+#view-practice .transport-tempo{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important}
+#view-practice .transport-tempo .tempo-control{display:flex!important;align-items:center!important;gap:5px!important}
+#view-practice #tab-tempo{width:65px!important;height:38px!important}
+#view-practice .tab-settings-button{white-space:nowrap!important;min-height:38px!important}
+#view-practice .song-foot{display:flex!important;flex-wrap:wrap!important;gap:9px!important;align-items:center!important;margin:8px 0 16px!important;font-size:11px!important}
+#view-practice .song-foot button:last-child{margin-left:auto!important}
+@media(max-width:1000px){
+ #view-practice .song-transport{grid-template-columns:auto minmax(0,1fr)!important}
+ #view-practice .transport-tempo{grid-column:1/-1!important;justify-content:flex-end!important}
+}
+@media(max-width:760px){
+ #view-practice .song-top{grid-template-columns:minmax(0,1fr) auto auto!important}
+ #view-practice .song-library-picker{grid-column:1/-1!important}
+ #view-practice .song-heading{grid-column:1!important}
+ #view-practice .song-controls.inline-target-controls{grid-template-columns:minmax(0,1fr)!important}
+ #view-practice .tab-setup-instrument,#view-practice .tab-setup-version,#view-practice .tab-setup-target{grid-column:1!important;grid-row:auto!important}
+ #view-practice .tab-setup-instrument .tab-group-fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+ #view-practice .tab-score-version-bar{align-items:stretch!important}
+ #view-practice .sheet-navigation{flex-basis:100%!important}
+ #view-practice .song-transport{grid-template-columns:minmax(0,1fr)!important}
+ #view-practice .transport-actions,#view-practice .transport-tempo{grid-column:1!important}
+ #view-practice .transport-timeline{grid-column:1!important}
+ #view-practice .transport-tempo{justify-content:space-between!important}
+}
+@media(max-width:440px){
+ #view-practice .tab-setup-target .tab-group-fields{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr)!important}
+ #view-practice #tab-explore-target{grid-column:1/-1!important;width:100%!important}
+ #view-practice .tab-setup-instrument .tab-group-fields{grid-template-columns:minmax(0,1fr)!important}
+ #view-practice .song-heading h1{font-size:20px!important}
+ #view-practice .song-foot button:last-child{margin-left:0!important}
+}
+</style><style id="tabs-workspace-structure-final">
+/* Compact, evenly sized configuration cards: no oversized empty instrument block. */
+#view-practice.tabs-workspace{display:flex!important;flex-direction:column!important;gap:12px!important;height:auto!important;}
+#view-practice .song-controls.inline-target-controls{
+ display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,.75fr) minmax(0,1.65fr)!important;
+ gap:10px!important;align-items:stretch!important;margin:0!important;min-width:0!important;
+}
+#view-practice .song-controls .tab-setup-group{
+ grid-column:auto!important;grid-row:auto!important;align-self:stretch!important;
+ min-width:0!important;padding:13px 14px!important;gap:11px!important;
+ background:#202020!important;border:1px solid #414141!important;border-radius:11px!important;
+}
+#view-practice .tab-setup-group .tab-group-heading{
+ min-height:0!important;font-size:11px!important;color:#dedede!important;
+ font-weight:750!important;letter-spacing:.09em!important;
+}
+#view-practice .tab-setup-group .tab-group-fields{min-width:0!important}
+#view-practice .tab-setup-instrument .tab-group-fields{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:9px!important;
+}
+#view-practice .tab-setup-target .tab-group-fields{
+ display:grid!important;grid-template-columns:minmax(77px,.53fr) minmax(120px,1.35fr)!important;
+ gap:8px!important;align-items:end!important;
+}
+#view-practice .tab-setup-target #tab-explore-target{
+ grid-column:1/-1!important;justify-self:start!important;width:auto!important;
+ height:34px!important;min-height:34px!important;padding:5px 10px!important;
+ font-size:11px!important;
+}
+#view-practice .tab-setup-group .tab-control-caption{
+ color:#aaa!important;line-height:1.25!important;font-size:10px!important;
+ margin-bottom:5px!important;letter-spacing:.065em!important;
+}
+#view-practice .tab-setup-group select{
+ height:40px!important;min-height:40px!important;padding:8px 10px!important;
+ font-size:12px!important;background:#181818!important;color:#ededed!important;
+ border:1px solid #494949!important;border-radius:8px!important;
+}
+#view-practice .tab-setup-version .tab-group-fields{display:block!important}
+#view-practice .tab-source-readonly{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ gap:6px!important;min-height:0!important;padding:0!important;margin:0!important;
+ border:0!important;background:transparent!important;
+}
+#view-practice .tab-source-readonly .tab-control-caption{margin:0!important}
+#view-practice .tab-source-readonly .tab-source-value{
+ font-size:13px!important;gap:6px!important;flex-wrap:wrap!important;
+ color:#ddd!important;line-height:1.4!important;
+}
+#view-practice .tab-source-readonly b{font-size:17px!important}
+/* The score keeps its own panel; navigation is an independent, quiet strip. */
+#view-practice .song-stage{margin:0!important;flex:0 0 auto!important;}
+#view-practice>.sheet-navigation{
+ display:grid!important;grid-template-columns:44px minmax(0,1fr) 44px!important;
+ align-items:center!important;gap:10px!important;flex:0 0 auto!important;
+ margin:0!important;padding:1px 0!important;border:0!important;
+}
+#view-practice>.sheet-navigation button{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:44px!important;min-width:44px!important;height:38px!important;min-height:38px!important;
+ padding:0!important;border-radius:9px!important;background:#272727!important;
+ border:1px solid #444!important;
+}
+#view-practice>.sheet-navigation .mono{
+ color:#bbb!important;text-align:center!important;font-size:11px!important;
+ line-height:1.4!important;white-space:normal!important;min-width:0!important;
+}
+/* All playback decisions live together: version -> melody -> play -> stop. */
+#view-practice>.song-transport{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;
+ grid-template-rows:auto auto!important;align-items:center!important;
+ gap:11px 15px!important;padding:12px 14px!important;margin:0!important;
+ background:#202020!important;border:1px solid #424242!important;border-radius:11px!important;
+}
+#view-practice .song-transport .transport-actions{
+ display:flex!important;flex-wrap:wrap!important;align-items:center!important;
+ justify-content:flex-start!important;gap:10px!important;grid-column:1!important;
+ grid-row:1!important;min-width:0!important;
+}
+#view-practice .song-transport .tab-version-control{
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ gap:8px!important;min-width:0!important;margin:0!important;
+}
+#view-practice .song-transport .tab-version-control .tab-control-caption{
+ display:inline-block!important;margin:0!important;color:#aaa!important;
+ font-size:10px!important;font-weight:700!important;letter-spacing:.08em!important;
+}
+#view-practice .song-transport .tab-version-switch{
+ display:inline-flex!important;gap:3px!important;flex:0 0 auto!important;
+ background:#171717!important;border:1px solid #494949!important;
+ padding:3px!important;border-radius:9px!important;
+}
+#view-practice .song-transport .tab-version-switch button{
+ min-height:36px!important;height:36px!important;padding:7px 12px!important;
+ font-size:12px!important;white-space:nowrap!important;
+}
+#view-practice .song-transport .tab-version-switch button[aria-pressed="true"]{
+ background:#2f2f2f!important;border-color:var(--cyan)!important;color:var(--cyan)!important;
+}
+#view-practice .song-transport .tab-melody-toggle{
+ display:inline-flex!important;align-items:center!important;gap:7px!important;
+ min-height:42px!important;padding:7px 12px!important;margin:0!important;
+ border:1px solid #464646!important;border-radius:9px!important;
+ background:#292929!important;color:#f2f2f2!important;
+ font-size:12px!important;font-weight:650!important;white-space:nowrap!important;
+}
+#view-practice .song-transport #tab-play{
+ min-height:42px!important;min-width:100px!important;border-radius:9px!important;
+ font-size:13px!important;font-weight:800!important;
+}
+#view-practice .song-transport #tab-stop{
+ width:42px!important;height:42px!important;min-height:42px!important;min-width:42px!important;
+ border-radius:9px!important;padding:0!important;
+}
+#view-practice .song-transport .transport-tempo{
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;
+ gap:12px!important;grid-column:2!important;grid-row:1!important;min-width:0!important;
+}
+#view-practice .song-transport .tempo-control{display:flex!important;align-items:center!important;gap:6px!important;}
+#view-practice .song-transport #tab-tempo{
+ width:65px!important;height:39px!important;min-height:39px!important;
+ border:1px solid #494949!important;background:#171717!important;color:#eee!important;
+}
+#view-practice .song-transport .tab-settings-button{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-height:39px!important;margin:0!important;padding:6px 12px!important;
+ border:1px solid #4a4a4a!important;border-radius:8px!important;
+ background:#2d2d2d!important;color:#eaeaea!important;white-space:nowrap!important;
+}
+#view-practice .song-transport .transport-timeline{
+ display:flex!important;align-items:center!important;gap:12px!important;
+ grid-column:1/-1!important;grid-row:2!important;min-width:0!important;
+ padding:4px 0 0!important;
+}
+#view-practice .song-transport #tab-seek{flex:1 1 auto!important;min-width:0!important;width:100%!important;}
+#view-practice .song-transport #tab-time{flex:0 0 auto!important;white-space:nowrap!important;font-size:11px!important;}
+#view-practice .song-foot{margin:0 0 3px!important;}
+/* Spectrum remains the original dedicated panel beneath the whole player. */
+#view-practice>.spectrum-mirror{
+ display:block!important;order:initial!important;flex:0 0 auto!important;
+ grid-row:auto!important;grid-column:auto!important;margin-top:6px!important;
+}
+@media(max-width:1130px){
+ #view-practice>.song-transport{grid-template-columns:minmax(0,1fr)!important;}
+ #view-practice>.song-transport .transport-actions{grid-column:1!important;grid-row:1!important;}
+ #view-practice>.song-transport .transport-tempo{grid-column:1!important;grid-row:3!important;justify-content:flex-end!important;}
+ #view-practice>.song-transport .transport-timeline{grid-column:1!important;grid-row:2!important;}
+}
+@media(max-width:950px){
+ #view-practice .song-controls.inline-target-controls{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ }
+ #view-practice .song-controls .tab-setup-instrument{grid-column:1!important;grid-row:1!important;}
+ #view-practice .song-controls .tab-setup-version{grid-column:2!important;grid-row:1!important;}
+ #view-practice .song-controls .tab-setup-target{grid-column:1/-1!important;grid-row:2!important;}
+ #view-practice .tab-setup-target .tab-group-fields{
+  grid-template-columns:minmax(80px,.32fr) minmax(150px,1fr) auto!important;
+ }
+ #view-practice .tab-setup-target #tab-explore-target{grid-column:3!important;height:40px!important;min-height:40px!important;}
+}
+@media(max-width:630px){
+ #view-practice .song-controls.inline-target-controls{grid-template-columns:minmax(0,1fr)!important;}
+ #view-practice .song-controls .tab-setup-instrument,
+ #view-practice .song-controls .tab-setup-version,
+ #view-practice .song-controls .tab-setup-target{grid-column:1!important;grid-row:auto!important;}
+ #view-practice .song-transport .transport-actions{gap:8px!important;}
+ #view-practice .song-transport .tab-version-control{flex-basis:100%!important;}
+ #view-practice .song-transport .transport-tempo{justify-content:space-between!important;}
+}
+@media(max-width:440px){
+ #view-practice .tab-setup-instrument .tab-group-fields{grid-template-columns:minmax(0,1fr)!important;}
+ #view-practice .tab-setup-target .tab-group-fields{grid-template-columns:minmax(0,.55fr) minmax(0,1fr)!important;}
+ #view-practice .tab-setup-target #tab-explore-target{grid-column:1/-1!important;width:100%!important;}
+ #view-practice .song-transport .transport-timeline{flex-wrap:wrap!important;}
+ #view-practice .song-transport #tab-time{margin-left:auto!important;}
+}
+</style><style id="tabs-compact-final-polish">
+#view-practice .tab-setup-target .tab-group-heading{
+ display:flex!important;flex-direction:row!important;justify-content:space-between!important;
+ align-items:center!important;gap:9px!important;flex-wrap:wrap!important;
+}
+#view-practice .tab-setup-target #tab-explore-target{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ grid-column:auto!important;justify-self:auto!important;width:auto!important;
+ height:30px!important;min-height:30px!important;max-width:100%!important;
+ margin:0!important;padding:4px 9px!important;font-size:10px!important;
+ border:1px solid #484848!important;background:#292929!important;color:#ddd!important;
+}
+#view-practice .tab-setup-target .tab-group-fields{
+ grid-template-columns:minmax(77px,.52fr) minmax(120px,1.45fr)!important;
+ align-items:end!important;
+}
+@media(min-width:801px){
+ #view-practice>.song-transport{
+  grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-rows:auto auto!important;
+ }
+ #view-practice>.song-transport .transport-actions{
+  grid-column:1!important;grid-row:1!important;
+ }
+ #view-practice>.song-transport .transport-tempo{
+  grid-column:2!important;grid-row:1!important;justify-content:flex-end!important;
+ }
+ #view-practice>.song-transport .transport-timeline{
+  grid-column:1/-1!important;grid-row:2!important;
+ }
+}
+@media(max-width:630px){
+ #view-practice .tab-setup-target .tab-group-heading{align-items:center!important}
+}
+</style><style id="tab-playing-notes-bold-only">
+/* No moving cursor or event background: emphasize the sounding notes. */
+#view-practice .tab-event.playing .event-bg,
+#view-practice .tab-event.playing:hover .event-bg{
+ fill:transparent!important;stroke:none!important;
+}
+#view-practice .tab-event.playing text.tab-pitch{
+ font-weight:900!important;
+ font-size:16px!important;
+ paint-order:stroke fill;
+ stroke:#161616;
+ stroke-width:1.5px;
+ animation:tab-note-onset-emphasis .48s ease-out 1;
+}
+#view-practice .tab-event.playing text.tab-pitch[data-score-role="melody"]{
+ fill:var(--cyan)!important;
+}
+#view-practice .tab-event.playing text.tab-pitch[data-score-role="chord"]{
+ fill:var(--magenta)!important;
+}
+@keyframes tab-note-onset-emphasis{
+ 0%{opacity:.65;stroke-width:2.5px}
+ 45%{opacity:1;stroke-width:1.5px}
+ 100%{opacity:1;stroke-width:1.5px}
+}
+@media(prefers-reduced-motion:reduce){
+ #view-practice .tab-event.playing text.tab-pitch{animation:none!important}
+}
+</style><style id="tab-player-inline-play-compact-settings">
+/* The play button belongs on the timeline row; no stop button. */
+#view-practice .song-transport .transport-timeline{
+ display:flex!important;align-items:center!important;gap:12px!important;
+ min-width:0!important;
+}
+#view-practice .song-transport .transport-timeline #tab-play{
+ flex:0 0 auto!important;min-width:95px!important;min-height:43px!important;
+ margin:0!important;white-space:nowrap!important;
+}
+#view-practice .song-transport .transport-timeline #tab-seek{
+ flex:1 1 auto!important;min-width:40px!important;width:auto!important;
+}
+#view-practice .song-transport .transport-timeline #tab-time{
+ flex:0 0 auto!important;white-space:nowrap!important;
+}
+#view-practice .song-transport .transport-tempo .tab-settings-button{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:0 0 42px!important;width:42px!important;min-width:42px!important;
+ min-height:40px!important;padding:5px!important;
+ font-size:23px!important;line-height:1!important;
+ border:1px solid #4e5558!important;border-radius:9px!important;
+ background:#2b3032!important;color:#eee!important;
+}
+#view-practice .song-transport .transport-tempo .tab-settings-button:hover{
+ background:#383e40!important;border-color:#777!important;
+}
+@media(max-width:450px){
+ #view-practice .song-transport .transport-timeline{gap:8px!important}
+ #view-practice .song-transport .transport-timeline #tab-play{
+  min-width:76px!important;min-height:40px!important;padding:8px!important;
+ }
+ #view-practice .song-transport .transport-timeline #tab-time{font-size:10px!important}
+}
+</style><style id="tabs-wide-bold-page-arrows">
+/* Wide, legible previous/next bar controls on desktop and mobile. */
+#view-practice>.sheet-navigation{
+ grid-template-columns:68px minmax(0,1fr) 68px!important;
+}
+#view-practice>.sheet-navigation button{
+ box-sizing:border-box!important;
+ width:68px!important;min-width:68px!important;
+ height:44px!important;min-height:44px!important;
+ font-family:Arial,system-ui,sans-serif!important;
+ font-size:27px!important;font-weight:900!important;
+ line-height:1!important;color:#f5f5f5!important;
+ background:#292929!important;border:1px solid #555!important;
+}
+#view-practice>.sheet-navigation button:hover:not(:disabled){
+ background:#363636!important;border-color:#aaa!important;
+}
+#view-practice>.sheet-navigation button:focus-visible{
+ outline:2px solid var(--cyan)!important;outline-offset:2px!important;
+}
+@media(max-width:500px){
+ #view-practice>.sheet-navigation{
+  grid-template-columns:54px minmax(0,1fr) 54px!important;gap:7px!important;
+ }
+ #view-practice>.sheet-navigation button{
+  width:54px!important;min-width:54px!important;
+  font-size:25px!important;
+ }
+}
+</style>
+<style id="tabs-simple-source-target-headers">
+#view-practice .tab-setup-group .tab-group-heading>span{font-size:14px!important;font-weight:750!important;letter-spacing:0!important;text-transform:none!important;color:#eee!important}
+#view-practice .tab-setup-instrument{justify-content:center!important}
+#view-practice .tab-setup-version .source-fields{display:block!important}
+#view-practice .tab-setup-version .tab-source-readonly{display:grid!important;grid-template-columns:minmax(45px,.38fr) minmax(0,1.62fr)!important;gap:12px!important;align-items:start!important;min-height:0!important}
+#view-practice .tab-setup-version .source-field{display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important}
+#view-practice .tab-setup-version .source-field .tab-control-caption{margin:0!important;color:#aaa!important;font-size:11px!important;font-weight:650!important;letter-spacing:.02em!important;text-transform:none!important}
+#view-practice .tab-setup-version .source-field b{font-size:16px!important;color:#eee!important}
+#view-practice .tab-setup-version .source-field #tab-source-scale{font-size:13px!important;color:#ddd!important;line-height:1.35!important;white-space:normal!important}
+#view-practice .tab-setup-target .tab-control-caption{font-size:11px!important;letter-spacing:.02em!important;text-transform:none!important}
+</style><style id="tabs-floating-source-target-legends">
+/* Place Source and Target in the top border, like a fieldset legend,
+   rather than spending a row of the panel interior on their titles. */
+#view-practice .tab-setup-version,
+#view-practice .tab-setup-target{
+  position:relative!important;
+  margin-top:13px!important;
+  overflow:visible!important;
+}
+#view-practice .tab-setup-version .tab-group-heading,
+#view-practice .tab-setup-target .tab-group-heading{
+  display:flex!important;
+  justify-content:flex-end!important;
+  align-items:center!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
+#view-practice .tab-setup-version .tab-group-heading>span:first-child,
+#view-practice .tab-setup-target .tab-group-heading>span:first-child{
+  position:absolute!important;
+  top:-12px!important;
+  right:14px!important;
+  z-index:2!important;
+  display:block!important;
+  width:auto!important;
+  padding:1px 8px!important;
+  background:#111!important;
+  color:#e8e8e8!important;
+  font-size:12px!important;
+  font-weight:750!important;
+  letter-spacing:.02em!important;
+  line-height:20px!important;
+  text-transform:none!important;
+  white-space:nowrap!important;
+}
+/* Leave a clear corner for the floating Target label. */
+#view-practice .tab-setup-target .tab-group-heading #tab-explore-target{
+  margin:15px auto 0 0!important;
+  align-self:flex-start!important;
+}
+#view-practice .tab-setup-version .tab-group-fields{
+  margin-top:10px!important;
+}
+#view-practice .tab-setup-target .tab-group-fields{
+  margin-top:0!important;
+}
+@media(max-width:650px){
+ #view-practice .tab-setup-version,
+ #view-practice .tab-setup-target{margin-top:15px!important}
+}
+</style><style id="tab-compact-equal-height-setup">
+/* All three setup cards have the same natural height, no empty stretched row. */
+#view-practice .song-controls.inline-target-controls{
+ display:grid!important;
+ grid-template-columns:minmax(0,1.05fr) minmax(0,.7fr) minmax(0,1.5fr)!important;
+ align-items:start!important;
+ gap:10px!important;
+ margin:12px 0 15px!important;
+}
+#view-practice .song-controls.inline-target-controls>.tab-setup-group{
+ box-sizing:border-box!important;
+ height:122px!important;
+ min-height:122px!important;
+ max-height:122px!important;
+ margin-top:10px!important;
+ padding:17px 13px 12px!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:center!important;
+ gap:0!important;
+}
+#view-practice .song-controls .tab-setup-instrument{
+ grid-column:1!important;grid-row:1!important;
+}
+#view-practice .song-controls .tab-setup-version{
+ grid-column:2!important;grid-row:1!important;
+}
+#view-practice .song-controls .tab-setup-target{
+ grid-column:3!important;grid-row:1!important;
+}
+#view-practice .tab-setup-version .tab-group-fields,
+#view-practice .tab-setup-target .tab-group-fields{
+ margin-top:0!important;
+}
+#view-practice .tab-setup-target .tab-group-heading{
+ height:0!important;min-height:0!important;
+}
+#view-practice .tab-setup-target .tab-group-fields{
+ display:grid!important;
+ grid-template-columns:minmax(85px,.65fr) minmax(0,1.65fr)!important;
+ align-items:end!important;
+ gap:9px!important;
+}
+#view-practice .tab-setup-target .tab-target-key,
+#view-practice .tab-setup-target .tab-target-scale{
+ display:flex!important;flex-direction:column!important;
+ min-width:0!important;gap:0!important;
+}
+#view-practice .tab-setup-target .tab-scale-caption-row{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:7px!important;
+ height:27px!important;
+ min-height:27px!important;
+ margin-bottom:5px!important;
+}
+#view-practice .tab-setup-target .tab-target-key>.tab-control-caption{
+ display:flex!important;align-items:center!important;
+ height:27px!important;min-height:27px!important;
+ margin-bottom:5px!important;
+}
+#view-practice .tab-setup-target .tab-scale-caption-row>span{
+ font-size:11px!important;color:#aaa!important;
+}
+#view-practice .tab-setup-target #tab-explore-target{
+ position:static!important;
+ align-self:auto!important;
+ display:inline-flex!important;align-items:center!important;
+ justify-content:center!important;
+ flex:0 0 auto!important;
+ width:auto!important;
+ height:27px!important;
+ min-height:27px!important;
+ margin:0!important;
+ padding:3px 9px!important;
+ border:1px solid #4b4b4b!important;
+ border-radius:6px!important;
+ background:#2b2b2b!important;
+ color:#eee!important;
+ font-size:11px!important;font-weight:650!important;
+ line-height:1!important;
+ white-space:nowrap!important;
+}
+#view-practice .tab-setup-target #tab-explore-target:hover{
+ background:#383838!important;border-color:#737373!important;
+}
+#view-practice .tab-setup-instrument .tab-group-fields{
+ width:100%!important;
+}
+#view-practice .tab-setup-version .source-fields{
+ width:100%!important;
+}
+@media(max-width:800px){
+ #view-practice .song-controls.inline-target-controls{
+  grid-template-columns:minmax(0,1fr)!important;gap:11px!important;
+ }
+ #view-practice .song-controls.inline-target-controls>.tab-setup-group{
+  grid-column:1!important;grid-row:auto!important;
+  height:auto!important;min-height:104px!important;max-height:none!important;
+  margin-top:10px!important;padding:14px 13px!important;
+ }
+ #view-practice .tab-setup-target .tab-group-fields{
+  grid-template-columns:minmax(75px,.65fr) minmax(0,1.65fr)!important;
+ }
+}
+@media(max-width:360px){
+ #view-practice .tab-setup-target .tab-group-fields{
+  grid-template-columns:minmax(70px,.65fr) minmax(0,1.65fr)!important;
+  gap:6px!important;
+ }
+ #view-practice .tab-setup-target #tab-explore-target{
+  padding:3px 6px!important;font-size:10px!important;
+ }
+}
+</style><style id="tab-transport-inside-score-pager">
+#view-practice .sheet-navigation.pager{
+ display:flex!important;align-items:center!important;gap:10px!important;
+ width:100%!important;margin:10px 0!important;padding:0!important;
+ border:0!important;background:none!important;
+}
+#view-practice .sheet-navigation.pager>.pager-center{
+ display:flex!important;flex:1 1 auto!important;min-width:0!important;
+ flex-direction:column!important;gap:4px!important;
+}
+#view-practice .sheet-navigation.pager .transport-timeline{
+ display:flex!important;align-items:center!important;gap:11px!important;
+ width:100%!important;min-width:0!important;
+ padding:5px 10px!important;border:1px solid #454545!important;
+ border-radius:9px!important;background:#232323!important;
+}
+#view-practice .sheet-navigation.pager #tab-play{
+ flex:0 0 auto!important;min-width:90px!important;min-height:40px!important;
+ padding:8px 13px!important;margin:0!important;font-weight:750!important;
+}
+#view-practice .sheet-navigation.pager #tab-seek{
+ flex:1 1 auto!important;width:100%!important;min-width:25px!important;
+ margin:0!important;
+}
+#view-practice .sheet-navigation.pager #tab-time{
+ flex:0 0 auto!important;font-size:11px!important;white-space:nowrap!important;
+}
+#view-practice .sheet-navigation.pager .pager-caption{
+ display:block!important;text-align:center!important;
+ font-size:10px!important;color:#999!important;
+ line-height:1.2!important;
+}
+#view-practice .sheet-navigation.pager>button{
+ flex:0 0 62px!important;min-height:48px!important;
+ font-size:22px!important;font-weight:800!important;
+}
+#view-practice .song-transport{
+ display:flex!important;align-items:center!important;
+ justify-content:space-between!important;gap:12px!important;
+ flex-wrap:wrap!important;
+}
+#view-practice .song-transport .transport-actions,
+#view-practice .song-transport .transport-tempo{
+ display:flex!important;align-items:center!important;gap:9px!important;
+ grid-column:auto!important;
+}
+@media(max-width:480px){
+ #view-practice .sheet-navigation.pager{gap:5px!important}
+ #view-practice .sheet-navigation.pager>button{
+  flex-basis:39px!important;min-height:44px!important;font-size:19px!important;
+ }
+ #view-practice .sheet-navigation.pager .transport-timeline{
+  gap:6px!important;padding:4px 5px!important;
+ }
+ #view-practice .sheet-navigation.pager #tab-play{
+  min-width:62px!important;min-height:37px!important;
+  padding:7px 5px!important;font-size:12px!important;
+ }
+ #view-practice .sheet-navigation.pager #tab-time{font-size:9px!important}
+}
+</style><style id="tab-transport-single-row-polish">
+/* One equal-height transport between the score paging arrows. */
+#view-practice .sheet-navigation.pager{
+ display:flex!important;align-items:stretch!important;gap:10px!important;
+ margin:10px 0!important;height:50px!important;min-height:50px!important;
+}
+#view-practice .sheet-navigation.pager>.pager-center{
+ display:flex!important;flex:1 1 0!important;min-width:0!important;
+ height:50px!important;min-height:50px!important;
+}
+#view-practice .sheet-navigation.pager .pager-caption{display:none!important}
+#view-practice .sheet-navigation.pager .transport-timeline{
+ box-sizing:border-box!important;display:flex!important;align-items:center!important;
+ flex:1 1 auto!important;gap:12px!important;min-width:0!important;
+ width:100%!important;height:50px!important;min-height:50px!important;
+ max-height:50px!important;margin:0!important;padding:4px 9px!important;
+ border:1px solid #464646!important;border-radius:9px!important;background:#242424!important;
+}
+#view-practice .sheet-navigation.pager>button{
+ box-sizing:border-box!important;flex:0 0 62px!important;
+ width:62px!important;height:50px!important;min-height:50px!important;
+ max-height:50px!important;margin:0!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+}
+#view-practice .sheet-navigation.pager #tab-play{
+ box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;
+ justify-content:center!important;flex:0 0 auto!important;
+ width:94px!important;min-width:94px!important;height:40px!important;
+ min-height:40px!important;max-height:40px!important;
+ padding:0 10px!important;margin:0!important;
+ white-space:nowrap!important;overflow:hidden!important;
+ font:750 14px/1 system-ui,sans-serif!important;
+ letter-spacing:0!important;border-radius:7px!important;
+ color:#0c1c20!important;background:var(--cyan)!important;
+ border:1px solid var(--cyan)!important;
+}
+#view-practice .sheet-navigation.pager #tab-play:hover{filter:brightness(1.08)}
+#view-practice .sheet-navigation.pager #tab-play:focus-visible{
+ outline:2px solid #fff!important;outline-offset:2px!important;
+}
+#view-practice .sheet-navigation.pager #tab-seek{flex:1 1 auto!important;min-width:0!important}
+#view-practice .sheet-navigation.pager #tab-time{
+ flex:0 0 auto!important;white-space:nowrap!important;
+ font:11px/1 ui-monospace,monospace!important;
+}
+@media(max-width:480px){
+ #view-practice .sheet-navigation.pager{gap:5px!important;height:46px!important;min-height:46px!important}
+ #view-practice .sheet-navigation.pager>.pager-center{height:46px!important;min-height:46px!important}
+ #view-practice .sheet-navigation.pager>button{
+  flex-basis:39px!important;width:39px!important;height:46px!important;
+  min-height:46px!important;max-height:46px!important;
+ }
+ #view-practice .sheet-navigation.pager .transport-timeline{
+  height:46px!important;min-height:46px!important;max-height:46px!important;
+  padding:3px 5px!important;gap:6px!important;
+ }
+ #view-practice .sheet-navigation.pager #tab-play{
+  width:66px!important;min-width:66px!important;height:38px!important;
+  min-height:38px!important;max-height:38px!important;
+  padding:0 5px!important;font-size:12px!important;
+ }
+ #view-practice .sheet-navigation.pager #tab-time{font-size:9px!important}
+}
+</style><style id="tab-footer-inside-score-bottom-right">
+/* Score metadata belongs to the score, not beneath the transport. */
+#view-practice .song-stage{
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+}
+#view-practice .song-stage>.song-foot{
+  display:flex!important;
+  flex:0 0 auto!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  align-self:stretch!important;
+  gap:6px 12px!important;
+  flex-wrap:wrap!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  padding:4px 12px 10px!important;
+  margin:0!important;
+  border:0!important;
+  background:transparent!important;
+  font-size:10px!important;
+  line-height:1.5!important;
+  color:#aaa!important;
+  text-align:right!important;
+}
+#view-practice .song-stage>.song-foot>span,
+#view-practice .song-stage>.song-foot>button{
+  flex:0 0 auto!important;
+  margin:0!important;
+  white-space:nowrap!important;
+}
+#view-practice .song-stage>.song-foot button{
+  min-height:27px!important;
+}
+@media(max-width:580px){
+ #view-practice .song-stage>.song-foot{
+   gap:5px 8px!important;
+   padding:6px 8px 9px!important;
+   font-size:9px!important;
+ }
+ #view-practice .song-stage>.song-foot>span:first-child{
+   flex:1 1 100%!important;
+   white-space:normal!important;
+ }
+}
+</style><style id="tab-score-fill-available-panel">
+/* Let the score occupy the panel, rather than letterboxing it to the SVG's
+   original aspect ratio. Keep the information footer below the score. */
+#view-practice #song-stage{
+ display:flex!important;flex-direction:column!important;
+}
+#view-practice #tab-sheet{
+ display:flex!important;
+ flex:1 1 auto!important;
+ min-height:0!important;
+ width:100%!important;
+ box-sizing:border-box!important;
+ padding:7px 8px 2px!important;
+ overflow:hidden!important;
+}
+#view-practice #tab-sheet>svg{
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-width:0!important;
+ max-width:none!important;
+ flex:1 1 auto!important;
+}
+#view-practice #song-stage>.song-foot{
+ flex:0 0 auto!important;
+}
+</style><style id="tab-unified-workspace-compact">
+/* A single workspace encloses library, arrangement, score and player.
+   Spectroscope remains an independent panel beneath it. */
+#view-practice .tab-workspace-container{
+  display:flex!important;flex-direction:column!important;
+  gap:10px!important;min-width:0!important;
+  padding:14px!important;margin:0 0 12px!important;
+  background:#1c1c1c!important;border:1px solid #3e3e3e!important;
+  border-radius:13px!important;
+}
+#view-practice .tab-workspace-container>.song-top{
+  margin:0!important;padding:0 0 10px!important;
+  border-bottom:1px solid #373737!important;
+}
+#view-practice .tab-workspace-container>.song-controls.inline-target-controls{
+  margin:0!important;gap:9px!important;
+}
+#view-practice .tab-workspace-container>.song-controls.inline-target-controls>.tab-setup-group{
+  margin-top:8px!important;
+}
+#view-practice .tab-workspace-container>.song-stage{
+  margin:0!important;
+}
+#view-practice .tab-workspace-container>.sheet-navigation{
+  margin:0!important;padding:0!important;
+}
+#view-practice .tab-workspace-container>.song-transport{
+  margin:0!important;padding:9px 12px!important;
+}
+#view-practice .tab-workspace-container #tab-sheet{
+  padding:3px 7px 0!important;
+}
+#view-practice .tab-workspace-container .song-stage>.song-foot{
+  padding-top:0!important;padding-bottom:6px!important;
+}
+#view-practice .tab-workspace-container>.song-top .song-heading h1{
+  margin:0!important;
+}
+#view-practice .tab-workspace-container>.song-top .song-heading p{
+  margin-top:3px!important;
+}
+#view-practice .tab-workspace-container>.song-controls.inline-target-controls>.tab-setup-group{
+  height:108px!important;min-height:108px!important;max-height:108px!important;
+}
+@media(max-width:800px){
+ #view-practice .tab-workspace-container{padding:10px!important;gap:8px!important}
+ #view-practice .tab-workspace-container>.song-controls.inline-target-controls>.tab-setup-group{
+   height:auto!important;min-height:85px!important;max-height:none!important;
+ }
+}
+@media(max-width:480px){
+ #view-practice .tab-workspace-container{padding:8px!important}
+}
+</style><style id="tabs-remove-forced-height-blank-space">
+/* The old Tabs view used a viewport-sized height. With a single workspace
+   wrapper that creates a large empty flex region. Let content set height. */
+#view-practice.tabs-workspace:not(.show-pattern):not(.show-structure):not(.show-transform){
+ height:auto!important;
+ min-height:0!important;
+ max-height:none!important;
+ flex:0 0 auto!important;
+ justify-content:flex-start!important;
+ align-items:stretch!important;
+}
+#view-practice.tabs-workspace .tab-workspace-container{
+ height:auto!important;
+ min-height:0!important;
+ max-height:none!important;
+ flex:0 0 auto!important;
+ justify-content:flex-start!important;
+ align-items:stretch!important;
+}
+#view-practice.tabs-workspace .tab-workspace-container>.song-stage{
+ flex:0 0 auto!important;
+ height:auto!important;
+ min-height:0!important;
+}
+#view-practice.tabs-workspace .tab-workspace-container>.song-transport{
+ flex:0 0 auto!important;
+ margin-top:0!important;
+}
+#view-practice.tabs-workspace .tab-workspace-container>.sheet-navigation{
+ flex:0 0 auto!important;
+}
+</style><style id="tab-play-pause-icon-fix">
+/* Draw the pause symbol in CSS to avoid font-dependent Roman numeral glyphs. */
+#view-practice .sheet-navigation.pager #tab-play{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex-direction:row!important;gap:8px!important;
+ font-family:inherit!important;font-size:14px!important;font-weight:750!important;
+ line-height:1!important;white-space:nowrap!important;
+ min-width:94px!important;padding:0 12px!important;
+}
+#view-practice .sheet-navigation.pager #tab-play[aria-pressed="true"]::before{
+ content:"";display:inline-block;flex:0 0 12px;width:12px;height:14px;
+ background:linear-gradient(to right,currentColor 0 4px,transparent 4px 8px,currentColor 8px 12px);
+}
+@media(max-width:480px){
+ #view-practice .sheet-navigation.pager #tab-play{
+  min-width:74px!important;padding:0 7px!important;font-size:12px!important;gap:5px!important;
+ }
+}
+</style><style id="tab-fret-space-rebalance">
+/* Give the longest fret presets more room without growing the entire row.
+   The scale selector gives up a little of its unused width. */
+@media(min-width:801px){
+ #view-practice .song-controls.inline-target-controls{
+   grid-template-columns:minmax(0,1.22fr) minmax(0,.70fr) minmax(0,1.33fr)!important;
+ }
+ #view-practice .tab-setup-instrument .tab-group-fields{
+   display:grid!important;
+   grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr)!important;
+   gap:9px!important;
+ }
+}
+#view-practice .tab-setup-instrument .tab-fret-choice,
+#view-practice .tab-setup-instrument .tab-tuning-choice{
+ min-width:0!important;width:100%!important;
+}
+#view-practice .tab-setup-instrument select{
+ box-sizing:border-box!important;display:block!important;
+ min-width:0!important;max-width:100%!important;width:100%!important;
+ padding-right:26px!important;
+ text-overflow:ellipsis!important;
+ white-space:nowrap!important;
+}
+@media(max-width:800px){
+ #view-practice .tab-setup-instrument .tab-group-fields{
+  display:grid!important;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr)!important;
+  gap:8px!important;
+ }
+}
+@media(max-width:380px){
+ #view-practice .tab-setup-instrument .tab-group-fields{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
 </style></head>
 <body>
 <header class="app-header">
@@ -4891,32 +6148,68 @@ body > header.app-header nav.main-nav > button[data-view]:focus-visible{
 </div>
 </section>
 <section aria-label="Tab" class="view tabs-workspace" hidden="" id="view-practice">
+<div class="tab-workspace-container" aria-label="Tab library and player">
 <div class="song-top"><div class="song-library-picker">
 <label for="song-library-select">Library · 106 selections</label>
 <select id="song-library-select" aria-label="Select a song, chord progression, or theory study"></select>
 <button type="button" class="small ghost" data-dialog="song-library" aria-controls="song-library" aria-haspopup="dialog" title="Search and filter the library">Search / filter</button>
 </div><div class="song-heading"><h1 id="tab-title">Stairway to Heaven</h1><p id="tab-credit"></p></div><button aria-label="Save favorite" class="icon-button" id="tab-favorite">☆</button><button aria-label="Song and arrangement information" class="icon-button" data-dialog="song-info">ⓘ</button></div>
-<div class="song-controls inline-target-controls">
- <select aria-label="Tab instrument" id="tab-tuning"></select>
- <label class="tab-fret-choice"><span class="tab-control-caption" id="tab-fret-caption">FRET MODEL</span>
-   <select aria-label="Tab instrument fret classification" id="tab-frets"></select>
- </label>
- <button type="button" class="tab-source-key" id="tab-source-reset" aria-label="Restore source key and scale">
-  <span class="tab-control-caption">SOURCE</span><span class="tab-source-value"><b id="tab-source-key">A</b><span id="tab-source-scale">Natural minor · Aeolian</span></span>
- </button>
- <div class="tab-version-switch" role="group" aria-label="Play source or target arrangement">
-  <button type="button" id="tab-play-source" aria-pressed="false">Source</button>
-  <button type="button" id="tab-play-target" aria-pressed="true">Target</button>
- </div>
- <label class="tab-target-key"><span class="tab-control-caption">TARGET KEY</span><select id="tab-key" aria-label="Target key"></select></label>
- <label class="tab-target-scale"><span class="tab-control-caption">TARGET SCALE</span><select id="tab-scale" aria-label="Target scale"></select></label>
- <button type="button" class="small ghost" id="tab-explore-target" title="Choose a key and scale in Explore, then return to this score">Choose in Explore</button>
- <button aria-label="Arrangement and practice settings" class="small tab-settings-button" data-dialog="practice-options">Settings</button>
+<div class="song-controls inline-target-controls" aria-label="Song arrangement controls">
+  <section class="tab-setup-group tab-setup-instrument" aria-label="Instrument and tuning">
+    
+    <div class="tab-group-fields">
+      <label class="tab-tuning-choice"><span class="tab-control-caption">INSTRUMENT</span><select aria-label="Tab instrument" id="tab-tuning"></select></label>
+      <label class="tab-fret-choice"><span class="tab-control-caption" id="tab-fret-caption">FRETS</span><select aria-label="Tab instrument fret classification" id="tab-frets"></select></label>
+    </div>
+  </section>
+  <section class="tab-setup-group tab-setup-version" aria-label="Source and target arrangement">
+    <div class="tab-group-heading"><span>Source</span></div>
+    <div class="tab-group-fields source-fields">
+      <div class="tab-source-key tab-source-readonly" id="tab-source-reset">
+        <div class="source-field"><span class="tab-control-caption">Key</span><b id="tab-source-key">A</b></div>
+        <div class="source-field"><span class="tab-control-caption">Scale</span><span id="tab-source-scale">Natural minor · Aeolian</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="tab-setup-group tab-setup-target" aria-label="Target key and scale">
+    <div class="tab-group-heading"><span>Target</span></div>
+    <div class="tab-group-fields">
+      <label class="tab-target-key"><span class="tab-control-caption">Key</span><select id="tab-key" aria-label="Target key"></select></label>
+      <label class="tab-target-scale"><span class="tab-control-caption tab-scale-caption-row"><span>Scale</span><button type="button" class="small ghost" id="tab-explore-target" title="Choose a key and scale in Explore, then return to this score">Explore ↗</button></span><select id="tab-scale" aria-label="Target scale"></select></label>
+    </div>
+  </section>
 </div>
-<div class="song-stage" id="song-stage"><div hidden="" id="structure-view"></div><div class="tab-sheet" id="tab-sheet"></div><div hidden="" id="pattern-view"><div class="pattern-heading"><span id="pattern-invariant">Same gaps. Different starting pitch.</span><label class="compact">Path<select id="pattern-voice"><option value="melody">Melody</option><option value="bass">Lowest voice</option></select></label></div><div class="pattern-canvas-wrap"><canvas aria-label="Original and transposed interval paths. Values are also available in the interval table." id="pattern-canvas" role="img"></canvas></div><div aria-live="polite" id="pattern-detail"></div><button class="small ghost pattern-table-button" data-dialog="tabs-interval-dialog">View exact intervals</button><p class="micro" id="pattern-formula">n′ᵢ = nᵢ + k → Δn′ᵢ = Δnᵢ. Beat positions and durations stay fixed.</p></div></div>
-<div class="sheet-navigation pager"><button aria-label="Previous bars" id="tab-page-prev">←</button><span class="mono" id="tab-page-label"></span><button aria-label="Next bars" id="tab-page-next">→</button></div>
-<div class="song-transport"><label class="tab-melody-toggle"><input id="tab-melody-only" type="checkbox"/><span>Melody only</span></label><button aria-pressed="false" class="primary" id="tab-play">▶ Play</button><button aria-label="Stop and return to start" class="small ghost" id="tab-stop" title="Stop and return to start">■</button><input aria-label="Playback position" id="tab-seek" max="16" min="0" step="0.05" type="range" value="0"/><span class="mono" id="tab-time">0:00 / 0:00</span><label class="tempo-control"><input aria-label="Tempo in beats per minute" id="tab-tempo" max="240" min="30" type="number" value="90"/><span>BPM</span></label></div>
-<div class="song-foot"><span id="transposition-badge">k = 0 · intervals unchanged</span><span class="tab-color-key"><span class="melody-key">Melody</span> · <span class="chord-key">Chords</span> · <span class="delta-key">Δn</span></span><span id="song-texture">Arranged score</span><button class="ghost small" data-dialog="transpose-guide">Mapping details</button></div>
+<div class="song-stage" id="song-stage"><div hidden="" id="structure-view"></div><div class="tab-sheet" id="tab-sheet"></div><div class="song-foot"><span id="transposition-badge">k = 0 · intervals unchanged</span><span class="tab-color-key"><span class="melody-key">Melody</span> · <span class="chord-key">Chords</span> · <span class="delta-key">Δn</span></span><span id="song-texture">Arranged score</span><button class="ghost small" data-dialog="transpose-guide">Mapping details</button></div><div hidden="" id="pattern-view"><div class="pattern-heading"><span id="pattern-invariant">Same gaps. Different starting pitch.</span><label class="compact">Path<select id="pattern-voice"><option value="melody">Melody</option><option value="bass">Lowest voice</option></select></label></div><div class="pattern-canvas-wrap"><canvas aria-label="Original and transposed interval paths. Values are also available in the interval table." id="pattern-canvas" role="img"></canvas></div><div aria-live="polite" id="pattern-detail"></div><button class="small ghost pattern-table-button" data-dialog="tabs-interval-dialog">View exact intervals</button><p class="micro" id="pattern-formula">n′ᵢ = nᵢ + k → Δn′ᵢ = Δnᵢ. Beat positions and durations stay fixed.</p></div></div>
+<div class="sheet-navigation pager">
+  <button aria-label="Previous bars" id="tab-page-prev">←</button>
+  <div class="pager-center">
+    <div class="transport-timeline">
+      <button aria-pressed="false" class="primary" id="tab-play">▶ Play</button>
+      <input aria-label="Playback position" id="tab-seek" max="16" min="0" step="0.05" type="range" value="0"/>
+      <span class="mono" id="tab-time">0:00 / 0:00</span>
+    </div>
+    <span class="mono pager-caption" id="tab-page-label" hidden aria-hidden="true"></span>
+  </div>
+  <button aria-label="Next bars" id="tab-page-next">→</button>
+</div>
+<div class="song-transport" aria-label="Song playback">
+  <div class="transport-actions">
+    <div class="tab-version-control">
+      <span class="tab-control-caption" id="tab-version-caption">VERSION</span>
+      <div class="tab-version-switch" role="group" aria-labelledby="tab-version-caption">
+        <button type="button" id="tab-play-source" aria-pressed="true">Source</button>
+        <button type="button" id="tab-play-target" aria-pressed="false">Target</button>
+      </div>
+    </div>
+    <label class="tab-melody-toggle"><input id="tab-melody-only" type="checkbox"/><span>Melody only</span></label>
+  </div>
+  <div class="transport-tempo">
+    <label class="tempo-control"><span>BPM</span><input aria-label="Tempo in beats per minute" id="tab-tempo" max="240" min="30" type="number" value="90"/></label>
+    <button type="button" class="small tab-settings-button" data-dialog="practice-options" aria-label="Player settings: playback, arrangement and reading" title="Playback, arrangement and reading settings">⚙</button>
+  </div>
+</div>
+
+</div>
 <section class="panel spectrum-mirror" aria-label="Spectrum analyzer">
   <div class="spectrum-mirror-heading">
     <div><p class="eyebrow">MELODY · CHORDS · MICROPHONE</p><h2>Spectroscope</h2></div>
@@ -8014,7 +9307,7 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
  };
  let targetRoot=H.state.root,targetMode=H.state.mode,exploreSignature=H.state.root+'|'+H.state.mode,choosingInExplore=false;
  // The target preset is independent of the currently previewed source.
- let savedTargetRoot=targetRoot,savedTargetMode=targetMode,playingSource=false;
+ let savedTargetRoot=targetRoot,savedTargetMode=targetMode,playingSource=true;
  function refreshVersionSwitch(){
    $('tab-play-source').setAttribute('aria-pressed',String(playingSource));
    $('tab-play-target').setAttribute('aria-pressed',String(!playingSource));
@@ -8052,7 +9345,7 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
  async function play(){
   if(S.starting)return;S.starting=true;const gen=++playGeneration;
   try{await H.audio.ensure();if(gen!==playGeneration)return;S.starting=false;H.audio.stop('practice');H.audio.stop('click');clearInterval(S.timer);if(S.beat>=S.to-.001||S.beat<S.from)S.beat=S.from;
-   S.anchorBeat=S.beat;S.anchorTime=H.audio.context.currentTime+.05;S.next=S.mapped.findIndex(e=>e.beat>=S.beat-.0001);if(S.next<0)S.next=S.mapped.length;S.nextClick=nextClickAt(S.beat);S.playing=true;S.paused=false;$('tab-play').textContent='Ⅱ Pause';$('tab-play').setAttribute('aria-pressed','true');S.timer=setInterval(schedule,25);schedule();
+   S.anchorBeat=S.beat;S.anchorTime=H.audio.context.currentTime+.05;S.next=S.mapped.findIndex(e=>e.beat>=S.beat-.0001);if(S.next<0)S.next=S.mapped.length;S.nextClick=nextClickAt(S.beat);S.playing=true;S.paused=false;$('tab-play').textContent='Pause';$('tab-play').setAttribute('aria-pressed','true');S.timer=setInterval(schedule,25);schedule();
   }catch(e){H.toast(e.message);stop(false)}
  }
  // Adapter for tab-specific dynamics; the shared synthesis engine is unchanged.
@@ -8083,7 +9376,11 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
   while(S.metronome&&S.nextClick<S.to){const when=S.anchorTime+(S.nextClick-S.anchorBeat)*secs();if(when>horizon)break;scheduleTabNotes([Math.abs((S.nextClick-pickup())/S.tab.meter-Math.round((S.nextClick-pickup())/S.tab.meter))<1e-6?24:19],{when,duration:.025,level:.5,role:'metronome',timbre:'sine',group:'click'});S.nextClick+=clickStep();}
   if(b>=S.to){if(S.loop){H.audio.stop('practice');H.audio.stop('click');S.beat=S.from;S.anchorBeat=S.from;S.anchorTime=now+.015;S.next=S.mapped.findIndex(e=>e.beat>=S.from-.0001);if(S.next<0)S.next=S.mapped.length;S.nextClick=nextClickAt(S.from);}else stop(true)}
  }
- function updateTransport(){const b=Math.max(0,Math.min(S.total,currentBeat()));$('tab-seek').value=b;$('tab-time').textContent=`${formatTime(b)} / ${formatTime(S.total)}`;}
+ function updateTransport(){
+  const b=Math.max(0,Math.min(S.total,currentBeat()));
+  $('tab-seek').value=b;
+  $('tab-time').textContent=`${formatTime(b)} / ${formatTime(S.total)}`;
+ }
  function highlight(i){
   if(S.active===i)return;document.querySelectorAll('.tab-event.playing').forEach(e=>e.classList.remove('playing'));S.active=i;
   if(i>=0&&S.mapped[i]){
@@ -8128,7 +9425,7 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
      p.fretless?`${p.label} · ${p.count}`:`${p.count} · ${p.label}`]),S.frets);
    select.value=String(S.frets);
    const isFretless=T.fretless(S.tuning);
-   $('tab-fret-caption').textContent=isFretless?'POSITION GUIDE':'FRET MODEL';
+   $('tab-fret-caption').textContent=isFretless?'POSITION GUIDE':'FRETS';
    select.title=isFretless?'The fretless instrument uses approximate semitone positions, not actual frets.':
      'Fret limit used to find exact playable placements of transposed notes.';
  }
@@ -8139,7 +9436,7 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
   savedTargetMode=tab.mode;
   targetRoot=tab.key;
   targetMode=tab.mode;
-  playingSource=false;
+  playingSource=true;
   if(S.tab)stop(true);
   S.tab=tab;
   S.tuning=tab.tuning in T.tunings?tab.tuning:'guitar';
@@ -8189,7 +9486,6 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
   $('pattern-invariant').textContent=pathName;$('pattern-formula').textContent=$('transposition-badge').title;
   $('tab-source-key').textContent=T.rootName(S.tab.key,S.tab.mode);
   $('tab-source-scale').textContent=T.scales[S.tab.mode].name;
-  $('tab-source-reset').title='Restore '+T.rootName(S.tab.key,S.tab.mode)+' '+T.scales[S.tab.mode].name+' (instrument octave fit may still apply)';
   $('tab-role-info').textContent=pathName+'. Cyan notes and the white Δn path use the same voice. Magenta is accompaniment. '+
    'Chord labels use the shared chord catalog and the mapped harmony. Unrecognized pitch sets are named by their notes, not assigned a guessed chord.';
   $('tab-mapping-info').textContent=$('transposition-badge').textContent+'. '+$('transposition-badge').title;
@@ -8244,7 +9540,7 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
   $('tab-page-prev').disabled=S.page===0;$('tab-page-next').disabled=S.page>=pages-1;
   const width=Math.max(280,geom.w),rowHeight=Math.max(count*17+90,geom.h/rows),height=Math.max(geom.h,rows*rowHeight);
   const gap=Math.max(17,Math.min(26,(rowHeight-90)/Math.max(1,count-1))),topPad=62;
-  const svg=se('svg',{viewBox:`0 0 ${width} ${height}`,preserveAspectRatio:'xMidYMid meet',role:'group','aria-label':`${S.tab.title}: cyan melody, magenta accompaniment, white melody intervals`},holder);
+  const svg=se('svg',{viewBox:`0 0 ${width} ${height}`,preserveAspectRatio:'none',role:'group','aria-label':`${S.tab.title}: cyan melody, magenta accompaniment, white melody intervals`},holder);
   const L=32,R=16,W=width-L-R,spell=T.scaleSpellings(targetRoot,targetMode);
   const melodyMap=new Map(S.path.map(p=>[p.index,p]));
   for(let row=0;row<rows;row++){
@@ -8369,13 +9665,12 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
   for(const option of $('tab-scale').querySelectorAll('option')){option.disabled=false;option.textContent=T.scales[option.value]?.name||option.textContent;}
   $('tab-scale').value=targetMode;
   $('tab-scale').addEventListener('change',e=>setTarget(savedTargetRoot,e.target.value));
-  $('tab-source-reset').addEventListener('click',()=>showVersion(!playingSource));
   $('tab-play-source').addEventListener('click',()=>showVersion(true));
   $('tab-play-target').addEventListener('click',()=>showVersion(false));
   $('tab-explore-target').addEventListener('click',()=>{choosingInExplore=true;$('tab-explore-return').hidden=false;H.setView('explore');});
   $('tab-explore-return').addEventListener('click',()=>{useExplore();H.setView('practice');});
   $('library-search').addEventListener('input',()=>{S.libraryPage=0;renderLibrary()});$('library-difficulty').addEventListener('change',e=>{S.difficulty=e.target.value;S.libraryPage=0;renderLibrary()});$('library-favorites').addEventListener('change',()=>{S.libraryPage=0;renderLibrary()});$('library-reset').addEventListener('click',()=>{$('library-search').value='';$('library-difficulty').value='all';$('library-favorites').checked=false;S.difficulty='all';S.libraryKind='all';document.querySelectorAll('#song-library [data-library-kind]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.libraryKind==='all')));S.libraryPage=0;renderLibrary()});$('library-prev').addEventListener('click',()=>{S.libraryPage--;renderLibrary()});$('library-next').addEventListener('click',()=>{S.libraryPage++;renderLibrary()});$('tab-favorite').addEventListener('click',favorite);
-  $('tab-play').addEventListener('click',()=>S.playing?stop(false):play());$('tab-stop').addEventListener('click',()=>{stop(true);S.page=sheetPageFor(S.from);drawSheet()});
+  $('tab-play').addEventListener('click',()=>S.playing?stop(false):play());
   $('tab-tempo').addEventListener('change',e=>{const was=S.playing;if(was)stop(false);S.tempo=Math.max(30,Math.min(240,Number(e.target.value)||90));e.target.value=S.tempo;updateTransport();if(was)play()});
   $('tab-loop').addEventListener('change',e=>S.loop=e.target.checked);$('tab-metronome').addEventListener('change',e=>{S.metronome=e.target.checked;S.nextClick=nextClickAt(currentBeat());if(!S.metronome)H.audio.stop('click')});
   $('tab-seek').addEventListener('input',e=>{const value=Number(e.target.value),was=S.playing;if(was)stop(false);S.beat=Math.max(S.from,Math.min(S.to,value));S.page=sheetPageFor(S.beat);drawSheet();updateTransport();if(was)play()});
@@ -8399,7 +9694,32 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
 
   $('tab-voicing').addEventListener('change',e=>{S.voicing=e.target.checked;rebuild()});$('tab-fit').addEventListener('change',e=>{S.fit=e.target.checked;rebuild()});$('tab-register').addEventListener('change',e=>{S.octaveFit=Number(e.target.value);S.fit=false;$('tab-fit').checked=false;rebuild()});
   $('loop-from').addEventListener('change',region);$('loop-to').addEventListener('change',region);
-  $('tab-page-prev').addEventListener('click',()=>{S.page--;drawSheet()});$('tab-page-next').addEventListener('click',()=>{S.page++;drawSheet()});$('tab-page-size').addEventListener('change',e=>{S.pageChoice=e.target.value;S.page=0;drawSheet()});$('tab-follow').addEventListener('change',e=>S.follow=e.target.checked);$('tab-annotation').addEventListener('change',e=>{S.annotation=e.target.value;drawSheet()});$('pattern-voice').addEventListener('change',e=>{S.voice=e.target.value;pathData();drawSheet()});
+  // Score arrows are transport jumps: open the adjacent score page and
+  // seek to the first beat of its first bar (or pickup); keep paused if paused.
+  function jumpToScorePage(direction){
+    if(!S.tab)return;
+    const destination=S.page+direction;
+    const pageCount=Math.max(1,Math.ceil((S.total-pickup())/(S.pageBars*S.tab.meter)));
+    if(destination<0||destination>=pageCount)return;
+    const wasPlaying=S.playing||S.starting;
+    if(wasPlaying)stop(false); // cancel scheduled audio only if playing
+    S.page=destination;
+    const start=sheetPageStart();
+    // A loop region must not silently override the requested destination.
+    if(start<S.from||start>=S.to){
+      S.from=0;S.to=S.total;
+      $('loop-from').value=S.from;
+      $('loop-to').value=S.to;
+    }
+    S.beat=start;
+    drawSheet();
+    updateTransport();
+    // Preserve paused/stopped state when browsing; only resume if playback
+    // was active before the arrow was pressed.
+    if(wasPlaying)play();
+  }
+  $('tab-page-prev').addEventListener('click',()=>jumpToScorePage(-1));
+  $('tab-page-next').addEventListener('click',()=>jumpToScorePage(1));$('tab-page-size').addEventListener('change',e=>{S.pageChoice=e.target.value;S.page=0;drawSheet()});$('tab-follow').addEventListener('change',e=>S.follow=e.target.checked);$('tab-annotation').addEventListener('change',e=>{S.annotation=e.target.value;drawSheet()});$('pattern-voice').addEventListener('change',e=>{S.voice=e.target.value;pathData();drawSheet()});
   document.querySelectorAll('[data-song-pane]').forEach(b=>b.addEventListener('click',()=>setPane(b.dataset.songPane)));
   // The Explore recipe is authoritative for the Tuner's key/scale context.
   // Visiting Explore from Tabs must never overwrite it with a song target.
