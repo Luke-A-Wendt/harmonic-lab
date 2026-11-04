@@ -10692,95 +10692,199 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
    se('text',{x:L+4,y:y+(count-1)*gap+28,fill:'#a6abad','font-size':9,'font-family':'monospace'},svg).textContent=caption+' · strokes = duration';
   }
  }
- // Exports the complete CURRENT arrangement, not just the visible score page.
- // Browser Print -> Save as PDF keeps the application self-contained.
+ // Print a continuous, monochrome tablature score. The browser's on-screen
+ // score pagination and colors are intentionally not reused for the PDF.
+ // Each printable system contains consecutive complete measures; systems flow
+ // top-to-bottom across portrait pages, as in a conventional tab sheet.
  const exportEscape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function exportCurrentScorePDF(){
-   if(!S.tab||!S.mapped.length){H.toast('Select a song to export.');return;}
-   // Opening synchronously within the click gesture avoids popup blockers.
-   const printWindow=window.open('','_blank');
-   if(!printWindow){H.toast('Allow pop-ups to export the score as PDF.');return;}
-   const priorPage=S.page;
-   const pages=[];
-   try{
-     drawSheet(); // current pageBars reflects the instrument and screen layout
-     const pageCount=Math.max(1,Math.ceil((S.total-pickup())/(S.pageBars*S.tab.meter)));
-     for(let page=0;page<Math.min(pageCount,800);page++){
-       S.page=page;drawSheet();
-       const svg=$('tab-sheet').querySelector('svg');
-       if(svg){
-         const copy=svg.cloneNode(true);
-         // Remove interactive attributes; preserve the played score's notes,
-         // exact instrument fingerings, harmony names and × markings.
-         copy.querySelectorAll('[tabindex]').forEach(node=>node.removeAttribute('tabindex'));
-         copy.querySelectorAll('.playing').forEach(node=>node.classList.remove('playing'));
-         pages.push(copy.outerHTML);
-       }
-     }
-   }catch(err){
-     printWindow.close();H.toast('Could not prepare score export: '+err.message);return;
-   }finally{
-     S.page=priorPage;drawSheet();
+  if(!S.tab||!S.mapped.length){H.toast('Select a song to export.');return;}
+  const printWindow=window.open('','_blank');
+  if(!printWindow){H.toast('Allow pop-ups to print or save the tablature as PDF.');return;}
+  try{
+   const instrument=T.tunings[S.tuning],stringCount=instrument.open.length;
+   const meter=Math.max(.25,Number(S.tab.meter)||4),up=pickup();
+   const total=Math.max(up,Number(S.total)||0),allEvents=[...S.mapped].sort((a,b)=>a.beat-b.beat);
+   const bars=[];
+   if(up>.0001)bars.push({number:'Pickup',start:0,end:up,events:[]});
+   const fullBars=Math.max(1,Math.ceil((total-up-1e-7)/meter));
+   for(let n=0;n<fullBars;n++)bars.push({number:n+1,start:up+n*meter,end:Math.min(total,up+(n+1)*meter),events:[]});
+   for(const event of allEvents){
+    const index=event.beat<up-.00001?0:Math.floor((event.beat-up+1e-7)/meter)+(up>.0001?1:0);
+    const bar=bars[Math.max(0,Math.min(bars.length-1,index))];
+    if(bar)bar.events.push(event);
    }
-   const scoreTitle=S.tab.title;
-   const instrument=T.tunings[S.tuning];
+   // At most four bars per system; fewer for rhythmically dense pieces.
+   // No bar is ever split, even if it contains many attacks.
+   const systems=[];
+   for(let index=0;index<bars.length;){
+    const group=[];let attacks=0;
+    while(index<bars.length&&group.length<4){
+     const bar=bars[index],next=bar.events.length;
+     if(group.length&&attacks+next>25)break;
+     group.push(bar);attacks+=next;index++;
+    }
+    systems.push(group);
+   }
+   const ink='#111111',muted='#4a4a4a';
+   const svgEl=(tag,attrs,parent)=>{
+    const el=document.createElementNS(NS,tag);
+    Object.entries(attrs).forEach(([name,value])=>el.setAttribute(name,String(value)));
+    if(parent)parent.appendChild(el);
+    return el;
+   };
+   const addText=(svg,x,y,value,attrs={})=>{
+    const el=svgEl('text',{x,y,fill:ink,'font-family':'Arial,Helvetica,sans-serif',...attrs},svg);
+    el.textContent=String(value??'');return el;
+   };
+   const harmonies=(S.harmonies||[]).filter(h=>h.name?.text).sort((a,b)=>a.beat-b.beat);
+   const lineGap=15,staffTop=58,staffBottom=staffTop+(stringCount-1)*lineGap;
+   const systemHeight=staffBottom+23;
+   const sheetWidth=760,left=48,right=12,available=sheetWidth-left-right;
+   function drawSystem(group,systemIndex){
+    const svg=svgEl('svg',{xmlns:NS,viewBox:`0 0 ${sheetWidth} ${systemHeight}`,
+      'aria-label':`Tablature measures ${group[0].number} through ${group[group.length-1].number}`});
+    svgEl('rect',{x:0,y:0,width:sheetWidth,height:systemHeight,fill:'#ffffff'},svg);
+    const weights=group.map(b=>Math.max(4,b.events.length));
+    const baseWidth=group.length===4?115:group.length===3?125:group.length===2?150:0;
+    const free=available-baseWidth*group.length,totalWeight=weights.reduce((a,b)=>a+b,0);
+    let cursor=left;
+    const positions=group.map((bar,i)=>{
+     const width=(i===group.length-1?sheetWidth-right-cursor:baseWidth+free*weights[i]/totalWeight);
+     const item={bar,x:cursor,width};cursor+=width;return item;
+    });
+    addText(svg,4,34,systemIndex===0?'TAB':'',{'font-size':12,'font-weight':'bold','letter-spacing':'.6'});
+    for(let s=0;s<stringCount;s++){
+     const y=staffTop+s*lineGap;
+     addText(svg,3,y+4,(instrument.labels[s]||'').replace(/\d/g,''),{'font-size':11,'font-family':'Courier New,monospace','font-weight':'bold'});
+     svgEl('line',{x1:left,x2:sheetWidth-right,y1:y,y2:y,stroke:ink,'stroke-width':.95},svg);
+    }
+    positions.forEach(({bar,x,width},barIndex)=>{
+     const edge=x+width;
+     svgEl('line',{x1:x,x2:x,y1:staffTop-3,y2:staffBottom+4,stroke:ink,
+       'stroke-width':barIndex===0?1.5:1.1},svg);
+     addText(svg,x+7,15,String(bar.number),{'font-size':10,'font-weight':'bold',fill:muted});
+     // Chord symbols appear above the strings, including carried harmony at
+     // the beginning of a measure, without repeating colored UI annotations.
+     const prior=[...harmonies].reverse().find(h=>h.beat<=bar.start+.00001);
+     const changes=harmonies.filter(h=>h.changed&&h.beat>bar.start+.00001&&h.beat<bar.end-.00001);
+     const chordLabels=[...(prior?[{...prior,beat:bar.start}]:[]),...changes];
+     let lastLabelRight=x+3;
+     chordLabels.forEach(h=>{
+      const name=h.name?.text||'';if(!name)return;
+      const rel=(h.beat-bar.start)/Math.max(.01,bar.end-bar.start);
+      const labelX=x+9+Math.max(0,rel)*(width-18);
+      const estimatedWidth=Math.min(90,name.length*7.3);
+      if(labelX<lastLabelRight+5||labelX+estimatedWidth>edge-2)return;
+      addText(svg,labelX,39,name,{'font-size':12,'font-family':'Courier New,monospace','font-weight':'bold'});
+      lastLabelRight=labelX+estimatedWidth;
+     });
+     const events=bar.events;
+     const innerWidth=Math.max(20,width-22),slot=innerWidth/Math.max(1,events.length);
+     events.forEach((event,eventIndex)=>{
+      const noteX=x+11+slot*(eventIndex+.5);
+      // Blank rests are represented by their timing gaps in the tab.
+      // Do not add rhythm symbols below the strings.
+      if(!event.notes.length)return;
+      event.notes.forEach((pitch,noteIndex)=>{
+       const pos=event.placements?.[noteIndex];
+       if(!pos||pos.string<0||pos.string>=stringCount){
+        // Unplayable notes have no string/fret position; do not print
+        // extra symbols below the tablature staff.
+        return;
+       }
+       const fret=String(pos.fret),y=staffTop+pos.string*lineGap;
+       const width=Math.max(14,fret.length*8+5);
+       svgEl('rect',{x:noteX-width/2,y:y-8,width,height:16,fill:'#ffffff'},svg);
+       const isMelody=event.roles?.[noteIndex]==='melody';
+       addText(svg,noteX,y+4,fret,{'font-size':13,'font-family':'Courier New,monospace',
+        'font-weight':isMelody?900:400,'text-anchor':'middle',
+        ...(isMelody?{'stroke':ink,'stroke-width':'.38','paint-order':'stroke fill'}:{})});
+      });
+     });
+    });
+    svgEl('line',{x1:sheetWidth-right,x2:sheetWidth-right,y1:staffTop-3,y2:staffBottom+4,
+      stroke:ink,'stroke-width':1.7},svg);
+    return svg.outerHTML;
+   }
+   const scoreTitle=S.tab.title,activeVersion=playingSource?'Source':'Target';
    const rootName=n=>T.roots[T.mod(n)]||String(n);
-   const originalKey=rootName(S.tab.key);
-   const originalMode=T.modes?.[S.tab.mode]?.label||S.tab.mode;
-   const targetPresetKey=rootName(savedTargetRoot);
-   const targetPresetMode=T.modes?.[savedTargetMode]?.label||savedTargetMode;
-   const playedKey=rootName(S.targetKey);
-   const audibleShift=(S.scaleMapping?.shift||0)+S.octaveFit;
-   const activeVersion=playingSource?'Source':'Target';
-   const metadata=[
-     ['Composer / author',S.tab.composer||'Not specified'],
-     ['Arrangement',S.tab.arrangement||S.tab.description||S.tab.kind||'—'],
-     ['Song source key',originalKey],
-     ['Song source scale',originalMode],
-     ['Target preset key',targetPresetKey],
-     ['Target preset scale',targetPresetMode],
-     ['Version exported',activeVersion],
-     ['Playing key',playedKey],
-     ['Playing scale',targetMode],
-     ['Instrument',instrument.name||S.tuning],
-     ['Tuning / open strings',instrument.labels.join(' · ')],
-     ['Fret range',T.fretless(S.tuning)?'Position guide 0–'+S.frets:'0–'+S.frets],
-     ['Register adjustment',`${S.octaveFit>0?'+':''}${S.octaveFit} semitones`],
-     ['Total pitch shift',`${audibleShift>0?'+':''}${audibleShift} semitones`],
-     ['Tempo',S.tempo+' BPM'],
-     ['Time signature',S.tab.sourceTimeSignature||`${S.tab.meter}/4`],
-     ['Part',S.texture==='melody'?'Melody only':'Melody and accompaniment'],
-     ['Notation','Cyan = melody · Magenta = accompaniment · × = unplayable/silent']
-   ];
-   const safeName=scoreTitle.replace(/[^\w\d-]+/g,'-').replace(/^-|-$/g,'').slice(0,70)||'Harmonic-Lab-Score';
+   const keyName=rootName(S.targetKey),modeName=T.modes?.[targetMode]?.label||targetMode;
+   const byline=S.tab.composer&&S.tab.composer!=='Not specified'?S.tab.composer:'';
+   const instrumentName=instrument.name||S.tuning;
+   const timeSignature=S.tab.sourceTimeSignature||`${S.tab.meter}/4`;
+   const tuning=instrument.labels.join(' · ');
+   const shift=(S.scaleMapping?.shift||0)+S.octaveFit;
+   const introMeta=[instrumentName,`${keyName} ${modeName}`,timeSignature,`${S.tempo} BPM`,activeVersion];
+   if(shift)introMeta.push(`Transpose ${shift>0?'+':''}${shift} semitones`);
+   const firstPageSystems=4,otherPageSystems=5;
+   const pageGroups=[];
+   for(let index=0;index<systems.length;){
+    const count=pageGroups.length===0?firstPageSystems:otherPageSystems;
+    pageGroups.push(systems.slice(index,index+count));index+=count;
+   }
+   const pageCount=pageGroups.length;
+   let systemIndex=0;
+   const pageHtml=pageGroups.map((pageSystems,pageIndex)=>{
+    const isFirst=pageIndex===0;
+    const header=isFirst
+     ?`<header class="score-header"><h1>${exportEscape(scoreTitle)}</h1>${byline?`<p class="byline">${exportEscape(byline)}</p>`:''}<p class="score-meta">${introMeta.map(exportEscape).join(' <span class="dot">·</span> ')}</p><p class="tuning">Tuning (high to low): ${exportEscape(tuning)}</p></header>`
+     :`<header class="continued"><strong>${exportEscape(scoreTitle)}</strong><span>${exportEscape(instrumentName)} · ${exportEscape(activeVersion)} · ${exportEscape(keyName)} ${exportEscape(modeName)}</span></header>`;
+    const sheets=pageSystems.map(system=>`<div class="tab-system">${drawSystem(system,systemIndex++)}</div>`).join('');
+    const footer=`<footer class="page-footer"><span>Tablature · ${exportEscape(instrumentName)}${S.mapped.some(e=>e.unplayable)?' · × = unavailable position':''}</span><span>Page ${pageIndex+1} of ${pageCount}</span></footer>`;
+    return `<section class="print-page">${header}<main class="score-systems">${sheets}</main>${footer}</section>`;
+   }).join('');
    const stylesheet=`
-     @page{size:A4 landscape;margin:12mm}
-     *{box-sizing:border-box}
-     body{margin:0;background:#fff;color:#171717;font-family:system-ui,-apple-system,Arial,sans-serif}
-     .toolbar{display:flex;justify-content:space-between;gap:15px;align-items:center;background:#191919;color:#fff;padding:12px 20px}
-     .toolbar button{background:#50e3ed;color:#101010;font-weight:800;border:0;padding:10px 17px;border-radius:6px;cursor:pointer}
-     .intro{padding:16px 20px 5px}.intro h1{margin:0 0 5px;font-size:22px}.intro p{margin:0;color:#555;font-size:11px}
-     dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 18px;margin:12px 0}
-     .meta{min-width:0}dt{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:#666}dd{font-size:11px;font-weight:650;margin:3px 0 0;overflow-wrap:anywhere}
-     .score-page{page-break-after:always;break-after:page;padding:7px 14px 4px}
-     .score-page:last-child{page-break-after:auto;break-after:auto}
-     .score-page h2{font-size:11px;font-weight:650;margin:3px 0 7px;color:#555}
-     .score-frame{border:1px solid #bbb;background:#1b1b1b;padding:8px;border-radius:6px}
-     .score-frame svg{display:block;width:100%;height:auto;max-height:151mm;overflow:visible}
-     .page-foot{display:flex;justify-content:space-between;font-size:9px;color:#666;margin-top:7px}
-     .tab-event .event-bg{fill:transparent!important;stroke:none!important}
-     @media print{.toolbar{display:none}.intro{padding:0 0 4mm}.score-page{padding:0}.score-frame{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-       body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-       .score-page h2{margin:4px 0 6px}
-     }
+    @page{size:letter portrait;margin:12mm 13mm}
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:white;color:#111;font-family:Arial,Helvetica,sans-serif}
+    .toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;
+      background:#f3f3f3;border-bottom:1px solid #bbb;padding:12px 20px;font-size:13px}
+    .toolbar button{background:#111;color:white;border:0;border-radius:5px;
+      padding:10px 15px;font-size:13px;font-weight:700;cursor:pointer}
+    .print-page{width:100%;page-break-after:always;break-after:page;min-height:0}
+    .print-page:last-child{page-break-after:auto;break-after:auto}
+    .score-header{border-bottom:1.4px solid #111;padding:0 0 10px;margin:12px 0 14px}
+    .score-header h1{font-family:Georgia,'Times New Roman',serif;font-size:27px;
+      font-weight:700;line-height:1.2;margin:0 0 4px}
+    .byline{font-size:12px;margin:0 0 8px}
+    .score-meta{font-size:11px;line-height:1.5;margin:6px 0 3px;font-weight:700}
+    .score-meta .dot{color:#777;margin:0 3px}
+    .tuning{font-size:10px;line-height:1.45;margin:4px 0 0;color:#333}
+    .continued{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+      border-bottom:1px solid #333;padding:0 0 7px;margin:10px 0 13px;font-size:11px}
+    .continued strong{font-family:Georgia,'Times New Roman',serif;font-size:16px}
+    .continued span{font-size:10px;color:#444;text-align:right}
+    .score-systems{display:block}
+    .tab-system{width:100%;margin:0 0 10px;page-break-inside:avoid;break-inside:avoid}
+    .tab-system svg{display:block;width:100%;height:auto;overflow:visible}
+    .page-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;
+      padding-top:7px;border-top:1px solid #aaa;color:#555;font-size:9px}
+    @media screen{
+      body{max-width:900px;margin:0 auto}
+      .print-page{padding:14px 22px 20px;border-bottom:2px solid #ddd}
+    }
+    @media print{
+      .toolbar{display:none!important}
+      .print-page{padding:0!important;border:0!important}
+      .score-header{margin-top:0}
+      .continued{margin-top:0}
+      .tab-system{margin-bottom:7px}
+      .tab-system svg{max-width:100%;}
+      .page-footer{margin-top:3px}
+      body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    }
    `;
-   const metadataHtml=metadata.map(([name,value])=>`<div class="meta"><dt>${exportEscape(name)}</dt><dd>${exportEscape(value)}</dd></div>`).join('');
-   const pageHtml=pages.map((svg,i)=>`<section class="score-page"><h2>${exportEscape(scoreTitle)} · ${exportEscape(activeVersion)} · Score page ${i+1} / ${pages.length}</h2><div class="score-frame">${svg}</div><div class="page-foot"><span>${exportEscape(instrument.name||S.tuning)} · ${exportEscape(playedKey)} ${exportEscape(targetMode)} · ${S.tempo} BPM</span><span>Harmonic Lab · ${i+1} / ${pages.length}</span></div></section>`).join('');
+   const safeName=scoreTitle.replace(/[^\w\d-]+/g,'-').replace(/^-|-$/g,'').slice(0,70)||'Harmonic-Lab-Tab';
    printWindow.document.open();
-   printWindow.document.write(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${exportEscape(safeName)} — Harmonic Lab score</title><style>${stylesheet}</style></head><body><div class="toolbar"><strong>Harmonic Lab — printable score</strong><button type="button" onclick="window.print()">Print / Save as PDF</button></div><header class="intro"><h1>${exportEscape(scoreTitle)}</h1><p>Current ${exportEscape(activeVersion.toLowerCase())} score · ${pages.length} score ${pages.length===1?'page':'pages'} · All currently mapped notes and chord labels</p><dl>${metadataHtml}</dl></header>${pageHtml}<script>window.addEventListener('load',()=>setTimeout(()=>window.print(),400));<\/script></body></html>`);
+   printWindow.document.write(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${exportEscape(safeName)} — Printable tablature</title><style>${stylesheet}</style></head><body><div class="toolbar"><strong>Printable tablature · ${exportEscape(scoreTitle)}</strong><button type="button" onclick="window.print()">Print / Save as PDF</button></div>${pageHtml}<script>window.addEventListener('load',()=>setTimeout(()=>window.print(),350));<\/script></body></html>`);
    printWindow.document.close();
+  }catch(err){
+   printWindow.close();H.toast('Could not prepare printable tablature: '+err.message);
+  }
  }
  $('tab-export-pdf').addEventListener('click',exportCurrentScorePDF);
+
  function durationLabel(d){const v=Math.round(d*1000)/1000;return({.25:'¼',.5:'½',.75:'¾',1.5:'1½',.333:'⅓',.667:'⅔'})[v]||String(v)}
  function setPane(){S.pane='tab';$('tab-sheet').hidden=false;requestAnimationFrame(drawSheet);}
  function region(){const from=Number($('loop-from').value),to=Number($('loop-to').value);if(!Number.isFinite(from)||!Number.isFinite(to)||from<0||to>S.total||to<=from){H.toast(`Use 0 ≤ From < To ≤ ${S.total}.`);$('loop-from').value=S.from;$('loop-to').value=S.to;return;}const was=S.playing;stop(false);S.from=from;S.to=to;S.beat=from;S.page=sheetPageFor(from);drawSheet();updateTransport();if(was)play();}
