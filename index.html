@@ -5667,7 +5667,24 @@ body > header.app-header nav.main-nav > button[data-view]:focus-visible{
  #view-practice .song-transport .tab-octave-buttons>.tab-control-caption{margin-right:3px!important;font-size:11px!important}
  #view-practice .song-transport .tab-octave-buttons>output{min-width:24px!important;margin-left:2px!important}
 }
-</style></head>
+</style><style id="harmonic-lab-page-visibility-guard">
+/* A view's hidden state always wins over layout/display rules.
+   The Tabs workspace has several higher-specificity display overrides; those
+   must never make it or its spectroscope appear on another page. */
+main > section.view[hidden],
+main > section#view-explore[hidden],
+main > section#view-spectrum[hidden],
+main > section#view-practice[hidden],
+main > section#view-math[hidden] {
+  display: none !important;
+  visibility: hidden !important;
+}
+/* Defensive fallback for the navigation system's active class. */
+main > section#view-practice:not(.active) {
+  display: none !important;
+}
+</style>
+</head>
 <body>
 <header class="app-header">
 <a aria-label="Harmonic Lab home" class="brand" href="#explore">
