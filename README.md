@@ -1,8 +1,8 @@
-# [Harmonic Lab](index.html)
+# [Harmonic Lab](https://luke-a-wendt.github.io/harmonic-lab/#practice)
 
 **Music · Mathematics · Sound**
 
-Harmonic Lab is an interactive, browser-based music and pitch exploration application. Open **[Harmonic Lab](index.html)** to start.
+Harmonic Lab is an interactive, browser-based music and pitch exploration application.
 
 ## What's included
 
