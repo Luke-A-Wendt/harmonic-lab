@@ -1,4 +1,4 @@
-# [Harmonic Lab](https://luke-a-wendt.github.io/harmonic-lab/#practice)
+# [Harmonic Lab](https://luke-a-wendt.github.io/harmonic-lab)
 
 **Music · Mathematics · Sound**
 
