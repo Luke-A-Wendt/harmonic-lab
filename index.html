@@ -9019,11 +9019,20 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
   }
   // Every user-initiated change of tonic or scale recipe auditions the new scale.
   // One shared handler covers circle nodes, scale selection, Parallel and Relative.
+  // Recipe and graph previews always use the tonic span containing A4 (n=0),
+  // independently of the octave selected for instrument playing.
+  function previewStartN(){
+    return H.state.root-9+(H.state.root>9?-12:0);
+  }
+  function previewChordPitches(){
+    const shift=previewStartN()-H.startN();
+    return H.chordPitches().map(n=>n+shift);
+  }
   function auditionCurrentScale() {
     const offsets=T.scales[H.state.mode]?.offsets;
     if(!offsets) return;
     const events=[...offsets,12].map((offset,i)=>({
-      notes:[H.startN()+offset],beat:i,duration:.86
+      notes:[previewStartN()+offset],beat:i,duration:.86
     }));
     H.playSequence(events,.24);
   }
@@ -9035,7 +9044,7 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
     circleAudition=true;
     try{H.update(selection);}finally{circleAudition=false;}
     const chord=H.state.chord;
-    if(chord)H.play(H.chordPitches(),{duration:1.2});
+    if(chord)H.play(previewChordPitches(),{duration:1.2});
     else auditionCurrentScale();
   }
   const cycleLessons={
@@ -9780,7 +9789,7 @@ window.HL.library = [{"version":1,"id":"prog-blues12","title":"12-bar blues","tu
       const cut=value.lastIndexOf('@'),type=value.slice(0,cut),chordRoot=Number(value.slice(cut+1));
       if(!H.chordFits(H.state.mode,H.state.root,chordRoot,type))return;
       H.update({chord:type,chordRoot});
-      H.play(H.chordPitches(),{duration:1.2});
+      H.play(previewChordPitches(),{duration:1.2});
     });
     $('scale-mode').addEventListener('change',e=>H.update({mode:e.target.value}));
     $('explore-tuning').addEventListener('change',e=>H.update({tuning:e.target.value}));
