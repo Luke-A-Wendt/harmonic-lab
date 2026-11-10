@@ -6531,7 +6531,14 @@ main > section#view-practice:not(.active) {
  #view-math .math-theory-formula{font-size:11px}
 }
 </style>
-</head>
+<style id="math-panel-consistency">
+#view-math #math-foundations{width:100%;max-width:none;box-sizing:border-box}
+#view-math .math-foundations-copy p,#view-math #math-alternative-systems p{font-size:13px;line-height:1.75;color:#d6e0e1;margin:0 0 16px}
+#view-math .other-tuning-table{overflow-x:auto;max-width:100%;margin:16px 0}
+#view-math .other-tuning-table table{border-collapse:collapse;width:100%;font-size:12px;text-align:left}
+#view-math .other-tuning-table th,#view-math .other-tuning-table td{padding:10px 8px;border-bottom:1px solid #444}
+#view-math #math-alternative-systems h3{margin:20px 0 10px}
+</style></head>
 <body>
 <header class="app-header">
 <a aria-label="Harmonic Lab home" class="brand" href="#explore">
@@ -7290,9 +7297,10 @@ main > section#view-practice:not(.active) {
       INTERACTIVE NOTEBOOK
      </span>
 </div>
-<p class="math-opening-narrative">A vibrating string produces a <strong>fundamental frequency</strong> (its lowest regular vibration rate, measured in <strong>hertz</strong>, or cycles per second) and <strong>harmonics</strong> (higher-frequency parts of the sound at whole-number multiples of the fundamental). <strong>Pitch</strong> is how high or low a sound seems; an <strong>octave</strong> is the <strong>interval</strong> (pitch distance between two notes) produced when one frequency is twice another, a <strong>2:1 frequency ratio</strong>. Human pitch perception is approximately <strong>logarithmic</strong>: equal frequency ratios correspond to equal perceived pitch distances, so a <strong>base-2</strong> scale counts each doubling as one octave. To make <strong>melodies</strong> (notes played in sequence) and <strong>chords</strong> (notes sounded together), we need smaller steps. <strong>12-tone equal temperament</strong> is a <strong>tuning system</strong> (a rule for choosing note frequencies) that divides each octave into 12 <strong>semitones</strong> (equally spaced pitch steps). Here <em>equal</em> means the same frequency <em>ratio</em> between neighboring notes—not the same number of hertz—with each step multiplying frequency by 2<sup>1/12</sup>. A <strong>perfect fifth</strong> (for example, C up to G) is a common musical interval whose pure <strong>3:2 ratio</strong> means the higher frequency is 1.5 times the lower. Seven equal-tempered semitones approximate that ratio to within about <strong>2 cents</strong>; one <strong>cent</strong> is 1/100 of a 12-tone semitone. Twelve therefore balances <strong>tuning accuracy</strong> (how closely its notes match simple frequency ratios), <strong>practicality</strong> (a manageable number of notes), and <strong>transposition</strong> (moving music to a different starting pitch without changing its intervals). It is a useful compromise, not the lowest-error system for every interval.</p>
+
 
 <nav aria-label="Math topics" class="math-nav">
+<a href="#math-foundations">00 Foundations</a>
 <a href="#math-harmonics">01 String modes</a>
 <a href="#math-pitch">02 Coordinates</a>
 <a href="#math-tuning">03 Why 12?</a>
@@ -7303,7 +7311,9 @@ main > section#view-practice:not(.active) {
 <a href="#math-progressions">08 Progressions</a>
 <a href="#math-tab-conversion">09 Tabs: source → target</a>
 <a href="#math-instrument-mapping">10 Instrument &amp; fingering</a>
+<a href="#math-alternative-systems">11 Other pitch systems</a>
 </nav>
+<section class="panel math-section" id="math-foundations"><div class="math-title"><span>00</span><div><h2>From vibration to musical pitch.</h2><p>The physical ideas behind this notebook.</p></div></div><div class="math-foundations-copy"><p>A vibrating string produces a <strong>fundamental frequency</strong> (its lowest regular vibration rate, measured in <strong>hertz</strong>, or cycles per second) and <strong>harmonics</strong> (higher-frequency parts of the sound at whole-number multiples of the fundamental). <strong>Pitch</strong> is how high or low a sound seems; an <strong>octave</strong> is the <strong>interval</strong> (pitch distance between two notes) produced when one frequency is twice another, a <strong>2:1 frequency ratio</strong>. Human pitch perception is approximately <strong>logarithmic</strong>: equal frequency ratios correspond to equal perceived pitch distances, so a <strong>base-2</strong> scale counts each doubling as one octave.</p><p>To make <strong>melodies</strong> (notes played in sequence) and <strong>chords</strong> (notes sounded together), we need smaller steps. <strong>12-tone equal temperament</strong> is a <strong>tuning system</strong> (a rule for choosing note frequencies) that divides each octave into 12 <strong>semitones</strong> (equally spaced pitch steps). Here <em>equal</em> means the same frequency <em>ratio</em> between neighboring notes—not the same number of hertz—with each step multiplying frequency by 2<sup>1/12</sup>.</p><p>A <strong>perfect fifth</strong> (for example, C up to G) is a common musical interval whose pure <strong>3:2 ratio</strong> means the higher frequency is 1.5 times the lower. Seven equal-tempered semitones approximate that ratio to within about <strong>2 cents</strong>; one <strong>cent</strong> is 1/100 of a 12-tone semitone. Twelve therefore balances <strong>tuning accuracy</strong> (how closely its notes match simple frequency ratios), <strong>practicality</strong> (a manageable number of notes), and <strong>transposition</strong> (moving music to a different starting pitch without changing its intervals). It is a useful compromise, not the lowest-error system for every interval.</p></div></section>
 <section class="panel math-section" id="math-harmonics">
 <div class="math-title">
 <span>
@@ -7875,10 +7885,31 @@ main > section#view-practice:not(.active) {
     <p><strong>Separate Transform study:</strong> The educational Transform workspace offers exact transposition, unchanged-pitch re-centering (a new tonic interpretation), and a stricter seven-note degree remap. Unlike Tabs playback, that strict remap <strong>stops and reports chromatic source notes</strong> that have no source-scale degree; it does not silently fit them. The main Tabs target-scale selector instead uses the fitting rules above to keep a playable preview possible.</p>
   </details>
 </section>
-<section class="panel sources">
+<section aria-labelledby="math-alternative-title" class="panel math-section math-alternative-systems" id="math-alternative-systems">
+<div class="math-title"><span>11</span><div><h2 id="math-alternative-title">Other ways to organize pitch.</h2><p>Tuning chooses frequencies. A scale chooses notes. Musical practice gives those notes their roles.</p></div></div>
+<div class="math-two">
+<div><h3>Ratios and historical temperaments</h3>
+<p><strong>Just intonation</strong> uses whole-number frequency ratios. A 4:5:6 triad has a 5:4 major third and a 3:2 fifth above its root. With a 220 Hz root, these are 275 Hz and 330 Hz. A fixed keyboard cannot preserve every desired pure interval in every key; singers and instruments with flexible pitch can adjust notes to context.</p>
+<p><strong>Pythagorean tuning</strong> builds pitches from pure 3:2 fifths and octave shifts. Its major third is 81:64 (about 407.82 cents), compared with 386.31 cents for 5:4. Twelve pure fifths overshoot seven octaves by about 23.46 cents: the <em>Pythagorean comma</em>. Closing the circle requires a compromise.</p>
+<p><strong>Meantone temperaments</strong> narrow fifths to improve thirds. Quarter-comma meantone gives pure 5:4 major thirds along its regular chain, but a twelve-note keyboard has problematic intervals where that chain closes. <strong>Well temperaments</strong> distribute adjustments unequally so all keys can be used with differing interval sizes. Well temperament is not synonymous with equal temperament.</p></div>
+<div><h3>Equal divisions beyond twelve</h3>
+<p>In <strong>N equal divisions of the octave (N-EDO)</strong>, every step multiplies frequency by 2<sup>1/N</sup>. Each step is 1200/N cents. Transposing by the same number of steps preserves all frequency ratios, but the approximation to a chosen pure interval depends on N.</p>
+<div class="equation">f(k) = f₀ × 2<sup>k/N</sup><br>cents(r) = 1200 log₂(r)</div>
+<p>Here f₀ is a reference frequency, k is an integer step count, and r is a frequency ratio. The table compares the nearest steps to 5:4 and 3:2; positive error means sharp, negative means flat.</p>
+<div class="other-tuning-table"><table><thead><tr><th scope="col">Division</th><th scope="col">Step size</th><th scope="col">5:4 third</th><th scope="col">3:2 fifth</th></tr></thead><tbody><tr><th scope="row">12-EDO</th><td>100.00¢</td><td>4 steps (+13.69¢)</td><td>7 steps (-1.96¢)</td></tr><tr><th scope="row">19-EDO</th><td>63.16¢</td><td>6 steps (-7.37¢)</td><td>11 steps (-7.22¢)</td></tr><tr><th scope="row">24-EDO</th><td>50.00¢</td><td>8 steps (+13.69¢)</td><td>14 steps (-1.96¢)</td></tr><tr><th scope="row">31-EDO</th><td>38.71¢</td><td>10 steps (+0.78¢)</td><td>18 steps (-5.18¢)</td></tr></tbody></table></div>
+<p>24-EDO adds 50-cent quarter tones between the twelve-tone notes, but does not improve these particular nearest third and fifth approximations. 19 and 31 offer different compromises. More divisions do not automatically make every interval more accurate.</p></div></div>
+<h3>A musical system is more than a tuning grid</h3>
+<p>A pitch collection alone does not specify melodic direction, ornament, characteristic phrases, rhythm, or the function of a tonal center. Nor must a performance use one fixed frequency for every named note. Unequal steps, flexible intonation, and continuous slides cannot be fully described by a list of twelve pitch classes. Different practices should be understood on their own terms, rather than ranked by closeness to equal temperament.</p>
+<h3>How this relates to Harmonic Lab</h3>
+<p>The notebook’s main coordinate n counts <strong>12-tone equal-tempered semitones</strong> from A4 = 440 Hz. Changing the scale recipe selects a different collection on that grid; it does not retune the grid to just intonation, 19-EDO, or another system. To describe an arbitrary frequency mathematically, n = 12 log₂(f/440) may be fractional. That extension is a coordinate conversion, not a claim that every instrument or playback control here supports fractional pitches.</p>
+<p><strong>Try the comparison:</strong> above a 220 Hz root, compare a pure 275 Hz major third with the twelve-tone value 220 × 2<sup>4/12</sup> ≈ 277.18 Hz. The equal-tempered third is about 13.69 cents higher. Which tuning is useful depends on the desired intervals, key changes, ensemble, and instrument.</p>
+</section>
+<section class="panel sources" id="math-sources">
 <h3>
       Sources &amp; implementation notes
      </h3>
+<a href="https://mtosmt.org/retrofit/mto.98.4.4/mto.98.4.4.scholtz.php" target="_blank" rel="noopener noreferrer">Society for Music Theory · Algorithms for tunings and temperaments ↗</a>
+<a href="https://math.ucr.edu/home/baez/tuning_book/index.html" target="_blank" rel="noopener noreferrer">John Baez · The Mathematics of Tuning Systems ↗</a>
 <p>
       Formulas and simulations are calculated locally. The following references explain the physical model and browser audio methods; external links open only when you choose them.
      </p>
@@ -7901,10 +7932,7 @@ main > section#view-practice:not(.active) {
       MDN · microphone permissions and secure contexts ↗
      </a>
 </section>
-<section aria-labelledby="math-alternative-title" class="panel math-alternative-systems">
-<h3 id="math-alternative-title">Other ways to organize pitch</h3>
-<p>Twelve equal semitones are a choice, not a law of nature. <strong>Just intonation</strong> tunes intervals to simple frequency ratios such as 3:2 for a pure fifth and 5:4 for a pure major third, but those exact ratios can be difficult to preserve when changing keys. <strong>Pythagorean tuning</strong> builds notes from successive pure 3:2 fifths, producing especially pure fifths but less even thirds. Other <strong>equal divisions of the octave</strong> include 19, 24, and 31 steps: 24 offers quarter tones, while 19 and 31 provide different tradeoffs in approximating familiar intervals, at the cost of more notes to learn and play. Some musical traditions use pitch organizations that are not based on twelve equal steps at all. The best system depends on the musical goals, instruments, and intervals being emphasized.</p>
-</section>
+
 </section>
 </main>
 <footer>
@@ -13009,5 +13037,63 @@ for(const id of ['instrument-octavon','instrument-piano','instrument-neck','inst
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
-</script></body>
+</script>
+<style id="explore-graph-slide-style">
+#view-explore #relative-star,#view-explore #circle-holder{
+  touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+}
+</style>
+<script id="explore-graph-slide">
+(()=>{
+  'use strict';
+  const regions=[document.getElementById('relative-star'),document.getElementById('circle-holder')].filter(Boolean);
+  const selector='.relative-star-choice,.circle-button';
+  let gesture=null,suppressClickUntil=0;
+  function visit(x,y){
+    if(!gesture)return;
+    const node=document.elementFromPoint(x,y)?.closest(selector);
+    const region=node&&regions.find(r=>r.contains(node));
+    if(!region||node.getAttribute('aria-disabled')==='true'||node.classList.contains('circle-disabled')){
+      gesture.slot=null;return;
+    }
+    const circle=node.querySelector('circle');
+    // Selection redraws both SVGs. Track the physical slot, not the replaced
+    // element or its changing relative-mode identity, to avoid repeat auditions.
+    const slot=region.id+':'+circle?.getAttribute('cx')+':'+circle?.getAttribute('cy');
+    if(gesture.slot===slot)return;
+    gesture.slot=slot;
+    node.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:0}));
+  }
+  function finish(e){
+    if(!gesture||(e&&e.pointerId!==gesture.id))return;
+    const old=gesture;gesture=null;suppressClickUntil=performance.now()+700;
+    try{old.region.releasePointerCapture(old.id);}catch{}
+  }
+  regions.forEach(region=>{
+    region.addEventListener('pointerdown',e=>{
+      if(gesture||!e.isPrimary||(e.pointerType!=='touch'&&e.button!==0))return;
+      e.preventDefault();e.stopPropagation();
+      gesture={id:e.pointerId,region,slot:null};
+      try{region.setPointerCapture(e.pointerId);}catch{}
+      visit(e.clientX,e.clientY);
+    },true);
+    region.addEventListener('contextmenu',e=>e.preventDefault());
+    region.addEventListener('lostpointercapture',finish);
+    region.addEventListener('click',e=>{
+      if(e.detail>0&&(gesture||performance.now()<suppressClickUntil)){
+        e.preventDefault();e.stopImmediatePropagation();
+      }
+    },true);
+  });
+  window.addEventListener('pointermove',e=>{
+    if(!gesture||e.pointerId!==gesture.id)return;
+    e.preventDefault();visit(e.clientX,e.clientY);
+  },{passive:false});
+  window.addEventListener('pointerup',finish);
+  window.addEventListener('pointercancel',finish);
+  window.addEventListener('blur',()=>finish());
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)finish();});
+})();
+</script>
+</body>
 </html>
