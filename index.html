@@ -13039,6 +13039,10 @@ for(const id of ['instrument-octavon','instrument-piano','instrument-neck','inst
 })();
 </script>
 <style id="explore-graph-slide-style">
+#view-explore .relative-star-choice,#view-explore .circle-button{outline:none!important;-webkit-tap-highlight-color:transparent}
+#view-explore .relative-star-choice:focus-visible circle,#view-explore .circle-button:focus-visible circle{stroke:#fff;stroke-width:3}
+.graph-start-ring{fill:none;stroke:#fff;stroke-width:2;pointer-events:none}
+
 #view-explore #relative-star,#view-explore #circle-holder{
   touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
 }
@@ -13049,6 +13053,16 @@ for(const id of ['instrument-octavon','instrument-piano','instrument-neck','inst
   const regions=[document.getElementById('relative-star'),document.getElementById('circle-holder')].filter(Boolean);
   const selector='.relative-star-choice,.circle-button';
   let gesture=null,suppressClickUntil=0;
+  function markStart(){
+    if(!gesture)return;
+    const svg=gesture.region.querySelector('svg');if(!svg)return;
+    svg.querySelector('.graph-start-ring')?.remove();
+    const ring=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    ring.setAttribute('class','graph-start-ring');
+    ring.setAttribute('aria-hidden','true');
+    for(const [key,value] of Object.entries(gesture.start))ring.setAttribute(key,value);
+    svg.append(ring);
+  }
   function visit(x,y){
     if(!gesture)return;
     const node=document.elementFromPoint(x,y)?.closest(selector);
@@ -13063,17 +13077,22 @@ for(const id of ['instrument-octavon','instrument-piano','instrument-neck','inst
     if(gesture.slot===slot)return;
     gesture.slot=slot;
     node.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:0}));
+    markStart();
   }
   function finish(e){
     if(!gesture||(e&&e.pointerId!==gesture.id))return;
     const old=gesture;gesture=null;suppressClickUntil=performance.now()+700;
+    old.region.querySelector('.graph-start-ring')?.remove();
     try{old.region.releasePointerCapture(old.id);}catch{}
   }
   regions.forEach(region=>{
     region.addEventListener('pointerdown',e=>{
       if(gesture||!e.isPrimary||(e.pointerType!=='touch'&&e.button!==0))return;
+      const node=e.target.closest?.(selector);
+      if(!node||!region.contains(node)||node.getAttribute('aria-disabled')==='true'||node.classList.contains('circle-disabled'))return;
+      const circle=node.querySelector('circle');if(!circle)return;
       e.preventDefault();e.stopPropagation();
-      gesture={id:e.pointerId,region,slot:null};
+      gesture={id:e.pointerId,region,slot:null,start:{cx:circle.getAttribute('cx'),cy:circle.getAttribute('cy'),r:Number(circle.getAttribute('r'))+4}};
       try{region.setPointerCapture(e.pointerId);}catch{}
       visit(e.clientX,e.clientY);
     },true);
